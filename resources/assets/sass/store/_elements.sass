@@ -1,0 +1,631 @@
+//////////////////////////////////////
+//                                  //
+//              COLORS              //
+//                                  //
+//////////////////////////////////////
+	
+//////////////////////////////////////
+//                                  //
+//              COLORS              //
+//                                  //
+//////////////////////////////////////
+
+$orange:     #dc9f1d
+$orangeH:    #ceaa5f
+$greenD:     #8DBB61
+$greenL:     #9FD56B
+$green:      rgb(189, 198, 167)
+$greenH:     #9FD56B
+$blue:       #5D76C9
+$blueH:      #7689C8
+$lblue:      #92c6de
+$red:        #D05C5C
+$redH:       #C47777
+
+//////////////////////////////////////
+//                                  //
+//           BACKGROUNDS            //
+//                                  //
+//////////////////////////////////////
+
+.blue-back
+	background-color: $blue
+
+.green-back
+	background-color: $green
+
+.red-back
+	background-color: $red
+
+.grey-back
+	background-color: #f3f3f3
+
+.yellow-back
+	background-color: #08dc2e
+
+.hollow-back-white
+	border: 1px solid white
+	background-color: transparent
+
+.hollow-back-lblue
+	border: 1px solid $lblue
+	background-color: transparent
+	color: #383838
+
+//////////////////////////////////////
+//                                  //
+//            HELPERS               //
+//                                  //
+//////////////////////////////////////
+
+.Hidden
+	display: none !important
+.brd
+  	border: 1px solid red
+.txtL
+  	text-align: left
+.txtR
+  	text-align: right
+.txtC
+ 	 text-align: center
+.pad0
+  	padding: 0
+
+//////////////////////////////////////
+//                                  //
+//             ELEMENTS             //
+//                                  //
+//////////////////////////////////////
+
+.checkout-accordion
+	.card
+		border-radius: 0
+	.card-header
+		border-radius: 0
+		padding: 0.2rem 1rem
+
+.checkout-table
+	margin-bottom: 0
+	
+.full-loader
+	position: fixed
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+	z-index: 9999
+	@include flex-column
+	.inner
+		width: 80px
+		height: 80px
+		border-radius: 4px
+		@include flex-column
+		@include box-shadow()
+		background-color: #ededed
+		img
+			width: 60px
+
+
+//////////////////////////////////////
+//                                  //
+//           PAGINATION             //
+//                                  //
+//////////////////////////////////////
+
+ul.pagination
+	// border-color: #0da9ef
+	// background-color: #0da9ef
+	display: block
+	margin: 0
+	padding: 0
+	margin-top: 5px
+	list-style: none
+	border-top: 0
+
+ul.pagination li
+	padding: 6px 12px
+	display: inline-block
+	text-align: center
+	border-radius: 50%
+	font-size: 1rem
+	font-weight: bold
+	line-height: 24px
+	width: 36px
+	height: 36px
+	&:hover
+		border-radius: 50%
+		border-color: #0da9ef
+		background-color: #0da9ef
+		a
+			color: #fff
+	
+
+ul.pagination li a
+	text-decoration: none
+	
+	margin-left: 2px
+	width: 36px
+	height: 36px
+
+ul.pagination li a.active,ul.pagination li.active
+	border-color: #0da9ef
+	background-color: #0da9ef
+	color: #fff
+
+//////////////////////////////////////
+//                                  //
+//       CONTAINERS / ITEMS         //
+//                                  //
+//////////////////////////////////////
+
+.grid-item
+	.product-card
+		padding: 0
+		a
+			text-decoration: none
+		.product-thumb
+			.inner
+				position: relative
+				img
+					min-width: 100%
+				.data
+					position: absolute
+					text-align: center
+					opacity: 0
+					width: 100%
+					height: 100%
+					background-color: rgba(241, 230, 226, 0.7)
+					@include transition(0.2s)
+					color: #383838
+					.text
+						font-size: 1rem
+						padding: 10px
+						padding-top: 25px
+						width: 100%	
+						hr
+							display: block
+							position: relative
+							padding: 0
+							margin: 2px auto
+							height: 0
+							width: 100%
+							max-height: 0
+							line-height: 0
+							clear: both
+							border: none
+							border-bottom: 1px solid #ffffff
+							max-width: 90px
+						span.item
+							font-size: 1.1rem
+							font-weight: 300
+				&:hover
+					.data
+						opacity: 1
+		.footer
+			height: 54px
+			position: relative
+			.product-buttons
+				position: absolute
+				bottom: 0
+				right: 0
+			.price
+				position: absolute
+				bottom: 0
+				left: 0
+				width: 50%
+				padding-top: 6px
+				height: 100%
+				@include flex-center()
+				.inner
+
+.discount-badge
+	position: absolute
+	right: 0
+	top: 0
+	width: 100px
+	height: 100px
+	overflow: hidden
+	.triangle
+		position: absolute
+		right: 0
+		left: 0
+		text-align: center
+		padding: 10px
+		padding-top: 50px
+		background-color: #ccc
+		transform: rotate(45deg)
+		width: 150px
+		z-index: 50
+	.inner
+		position: absolute
+		font-weight: 700
+		top: 8px
+		right: 10px
+		z-index: 100
+
+.widget
+	.inline
+		ul
+			padding-left: 0
+			padding: 0
+			margin: 0
+			li
+				min-width: 60px
+				display: inline-block
+				list-style: none
+
+.site-logo
+	width: 190px
+
+.index-header
+	margin-bottom: 25px
+
+.login-box
+	background: #fff
+	margin-top: 100px
+	position: relative
+	padding-bottom: 50px
+	.bottom-text
+		position: absolute
+		width: 100%
+		text-align: center
+		bottom: 10px
+		left: 0
+
+@media (max-width: 481px)
+	.navbar
+		.site-branding
+			position: relative
+			@include flex-center
+			.site-logo
+				img
+					width: 150px
+		.toolbar
+			position: relative
+			@include flex-center
+			margin: 0
+			height: auto
+			left: auto
+			right: auto
+
+@media (max-width: 265px)
+	// .navbar .toolbar .tools
+	// 	@include flex-column
+
+.user-info-wrapper .user-info .user-avatar>img
+	width: 150px
+	height: 120px
+
+	
+//////////////////////////////////////
+//                                  //
+//             ELEMENTS             //
+//                                  //
+//////////////////////////////////////
+
+
+//////////////////////////////////////
+//                                  //
+//       BUTTONS / TRIGGERS         //
+//                                  //
+//////////////////////////////////////
+
+.custom-badge
+	display: inline-block
+	min-width: 10px
+	padding: 3px 7px
+	font-size: 12px
+	font-weight: 700
+	line-height: 1
+	text-align: center
+	white-space: nowrap
+	vertical-align: middle
+	border-radius: 10px
+	margin-bottom: 5px
+
+.hollow-white
+	border: 1px solid #fff
+	background-color: transparent
+	color: #383838
+	font-size: 1rem
+	border-radius: 50px
+	font-weight: 300
+	margin-top: 5px
+
+.navbar-sticky
+	.toolbar
+		.inner
+			.tools
+				.account
+					img
+						border-radius: 50%
+
+
+.btn-sm-round
+	height: 30px
+	padding: 0 7px
+	border-radius: 18px
+	font-size: 12px
+	line-height: 34px
+	width: 37px
+
+.btm-sm
+	padding: 0px 10px
+	height: 30px
+	line-height: 30px
+	font-size: 0.8rem
+
+.btn-green
+	background-color: $green
+	color: #000
+
+.btn-blue
+	background-color: $blue
+	color: #fff
+	&:hover
+		opacity: .9
+		color: #f9f9f9
+
+.button-and-loader
+	@include flex-center-left()
+
+.btn-wishlist
+	height: 36px
+
+.btnIcon
+	// background-color: $lblue
+	border: 1px solid #ccc
+	padding: 4px 14px 9px
+	margin-bottom: 2px
+	color: #383838
+	@include transition(0.2s)
+	i
+		font-size: 0.9rem
+		line-height: 1px
+	&:hover
+		opacity: .6
+	
+
+//////////////////////////////////////
+//                                  //
+//             FORMS                //
+//                                  //
+//////////////////////////////////////
+
+.centered-form
+	@include flex-column
+	.inner
+		max-width: 500px
+
+.form-group
+	margin-bottom: 10px
+
+.form-control:not(textarea)
+	height: 30px
+
+select.form-control:not([size]):not([multiple])
+	height: 30px
+
+	
+//////////////////////////////////////
+//                                  //
+//       CART AND CATALOGUE         //
+//                                  //
+//////////////////////////////////////
+
+.product-gallery
+	padding: 0
+	border: 0
+	.product-carousel .owl-stage-outer .owl-stage .owl-item img
+		width: 100% 
+
+.product-gallery .gallery-item 
+	z-index: 50
+	position: absolute
+	top: 8px
+	right: 9px
+	margin-bottom: 0
+	background: #fff
+	border-radius: 50%
+	
+.product-show
+	.products-details
+		h2
+			padding-top: 0
+
+.grid-item .product-card .footer .product-buttons
+	width: 50%
+
+.toolbar .cart>.toolbar-dropdown
+	top: 36px
+
+// Index List
+.product-card
+	.max-text
+		max-height: 100px
+		overflow: hidden
+		white-space: nowrap
+		text-overflow: ellipsis
+
+.addedToFavs
+	background-color: $red
+	color: #fff
+	border: 0
+.dropdown-product-item > .dropdown-product-info
+	max-width: 148px
+	width: 148px
+	padding-left: 0
+.dropdown-product-item > .dropdown-product-custom-thumb > img
+	border-radius: 50%
+	max-width: 100%
+	width: 70px
+	min-width: 70px
+	height: 70px
+
+@media (min-width: 481px)
+	.toolbar .cart > .toolbar-dropdown
+		width: 300px
+		padding-left: 18px !important
+		max-height: 400px
+		overflow-y: scroll
+		overflow-x: hidden
+
+@media (max-width: 481px)
+	.toolbar-user-dropdown
+		position: fixed
+		top: 150px
+		left: 10px !important
+
+.navbar-sticky	
+	.toolbar 
+		white-space: nowrap
+		.inner 
+			@include flex-center
+			margin-bottom: 10px
+			.tools
+				height: auto
+				display: inline-flex
+		
+
+.user-info-wrapper
+	padding-top: 20px
+	padding-bottom: 20px
+	.user-info .user-data
+		padding-top: 26px
+
+@media (max-width: 660px)
+	.checkout-steps
+		display: none
+
+.top-info
+	padding-bottom: 20px
+
+@media (max-width: 1070px)
+	.toolbar 
+		.tools
+			display: table-cell
+			vertical-align: middle
+			.account
+				display: block
+
+
+@media (max-width: 991px)
+	.sidebar
+		max-width: 100%
+
+.review-bottom
+	background: #f9f9f97d
+	
+.back-to-store
+	margin-bottom: 10px
+	a
+		text-decoration: none
+		font-size: 1rem
+
+@media (max-width: 991px)
+	.checkout-container
+		aside
+			border: 1px solid #e1e7ec
+			padding: 10px
+	.back-to-store
+		display: none
+
+//////////////////////////////////////
+//                                  //
+//            CHECKOUT              //
+//                                  //
+//////////////////////////////////////
+
+.shopping-cart
+	.product-item
+		.product-thumb
+			max-width: 80px
+
+.coupon-message
+	.inner
+		padding: 10px
+		border: 1px solid #ccc
+		text-align: center
+		.small
+			font-size: 1.2rem
+		.big
+			font-size: 2rem
+			color: green
+			
+//////////////////////////////////////
+//                                  //
+//           DECORATIONS            //
+//                                  //
+//////////////////////////////////////
+
+.short-divisor
+	@include flex-center
+	.inner
+		width: 250px
+		border-bottom: 1px solid #ccc
+		text-align: center
+		margin-bottom: 10px
+		margin-top: 15px
+
+//////////////////////////////////////
+//                                  //
+//             ALERTS               //
+//                                  //
+//////////////////////////////////////
+
+.alert-success
+	background-color: $green
+	color: #000
+	margin-top: 20px 
+	
+.alert-success > :not(.text-white), .alert-success > :not(.text-light), .alert-success h1:not(.text-white), .alert-success h1:not(.text-light), .alert-success h2:not(.text-white), .alert-success h2:not(.text-light), .alert-success h3:not(.text-white), .alert-success h3:not(.text-light), .alert-success h4:not(.text-white), .alert-success h4:not(.text-light), .alert-success h5:not(.text-white), .alert-success h5:not(.text-light), .alert-success h6:not(.text-white), .alert-success h6:not(.text-light), .alert-success p:not(.text-white), .alert-success p:not(.text-light), .alert-success ul:not(.text-white), .alert-success ul:not(.text-light), .alert-success ol:not(.text-white), .alert-success ol:not(.text-light), .alert-success a:not(.text-white), .alert-success a:not(.text-light)
+	color: #000
+
+.centered-notification
+	text-align: center
+	margin-top: 150px
+	font-size: 1.5rem
+	.content
+		padding: 10px
+		background: #f9f9f9
+	.bottom
+		margin-top: 50px
+
+//////////////////////////////////////
+//                                  //
+//           HELPERS                //
+//                                  //
+//////////////////////////////////////
+
+.dont-break
+	white-space: nowrap
+.dont-wrap
+	display: flex
+	flex-wrap: nowrap
+	
+.marg-top-25
+	margin-top: 25px
+.pad0
+	padding: 0
+.cursor-pointer
+	&:hover
+		cursor: pointer
+.anchor
+	display: block
+	position: relative
+	top: -50px
+	visibility: hidden
+
+.horizontal-list
+	ul
+		padding-left: 0
+		padding: 0
+		margin: 0
+		li
+			display: inline-block
+			list-style: none
+
+.flex-h-100
+	display: flex
+	.flex-h-inner
+		width: 100%
