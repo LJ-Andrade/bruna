@@ -22,26 +22,37 @@
 @endsection
 
 @section('content')
-
-	<div class="inner-wrapper">
-		{!! Form::model($item, [
-				'method' => 'PATCH',
-				'url' => ['vadmin/cat_atribute1', $item->id],
-				'class' => 'row big-form mw450', 
-				'data-parsley-validate' => ''
-			]) !!}
-			@include('vadmin.catalog.atribute1.form')
-			<div class="form-actions right">
-				<a href="{{ route('cat_atribute1.index')}}">
-					<button type="button" class="btn btnRed">
-						<i class="icon-cross2"></i> Cancelar
+	<div class="row	inner-wrapper">
+		<div class="col-sm-12 col-md-6">
+			{!! Form::model($item, [
+					'method' => 'PATCH',
+					'url' => ['vadmin/cat_atribute1', $item->id],
+					'class' => 'row big-form', 
+					'data-parsley-validate' => ''
+				]) !!}
+				@include('vadmin.catalog.atribute1.form')
+				<div class="form-actions right">
+					<a href="{{ route('cat_atribute1.index')}}">
+						<button type="button" class="btn btnRed mx-1">
+							<i class="icon-cross2"></i> 
+						</button>
+					</a>
+					<button type="submit" class="btn btnGreen">
+						<i class="icon-check2"></i> Guardar
 					</button>
-				</a>
-				<button type="submit" class="btn btnGreen">
-					<i class="icon-check2"></i> Guardar
-				</button>
-			</div>
-		{!! Form::close() !!}
+				</div>
+			{!! Form::close() !!}
+		</div>
+		<div class="col-sm-12 col-md-6">
+			@component('vadmin.components.infoContainer')
+				@slot('text')
+				Agregue los <b>talles</b> correspondientes. <br>
+				Luego estarán disponibles como opción al momento de cargar artículos para el <b>catálogo</b><br>
+				Estos atributos permitirán a los usuarios filtrar los artículos desde la tienda y facilitan a los administradores la carga de datos. 
+				<br>
+				@endslot
+			@endcomponent
+		</div>
 	</div>  
 @endsection
 

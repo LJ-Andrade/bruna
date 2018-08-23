@@ -3,33 +3,37 @@
 @section('content')
 	<div class="container padding-bottom-3x mb-1 marg-top-25">
 		<div class="row product-show">
-			<div class="col-xs-12 col-sm-6 col-lg-6 image">
-				<div class="product-gallery">
-					<ul class="product-thumbnails">
-						@foreach($article->images as $image)
-							<li class=""><a href="#{{ $image->id }}"><img src="{{ asset('webimages/catalogo/'. $image->name) }}" alt="Product"></a></li>
-						@endforeach
-					</ul>
-					<div class="gallery-wrapper">
-						@foreach($article->images as $index => $image)
-						<div class="gallery-item {{ $index == 0 ? 'active' : '' }}">
-							<a href="{{ asset('webimages/catalogo/'. $image->name) }}" data-hash="{{ $image->id }}" data-size="500x750"></a>
-						</div>
-						@endforeach
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-6 image">
+				<div class="row product-gallery">
+					<div class="col-xs-12 col-sm-3 col-md-3 pad0">
+						<ul class="product-thumbnails">
+							@foreach($article->images as $image)
+								<li class=""><a href="#{{ $image->id }}"><img src="{{ asset('webimages/catalogo/'. $image->name) }}" alt="Product"></a></li>
+							@endforeach
+						</ul>
 					</div>
-					<div class="product-carousel owl-carousel">
-						@if(!$article->images->isEmpty())
-						@foreach($article->images as $image)
-							<div data-hash="{{ $image->id }}"><img src="{{ asset('webimages/catalogo/'. $image->name) }}" alt="Product"></div>
-						@endforeach
-						@else
-							<img src="{{ asset($article->featuredImageName()) }}" alt="Producto del Catálogo">
-						@endif
+					<div class="col-xs-12 col-sm-9 col-md-9 images-container pad0">
+						<div class="gallery-wrapper">
+							@foreach($article->images as $index => $image)
+							<div class="gallery-item {{ $index == 0 ? 'active' : '' }}">
+								<a href="{{ asset('webimages/catalogo/'. $image->name) }}" data-hash="{{ $image->id }}" data-size="500x750"><i class="icon-zoom-in"></i></a>
+							</div>
+							@endforeach
+						</div>
+						<div class="product-carousel owl-carousel">
+							@if(!$article->images->isEmpty())
+							@foreach($article->images as $image)
+								<div data-hash="{{ $image->id }}"><img class="img-fluid" src="{{ asset('webimages/catalogo/'. $image->name) }}" alt="Product"></div>
+							@endforeach
+							@else
+								<img src="{{ asset($article->featuredImageName()) }}" alt="Producto del Catálogo">
+							@endif
+						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-xs-12 col-md-6 col-lg-6 products-details">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7 col-xl-6 products-details">
 				<div class="padding-top-2x mt-2 hidden-md-up"></div>
 				{{--  Article Name  --}}
 				

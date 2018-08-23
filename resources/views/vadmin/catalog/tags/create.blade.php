@@ -20,15 +20,14 @@
 @endsection
 
 @section('content')
-	<div class="inner-wrapper">
-		<div class="row">
-			<div class="col-md-5">
-			{!! Form::open(['route' => 'cat_tags.store', 'method' => 'POST', 'files' => true, 'class' => 'row big-form mw450', 'data-parsley-validate' => '']) !!}	
+	<div class="row inner-wrapper">
+		<div class="col-sm-12 col-md-6">
+			{!! Form::open(['route' => 'cat_tags.store', 'method' => 'POST', 'files' => true, 'class' => 'row big-form', 'data-parsley-validate' => '']) !!}	
 				@include('vadmin.catalog.tags.form')
 				<div class="form-actions right">
 					<a href="{{ route('cat_tags.index')}}">
-						<button type="button" class="btn btnRed">
-							<i class="icon-cross2"></i> Cancelar
+						<button type="button" class="btn btnRed mx-1">
+							<i class="icon-cross2"></i> 
 						</button>
 					</a>
 					<button type="submit" class="btn btnGreen">
@@ -37,16 +36,15 @@
 				</div>
 			</div>
 			{!! Form::close() !!}
-			<div class="col-md-7">
-				@component('vadmin.components.infoContainer')
-					@slot('text')
-					Las <b>etiquetas</b> (o tags) son palabras claves que permiten agrupar items con una característica particular.
-					Estas pueden ser compartidas entre items que pertenezcan a distintas categorías.
-					Luego permitirá a los usuarios que filtren los items en los buscadores de la web según sus preferencias. <br><br>
-					@endslot
-				@endcomponent
-			</div>
-		</div>		
+		<div class="col-sm-12 col-md-6">
+			@component('vadmin.components.infoContainer')
+				@slot('text')
+				Las <b>etiquetas</b> (o tags) son palabras claves que permiten agrupar items con una característica particular.
+				Estas pueden ser compartidas entre items que pertenezcan a distintas categorías.
+				Luego permitirá a los usuarios que filtren los items en los buscadores de la web según sus preferencias. <br><br>
+				@endslot
+			@endcomponent
+		</div>	
 	</div>  
 @endsection
 

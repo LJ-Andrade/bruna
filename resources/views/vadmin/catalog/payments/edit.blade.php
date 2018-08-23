@@ -24,25 +24,34 @@
 @section('content')
 
 	<div class="inner-wrapper">
-		{!! Form::model($item, [
-				'method' => 'PATCH',
-				'url' => ['vadmin/payments', $item->id],
-				'class' => 'row big-form mw450', 
-				'data-parsley-validate' => ''
-			]) !!}
-			@include('vadmin.catalog.payments.form')
-			<div class="form-actions right">
-				<a href="{{ route('payments.index')}}">
-					<button type="button" class="btn btnRed">
-						<i class="icon-cross2"></i> Cancelar
+		<div class="col-sm-12 col-md-6">
+			{!! Form::model($item, [
+					'method' => 'PATCH',
+					'url' => ['vadmin/payments', $item->id],
+					'class' => 'row big-form', 
+					'data-parsley-validate' => ''
+				]) !!}
+				@include('vadmin.catalog.payments.form')
+				<div class="form-actions right">
+					<a href="{{ route('payments.index')}}">
+						<button type="button" class="btn btnRed mx-1">
+							<i class="icon-cross2"></i>
+						</button>
+					</a>
+					<button type="submit" class="btn btnGreen">
+						<i class="icon-check2"></i> Guardar
 					</button>
-				</a>
-				<button type="submit" class="btn btnGreen">
-					<i class="icon-check2"></i> Guardar
-				</button>
-			</div>
-		{!! Form::close() !!}
-		
+				</div>
+			{!! Form::close() !!}
+		</div>
+		<div class="col-sm-12 col-md-6">
+			@component('vadmin.components.infoContainer')
+				@slot('text')
+				<b>Este método de pago</b></b> aparecerá como una opción a seleccionar por el cliente al momento de finalizar su compra (checkout). <br><br>
+				<b>El porcentaje indicado</b></b>se calculará apartir del subtotal de la compra.
+				@endslot
+			@endcomponent
+		</div>
 	</div>  
 
 @endsection

@@ -211,7 +211,6 @@ class UserController extends Controller
     // ---------- Update Avatar --------------- //
     public function updateAvatar(Request $request)
     {
-        
         if ($request->hasFile('avatar')) {
 
             $user     = User::findOrFail($request->id);
@@ -219,11 +218,11 @@ class UserController extends Controller
             $filename = $user->id.'.jpg';
             try{
                 Image::make($avatar)->encode('jpg', 80)->fit(300, 300)->save(public_path('images/users/'.$filename));
-                if ($user->avatar != "default.jpg") {
-                    $path     = public_path('images/users/');
-                    $lastpath = $user->avatar;
-                    File::Delete($path . $lastpath);   
-                }
+                // if ($user->avatar != "default.jpg") {
+                //     $path     = public_path('images/users/');
+                //     $lastpath = $user->avatar;
+                //     File::Delete($path . $lastpath);   
+                // }
                 $user->avatar = $filename;
                 $user->save();
                 return redirect('vadmin/users/'.$user->id)->with('message', 'Avatar actualizado');

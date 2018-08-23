@@ -10,9 +10,9 @@
 		</a>
 	</div>
 	<div class="topbar-column">
-		<a class="hidden-md-down">&nbsp;<b> 4962-5134 </b>| 15 6761-8867 | 15 3321-2292</a>
+		<a class="hidden-md-down">&nbsp;<b> 4545-4545 </b>| 15 4545-4545</a>
 		<a class="hidden-md-down" href="info@bruna.com.ar">
-			<i class="icon-mail"></i>&nbsp; info@santaosadia.com.ar
+			<i class="icon-mail"></i>&nbsp; info@bruna.com.ar
 		</a>
 	</div>
 </div>

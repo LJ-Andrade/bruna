@@ -1,4 +1,4 @@
-<div class="container content-header-inner">
+<div class="container-fluid content-header-inner">
     <div class="row inner-header">
         <ol class="breadcrumb">
             {{ $breadcrums }}

@@ -22,13 +22,13 @@
 @section('content')
 	<div class="inner-wrapper">
 		<div class="row">	
-			<div class="col-md-5">
-				{!! Form::open(['route' => 'payments.store', 'method' => 'POST', 'class' => 'row big-form mw450', 'data-parsley-validate' => '']) !!}	
+			<div class="col-sm-12 col-md-6">
+				{!! Form::open(['route' => 'payments.store', 'method' => 'POST', 'class' => 'row big-form', 'data-parsley-validate' => '']) !!}	
 					@include('vadmin.catalog.payments.form')
 					<div class="form-actions right">
 						<a href="{{ route('payments.index')}}">
-							<button type="button" class="btn btnRed">
-								<i class="icon-cross2"></i> Cancelar
+							<button type="button" class="btn btnRed mx-1">
+								<i class="icon-cross2"></i>
 							</button>
 						</a>
 						<button type="submit" class="btn btnGreen">
@@ -37,11 +37,11 @@
 					</div>
 				{!! Form::close() !!}
 			</div>
-			<div class="col-md-7">
+			<div class="col-sm-12 col-md-6">
 				@component('vadmin.components.infoContainer')
 					@slot('text')
-					<b>El método de pago</b></b> que será creado aparecerá como una opción a seleccionar por el cliente al momento de finalizar su compra (checkout). <br><br>
-					<b>El porcentaje indicado</b></b> se sumará al subtotal de la compra.
+					<b>Este método de pago</b></b> aparecerá como una opción a seleccionar por el cliente al momento de finalizar su compra (checkout). <br><br>
+					<b>El porcentaje indicado</b></b>se calculará apartir del subtotal de la compra.
 					@endslot
 				@endcomponent
 			</div>

@@ -1,4 +1,4 @@
-@extends('layouts.vadmin.main')
+@extends('vadmin.partials.main')
 {{-- PAGE TITLE --}}
 @section('title', 'Vadmin | Documentación')
 @section('header')

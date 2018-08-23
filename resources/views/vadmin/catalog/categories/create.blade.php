@@ -20,32 +20,30 @@
 @endsection
 
 @section('content')
-	<div class="inner-wrapper">
-		<div class="row">
-			<div class="col-md-5">
-				{!! Form::open(['route' => 'cat_categorias.store', 'method' => 'POST', 'files' => true, 'class' => 'row big-form mw450', 'data-parsley-validate' => '']) !!}	
-					@include('vadmin.portfolio.categories.form')
-					<div class="form-actions right">
-						<a href="{{ route('cat_categorias.index')}}">
-							<button type="button" class="btn btnRed">
-								<i class="icon-cross2"></i> Cancelar
-							</button>
-						</a>
-						<button type="submit" class="btn btnGreen">
-							<i class="icon-check2"></i> Guardar
+	<div class="row inner-wrapper">
+		<div class="col-sm-12 col-md-6">
+			{!! Form::open(['route' => 'cat_categorias.store', 'method' => 'POST', 'files' => true, 'class' => 'row big-form', 'data-parsley-validate' => '']) !!}	
+				@include('vadmin.portfolio.categories.form')
+				<div class="form-actions right">
+					<a href="{{ route('cat_categorias.index')}}">
+						<button type="button" class="btn btnRed mx-1">
+							<i class="icon-cross2"></i>
 						</button>
-					</div>
-				{!! Form::close() !!}
-			</div>
-			<div class="col-md-7">
-				@component('vadmin.components.infoContainer')
-					@slot('text')
-					Las <b>categorías</b> siven para organizar el contenido del catálogo. Permiten una mejor segmentación del contenido.
-					Se utilizan palabras o frases para agrupar artículos de igual temática.
-					Esto permitirá luego que los usuarios filtren los items en los buscadores de la web según sus preferencias. <br><br>
-					@endslot
-				@endcomponent
-			</div>
+					</a>
+					<button type="submit" class="btn btnGreen">
+						<i class="icon-check2"></i> Guardar
+					</button>
+				</div>
+			{!! Form::close() !!}
+		</div>
+		<div class="col-sm-12 col-md-6">
+			@component('vadmin.components.infoContainer')
+				@slot('text')
+				Las <b>categorías</b> siven para organizar el contenido del catálogo. Permiten una mejor segmentación del contenido.
+				Se utilizan palabras o frases para agrupar artículos de igual temática.
+				Esto permitirá luego que los usuarios filtren los items en los buscadores de la web según sus preferencias. <br><br>
+				@endslot
+			@endcomponent
 		</div>
 	</div>  
 @endsection

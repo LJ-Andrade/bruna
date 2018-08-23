@@ -2,7 +2,7 @@
 
 @section('styles')
 	<style>
-		body {
+		/* body {
 			background: url('../store/backlogin.jpg') no-repeat center center;
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
@@ -12,7 +12,7 @@
 
 		.offcanvas-wrapper {
 			background: transparent
-		}
+		} */
 	</style>
 @endsection
 

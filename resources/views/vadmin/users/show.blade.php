@@ -20,36 +20,38 @@
                  <span style="color: #ada8a8">Perfil | </span>{{ $user->username }}
             @endslot
             @slot('content')
-                <div class="round-image-card">
-                    <div class="inner">
-                        <div class="image">
-                            @if($user->avatar == '')
-                                <img id="Avatar" class="Image-Container CheckImg" src="{{ asset('images/users/default.jpg') }}" alt="Imágen de Usuario">
-                            @else	
-                                <img id="Avatar" class="Image-Container CheckImg" src="{{ asset('images/users/'.$user->avatar) }}" alt="Imágen de Usuario">
-                            @endif
-                            <span class="over-text">Cambiar imágen</span>
-                        </div>
-                        <div class="card-content">
-                            <span><b>Nombre de Usuario:</b> {{ $user->username }} </span><br>
-                            <span><b>Nombre:</b> {{ $user->name }} </span><br>
-                            <span><b>E-Mail:</b> {{ $user->email }}  </span><br><br>
-                            <span class="tag tag-pill btnBlue"><b>Rol:</b> {{ roleTrd($user->role) }}  </span> 
-                            <span class="tag tag-pill btnGreen"><b>Grupo:</b> {{ groupTrd($user->group) }}  </span>   
+                <div class="centered-content">
+                    <div class="round-image-card">
+                        <div class="inner">
+                            <div class="image">
+                                @if($user->avatar == '')
+                                    <img id="Avatar" class="Image-Container CheckImg" src="{{ asset('images/users/default.jpg') }}" alt="Imágen de Usuario">
+                                @else	
+                                    <img id="Avatar" class="Image-Container CheckImg" src="{{ asset('images/users/'.$user->avatar) }}" alt="Imágen de Usuario">
+                                @endif
+                                <span class="over-text">Cambiar imágen</span>
+                            </div>
+                            <div class="card-content">
+                                <span><b>Nombre de Usuario:</b> {{ $user->username }} </span><br>
+                                <span><b>Nombre:</b> {{ $user->name }} </span><br>
+                                <span><b>E-Mail:</b> {{ $user->email }}  </span><br><br>
+                                <span class="tag tag-pill btnBlue"><b>Rol:</b> {{ roleTrd($user->role) }}  </span> 
+                                <span class="tag tag-pill btnGreen"><b>Grupo:</b> {{ groupTrd($user->group) }}  </span>   
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="ActionContainer Hidden">
-                    <hr class="softhr">
-                    {!! Form::open(['url' => 'vadmin/updateAvatar', 'method' => 'POST', 'class' => 'UpdateAvatarForm Hidden', 'files' => true]) !!}
-                        {{-- <form enctype="multipart/form-data" action="profile" method="POST"> --}}
-                        {{ csrf_field() }}
-                        <input type="file" name="avatar" class="Hidden" id="ImageInput">
-                        <input type="hidden" name="id" value="{{ $user->id }}">
-                        <input type="submit" class="btn btnGreen" id="ConfirmChange" value="Confirmar">
-                    {!! Form::close() !!}    
-                    {{-- <button id="UpdateProfileBtn" class="btn btnGreen"><i class="icon-check2"></i> Actualizar</button> --}}
-                </div>
+                    <div class="ActionContainer Hidden">
+                        <hr class="softhr">
+                        {!! Form::open(['url' => 'vadmin/updateAvatar', 'method' => 'POST', 'class' => 'UpdateAvatarForm Hidden', 'files' => true]) !!}
+                            {{-- <form enctype="multipart/form-data" action="profile" method="POST"> --}}
+                            {{ csrf_field() }}
+                            <input type="file" name="avatar" class="Hidden" id="ImageInput">
+                            <input type="hidden" name="id" value="{{ $user->id }}">
+                            <input type="submit" class="btn btnGreen" id="ConfirmChange" value="Confirmar">
+                        {!! Form::close() !!}    
+                        {{-- <button id="UpdateProfileBtn" class="btn btnGreen"><i class="icon-check2"></i> Actualizar</button> --}}
+                    </div>
+                </div>  
             @endslot
         @endcomponent
     </div>

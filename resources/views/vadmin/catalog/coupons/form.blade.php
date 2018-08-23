@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="form-group ">
+        <div class="form-group">
             {!! Form::label('code', 'Código') !!}
             {!! Form::text('code', null, [ 'id' => 'CouponCode', 'class' => 'form-control', 'placeholder' => 'Ingrese un código', 'required' => '']) !!}
-            <button class="btnSm btnBlue" type="button" onclick="generateCatalogCoupon('CouponCode')">Generar Código</button>
+            <button class="btnSm btnBlue my-1" type="button" onclick="generateCatalogCoupon('CouponCode')">Generar Código</button>
         </div>
     </div>
 </div>    
