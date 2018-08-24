@@ -1,159 +1,5 @@
 //////////////////////////////////////
 //                                  //
-//              COLORS              //
-//                                  //
-//////////////////////////////////////
-	
-//////////////////////////////////////
-//                                  //
-//              COLORS              //
-//                                  //
-//////////////////////////////////////
-
-$orange:     #dc9f1d
-$orangeH:    #ceaa5f
-$greenD:     #8DBB61
-$greenL:     #9FD56B
-$green:      rgb(189, 198, 167)
-$greenH:     #9FD56B
-$blue:       #5D76C9
-$blueH:      #7689C8
-$lblue:      #92c6de
-$red:        #D05C5C
-$redH:       #C47777
-
-//////////////////////////////////////
-//                                  //
-//           BACKGROUNDS            //
-//                                  //
-//////////////////////////////////////
-
-.blue-back
-	background-color: $blue
-
-.green-back
-	background-color: $green
-
-.red-back
-	background-color: $red
-
-.grey-back
-	background-color: #f3f3f3
-
-.yellow-back
-	background-color: #08dc2e
-
-.hollow-back-white
-	border: 1px solid white
-	background-color: transparent
-
-.hollow-back-lblue
-	border: 1px solid $lblue
-	background-color: transparent
-	color: #383838
-
-//////////////////////////////////////
-//                                  //
-//            HELPERS               //
-//                                  //
-//////////////////////////////////////
-
-.Hidden
-	display: none !important
-.brd
-  	border: 1px solid red
-.txtL
-  	text-align: left
-.txtR
-  	text-align: right
-.txtC
- 	 text-align: center
-.pad0
-  	padding: 0
-
-//////////////////////////////////////
-//                                  //
-//             ELEMENTS             //
-//                                  //
-//////////////////////////////////////
-
-.checkout-accordion
-	.card
-		border-radius: 0
-	.card-header
-		border-radius: 0
-		padding: 0.2rem 1rem
-
-.checkout-table
-	margin-bottom: 0
-	
-.full-loader
-	position: fixed
-	top: 0
-	left: 0
-	width: 100%
-	height: 100%
-	z-index: 9999
-	@include flex-column
-	.inner
-		width: 80px
-		height: 80px
-		border-radius: 4px
-		@include flex-column
-		@include box-shadow()
-		background-color: #ededed
-		img
-			width: 60px
-
-
-//////////////////////////////////////
-//                                  //
-//           PAGINATION             //
-//                                  //
-//////////////////////////////////////
-
-ul.pagination
-	// border-color: #0da9ef
-	// background-color: #0da9ef
-	display: block
-	margin: 0
-	padding: 0
-	margin-top: 5px
-	list-style: none
-	border-top: 0
-
-ul.pagination li
-	padding: 6px 12px
-	display: inline-block
-	text-align: center
-	border-radius: 50%
-	font-size: 1rem
-	font-weight: bold
-	line-height: 24px
-	width: 36px
-	height: 36px
-	&:hover
-		border-radius: 50%
-		border-color: #0da9ef
-		background-color: #0da9ef
-		a
-			color: #fff
-	
-
-ul.pagination li a
-	text-decoration: none
-	
-	margin-left: 2px
-	width: 36px
-	height: 36px
-
-ul.pagination li a.active,ul.pagination li.active
-	border-color: #0da9ef
-	background-color: #0da9ef
-	color: #fff
-
-//////////////////////////////////////
-//                                  //
 //       CONTAINERS / ITEMS         //
 //                                  //
 //////////////////////////////////////
@@ -296,17 +142,37 @@ ul.pagination li a.active,ul.pagination li.active
 	width: 150px
 	height: 120px
 
+.checkout-accordion
+	.card
+		border-radius: 0
+	.card-header
+		border-radius: 0
+		padding: 0.2rem 1rem
+
+.checkout-table
+	margin-bottom: 0
 	
+.full-loader
+	position: fixed
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+	z-index: 9999
+	@include flex-column
+	.inner
+		width: 80px
+		height: 80px
+		border-radius: 4px
+		@include flex-column
+		@include box-shadow()
+		background-color: #ededed
+		img
+			width: 60px
+			
 //////////////////////////////////////
 //                                  //
 //             ELEMENTS             //
-//                                  //
-//////////////////////////////////////
-
-
-//////////////////////////////////////
-//                                  //
-//       BUTTONS / TRIGGERS         //
 //                                  //
 //////////////////////////////////////
 
@@ -339,7 +205,6 @@ ul.pagination li a.active,ul.pagination li.active
 				.account
 					img
 						border-radius: 50%
-
 
 .btn-sm-round
 	height: 30px
@@ -384,7 +249,32 @@ ul.pagination li a.active,ul.pagination li.active
 		line-height: 1px
 	&:hover
 		opacity: .6
+
+.sq-badge
+	border: 1px solid $grey
+	color: $grey
+	padding: 4px 10px
+	margin: 2px
+	white-space: 
+	min-width: 40px
+	text-align: center
+	font-size: 0.8rem
+	@include transition(0.2s)
+	&:hover
+		background: $main-color
+		border: 1px solid $main-color
+		span
+			color: #fff
 	
+
+.short-divisor
+	@include flex-center
+	.inner
+		width: 250px
+		border-bottom: 1px solid #ccc
+		text-align: center
+		margin-bottom: 10px
+		margin-top: 15px
 
 //////////////////////////////////////
 //                                  //
@@ -400,13 +290,59 @@ ul.pagination li a.active,ul.pagination li.active
 .form-group
 	margin-bottom: 10px
 
-.form-control:not(textarea)
-	height: 30px
+// .form-control:not(textarea)
+// 	height: 30px
 
-select.form-control:not([size]):not([multiple])
-	height: 30px
+// select.form-control:not([size]):not([multiple])
+// 	height: 30px
 
+
+//////////////////////////////////////
+//                                  //
+//           PAGINATION             //
+//                                  //
+//////////////////////////////////////
+
+ul.pagination
+	// border-color: #0da9ef
+	// background-color: #0da9ef
+	display: block
+	margin: 0
+	padding: 0
+	margin-top: 5px
+	list-style: none
+	border-top: 0
+
+ul.pagination li
+	padding: 6px 12px
+	display: inline-block
+	text-align: center
+	border-radius: 50%
+	font-size: 1rem
+	font-weight: bold
+	line-height: 24px
+	width: 36px
+	height: 36px
+	&:hover
+		border-radius: 50%
+		border-color: #0da9ef
+		background-color: #0da9ef
+		a
+			color: #fff
 	
+
+ul.pagination li a
+	text-decoration: none
+	
+	margin-left: 2px
+	width: 36px
+	height: 36px
+
+ul.pagination li a.active,ul.pagination li.active
+	border-color: #0da9ef
+	background-color: #0da9ef
+	color: #fff
+
 //////////////////////////////////////
 //                                  //
 //       CART AND CATALOGUE         //
@@ -510,6 +446,21 @@ select.form-control:not([size]):not([multiple])
 				display: block
 
 
+
+// Sidebar
+.sidebar
+	.sidebar-widget
+		margin-bottom: 15px
+		font-family: $font2
+		ul
+			padding: 0
+			list-style: none
+			li
+				a
+					text-decoration: none
+					color: #383838
+
+
 @media (max-width: 991px)
 	.sidebar
 		max-width: 100%
@@ -585,20 +536,6 @@ select.form-control:not([size]):not([multiple])
 			font-size: 2rem
 			color: green
 			
-//////////////////////////////////////
-//                                  //
-//           DECORATIONS            //
-//                                  //
-//////////////////////////////////////
-
-.short-divisor
-	@include flex-center
-	.inner
-		width: 250px
-		border-bottom: 1px solid #ccc
-		text-align: center
-		margin-bottom: 10px
-		margin-top: 15px
 
 //////////////////////////////////////
 //                                  //
@@ -630,6 +567,18 @@ select.form-control:not([size]):not([multiple])
 //                                  //
 //////////////////////////////////////
 
+.Hidden
+	display: none !important
+.brd
+  	border: 1px solid red
+.txtL
+  	text-align: left
+.txtR
+  	text-align: right
+.txtC
+ 	 text-align: center
+.pad0
+  	padding: 0
 .dont-break
 	white-space: nowrap
 .dont-wrap

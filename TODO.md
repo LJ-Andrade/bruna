@@ -19,3 +19,13 @@ Errores - Fallas - Bugs
 PDF en store que salga depende si es mayorista o minorista
 En Vadmin precios mayoristas y min dependiendo customer
 En store checkout no se pueden borrar items
+
+
+
+BRUNA
+
+Cuando se quiere comprar si estar logueado tira 404
+
+Los links arriba de redes tienen url de santa osadia
+
+Tienda > register : 404

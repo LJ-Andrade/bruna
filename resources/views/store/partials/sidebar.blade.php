@@ -1,60 +1,40 @@
 <!-- Sidebar          -->
 
 <aside class="sidebar">
-	{{-- <section class="widget">
-		<div class="shop-sorting">
-			<select class="form-control" id="sorting">
-			<option>Menor Precio</option>
-			<option>Mayor Precio</option>
-			<option>A - Z</option>
-			<option>Z - A</option>
-			</select>
-			<span class="text-muted">Mostrando:&nbsp;</span><span>1 - 12 items</span> 
-		</div>
-	</section> --}}
-	<!-- Widget Categories-->
-	<section class="widget widget-categories">
-		<h3 class="widget-title">Categorias</h3>
+	<section class="sidebar-widget">
+		{!! Form::open(['route' => 'store', 'method' => 'GET', 'class' => 'input-group form-group']) !!}
+			<span class="input-group-btn">
+				<button type="submit"><i class="icon-search"></i></button>
+			</span>
+			<input class="form-control" name="buscar" type="search" placeholder="Buscar...">
+		{!! Form::close() !!}
+	</section>
+	<section class="sidebar-widget">
+		<h4>Categorias</h4>
 		<ul>
 			@foreach($categories as $category)
-				<li><a href="{{ route('store', 'category=').$category->id }}">{{ $category->name }} ({{ $category->articles->count() }})</a><span></span></li>
+				<li><a href="{{ route('store', 'categoria=').$category->id }}">{{ $category->name }} ({{ $category->articles->count() }})</a><span></span></li>
 			@endforeach
 		</ul>
 	</section>
-
-	<!-- Widget Size Filter-->
-	{{-- {!! Form::open(['id' => 'SearchForm', 'method' => 'GET', 'route' => 'store', 'class' => 'form-inline', 'role' => 'search']) !!} 
-	<section class="widget">
-		<h3 class="widget-title">Atributos</h3>
-		<div class="row inline">
+	<section class="sidebar-widget">
+		<h4>Talles</h4>
+		<div class="horizontal-list">
 			<ul>
-			@foreach($atributes1 as $atribute1)
-				<li>
-					<label class="custom-control custom-checkbox d-block">
-						<input class="custom-control-input" type="checkbox" name="atributes1[]" value="{{ $atribute1->id }}">
-						<span class="custom-control-indicator"></span><span>{!! $atribute1->name !!}</span>
-					</label>
-				</li>
-			@endforeach
+				@foreach($atributes1 as $size)
+					<a href="{{ route('store.search.size', $size->name )}}"><li class="sq-badge font-1">{{ $size->name }}</li></a>
+				@endforeach
 			</ul>
 		</div>
-		<br>
-		<h3 class="widget-title">Etiquetas</h3>
-		<div class="row inline">
-			<ul>
-			@foreach($tags as $tag)
-				<li>
-				<label class="custom-control custom-checkbox d-block">
-					<input class="custom-control-input" type="checkbox" name="tags[]" value="{{ $tag->id }}">
-					<span class="custom-control-indicator"></span>
-					<span>{{ $tag->name }}</span>
-				</label>
-				</li>
-			@endforeach
-			</ul>
-		</div>
-		<br>
-		<button class="btn btn-outline-primary btn-sm" type="submit">Buscar</button>
 	</section>
-	{!! Form::close() !!} --}}
+	<section class="sidebar-widget">
+		<h4>Etiquetas</h4>
+		<div class="horizontal-list">
+			<ul>
+				@foreach($tags as $tag)
+					<li class="sq-badge font-1"><span>{{ $tag->name }}</span></li>
+				@endforeach
+			</ul>
+		</div>
+	</section>
 </aside>

@@ -33,6 +33,9 @@ Route::post('mail_sender', 'WebController@mail_sender');
 */
 Route::get('/', 'Store\StoreController@index')->middleware('active-customer');
 Route::get('tienda', ['as' => 'store', 'uses' => 'Store\StoreController@index'])->middleware('active-customer');
+// Searchs
+Route::get('talle/{name}', ['as'   => 'store.search.size', 'uses' => 'Store\StoreController@searchSize']);
+
 Route::get('store-register-hold', ['as' => 'store-register-hold', 'uses' => 'CustomerAuth\RegisterController@holdRegisterLogin'])->middleware('active-customer');
 
 Route::get('tienda/proceso', function(){ return view('store.proceso'); })->middleware('active-customer');

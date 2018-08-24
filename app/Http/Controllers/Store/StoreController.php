@@ -39,16 +39,26 @@ class StoreController extends Controller
     
     public function index(Request $request)
     {   
-        if($request->category)
+        $paginate = 15;
+
+        if(isset($request->buscar))
         {
-            $articles = CatalogArticle::orderBy('id', 'DESC')->active()->where('category_id', $request->category)->paginate(15);
-        } elseif($request->atributes1 || $request->tags)
+            $articles = CatalogArticle::search($request->search)->active()->paginate($paginate);
+        } 
+        else if(isset($request->categoria))
         {
-            $articles = CatalogArticle::orderBy('id', 'DESCC')->active()->paginate(15);
-        } else {
-            $articles = CatalogArticle::orderBy('id', 'DESCC')->active()->paginate(15);
+            $articles = CatalogArticle::orderBy('id', 'DESC')->active()->where('category_id', $request->category)->paginate($paginate);
+        }
+        else if(isset($request->etiqueta))
+        {
+            $articles = CatalogArticle::orderBy('id', 'DESC')->active()->where('category_id', $request->category)->paginate($paginate);
+        }
+        else 
+        {
+            $articles = CatalogArticle::orderBy('id', 'DESCC')->active()->paginate($paginate);
         }
 
+       
         
         // Get only categories with active products
         $categories = CatalogCategory::with(['articles' => function($query) { $query->where('status','=', '1'); } ])->get();
@@ -65,6 +75,16 @@ class StoreController extends Controller
             ->with('favs', $favs)
             ->with('atributes1', $atributes1);
     }
+
+    public function searchSize($name)
+	{
+        $size = CatalogArticle::size($name)->first();
+		$articles = $size->article()->paginate(12);
+        dd($articles);
+		
+		return view('web.portfolio.portfolio')->with('articles', $articles);
+    }
+    
     
     public function show(Request $request)
     {
