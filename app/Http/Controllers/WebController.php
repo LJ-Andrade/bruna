@@ -20,8 +20,7 @@ class WebController extends Controller
 
 	public function home()
 	{
-		
-		return view('web.index');
+		return view('store.index');
 	}
 	
 	public function getDownload($data){

@@ -9,6 +9,7 @@
 
 // Route::get('/', ['as' => 'web', 'uses' => 'WebController@home']);
 
+
 // Route::get('contacto', function(){ return view('web.web.contacto'); });
 
 /*
@@ -30,8 +31,7 @@ Route::post('mail_sender', 'WebController@mail_sender');
 | Store
 |--------------------------------------------------------------------------
 */
-
-Route::get('/', ['as' => 'store', 'uses' => 'Store\StoreController@index'])->middleware('active-customer');
+Route::get('/', 'Store\StoreController@index')->middleware('active-customer');
 Route::get('tienda', ['as' => 'store', 'uses' => 'Store\StoreController@index'])->middleware('active-customer');
 Route::get('store-register-hold', ['as' => 'store-register-hold', 'uses' => 'CustomerAuth\RegisterController@holdRegisterLogin'])->middleware('active-customer');
 

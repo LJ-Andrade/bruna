@@ -1,5 +1,7 @@
 @extends('web.partials.main')
-@section('title', 'Santa Osadia | Inicio')
+@section('title')
+    {{ APP_BUSSINESS_NAME }}
+@endsection
 
 @section('content')
     <div class="container error-page">
