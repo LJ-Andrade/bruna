@@ -47,44 +47,53 @@ class StoreController extends Controller
         } 
         else if(isset($request->categoria))
         {
-            $articles = CatalogArticle::orderBy('id', 'DESC')->active()->where('category_id', $request->category)->paginate($paginate);
+            $articles = CatalogArticle::orderBy('id', 'DESC')->active()->where('category_id', $request->categoria)->paginate($paginate);
         }
         else if(isset($request->etiqueta))
         {
-            $articles = CatalogArticle::orderBy('id', 'DESC')->active()->where('category_id', $request->category)->paginate($paginate);
+            $articles = CatalogArticle::orderBy('id', 'DESC')->active()->where('category_id', $request->etiqueta)->paginate($paginate);
         }
         else 
         {
             $articles = CatalogArticle::orderBy('id', 'DESCC')->active()->paginate($paginate);
         }
-
-       
         
         // Get only categories with active products
-        $categories = CatalogCategory::with(['articles' => function($query) { $query->where('status','=', '1'); } ])->get();
-
-        $tags = CatalogTag::orderBy('id', 'ASC')->select('name', 'id')->get();
-        $atributes1 = CatalogAtribute1::orderBy('id', 'ASC')->select('name', 'id')->get();
+        //$categories = CatalogCategory::with(['articles' => function($query) { $query->where('status','=', '1'); } ])->get();
+//
+        //$tags = CatalogTag::orderBy('id', 'ASC')->select('name', 'id')->get();
+        //$atributes1 = CatalogAtribute1::orderBy('id', 'ASC')->select('name', 'id')->get();
         
         $favs = $this->getCustomerFavs();
 
         return view('store.index')
             ->with('articles', $articles)
-            ->with('categories', $categories)
-            ->with('tags', $tags)
-            ->with('favs', $favs)
-            ->with('atributes1', $atributes1);
+            ->with('favs', $favs);
     }
 
     public function searchSize($name)
 	{
-        $size = CatalogArticle::size($name)->first();
-		$articles = $size->article()->paginate(12);
-        dd($articles);
-		
-		return view('web.portfolio.portfolio')->with('articles', $articles);
+        $size = CatalogAtribute1::searchName($name)->first();
+		$articles = $size->articles()->paginate(15);
+        $articles->each(function($articles){
+            $articles->category;
+            $articles->images;
+        });  
+
+		return view('store.index')->with('articles', $articles);
     }
     
+    public function searchTag($name)
+	{
+        $tag = CatalogTag::searchName($name)->first();
+		$articles = $tag->articles()->paginate(15);
+        $articles->each(function($articles){
+            $articles->category;
+            $articles->images;
+        });  
+
+		return view('store.index')->with('articles', $articles);
+    }
     
     public function show(Request $request)
     {

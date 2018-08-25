@@ -2,11 +2,13 @@
 namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+
 class StoreServiceProvider extends ServiceProvider
 {
     
-    public function boot()
+    public function boot(View $view)
     {
+        //View::composer(['store'], 'App\Http\ViewComposers\ShowCatTagsAtrib');
     }
     
     public function register()
@@ -29,6 +31,5 @@ class StoreServiceProvider extends ServiceProvider
             'store.cartdetail',
             'store.wishlist'
         ], 'App\Http\ViewComposers\StoreComposer');
-        
     }
 }

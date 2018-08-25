@@ -12,6 +12,10 @@ class CartItemController extends Controller
 {
     public function store(Request $request)
     {
+        return response()->json(['response' => false, 'result' => 'error', 'message' => 'no-logged']);
+        if(auth()->guard('customer')->check()){
+            return response()->json(['response' => false, 'result' => 'error', 'message' => 'no-logged']);
+        }
         $cartItem = new CartItem();
         $cartItem->cart_id = auth()->guard('customer')->user()->cart->id;
         $cartItem->article_id = $request->article_id;

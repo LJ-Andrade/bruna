@@ -1,20 +1,5 @@
-@extends('layouts.store.main')
+@extends('store.partials.main')
 
-@section('styles')
-	<style>
-		body {
-			background: url('../store/backlogin.jpg') no-repeat center center;
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
-			background-size: cover ;
-		}
-
-		.offcanvas-wrapper {
-			background: transparent
-		}
-	</style>
-@endsection
 
 @section('content')
 <div class="container padding-bottom-3x mb-2 marg-top-25">

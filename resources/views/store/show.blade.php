@@ -110,7 +110,7 @@
 		</div>
 	</div>
 		
-		<!-- Photoswipe container // This Shows Big Image Preview -->
+	<!-- Photoswipe container // This Shows Big Image Preview -->
 	<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="pswp__bg"></div>
 		<div class="pswp__scroll-wrap">

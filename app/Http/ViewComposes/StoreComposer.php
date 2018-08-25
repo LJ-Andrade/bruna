@@ -8,7 +8,6 @@ use App\Traits\CartTrait;
 
 class StoreComposer
 {
-
     use CartTrait;
 
 	public function compose(View $view)

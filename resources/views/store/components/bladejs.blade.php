@@ -15,7 +15,6 @@
         var articleid = $(this).data('articleid');
         var size      = $('#SelectedSize').val();
         var quantity  = $('#SelectedQuantity').val();
-
         AddArticleToCart(route, articleid, size, quantity);
     });
 
@@ -28,6 +27,7 @@
 
 
     function AddArticleToCart(route, articleid, size, quantity){
+
         $.ajax({	
             url: route,
             method: 'POST',             
@@ -35,16 +35,16 @@
             data: { article_id: articleid, size: size, quantity: quantity },
             success: function(data){
                 //$('#Error').html(data.responseText);
-                //console.log(data);
-                var action = 'reload';
-                var time   = 1000;
-                if(data.response == true){
-                    toast_success('Ok!', 'Producto agregado al carro | Talle: ' + size + ' | Cantidad: ' + quantity, 'bottomCenter', action, time);
-                }  else {
-                    //$('#Error').html(data.message['errorInfo']);
-                    toast_error('Ups!', 'Error', 'bottomCenter', action, time);
-                    console.log(data);
-                }
+                console.log(data);
+                //var action = 'reload';
+                //var time   = 1000;
+                //if(data.response == true){
+                //    toast_success('Ok!', 'Producto agregado al carro | Talle: ' + size + ' | Cantidad: ' + quantity, 'bottomCenter', action, time);
+                //}  else {
+                //    //$('#Error').html(data.message['errorInfo']);
+                //    toast_error('Ups!', 'Error', 'bottomCenter', action, time);
+                //    console.log(data);
+                //}
             },
             error: function(data){
                 $('#Error').html(data.responseText);

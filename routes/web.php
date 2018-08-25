@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
 |--------------------------------------------------------------------------
 | Web
 |--------------------------------------------------------------------------
@@ -20,10 +20,10 @@
 
 Route::get('portfolio', ['as'   => 'web.portfolio',	'uses' => 'WebController@portfolio']);
 // Show Article / Catalogue
-Route::get('article/{slug}', ['uses' => 'WebController@showWithSlug', 'as'   => 'web.portfolio.article'])->where('slug', '[\w\d\-\_]+');
+Route::get('article/{slug}', ['as' => 'web.portfolio.article', 'uses' => 'WebController@showWithSlug'])->where('slug', '[\w\d\-\_]+');
 // Article Searcher
-Route::get('categories/{name}', ['uses' => 'WebController@searchCategory', 'as'   => 'web.search.category']);
-Route::get('tag/{name}', ['uses' => 'WebController@searchTag', 'as'   => 'web.search.tag']);
+Route::get('categories/{name}', ['as' => 'web.search.category', 'uses' => 'WebController@searchCategory']);
+Route::get('tag/{name}', ['as' => 'web.search.tag', 'uses' => 'WebController@searchTag']);
 Route::post('mail_sender', 'WebController@mail_sender');
 
 /*
@@ -34,7 +34,8 @@ Route::post('mail_sender', 'WebController@mail_sender');
 Route::get('/', 'Store\StoreController@index')->middleware('active-customer');
 Route::get('tienda', ['as' => 'store', 'uses' => 'Store\StoreController@index'])->middleware('active-customer');
 // Searchs
-Route::get('talle/{name}', ['as'   => 'store.search.size', 'uses' => 'Store\StoreController@searchSize']);
+Route::get('tienda/talle/{name}', ['as' => 'store.search.size', 'uses' => 'Store\StoreController@searchSize']);
+Route::get('tienda/etiqueta/{name}', ['as' => 'store.search.tag', 'uses' => 'Store\StoreController@searchTag']);
 
 Route::get('store-register-hold', ['as' => 'store-register-hold', 'uses' => 'CustomerAuth\RegisterController@holdRegisterLogin'])->middleware('active-customer');
 
@@ -184,10 +185,6 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'admin'], function(){
     // -- CATALOG --
     Route::resource('catalogo', 'Catalog\ArticlesController');
     Route::post('update_catalog_field', 'Catalog\ArticlesController@updateField');
-    // Route::post('update_catalog_stock', 'Catalog\ArticlesController@updateStock');
-    // Route::post('update_catalog_reseller_price', 'Catalog\ArticlesController@updateResellerPrice');
-    // Route::post('update_catalog_discount', 'Catalog\ArticlesController@updateDiscount');
-    // Route::post('update_catalog_reseller_discount', 'Catalog\ArticlesController@updateDiscount');
     // Categories
     Route::resource('cat_categorias', 'Catalog\CategoriesController');
     Route::resource('cat_tags', 'Catalog\TagsController');

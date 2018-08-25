@@ -10,8 +10,13 @@ class CatalogAtribute1 extends Model
 
     protected $fillable = ['name'];
     
-    public function scopeSearchname($query, $name)
-    {
-        return $query->where('name','LIKE', "%$name%");
+    public function articles(){
+		return $this->belongsToMany('App\CatalogArticle');
     }
+    
+    public function scopeSearchName($query, $name)
+    {
+        return $query->where('name','=', $name);
+    }
+
 }

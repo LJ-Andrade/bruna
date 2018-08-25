@@ -167,10 +167,14 @@ return [
         /*
         * Package Service Providers...
         */
-        // To send data to all views (Categories, tags)
         App\Providers\ComposerServiceProvider::class,
+        // Send activeCart
         App\Providers\StoreServiceProvider::class,
-        
+        // Send Categories, tags and atribute1
+        App\Providers\StoreCatalogServiceProvider::class,
+        // Send General Data to Vadmin
+        App\Providers\VadminServiceProvider::class,
+
         /*
         * Application Service Providers...
         */

@@ -1,5 +1,4 @@
 <!-- Sidebar          -->
-
 <aside class="sidebar">
 	<section class="sidebar-widget">
 		{!! Form::open(['route' => 'store', 'method' => 'GET', 'class' => 'input-group form-group']) !!}
@@ -22,7 +21,9 @@
 		<div class="horizontal-list">
 			<ul>
 				@foreach($atributes1 as $size)
-					<a href="{{ route('store.search.size', $size->name )}}"><li class="sq-badge font-1">{{ $size->name }}</li></a>
+					<a href="{{ route('store.search.size', $size->name) }}">
+						<li class="sq-badge font-1">{{ $size->name }}</li>
+					</a>
 				@endforeach
 			</ul>
 		</div>
@@ -32,7 +33,9 @@
 		<div class="horizontal-list">
 			<ul>
 				@foreach($tags as $tag)
-					<li class="sq-badge font-1"><span>{{ $tag->name }}</span></li>
+					<a href="{{ route('store.search.tag', $tag->name) }}">
+						<li class="sq-badge font-1"><span>{{ $tag->name }}</span></li>
+					</a>
 				@endforeach
 			</ul>
 		</div>

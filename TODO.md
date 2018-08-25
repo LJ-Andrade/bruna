@@ -17,15 +17,26 @@ Tamaño de imágenes
 
 Errores - Fallas - Bugs
 PDF en store que salga depende si es mayorista o minorista
-En Vadmin precios mayoristas y min dependiendo customer
-En store checkout no se pueden borrar items
 
 
 
 BRUNA
 
+Agregar producto vía ajax - No funciona
 Cuando se quiere comprar si estar logueado tira 404
 
+(RESUELTO)
 Los links arriba de redes tienen url de santa osadia
 
+(RESUELTO)
 Tienda > register : 404
+
+(RESUELTO)
+En AppServiceProvider se está mandando a todo el sitema, incluido a la tienda un monton de cosas
+que no deberian estar ahi
+
+(RESUELTO)
+En Vadmin precios mayoristas y min dependiendo customer
+
+(RESUELTO)
+En store checkout no se pueden borrar items
