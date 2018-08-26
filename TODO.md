@@ -1,29 +1,40 @@
-Inventar algo para que sea más genérico cambiar valores desde inputs directamente
-
-
-
-
-Configurar la actualización de estado de portfolio. updateStatus es ahora una función generica.
-
-
 Recordar descomentar los $request->session()->invalidate();
 en los LoginController tanto de admin como customers.
-
 
 SISTEMA GEO
 Tamaño de imágenes
 750x500
 
 
-Errores - Fallas - Bugs
-PDF en store que salga depende si es mayorista o minorista
 
-
+Configurar la actualización de estado de portfolio. updateStatus es ahora una función generica.
 
 BRUNA
+Implementar
+//---------------------------------------------------------
 
-Agregar producto vía ajax - No funciona
+
+
+Errores - Fallas - Bugs
+//---------------------------------------------------------
+Agregar producto vía ajax - No funciona - Ok
+Dar mensaje cuando se agrega item a carrom de compra
+
+
+
+
+
+RESUELTOS
+//---------------------------------------------------------
+
+(RESUELTO)
 Cuando se quiere comprar si estar logueado tira 404
+
+(RESUELTO)
+PDF en store que salga depende si es mayorista o minorista
+
+(RESUELTO)
+Inventar algo para que sea más genérico cambiar valores desde inputs directamente
 
 (RESUELTO)
 Los links arriba de redes tienen url de santa osadia

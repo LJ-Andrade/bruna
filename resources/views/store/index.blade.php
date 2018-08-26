@@ -7,12 +7,12 @@
 @endsection
 
 @section('content')
-	<!-- Page Content-->
+	<!-- Page Content -->
 	<div class="container-fluid padding-bottom-3x mb-1">
 		<div class="row">
-			<!-- Products-->
-			<div class="col-sm-10 push-sm-2">
-				<!-- Products Grid-->
+			<!-- Products -->
+			<div class="col-xs-12 col-sm-9 push-sm-2 col-md-10">
+				<!-- Products Grid -->
 				@if(count($_GET) > 0)
 					<div class="top-info">
 						<a href="{{ url('tienda') }}" class="btn btn-outline-primary btn-sm">Mostrar Todos</a> 
@@ -26,10 +26,10 @@
 						@endif
 					</div>
 				@endif
-				<div class="isotope-grid cols-4 mb-2">
+				<div class="isotope-grid cols-3 mb-2">
 					<div class="gutter-sizer"></div>
 					<div class="grid-sizer"></div>
-					<!-- Product-->
+					 Product
 					@foreach($articles as $article)
 					<div class="grid-item">
 						<div class="product-card">
@@ -102,10 +102,11 @@
 					{{ $article->catalogfavs }}
 					@endforeach
 				</div>
-				<!-- Pagination-->
+				 Pagination
 				{!! $articles->render() !!}
 			</div>
-			<div class="col-sm-2 pull-sm-10">
+			<!-- SideBar -->
+			<div class="col-xs-12 col-sm-3 pull-sm-10 col-md-2">
 				@include('store.partials.sidebar')
 			</div>
 		</div>

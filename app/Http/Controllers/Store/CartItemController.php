@@ -12,24 +12,25 @@ class CartItemController extends Controller
 {
     public function store(Request $request)
     {
-        return response()->json(['response' => false, 'result' => 'error', 'message' => 'no-logged']);
-        if(auth()->guard('customer')->check()){
-            return response()->json(['response' => false, 'result' => 'error', 'message' => 'no-logged']);
+        if(!auth()->guard('customer')->check()){
+            return redirect('tienda/login');
         }
         $cartItem = new CartItem();
         $cartItem->cart_id = auth()->guard('customer')->user()->cart->id;
-        $cartItem->article_id = $request->article_id;
+        $cartItem->article_id = $request->articleId;
         $cartItem->quantity = $request->quantity;
         $cartItem->size = $request->size;
         
-        $article = CatalogArticle::where('id', $request->article_id)->first();
+        $article = CatalogArticle::where('id', $request->articleId)->first();
         $cartItem->article_name = $article->name;
         $cartItem->color = $article->color;
         $cartItem->textile = $article->textile;
-        
-        $cartItem->save();
-
-        return response()->json(['response' => true, 'result' => 'done', 'message' => 'done']); 
+        try{
+            $cartItem->save();
+        } catch (\Exception $e) {
+            dd($e);
+        }
+        return redirect()->back();
     }
 
     public function destroy(Request $request)
