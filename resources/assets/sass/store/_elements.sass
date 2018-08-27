@@ -70,30 +70,6 @@
 				@include flex-center()
 				.inner
 
-.discount-badge
-	position: absolute
-	right: 0
-	top: 0
-	width: 100px
-	height: 100px
-	overflow: hidden
-	.triangle
-		position: absolute
-		right: 0
-		left: 0
-		text-align: center
-		padding: 10px
-		padding-top: 50px
-		background-color: #ccc
-		transform: rotate(45deg)
-		width: 150px
-		z-index: 50
-	.inner
-		position: absolute
-		font-weight: 700
-		top: 8px
-		right: 10px
-		z-index: 100
 
 .widget
 	.inline
@@ -309,7 +285,7 @@
 		flex: 1
 		border-radius: 5px 0px 0px 5px
 	.short-input
-		max-width: 100px
+		width: 100px
 	.input-btn
 		white-space: nowrap
 		border-left: 0
@@ -372,6 +348,91 @@ ul.pagination li a.active,ul.pagination li.active
 //                                  //
 //////////////////////////////////////
 
+.articles-container
+	padding: 0
+	.article
+		padding: 10px
+		.inner
+			background: #fff
+			position: relative
+			.image
+				img
+			.content
+				padding: 5px
+				height: 150px
+				text-align: center
+				@include flex-column()
+				width: 100%
+				.title-info
+					font-family: $font2
+					width: 100%
+					h3
+						font-size: 1.2rem
+				.footer
+					width: 100%
+					display: flex
+					margin-top: 10px
+					.col
+						.price
+							font-size: 1.5rem
+							font-weight: 700
+							white-space: nowrap
+							text-align: center
+							color: $main-color
+							position: relative
+							del
+								position: absolute
+								top: -21px
+								left: 0px
+								white-space: nowrap
+								color: #ccc
+								margin-right: 10px
+								font-size: 1rem
+								font-weight: 300
+						.fa-icon
+							margin-left: 15px
+							margin-right: 15px
+							font-size: 1.5rem
+						.del
+							font-size: 0.9rem
+					.col-price,.col-favs
+						@include flex-center()
+
+@media (min-width: 1199px) and (max-width: 1340px)
+	.articles-container .article .inner .content .footer
+		.fa-icon
+			margin: 0
+		.btn
+			padding: 1px 5px
+			font-size: 0.7rem
+
+.discount-badge
+	position: absolute
+	right: 0
+	top: 0
+	width: 100px
+	height: 100px
+	overflow: hidden
+	.triangle
+		position: absolute
+		right: 0
+		left: 0
+		text-align: center
+		padding: 10px
+		padding-top: 50px
+		background-color: $main-color
+		transform: rotate(45deg)
+		width: 150px
+		z-index: 50
+	.text
+		font-family: $font1
+		position: absolute
+		font-weight: 700
+		top: 8px
+		right: 10px
+		z-index: 100
+		color: #fff
+
 .product-gallery
 	padding: 0
 	border: 0
@@ -389,12 +450,13 @@ ul.pagination li a.active,ul.pagination li.active
 	
 .product-show
 	.products-details
+		padding: 15px
 		padding-right: 50px
 		position: relative
 		.fav-container
 			position: absolute
-			right: 0
-			top: 24px
+			right: 3px
+			top: 10px
 			font-size: 1.5rem
 			i
 				color: $red
@@ -409,7 +471,7 @@ ul.pagination li a.active,ul.pagination li.active
 // FAVOURITES 
 .fa-icon
 	&:before
-	font-family: "Font Awesome 5 Free"
+	font-family: $fa-icon
 	font-weight: 900
 	display: inline-block
 	font-style: normal
@@ -420,7 +482,7 @@ ul.pagination li a.active,ul.pagination li.active
 		cursor: pointer
 
 .fav-icon-nofav::before
-	color: #ccc
+	color: #f1f1f1
 	content: "\f004"
 
 .fav-icon-isfav::before
@@ -540,8 +602,6 @@ ul.pagination li a.active,ul.pagination li.active
 		.product-thumbnails
 			padding-top: 0
 			margin-top: 0
-		.owl-carousel .owl-stage-outer
-			border-radius: 5px
 
 .gallery-item
 	a

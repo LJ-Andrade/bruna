@@ -10,8 +10,12 @@
 	<!-- Page Content -->
 	<div class="container-fluid padding-bottom-3x mb-1">
 		<div class="row">
+			<!-- SideBar -->
+			<div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+				@include('store.partials.sidebar')
+			</div>
 			<!-- Products -->
-			<div class="col-xs-12 col-sm-9 push-sm-2 col-md-10">
+			<div class="col-xs-12 col-sm-9 col-md-9 col-lg-10">
 				<!-- Products Grid -->
 				@if(count($_GET) > 0)
 					<div class="top-info">
@@ -26,87 +30,87 @@
 						@endif
 					</div>
 				@endif
-				<div class="isotope-grid cols-3 mb-2">
-					<div class="gutter-sizer"></div>
-					<div class="grid-sizer"></div>
-					 Product
+				<div class="row articles-container">
 					@foreach($articles as $article)
-					<div class="grid-item">
-						<div class="product-card">
-							{{-- Discount Badge --}}
-							@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 article">
+							<div class="inner">
+								{{-- =========== Discount Badge =========== --}}
+								{{-- ====================================== --}}
+								
 								{{-- Reseller Discount --}}
-								@if($article->reseller_discount > 0)
-									<div class="discount-badge">
-										<div class="triangle"></div>
-										<div class="inner">	%{{ $article->reseller_discount }} <br> off !!</div>
-									</div> 
+								@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
+									@if($article->reseller_discount > 0)
+										<div class="discount-badge">
+											<div class="triangle"></div>
+											<div class="text">	%{{ $article->reseller_discount }} <br> off !!</div>
+										</div> 
+									@endif
+								@else
+									{{-- Normal Customer Discount --}}
+									@if($article->discount > 0)
+										<div class="discount-badge">
+											<div class="triangle"></div>
+											<div class="text">	%{{ $article->discount }} <br> off !!</div>
+										</div> 
+									@endif
 								@endif
-							@else
-								{{-- Normal Customer Discount --}}
-								@if($article->discount > 0)
-									<div class="discount-badge">
-										<div class="triangle"></div>
-										<div class="inner">	%{{ $article->discount }} <br> off !!</div>
-									</div> 
-								@endif
-							@endif
-							<a class="product-thumb" href="{{ url('tienda/articulo/'.$article->id) }}">
-								<div class="inner">
-									{{-- Overlay --}}{{-- <div class="data"><div class="text"></div></div> --}}
-									@if($article->featuredImageName())
+								{{-- =============== Image ================ --}}
+								{{-- ====================================== --}}
+								<div class="image">
+									<a href="{{ url('tienda/articulo/'.$article->id) }}">
 										<img class="CheckCatalogImg" src="{{ asset($article->featuredImageName()) }}" alt="Producto del Catálogo">
-									@endif
+									</a>
 								</div>
-								<a href="{{ url('tienda/articulo/'.$article->id) }}"><h3 class="product-title max-text"><b>{{ $article->name }}</b></h3></a>
-								<h3 class="product-title max-text"> {{ $article->color}} |
-								@foreach($article->atribute1 as $atribute) 	{{ $atribute->name }} @endforeach
-								</h3>
-							</a>
-							<div class="footer">
-								<div class="price">
-									<h4 class="product-price">
-										@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
-											@if($article->reseller_discount > 0)
-												<del>$ {{ $article->reseller_price }}</del> <br>
-												$ {{ calcValuePercentNeg($article->reseller_price, $article->reseller_discount) }}
+								{{-- ============== Content =============== --}}
+								{{-- ====================================== --}}
+								<div class="content">
+									{{-- ============ Title-Info ============== --}}
+									<div class="title-info">
+										<a href="{{ url('tienda/articulo/'.$article->id) }}"><h3 class="product-title max-text"><b>{{ $article->name }}</b></h3></a>
+										<h3 class="product-title max-text"> {{ $article->color}} |
+										@foreach($article->atribute1 as $atribute) 	{{ $atribute->name }} @endforeach
+										</h3>
+									</div>
+									{{-- =============== Footer =============== --}}
+									<div class="footer">
+										<div class="col col-price pad0">
+											@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
+												@if($article->reseller_discount > 0)
+													<span class="price">
+														<del>$ {{ $article->reseller_price }}</del> 
+														 $ {{ calcValuePercentNeg($article->reseller_price, $article->reseller_discount) }}
+													</span>
+												@else
+													<span class="price">$ {{ $article->reseller_price }}</span>
+												@endif
 											@else
-												$ {{ $article->reseller_price }}
+												@if($article->discount > 0)
+													<span class="price">
+														<del>$ {{ $article->price }}</del> 
+														$ {{ calcValuePercentNeg($article->price, $article->discount) }}
+													</span>
+												@else
+													<span class="price">$ {{ $article->price }}</span>
+												@endif
 											@endif
-										@else
-											@if($article->discount > 0)
-												<del>$ {{ $article->price }}</del> <br>
-												$ {{ calcValuePercentNeg($article->price, $article->discount) }}
-											@else
-												$ {{ $article->price }}
+										</div>
+										<div class="col col-favs pad0">
+											@if(Auth::guard('customer')->check())
+											{{--  Check if product is in favs  --}}
+											<a class="AddToFavs fa-icon fav-icon-nofav fav-btn
+												@if(in_array($article->id, $favs['articleFavs'])) fav-icon-isfav @endif"
+												data-id="{{ $article->id }}" data-toggle="tooltip" title="Agregar a Favoritos">
+											</a>
 											@endif
-										@endif
-									</h4>
-								</div>
-								<div class="product-buttons">
-									@if(Auth::guard('customer')->check())
-									{{--  Check if product is in favs  --}}
-										<a class="AddToFavs fa-icon fav-icon-nofav fav-btn
-										@if(in_array($article->id, $favs['articleFavs'])) fav-icon-isfav @endif"
-										data-id="{{ $article->id }}" data-toggle="tooltip" title="Agregar a Favoritos">
-										</a>
-										<a href="{{ url('tienda/articulo/'.$article->id) }}" class="btn btn-outline-primary btn-sm">Ver</a>
-									@else
-										<a href="{{ route('customer.login') }}" class="btn btn-outline-primary btn-sm">Ver</a>
-									@endif
+											<a href="{{ url('tienda/articulo/'.$article->id) }}" class="btn btn-outline-primary btn-sm">Ver producto</a>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					{{ $article->catalogfavs }}
 					@endforeach
 				</div>
-				 Pagination
 				{!! $articles->render() !!}
-			</div>
-			<!-- SideBar -->
-			<div class="col-xs-12 col-sm-3 pull-sm-10 col-md-2">
-				@include('store.partials.sidebar')
 			</div>
 		</div>
 	</div>

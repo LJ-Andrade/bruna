@@ -27,11 +27,7 @@
 										<td>
 											<div class="product-item">
 												<a class="product-thumb" href="{{ url('tienda/articulo/'.$item->article->id) }}">
-													@if($item->article->featuredImageName())
-													<img src="{{ asset('webimages/catalogo/'.$item->article->featuredImageName()) }}" alt="Producto del Catálogo">
-													@else
-													<img src="{{ asset('webimages/gen/catalog-gen.jpg') }}" alt="Producto del Catálogo">
-													@endif
+													<img class="CheckCatalogImg" src="{{ asset($item->article->featuredImageName()) }}" alt="Producto del Catálogo">
 												</a>
 												<div class="product-info">
 													<h4 class="product-title"><a href="{{ url('tienda/articulo/'.$item->article->id) }}">

@@ -1,4 +1,4 @@
-@extends('layouts.store.main')
+@extends('store.partials.main')
 
 @section('styles')
 	<style>
