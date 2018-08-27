@@ -148,7 +148,11 @@ class StoreController extends Controller
     public function validateAndSetCoupon(Request $request)
     {
         $coupon = CatalogCoupon::where('code', $request->code)->first();
-        
+        // Not existing coupon
+        if($coupon == null)
+        {
+            return response()->json(['response' => null, 'message' => "El cupón no existe"]);
+        }
         // Expired Coupon
         $coupon_expire = $coupon->expire_date;
         $coupon_expire = Carbon::parse($coupon_expire, 'America/Araguaina');
@@ -156,7 +160,7 @@ class StoreController extends Controller
         $actual_date = Carbon::parse($actual_date, 'America/Araguaina');
         if($coupon_expire->lt($actual_date))
         {
-            return response()->json(['response' => null, 'message' => "El cupón ingresado ha expirado :("]);
+            return response()->json(['response' => null, 'message' => "El cupón ingresado ha expirado :(, (Fecha actual: )". $actual_date . "Fecha de expiracion: ".$coupon_expire]);
         } 
         
         // Group User Not Included in promo
@@ -168,11 +172,6 @@ class StoreController extends Controller
             }
         }
 
-        // Not existing coupon
-        if($coupon == null)
-        {
-            return response()->json(['response' => null, 'message' => "El cupón no existe"]);
-        }
         
         $cart = Cart::find($request->cartid);
         // Cart Not exist

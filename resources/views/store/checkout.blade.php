@@ -189,8 +189,16 @@
 									<b>Teléfono 2:</b> {{ Auth::guard('customer')->user()->phone2 }} <br>
 									<b>Dirección:</b> {{ Auth::guard('customer')->user()->address }} <br>
 									<b>Código Postal:</b> {{ Auth::guard('customer')->user()->cp }} <br>
-									<b>Provincia:</b> {{ Auth::guard('customer')->user()->geoprov->name }} <br>
-									<b>Localidad:</b> {{ Auth::guard('customer')->user()->geoloc->name }} <br>
+									<b>Provincia:</b> @if(!is_null(Auth::guard('customer')->user()->geoprov)) 
+														Auth::guard('customer')->user()->geoprov->name
+													  @else
+													  	<span class="text-danger">* Debe completar este dato</span>
+													  @endif <br>
+									<b>Localidad:</b> @if(!is_null(Auth::guard('customer')->user()->geoloc)) 
+														Auth::guard('customer')->user()->geoloc 
+													  @else
+													  <span class="text-danger">* Debe completar este dato</span>	
+													  @endif <br>
 									<a href="{{ route('store.customer-account', array('from' => 'checkout')) }}"> <h6>Editar</h6></a>
 								</p>
 							</div>

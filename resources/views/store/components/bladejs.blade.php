@@ -35,7 +35,7 @@
     {
         let couponDiv = $('#CouponDiv');
         let couponSet = $('#SettedCoupon');
-
+        console.log(code, cartid);
         $.ajax({	
             url: "{{ route('store.validateAndSetCoupon') }}",
             method: 'POST',             
