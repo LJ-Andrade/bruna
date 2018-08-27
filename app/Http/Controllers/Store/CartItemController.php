@@ -30,7 +30,7 @@ class CartItemController extends Controller
         } catch (\Exception $e) {
             dd($e);
         }
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Producto agegado al carro de compras');
     }
 
     public function destroy(Request $request)

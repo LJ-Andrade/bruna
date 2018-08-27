@@ -86,14 +86,13 @@
 								<div class="product-buttons">
 									@if(Auth::guard('customer')->check())
 									{{--  Check if product is in favs  --}}
-										<button class="AddToFavs btn btn-outline-secondary btn-sm-round btn-wishlist
-											@if(in_array($article->id, $favs['articleFavs'])) addedToFavs @endif" 
-											data-id="{{ $article->id }}" data-toggle="tooltip" title="A Favoritos"><i class="icon-heart"></i>
-										</button>
+										<a class="AddToFavs fa-icon fav-icon-nofav fav-btn
+										@if(in_array($article->id, $favs['articleFavs'])) fav-icon-isfav @endif"
+										data-id="{{ $article->id }}" data-toggle="tooltip" title="Agregar a Favoritos">
+										</a>
 										<a href="{{ url('tienda/articulo/'.$article->id) }}" class="btn btn-outline-primary btn-sm">Ver</a>
-									@else 
-										<a href="{{ route('customer.login') }}" class="btn btn-outline-secondary btn-sm-round btn-wishlist" data-toggle="tooltip" title="Agregar a Favoritos"><i class="icon-heart"></i></a>	
-										<a href="{{ route('customer.login') }}" class="btn btn-outline-primary btn-sm">Agregar</a>
+									@else
+										<a href="{{ route('customer.login') }}" class="btn btn-outline-primary btn-sm">Ver</a>
 									@endif
 								</div>
 							</div>

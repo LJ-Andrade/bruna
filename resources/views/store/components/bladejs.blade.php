@@ -110,7 +110,8 @@
                             location.reload();
                             break;
                         case 'show':
-                            displayButton.addClass('addedToFavs');
+                            displayButton.removeClass('fav-icon-nofav');
+                            displayButton.addClass('fav-icon-isfav');
                             toast_success('Ok!', 'Producto agregado a favoritos', 'bottomCenter');
                             break;
                         case 'none':
@@ -120,7 +121,8 @@
                             break;
                     } 
                 } else if(data.response == true && data.result == 'removed') {
-                        displayButton.removeClass('addedToFavs');
+                        displayButton.addClass('fav-icon-nofav');
+                        displayButton.removeClass('fav-icon-isfav');
                         toast_success('Ok!', 'Producto eliminado de favoritos', 'bottomCenter');
                 }
             },

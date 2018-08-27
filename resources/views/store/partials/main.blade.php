@@ -20,9 +20,10 @@
 		<!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
 		<link rel="stylesheet" media="screen" href="{{ asset('store-ui/css/vendor.min.css') }}">
 		<link rel="stylesheet" media="screen" href="{{ asset('store-ui/css/iziToast.min.css') }}">
-		
+		<link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/all.css') }}">
 		<!-- Main Template Styles-->
-		<link id="mainStyles" rel="stylesheet" media="screen" href="{{ asset('css/store-custom.css') }}">
+		<link rel="stylesheet" media="screen" href="{{ asset('css/store-custom.css') }}">
+		
 		@yield('styles')
 		<!-- Modernizr-->
 		<script src="{{ asset('store-ui/js/modernizr.min.js') }}"></script>
@@ -60,7 +61,6 @@
 		<!-- Backdrop-->
 		<div class="site-backdrop"></div>
 		<!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
-		
 		<script src="{{ asset('store-ui/js/vendor.min.js') }}"></script>
 		<script src="{{ asset('store-ui/js/iziToast.min.js') }}"></script>
 		<script src="{{ asset('store-ui/js/scripts.min.js') }}"></script>

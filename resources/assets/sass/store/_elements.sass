@@ -53,7 +53,13 @@
 			.product-buttons
 				position: absolute
 				bottom: 0
-				right: 0
+				right: 6px
+				text-align: right
+				white-space: nowrap
+				@include flex-center()
+				.fav-btn
+					margin-right: 10px
+					font-size: 1.5rem
 			.price
 				position: absolute
 				bottom: 0
@@ -297,6 +303,23 @@
 // 	height: 30px
 
 
+.input-with-btn
+	display: flex
+	.input-field
+		flex: 1
+		border-radius: 5px 0px 0px 5px
+	.short-input
+		max-width: 100px
+	.input-btn
+		white-space: nowrap
+		border-left: 0
+		border-radius: 0px 5px 5px 0px
+		margin: 0
+		&:hover
+			background-color: $main-color
+			color: #fff
+
+
 //////////////////////////////////////
 //                                  //
 //           PAGINATION             //
@@ -366,12 +389,43 @@ ul.pagination li a.active,ul.pagination li.active
 	
 .product-show
 	.products-details
+		padding-right: 50px
+		position: relative
+		.fav-container
+			position: absolute
+			right: 0
+			top: 24px
+			font-size: 1.5rem
+			i
+				color: $red
 		h2
 			padding-top: 0
 
-.grid-item .product-card .footer .product-buttons
-	width: 60%
-	white-space: nowrap
+@media (max-width: 1190px)
+	.product-show .products-details
+		.fav-container
+			right: 20px
+
+// FAVOURITES 
+.fa-icon
+	&:before
+	font-family: "Font Awesome 5 Free"
+	font-weight: 900
+	display: inline-block
+	font-style: normal
+	font-variant: normal
+	text-rendering: auto
+	-webkit-font-smoothing: antialiased
+	&:hover
+		cursor: pointer
+
+.fav-icon-nofav::before
+	color: #ccc
+	content: "\f004"
+
+.fav-icon-isfav::before
+	color: $red
+	content: "\f004"
 
 .toolbar .cart>.toolbar-dropdown
 	top: 36px
@@ -384,10 +438,6 @@ ul.pagination li a.active,ul.pagination li.active
 		white-space: nowrap
 		text-overflow: ellipsis
 
-.addedToFavs
-	background-color: $red
-	color: #fff
-	border: 0
 .dropdown-product-item > .dropdown-product-info
 	max-width: 148px
 	width: 148px

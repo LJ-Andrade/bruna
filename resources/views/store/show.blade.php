@@ -4,20 +4,21 @@
 <div class="container padding-bottom-3x mb-1 marg-top-25">
 	<div class="row product-show">
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-6 image">
-			<span class="text-medium">Categoría:&nbsp;</span>
-			<a class="navi-link" href="#">{{ $article->category->name }}</a>
 			<div class="row product-gallery">
 				<div class="col-xs-12 col-sm-3 col-md-3 pad0">
 					<ul class="product-thumbnails">
 						@foreach($article->images as $image)
-							<li class=""><a href="#{{ $image->id }}"><img src="{{ asset('webimages/catalogo/'. $image->name) }}" alt="Product"></a></li>
-						@endforeach
-					</ul>
-				</div>
-				<div class="col-xs-12 col-sm-9 col-md-9 images-container pad0">
-					<div class="gallery-wrapper">
-						@foreach($article->images as $index => $image)
-						<div class="gallery-item {{ $index == 0 ? 'active' : '' }}">
+							<li><a href="#{{ $image->id }}">
+									<img src="{{ asset('webimages/catalogo/'. $image->name) }}" class="CheckCatalogImg" alt="Producto Bruna">
+								</a>
+							</li>
+							@endforeach
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-9 col-md-9 images-container pad0">
+						<div class="gallery-wrapper">
+							@foreach($article->images as $index => $image)
+							<div class="gallery-item {{ $index == 0 ? 'active' : '' }}">
 							<a href="{{ asset('webimages/catalogo/'. $image->name) }}" data-hash="{{ $image->id }}" data-size="500x750"><i class="icon-zoom-in"></i></a>
 						</div>
 						@endforeach
@@ -25,24 +26,30 @@
 					<div class="product-carousel owl-carousel">
 						@if(!$article->images->isEmpty())
 						@foreach($article->images as $image)
-							<div data-hash="{{ $image->id }}"><img class="img-fluid" src="{{ asset('webimages/catalogo/'. $image->name) }}" alt="Product"></div>
+						<div data-hash="{{ $image->id }}"><img class="CheckCatalogImg" src="{{ asset('webimages/catalogo/'. $image->name) }}" alt="Product"></div>
 						@endforeach
 						@else
-							<img src="{{ asset($article->featuredImageName()) }}" alt="Producto del Catálogo">
+						<img src="{{ asset($article->featuredImageName()) }}" class="CheckCatalogImg" alt="Producto del Catálogo">
 						@endif
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7 col-xl-6 products-details">
-			<div class="padding-top-2x hidden-md-up"></div>
+		
+		<div class="padding-top-2x hidden-md-up"></div>
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 col-xl-6 products-details">
+			<div class="fav-container">
+				<a class="AddToFavs fa-icon fav-icon-nofav @if($isFav) fav-icon-isfav @endif"
+				data-id="{{ $article->id }}" data-toggle="tooltip" title="Agregar a Favoritos">
+				</a>
+			</div>
+			<span class="text-medium">Categoría:&nbsp;</span>
+			<a class="navi-link" href="#">{{ $article->category->name }}</a>
 			{{--  Article Name  --}}
-			<h2 class="text-normal" style="margin: 0">{{ $article->name }}</h2>
-			<div class="mb-3"><span class="text-medium">Código:</span> #{{ $article->id }}</div>
+			<h2 class="text-normal">{{ $article->name }}</h2>
 			
 			@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
-				{{-- Reseller Article Price and Discount --}}	
+			{{-- Reseller Article Price and Discount --}}	
 				@if($article->reseller_discount > 0)
 					DESCUENTO % {{ $article->reseller_discount }}!!
 					<span class="h2 d-block">
@@ -53,7 +60,7 @@
 					<span class="h2 d-block">$ {{ $article->reseller_price }}</span>
 				@endif
 			@else
-				{{-- Article Price and Discount --}}
+			{{-- Article Price and Discount --}}
 				@if($article->discount > 0)
 					DESCUENTO % {{ $article->discount }}!!
 					<span class="h2 d-block">
@@ -64,7 +71,8 @@
 					<span class="h2 d-block">$ {{ $article->price }}</span>
 				@endif
 			@endif
-		
+			<div class="mb-3"><span class="text-medium">Código:</span> #{{ $article->id }}</div>
+			
 			{{-- Article Description --}}
 			<p>{{ strip_tags($article->description) }}</p>
 			<div class="row">
@@ -77,31 +85,22 @@
 					<a class="navi-link" href="#">{{ $article->textile }}</a>
 				</div>
 			</div>
-			<label for="quantity">Cantidad</label>
 			<div class="row margin-top-1x">
-				{{-- Quantity --}}
-				<div class="col-sm-3">
+				{{-- Form --}}
+				<div class="col-sm-6">
 					{!! Form::open(['route' => 'store.addtocart', 'method' => 'POST', 'class' => 'form-group']) !!}	
-						Cantidad
+						<div class="input-with-btn">
+							<input class="form-control input-field short-input" name="quantity" type="number" min="1" max="{{ $article->stock }}" value="1" placeholder="1" required>
+							<button class="btn input-btn">Agregar al carro</button>
+						</div>
 						<input type="hidden" value="{{ $article->id }}" name="articleId">
-						<input class="form-control" name="quantity" type="number" min="1" max="{{ $article->stock }}" value="1">
-						<button type="submit" class="btn btn-outline-primary btn-sm">Agregar</button>
 					{!! Form::close() !!}
-				</div>
-				<div class="sp-buttons">
-					<button class="AddToFavs btn btn-outline-secondary btn-sm btn-wishlist
-						@if($isFav) addedToFavs @endif" data-id="{{ $article->id }}" data-toggle="tooltip" title="Agregar a Favoritos">
-						<i class="icon-heart"></i>
-					</button>
 				</div>
 			</div>
 			<hr class="mb-3">
-			<div class="pull-right">
-				<a class="btn btn-outline-secondary" href="{{ route('store') }}"><i class="icon-arrow-left"></i>&nbsp;Volver a la tienda</a>
-			</div>
+			<a class="btn btn-outline-secondary" href="{{ route('store') }}"><i class="icon-arrow-left"></i>&nbsp;Volver a la tienda</a>
 			<div class="clearfix"></div>
 			<br>
-		</div>
 	</div>
 </div>
 	
