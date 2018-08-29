@@ -88,7 +88,10 @@
 												@endif
 												<td>{{ $item->quantity }}</td>
 												<td class="text-center">
-													<a class="RemoveArticleFromCart btn btn-outline-primary btn-sm" data-itemid="{{ $item->id }}">x</a>
+													{!! Form::open(['route' => 'store.removefromcart', 'method' => 'POST']) !!}	
+														<input type="hidden" name="itemid" value="{{ $item->id }}">
+														<button type="submit" class="btn btn-outline-primary btn-sm">x</button>
+													{!! Form::close() !!}
 												</td>
 											</tr>
 											@endforeach

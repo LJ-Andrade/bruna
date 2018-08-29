@@ -9,14 +9,6 @@
 		{!! Form::close() !!}
 	</section>
 	<section class="sidebar-widget">
-		<h4>Categorias</h4>
-		<ul>
-			@foreach($categories as $category)
-				<li><a href="{{ route('store', 'categoria=').$category->id }}">{{ $category->name }} ({{ $category->articles->count() }})</a><span></span></li>
-			@endforeach
-		</ul>
-	</section>
-	<section class="sidebar-widget">
 		<h4>Talles</h4>
 		<div class="horizontal-list">
 			<ul>
@@ -39,5 +31,13 @@
 				@endforeach
 			</ul>
 		</div>
+	</section>
+	<section class="sidebar-widget">
+		<h4>Categorias</h4>
+		<ul>
+			@foreach($categories as $category)
+				<li><a href="{{ route('store', 'categoria=').$category->id }}">{{ $category->name }} ({{ $category->articles->count() }})</a><span></span></li>
+			@endforeach
+		</ul>
 	</section>
 </aside>

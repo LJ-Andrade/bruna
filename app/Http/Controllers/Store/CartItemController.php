@@ -40,29 +40,16 @@ class CartItemController extends Controller
         try{
             $item->delete();
             } catch (\Exception $e) {
-                return response()->json([
-                    'response'   => false,
-                    'error'    => 'Error: '.$e
-                    ]);
+                return redirect()->back()->with('message', 'Error al eliminar');
             }
-            
         // If last article is deleted also delete activecart
         $cart = Cart::findOrFail($item->cart->id);
         if($cart->Items->count() < 1)
         {
             $cart->delete();
-            return response()->json([
-                'response'   => true,
-                'doaction'   => 'back'
-            ]);  
+            return redirect('tienda')->with('message', 'Carro de compras eliminado');
         } else {
-            return response()->json([
-                'response'   => true,
-                'doaction'   => 'reload'
-            ]);  
+            return redirect()->back()->with('message', 'Artículo eliminado');
         }
     }
-
-
-
 }

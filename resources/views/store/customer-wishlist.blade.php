@@ -6,7 +6,8 @@
             <div class="col-lg-4">
                 @include('store.partials.profile-aside')
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8 white-container">
+				<h2>Productos favoritos</h2>
 				<div class="padding-top-2x mt-2 hidden-lg-up"></div>
 				<!-- Wishlist Table-->
 				<div class="table-responsive wishlist-table margin-bottom-none">

@@ -36,9 +36,7 @@ Route::get('tienda', ['as' => 'store', 'uses' => 'Store\StoreController@index'])
 // Searchs
 Route::get('tienda/talle/{name}', ['as' => 'store.search.size', 'uses' => 'Store\StoreController@searchSize']);
 Route::get('tienda/etiqueta/{name}', ['as' => 'store.search.tag', 'uses' => 'Store\StoreController@searchTag']);
-
 Route::get('store-register-hold', ['as' => 'store-register-hold', 'uses' => 'CustomerAuth\RegisterController@holdRegisterLogin'])->middleware('active-customer');
-
 Route::get('tienda/proceso', function(){ return view('store.proceso'); })->middleware('active-customer');
 
 Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function() {    
@@ -58,10 +56,8 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
         Route::post('finalizando-compra', ['as' => 'store.processCheckout', 'uses' => 'Store\StoreController@processCheckout']);
         Route::get('finalizando-compra', 'Store\StoreController@index'); 
         Route::get('descargar-comprobante/{id}/{action}', 'Store\StoreController@downloadInvoice');
-        
         //Route::post('mp-connect', ['as' => 'store.getCreatePreference', 'uses' => 'MercadoPagoController@getCreatePreference']);
         Route::post('mp-connect', ['as' => 'store.getCreatePreference', 'uses' => 'Store\StoreController@mpConnect']);
-        
         // Sections    
         Route::get('cuenta', ['as' => 'store.customer-account', 'uses' => 'Store\StoreController@customerAccount']);
         Route::get('favoritos', ['as' => 'store.customer-wishlist', 'uses' => 'Store\StoreController@customerWishlist']);
@@ -79,6 +75,7 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
     Route::post('removeAllArticlesFromFavs', ['as' => 'customer.removeAllArticlesFromFavs', 'uses' => 'Store\StoreController@removeAllArticlesFromFavs']);
 
     // Store Login Routes
+
     Route::get('login', ['as' => 'customer.login', 'uses' => 'CustomerAuth\LoginController@showLoginForm']);
     Route::post('login', ['uses' => 'CustomerAuth\LoginController@login']);
     Route::post('logout', ['as' => 'customer.logout', 'uses' => 'CustomerAuth\LoginController@logout']);

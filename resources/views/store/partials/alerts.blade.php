@@ -1,5 +1,3 @@
-
-
 {{-- Errors --}}
 @if(count($errors) > 0)
 <div class="alert alert-danger alert-dismissible fade show text-center margin-bottom-1x">

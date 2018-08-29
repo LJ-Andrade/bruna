@@ -6,7 +6,8 @@
             <div class="col-lg-4">
                 @include('store.partials.profile-aside')
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8 white-container">
+                <h3>Órdenes realizadas</h3>
                 <div class="padding-top-2x mt-2 hidden-lg-up"></div>
                 <div class="table-responsive">
                     <table class="table table-hover margin-bottom-none">

@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+
 
 class Handler extends ExceptionHandler
 {
@@ -52,6 +54,10 @@ class Handler extends ExceptionHandler
         // return parent::render($request, $exception);
 
         // Moded Line
+        if ($exception instanceof TokenMismatchException){
+            return redirect('tienda/login')->with("message", "Su sesión ha expirado, recarge la página e intente logearse nuevamente");
+        }
+        
         if($this->isHttpException($exception))
         {
             switch($exception->getStatusCode())
@@ -66,9 +72,8 @@ class Handler extends ExceptionHandler
                     return $this->renderHttpException($exception);
                     break;
             }
-        } else {
-            return parent::render($request, $exception);
         }
+        return parent::render($request, $exception);
     }
 
     

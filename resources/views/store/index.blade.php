@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
 	<!-- Page Content -->
 	<div class="container-fluid padding-bottom-3x mb-1">
 		<div class="row">
@@ -17,7 +18,7 @@
 			<!-- Products -->
 			<div class="col-xs-12 col-sm-9 col-md-9 col-lg-10">
 				<!-- Products Grid -->
-				@if(count($_GET) > 0)
+				@if(count($_GET) > 0 && $_GET != 'page')
 					<div class="top-info">
 						<a href="{{ url('tienda') }}" class="btn btn-outline-primary btn-sm">Mostrar Todos</a> 
 						<br>	

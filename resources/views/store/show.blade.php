@@ -3,7 +3,14 @@
 @section('content')
 <div class="container padding-bottom-3x mb-1 marg-top-25">
 	<div class="row product-show">
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-6 image">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-6 col-xs-pull-12 image">
+			{{-- Title Mobile --}}
+			<div class="title-mobile">
+				<span class="text-medium">Categoría:&nbsp;</span>
+				<a class="navi-link" href="#">{{ $article->category->name }}</a>
+				{{--  Article Name  --}}
+				<h2 class="text-normal">{{ $article->name }}</h2>
+			</div>
 			<div class="row product-gallery">
 				<div class="col-xs-12 col-sm-3 col-md-3 pad0">
 					<ul class="product-thumbnails">
@@ -38,15 +45,23 @@
 		
 		<div class="padding-top-2x hidden-md-up"></div>
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 col-xl-6 products-details">
+			{{-- Favs --}}
 			<div class="fav-container">
-				<a class="AddToFavs fa-icon fav-icon-nofav @if($isFav) fav-icon-isfav @endif"
-				data-id="{{ $article->id }}" data-toggle="tooltip" title="Agregar a Favoritos">
-				</a>
+				@if(Auth::guard('customer')->check())
+					<a class="AddToFavs fa-icon fav-icon-nofav @if($isFav) fav-icon-isfav @endif"
+					data-id="{{ $article->id }}" data-toggle="tooltip" title="Agregar a Favoritos">
+					</a>
+					@else
+					<a href="{{ url('tienda/login') }}" class="fa-icon fav-icon-nofav"></a>
+					@endif
 			</div>
-			<span class="text-medium">Categoría:&nbsp;</span>
-			<a class="navi-link" href="#">{{ $article->category->name }}</a>
-			{{--  Article Name  --}}
-			<h2 class="text-normal">{{ $article->name }}</h2>
+			{{-- Title Desktop --}}
+			<div class="title-desktop">
+				<span class="text-medium">Categoría:&nbsp;</span>
+				<a class="navi-link" href="#">{{ $article->category->name }}</a>
+				{{--  Article Name  --}}
+				<h2 class="text-normal">{{ $article->name }}</h2>
+			</div>
 			
 			@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
 			{{-- Reseller Article Price and Discount --}}	
@@ -98,9 +113,8 @@
 				</div>
 			</div>
 			<hr class="mb-3">
-			<a class="btn btn-outline-secondary" href="{{ route('store') }}"><i class="icon-arrow-left"></i>&nbsp;Volver a la tienda</a>
-			<div class="clearfix"></div>
-			<br>
+			<a class="back-btn" href="{{ route('store') }}"><i class="icon-arrow-left"></i>&nbsp;Volver a la tienda</a>
+		</div>
 	</div>
 </div>
 	

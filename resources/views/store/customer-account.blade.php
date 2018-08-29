@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="container padding-bottom-3x mb-2 marg-top-25">
-        <div class="row">
+        <div class="row ">
             <div class="col-lg-4">
                 @include('store.partials.profile-aside')
             </div>
-            <div class="col-lg-8">
-                <br>                    
+            <div class="col-lg-8 white-container">
+                <h2>Datos de contacto y entrega</h2>
                 <div class="padding-top-2x mt-2 hidden-lg-up"></div>
                 @if(app('request')->input('from') == 'checkout')
                 <form class="row" method="POST" action="{{ route('store.updateCustomer', array('from' => 'checkout')) }}">
@@ -92,7 +92,7 @@
                         <div class="d-flex flex-wrap justify-content-between align-items-center">
                             <label class="custom-control custom-checkbox d-block"> 
                             </label>
-                            <button class="btn btn-green margin-right-none" type="submit">Actualizar Datos</button>
+                            <button class="btn btn-main margin-right-none" type="submit">Actualizar Datos</button>
                         </div>
                     </div>
                 </form>

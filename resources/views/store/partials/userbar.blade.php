@@ -32,7 +32,7 @@
                                             @endif
                                             (x{{ $item->quantity }})
                                         </span><br>
-                                        <span class="dropdown-product-details">Talle:  {{ $item->size }} | {{ $item->color }} </span>
+                                        <span class="dropdown-product-details">Talle: {{ $item->size }} | {{ $item->color }} </span>
                                     </div>
                                 </div>
                             @endforeach
@@ -41,7 +41,7 @@
                                 <div class="column text-right"><span class="text-lg text-medium">$ {{ $activeCart['cartSubTotal'] }} &nbsp;</span></div>
                             </div>
                             <div class="toolbar-dropdown-group">
-                                <div class="column"><a class="btn btn-sm btn-block btn-success" href="{{ route('store.checkout') }}">Ir al carro</a></div>
+                                <div class="column"><a class="btn btn-sm btn-block btn-main" href="{{ route('store.checkout') }}">Ir al carro</a></div>
                             </div>
                         </div>
                     </div>

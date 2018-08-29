@@ -30,11 +30,13 @@
 	</head>
 	<!-- Body-->
 	<body>
+		
 		<div id="full-loader" class="full-loader Hidden">
 			<div class="inner">
 				<img src="{{ asset('store-ui/images/loader.gif') }}" alt="">
 			</div>
 		</div>
+		
 		@yield('modal')
 		@include('store.partials.topbar')
 		@include('store.partials.mobilemenu')
