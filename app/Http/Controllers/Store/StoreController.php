@@ -43,7 +43,7 @@ class StoreController extends Controller
 
         if(isset($request->buscar))
         {
-            $articles = CatalogArticle::search($request->search)->active()->paginate($paginate);
+            $articles = CatalogArticle::search($request->buscar)->active()->paginate($paginate);
         } 
         else if(isset($request->categoria))
         {
