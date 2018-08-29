@@ -18,7 +18,7 @@
 			<!-- Products -->
 			<div class="col-xs-12 col-sm-9 col-md-9 col-lg-10">
 				<!-- Products Grid -->
-				@if(count($_GET) > 0 && $_GET != 'page')
+				@if(isset($search) && $search == true || count($_GET) > 0)
 					<div class="top-info">
 						<a href="{{ url('tienda') }}" class="btn btn-outline-primary btn-sm">Mostrar Todos</a> 
 						<br>	

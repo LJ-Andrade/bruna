@@ -65,7 +65,6 @@ class StoreController extends Controller
         //$atributes1 = CatalogAtribute1::orderBy('id', 'ASC')->select('name', 'id')->get();
         
         $favs = $this->getCustomerFavs();
-
         return view('store.index')
             ->with('articles', $articles)
             ->with('favs', $favs);
@@ -79,8 +78,13 @@ class StoreController extends Controller
             $articles->category;
             $articles->images;
         });  
-
-		return view('store.index')->with('articles', $articles);
+        
+        $favs = $this->getCustomerFavs();
+        $search = true;
+        return view('store.index')
+            ->with('search', $search)
+            ->with('articles', $articles)
+            ->with('favs', $favs);
     }
     
     public function searchTag($name)
@@ -92,7 +96,12 @@ class StoreController extends Controller
             $articles->images;
         });  
 
-		return view('store.index')->with('articles', $articles);
+        $favs = $this->getCustomerFavs();
+        $search = true;
+        return view('store.index')
+            ->with('search', $search)
+            ->with('articles', $articles)
+            ->with('favs', $favs);
     }
     
     public function show(Request $request)
