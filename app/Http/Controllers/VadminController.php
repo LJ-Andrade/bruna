@@ -279,5 +279,15 @@ class VadminController extends Controller
         return view('vadmin.configs');
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | SUPER VADMIN
+    |--------------------------------------------------------------------------
+    */
+
+    public function superVadmin()
+    {
+        dd('OK');
+    }
 
 }

@@ -108,8 +108,8 @@
 			
 				</div>
 			</div>
-
-		</div>
+		</div>		
+	</div>
 	<div id="Error"></div>
 @endsection
 

@@ -203,11 +203,14 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'admin'], function(){
     
     // Carts (Orders) Management
     Route::resource('orders', 'Store\OrdersController');
+
+    Route::get('super-vadmin', 'VadminController@superVadmin');
+
 });
 
 /*
 |--------------------------------------------------------------------------
-| Shared Functionalities
+| Shared Functions
 |--------------------------------------------------------------------------
 */
 
@@ -247,4 +250,14 @@ Route::prefix('vadmin')->middleware('admin')->group(function () {
 Route::get('404', ['as' => '404', 'uses' => 'ErrorController@notfound']);
 Route::get('500', ['as' => '500', 'uses' => 'ErrorController@fatal']);
 
+/*
+|--------------------------------------------------------------------------
+| API Passport
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/vadmin/clients', function(){
+    return view('vadmin.dev.clients');
+});
+//->middleware('auth');
 

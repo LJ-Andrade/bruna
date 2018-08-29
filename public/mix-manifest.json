@@ -1,10 +1,12 @@
 {
-    "/js/web.js": "/js/web.js",
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
     "/css/web.css": "/css/web.css",
+    "/css/store-custom.css": "/css/store-custom.css",
     "/css/vadmin.css": "/css/vadmin.css",
+    "/js/web.js": "/js/web.js",
     "/js/vadmin-ui.js": "/js/vadmin-ui.js",
     "/js/vadmin-functions.js": "/js/vadmin-functions.js",
     "/js/vadmin-forms.js": "/js/vadmin-forms.js",
-    "/js/store-scripts.js": "/js/store-scripts.js",
-    "/css/store-custom.css": "/css/store-custom.css"
+    "/js/store-scripts.js": "/js/store-scripts.js"
 }
