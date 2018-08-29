@@ -39,7 +39,7 @@ class StoreController extends Controller
     
     public function index(Request $request)
     {   
-        $paginate = 4;
+        $paginate = 12;
 
         if(isset($request->buscar))
         {
