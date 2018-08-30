@@ -61,6 +61,13 @@
 									<a href="{{ url('tienda/articulo/'.$article->id) }}">
 										<img class="CheckCatalogImg" src="{{ asset($article->featuredImageName()) }}" alt="Producto del Catálogo">
 									</a>
+									@if(Auth::guard('customer')->check())
+									{{--  Check if product is in favs  --}}
+									<a class="AddToFavs fa-icon fav-icon-nofav fav-btn
+										@if(in_array($article->id, $favs['articleFavs'])) fav-icon-isfav @endif"
+										data-id="{{ $article->id }}" data-toggle="tooltip" title="Agregar a Favoritos">
+									</a>
+									@endif
 								</div>
 								{{-- ============== Content =============== --}}
 								{{-- ====================================== --}}
@@ -96,13 +103,13 @@
 											@endif
 										</div>
 										<div class="col col-favs pad0">
-											@if(Auth::guard('customer')->check())
+											{{-- @if(Auth::guard('customer')->check()) --}}
 											{{--  Check if product is in favs  --}}
-											<a class="AddToFavs fa-icon fav-icon-nofav fav-btn
+											{{-- <a class="AddToFavs fa-icon fav-icon-nofav fav-btn
 												@if(in_array($article->id, $favs['articleFavs'])) fav-icon-isfav @endif"
 												data-id="{{ $article->id }}" data-toggle="tooltip" title="Agregar a Favoritos">
 											</a>
-											@endif
+											@endif --}}
 											<a href="{{ url('tienda/articulo/'.$article->id) }}" class="btn btn-outline-primary btn-sm">Ver producto</a>
 										</div>
 									</div>

@@ -1,0 +1,108 @@
+server {
+        #listen 80 default_server;
+        #listen [::]:80 default_server;
+
+        #listen 443 ssl http2 default_server;
+        #listen [::]:443 ssl http2 default_server;
+
+        #root /var/www/html;
+        #index index.php index.html index.htm;
+
+        # Make site accessible from http://localhost/
+        #server_name brunaindumentaria.com.ar;
+
+        ssl_certificate /etc/nginx/ssl/fullchain.pem;
+        ssl_certificate_key /etc/nginx/ssl/privkey.pem;
+        ssl_dhparam  /etc/nginx/ssl/dhparam.pem;
+
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+                # Uncomment to enable naxsi on this location
+                # include /etc/nginx/naxsi.rules
+        }
+
+        error_page 404 /404.html;
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+                root /usr/share/nginx/html;
+        }
+
+        location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        }
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+  location ~ /\.ht {
+                deny all;
+        }
+}
+
+
+server {
+
+        root /var/www/html;
+        index index.php index.html index.htm;
+
+        # Make site accessible from http://localhost/
+        server_name brunaindumentaria.com.ar www.brunaindumentaria.com.ar; # managed by Certbot
+
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+                # Uncomment to enable naxsi on this location
+                # include /etc/nginx/naxsi.rules
+        }
+
+        error_page 404 /404.html;
+        error_page 500 502 503 504 /50x.html;
+        
+        location = /50x.html {
+                root /usr/share/nginx/html;
+        }
+
+        location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        }
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        #location ~ /\.ht {
+        #       deny all;
+        #}
+
+
+        listen [::]:443 ssl ipv6only=on; # managed by Certbot
+        listen 443 ssl; # managed by Certbot
+        ssl_certificate /etc/letsencrypt/live/brunaindumentaria.com.ar/fullchain.pem; # managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/brunaindumentaria.com.ar/privkey.pem; # managed by Certbot
+
+        include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+
+server {
+        if ($host = www.brunaindumentaria.com.ar) {
+            return 301 https://$host$request_uri;
+        } # managed by Certbot
+
+
+        if ($host = brunaindumentaria.com.ar) {
+            return 301 https://$host$request_uri;
+        } # managed by Certbot
+
+
+        listen 80;
+        listen [::]:80;
+        server_name brunaindumentaria.com.ar www.brunaindumentaria.com.ar;
+        return 404; # managed by Certbot
+}

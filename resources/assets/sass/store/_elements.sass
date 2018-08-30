@@ -364,47 +364,59 @@ ul.pagination
 			background: #fff
 			position: relative
 			.image
-				img
+				position: relative
+				.fa-icon
+					position: absolute
+					left: 0
+					top: 0
+					margin-left: 15px
+					margin-right: 15px
+					font-size: 1.5rem
 			.content
 				padding: 5px
-				height: 150px
+				height: 140px
 				text-align: center
-				@include flex-column()
 				width: 100%
+				padding-bottom: 50px
 				.title-info
 					font-family: $font2
 					width: 100%
+					height: 80px
+					@include flex-column()
 					h3
-						font-size: 1.2rem
+						font-size: 1.1rem
+						margin-bottom: 6px
 				.footer
 					width: 100%
 					display: flex
 					margin-top: 10px
-					.col
+					position: absolute
+					bottom: 4px
+					left: 0
+					.col-price
+						@include flex-column()
 						.price
-							font-size: 1.5rem
+							font-size: 1.2rem
 							font-weight: 700
 							white-space: nowrap
 							text-align: center
 							color: $main-color
 							position: relative
+							position: absolute
+							bottom: 1px
+							left: auto
 							del
 								position: absolute
 								top: -21px
 								left: 0px
 								white-space: nowrap
-								color: #ccc
+								color: #585656
 								margin-right: 10px
 								font-size: 1rem
 								font-weight: 300
-						.fa-icon
-							margin-left: 15px
-							margin-right: 15px
-							font-size: 1.5rem
+					.col
 						.del
 							font-size: 0.9rem
-					.col-price,.col-favs
-						@include flex-center()
 
 @media (min-width: 1199px) and (max-width: 1340px)
 	.articles-container .article .inner .content .footer

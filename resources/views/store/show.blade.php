@@ -93,9 +93,9 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<span class="text-medium"><b>Talle:</b></span>
-					<a class="navi-link" href="#">@foreach($article->atribute1 as $atribute) {{ $atribute->name }} @endforeach</a> |
+					<a class="navi-link" href="#">@foreach($article->atribute1 as $atribute) {{ $atribute->name }} @endforeach</a> <br>
 					<span class="text-medium"><b>Color:</b></span>
-					<a class="navi-link" href="#">{{ $article->color }}</a> |
+					<a class="navi-link" href="#">{{ $article->color }}</a> <br>
 					<span class="text-medium"><b>Tela:</b></span>
 					<a class="navi-link" href="#">{{ $article->textile }}</a>
 				</div>
