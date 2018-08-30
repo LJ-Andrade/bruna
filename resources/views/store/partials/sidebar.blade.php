@@ -1,7 +1,20 @@
-<!-- Sidebar          -->
-<aside class="sidebar">
-	<section class="sidebar-widget">
+<!-- Sidebar Trigger Mobile-->
+<div class="container sidebar-trigger">
+	<div class="row">
 		{!! Form::open(['route' => 'store', 'method' => 'GET', 'class' => 'input-group form-group']) !!}
+			<span class="input-group-btn">
+				<button type="submit"><i class="icon-search"></i></button>
+			</span>
+			<input class="form-control" name="buscar" type="search" placeholder="Buscar...">
+		{!! Form::close() !!}
+		<button class="btn main-btn" onclick="openSidebar()"><i class="fas fa-sliders-h"></i></button>
+	</div>
+</div>
+
+<!-- Sidebar -->
+<aside id="Sidebar" class="sidebar">
+	<section class="sidebar-widget">
+		{!! Form::open(['route' => 'store', 'method' => 'GET', 'class' => 'input-group form-group search-input']) !!}
 			<span class="input-group-btn">
 				<button type="submit"><i class="icon-search"></i></button>
 			</span>

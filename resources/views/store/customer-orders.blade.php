@@ -13,29 +13,27 @@
                     <table class="table table-hover margin-bottom-none">
                         <thead>
                             <tr>
-                            <th>Pedido #</th>
-                            <th>Fecha de Compra</th>
-                            <th>Estado</th>
-                            <th class="text-center">Comprobante</th>
-                            <th></th>
+                                <th>Pedido #</th>
+                                <th>Fecha de Compra</th>
+                                <th>Estado</th>
+                                <th>Comprobante</th>
+                                <th>Detalle</th>
                             </tr>
                         </thead>
                     <tbody>
                     @if(!$carts->isEmpty())
                         @foreach($carts as $cart)
                             <tr>
-                                <td><span class="text-medium">{{ $cart->id }}</span></td>
+                                <td class="text-medium">{{ $cart->id }}</td>
                                 <td>{{ transDateAndTime($cart->created_at) }}</td>
-                                <td><span class="text-danger">{{ orderStatusTrd($cart->status) }}</span></td>
-                                <td class="text-center">
+                                <td>{{ orderStatusTrd($cart->status) }}</td>
+                                <td class="dont-wrap">
                                     <a href="{{ url('tienda/descargar-comprobante', [$cart->id, 'download']) }}" target="_blank"><span class="btnIcon"><i class="icon-download"></i></span></a>
                                     <a href="{{ url('tienda/descargar-comprobante', [$cart->id, 'stream']) }}" target="_blank"><span class="btnIcon"><i class="icon-eye"></i></span></a>
                                 </td>
-                                @if($cart->status == 'Active')
-                                    <td><a href="{{ route('store.checkout') }}">Ver Detalle</a></td>                                    
-                                @else
-                                    <td><a href="{{ route('store.customerOrder', ['id' => $cart->id]) }}">Ver Detalle</a></td>
-                                @endif
+                                <td>
+                                    <span class="dont-wrap"><a href="{{ route('store.customerOrder', ['id' => $cart->id]) }}"> Ver</a></span>
+                                </td>
                             </tr>
                         @endforeach
                         @else 

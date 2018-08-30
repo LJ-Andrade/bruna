@@ -42,3 +42,12 @@ mix.js('resources/assets/js/app.js', 'public/js')
         sourcemaps: 'inline-source-map'
     })
     .browserSync('http://localhost/bruna/public/');
+
+// Only Styles
+// mix.sass('resources/assets/sass/store/store-custom.sass', 'public/css')
+//     .options({
+//         processCssUrls: false,
+//         outputStyle: 'compressed',
+//         sourcemaps: 'inline-source-map'
+//     })
+//     .browserSync('http://localhost/bruna/public/');

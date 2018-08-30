@@ -1,4 +1,4 @@
-<aside class="sidebar">
+<aside class="checkout-sidebar">
     {{-- {{dd($activeCart)}} --}}
     <div class="hidden-lg-up"></div>
     <!-- Order Summary Widget-->

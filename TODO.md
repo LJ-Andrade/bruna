@@ -17,7 +17,7 @@ Implementar
 
 Errores - Fallas - Bugs
 //---------------------------------------------------------
-Agregar producto vía ajax - No funciona - Ok
+
 Dar mensaje cuando se agrega item a carrom de compra
 
 
@@ -26,6 +26,9 @@ Dar mensaje cuando se agrega item a carrom de compra
 
 RESUELTOS
 //---------------------------------------------------------
+
+(RESUELTO)
+Agregar producto vía ajax - No funciona - Ok
 
 (RESUELTO)
 Cuando se quiere comprar si estar logueado tira 404

@@ -1,6 +1,7 @@
 <!-- Toolbar-->
 <div class="toolbar">
     <div class="inner">
+        <a class="site-logo-mobile" href="{{ url('/') }}"><img style="width: 110px" src="{{ asset('images/logos/app-logo.png') }}" alt="Logo"></a>
         <div class="tools">
             {{--  <div class="search"><i class="icon-search"></i></div>  --}}
             @if(Auth::guard('customer')->check())
@@ -11,13 +12,14 @@
                         <div class="toolbar-dropdown toolbar-user-dropdown">
                             @foreach($activeCart['rawdata']->items as $item)
                                 <div class="dropdown-product-item">
-                                    <span class="RemoveArticleFromCart dropdown-product-remove" data-itemid="{{ $item->id }}">
-                                        <i class="icon-cross"></i></span>
+                                    {{-- <span class="RemoveArticleFromCart dropdown-product-remove" data-itemid="{{ $item->id }}">
+                                        <i class="icon-cross"></i>
+                                    </span> --}}
                                     <a class="dropdown-product-custom-thumb" href="{{ url('tienda/articulo/'.$item->id) }}">
                                         <img src="{{ asset($item->article->featuredImageName()) }}" alt="Product">
                                     </a>
                                     <div class="dropdown-product-info">
-                                        <a class="dropdown-product-title" href="shop-single.html">
+                                        <a class="dropdown-product-title" href="">
                                             @if(strlen($item->article->name) > 15)
                                                 {{ substr($item->article->name, 0, 15) }}...
                                             @else

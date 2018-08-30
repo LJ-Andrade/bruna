@@ -10,8 +10,8 @@
 		</a>
 	</div>
 	<div class="topbar-column">
-		<a class="hidden-md-down">&nbsp;<b> 4545-4545 </b>| 15 4245-4545</a>
-		<a class="hidden-md-down" href="info@bruna.com.ar">
+		<a class="hidden-xs-down">&nbsp;<b> 4545-4545 </b>| 15 4245-4545</a>
+		<a class="hidden-xs-down" href="info@bruna.com.ar">
 			<i class="icon-mail"></i>&nbsp; info@bruna.com.ar
 		</a>
 	</div>

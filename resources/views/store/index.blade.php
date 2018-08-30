@@ -12,11 +12,11 @@
 	<div class="container-fluid padding-bottom-3x mb-1">
 		<div class="row">
 			<!-- SideBar -->
-			<div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
 				@include('store.partials.sidebar')
 			</div>
 			<!-- Products -->
-			<div class="col-xs-12 col-sm-9 col-md-9 col-lg-10">
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
 				<!-- Products Grid -->
 				@if(isset($search) && $search == true || count($_GET) > 0)
 					<div class="top-info">
@@ -84,21 +84,21 @@
 										<div class="col col-price pad0">
 											@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
 												@if($article->reseller_discount > 0)
+													<del>$ {{ $article->reseller_price + 0 }}</del> 
 													<span class="price">
-														<del>$ {{ $article->reseller_price }}</del> 
-														 $ {{ calcValuePercentNeg($article->reseller_price, $article->reseller_discount) }}
+														 $ {{ calcValuePercentNeg($article->reseller_price, $article->reseller_discount + 0) }}
 													</span>
 												@else
-													<span class="price">$ {{ $article->reseller_price }}</span>
+													<span class="price">$ {{ $article->reseller_price + 0 }}</span>
 												@endif
 											@else
 												@if($article->discount > 0)
+													<del>$ {{ $article->price + 0 }}</del>
 													<span class="price">
-														<del>$ {{ $article->price }}</del> 
-														$ {{ calcValuePercentNeg($article->price, $article->discount) }}
+														$ {{ calcValuePercentNeg($article->price, $article->discount + 0) }}
 													</span>
 												@else
-													<span class="price">$ {{ $article->price }}</span>
+													<span class="price">$ {{ $article->price + 0 }}</span>
 												@endif
 											@endif
 										</div>
@@ -127,6 +127,10 @@
 
 @section('custom_js')
 	@include('store.components.bladejs')
+	<script>
+		function openSidebar(){
+			$('#Sidebar').toggle(100);
+		}
+	</script>
 @endsection
 
-	

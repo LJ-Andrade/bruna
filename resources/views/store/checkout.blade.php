@@ -90,7 +90,7 @@
 												<td class="text-center">
 													{!! Form::open(['route' => 'store.removefromcart', 'method' => 'POST']) !!}	
 														<input type="hidden" name="itemid" value="{{ $item->id }}">
-														<button type="submit" class="btn btn-outline-primary btn-sm">x</button>
+														<button type="submit" class="icon-only-btn"><i class="far fa-trash-alt"></i></button>
 													{!! Form::close() !!}
 												</td>
 											</tr>
@@ -193,12 +193,12 @@
 									<b>Dirección:</b> {{ Auth::guard('customer')->user()->address }} <br>
 									<b>Código Postal:</b> {{ Auth::guard('customer')->user()->cp }} <br>
 									<b>Provincia:</b> @if(!is_null(Auth::guard('customer')->user()->geoprov)) 
-														Auth::guard('customer')->user()->geoprov->name
+														{{ Auth::guard('customer')->user()->geoprov->name }}
 													  @else
 													  	<span class="text-danger">* Debe completar este dato</span>
 													  @endif <br>
 									<b>Localidad:</b> @if(!is_null(Auth::guard('customer')->user()->geoloc)) 
-														Auth::guard('customer')->user()->geoloc 
+														{{ Auth::guard('customer')->user()->geoloc->name }}
 													  @else
 													  <span class="text-danger">* Debe completar este dato</span>	
 													  @endif <br>

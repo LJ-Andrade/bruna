@@ -184,14 +184,6 @@
 	font-weight: 300
 	margin-top: 5px
 
-.navbar-sticky
-	.toolbar
-		.inner
-			.tools
-				.account
-					img
-						border-radius: 50%
-
 .btn:hover
 	filter: brightness(1.5)
 
@@ -245,6 +237,16 @@
 	&:hover
 		opacity: .6
 
+.icon-only-btn
+	border: 0
+	background: 0
+	font-size: 1.2rem
+	@include transition(0.2s)
+	&:hover
+		filter: brightness(2)
+		font-size: 1.1rem
+		cursor: pointer
+
 .sq-badge
 	border: 1px solid $grey
 	color: $grey
@@ -271,6 +273,13 @@
 		margin-bottom: 10px
 		margin-top: 15px
 
+
+.main-btn
+	background-color: $main-color
+	color: #ffffff
+	@include transition(0.2s)
+	&:hover
+		filter: brightness(1.2)
 //////////////////////////////////////
 //                                  //
 //             FORMS                //
@@ -368,7 +377,7 @@ ul.pagination
 				.fa-icon
 					position: absolute
 					left: 0
-					top: 0
+					top: 6px
 					margin-left: 15px
 					margin-right: 15px
 					font-size: 1.5rem
@@ -401,19 +410,12 @@ ul.pagination
 							white-space: nowrap
 							text-align: center
 							color: $main-color
-							position: relative
-							position: absolute
-							bottom: 1px
-							left: auto
-							del
-								position: absolute
-								top: -21px
-								left: 0px
-								white-space: nowrap
-								color: #585656
-								margin-right: 10px
-								font-size: 1rem
-								font-weight: 300
+						del
+							white-space: nowrap
+							color: #585656
+							margin-right: 5px
+							font-size: 1rem
+							font-weight: 300
 					.col
 						.del
 							font-size: 0.9rem
@@ -539,89 +541,6 @@ ul.pagination
 		white-space: nowrap
 		text-overflow: ellipsis
 
-.dropdown-product-item > .dropdown-product-info
-	max-width: 148px
-	width: 148px
-	padding-left: 0
-.dropdown-product-item > .dropdown-product-custom-thumb > img
-	border-radius: 50%
-	max-width: 100%
-	width: 70px
-	min-width: 70px
-	height: 70px
-
-@media (min-width: 481px)
-	.toolbar .cart > .toolbar-dropdown
-		width: 300px
-		padding-left: 18px !important
-		max-height: 400px
-		overflow-y: scroll
-		overflow-x: hidden
-
-@media (max-width: 481px)
-	.toolbar-user-dropdown
-		position: fixed
-		top: 150px
-		left: 10px !important
-
-.navbar-sticky	
-	.toolbar 
-		white-space: nowrap
-		.inner 
-			@include flex-center
-			margin-bottom: 10px
-			.tools
-				height: auto
-				display: inline-flex
-		
-
-.user-info-wrapper
-	padding-top: 20px
-	padding-bottom: 20px
-	.user-info .user-data
-		padding-top: 26px
-
-@media (max-width: 660px)
-	.checkout-steps
-		display: none
-
-.top-info
-	padding-bottom: 20px
-
-@media (max-width: 1070px)
-	.toolbar 
-		.tools
-			display: table-cell
-			vertical-align: middle
-			.account
-				display: block
-
-
-
-// Sidebar
-.sidebar
-	background: #fff
-	padding: 10px
-	.table td, .table th
-		padding: 5px 1px
-		vertical-align: middle
-	.total
-		font-size: 1.5rem
-	.sidebar-widget
-		margin-bottom: 15px
-		ul
-			padding: 0
-			list-style: none
-			li
-				a
-					text-decoration: none
-					color: #383838
-
-
-@media (max-width: 991px)
-	.sidebar
-		max-width: 100%
-
 .review-bottom
 	background: #f9f9f97d
 	
@@ -646,7 +565,25 @@ ul.pagination
 	.back-to-store
 		display: none
 
-// SHOW
+.shopping-cart
+	.product-item
+		.product-thumb
+			max-width: 80px
+
+.coupon-message
+	.inner
+		padding: 10px
+		border: 1px solid #ccc
+		text-align: center
+		.small
+			font-size: 1.2rem
+		.big
+			font-size: 2rem
+			color: green
+			
+
+// ------------- Show --------------- //
+
 .product-show
 	.product-gallery
 		.images-container
@@ -676,28 +613,51 @@ ul.pagination
 		.product-thumbnails
 			display: none
 
-//////////////////////////////////////
-//                                  //
-//            CHECKOUT              //
-//                                  //
-//////////////////////////////////////
 
-.shopping-cart
-	.product-item
-		.product-thumb
-			max-width: 80px
+// ------------- Sidebar --------------- //
+.sidebar
+	background: #fff
+	padding: 10px
+	.table td, .table th
+		padding: 5px 1px
+		vertical-align: middle
+	.total
+		font-size: 1.5rem
+	.sidebar-widget
+		margin-bottom: 15px
+		ul
+			padding: 0
+			list-style: none
+			li
+				a
+					text-decoration: none
+					color: #383838
 
-.coupon-message
-	.inner
-		padding: 10px
-		border: 1px solid #ccc
-		text-align: center
-		.small
-			font-size: 1.2rem
-		.big
-			font-size: 2rem
-			color: green
-			
+.sidebar-trigger
+	display: none
+
+@media (max-width: 768px)
+	.sidebar-trigger
+		display: block
+		.main-btn
+			margin: 0
+			margin-left: 10px
+	.sidebar
+		display: none
+		.search-input
+			display: none
+		.sidebar-widget
+			.sq-badge
+				line-height: 2rem
+			ul li
+				display: inline
+				margin-right: 5px
+
+@media (max-width: 991px)
+	.sidebar
+		max-width: 100%
+
+
 
 //////////////////////////////////////
 //                                  //

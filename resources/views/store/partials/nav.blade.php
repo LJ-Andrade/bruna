@@ -8,10 +8,8 @@
 	</form>
 	<div class="site-branding">
 		<div class="inner">
-		{{--  This Is the SIDEMENU  --}}
-		{{--  <!-- Off-Canvas Toggle (#shop-categories)--><a class="offcanvas-toggle cats-toggle" href="#shop-categories" data-toggle="offcanvas"></a>
-		<!-- Off-Canvas Toggle (#mobile-menu)--><a class="offcanvas-toggle menu-toggle" href="#mobile-menu" data-toggle="offcanvas"></a>  --}}
-		<!-- Site Logo--><a class="site-logo" href="{{ url('/') }}"><img style="width: 110px" src="{{ asset('images/logos/app-logo.png') }}" alt="Logo"></a>
+			<!-- Site Logo-->
+			<a class="site-logo" href="{{ url('/') }}"><img style="width: 110px" src="{{ asset('images/logos/app-logo.png') }}" alt="Logo"></a>
 		</div>
 	</div>
 	<!-- Main Navigation-->

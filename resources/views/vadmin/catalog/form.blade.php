@@ -12,8 +12,8 @@
     </div>
     {{--  Sizes  --}}
     <div class="col-md-4 form-group">
-        {!! Form::label('atribute1', 'Talles') !!}
-        {!! Form::select('atribute1[]', $atribute1, null, ['class' => 'Select-Atribute form-control', 'multiple']) !!}
+        {!! Form::label('atribute1', 'Talle') !!}
+        {!! Form::select('atribute1[]', $atribute1, null, ['class' => 'Select-Atribute form-control', '']) !!}
         <div class="slug2"></div>
     </div>
 </div>
