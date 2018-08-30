@@ -47,7 +47,6 @@ class StoreController extends Controller
         } 
         else if(isset($request->categoria))
         {
-            dd($request->categoria);
             $articles = CatalogArticle::orderBy('id', 'DESC')->active()->where('category_id', $request->categoria)->paginate($paginate);
         }
         else if(isset($request->etiqueta))
