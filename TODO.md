@@ -20,6 +20,8 @@ Errores - Fallas - Bugs
 
 Dar mensaje cuando se agrega item a carrom de compra
 
+ONLINE no filtra por categorías
+
 
 
 

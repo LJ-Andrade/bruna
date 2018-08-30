@@ -40,13 +40,14 @@ class StoreController extends Controller
     public function index(Request $request)
     {   
         $paginate = 12;
-
+        
         if(isset($request->buscar))
         {
             $articles = CatalogArticle::search($request->buscar)->active()->paginate($paginate);
         } 
         else if(isset($request->categoria))
         {
+            dd($request->categoria);
             $articles = CatalogArticle::orderBy('id', 'DESC')->active()->where('category_id', $request->categoria)->paginate($paginate);
         }
         else if(isset($request->etiqueta))
