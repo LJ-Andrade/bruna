@@ -5,6 +5,7 @@
 /public/webimages/catalogo
 /public/webimages/portfolio
 /public/webimages/customers
+/public/phpmyadmin
 /storage/*.key
 /vendor
 /.idea
