@@ -3,6 +3,7 @@
 @section('content')
 <div class="container padding-bottom-3x mb-2 marg-top-25">
 	<div class="row centered-form">
+
 		<form class="login-box inner" method="POST" action="{{ route('customer.login') }}">
 			{{ csrf_field() }}
 			<h3>Ingresar</h3>

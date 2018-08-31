@@ -21,11 +21,16 @@ class CustomerController extends Controller
     public function index(Request $request)
     {    
         $group = $request->get('group');
+        $status = $request->get('status');
         // Name is name, surname, username, email
         $name  = $request->get('name');
+        
         $paginate = 15;
 
-        if(isset($name))
+        if(isset($group) && isset($status)){
+            $items = Customer::searchGroupStatus($group, $status)->orderBy('id', 'ASC')->paginate($paginate);    
+        }
+        elseif(isset($name))
         {
             $items = Customer::searchName($name)->orderBy('id', 'ASC')->paginate($paginate); 
         }

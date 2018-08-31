@@ -30,7 +30,7 @@ class RegisterController extends Controller
      * @var string
      */
     
-    protected $redirectTo = '/store-register-hold';
+    protected $redirectTo = '/registro-completo';
 
     /**
      * Create a new controller instance.
@@ -39,7 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
     }
 
     /**
@@ -57,30 +57,29 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:customers',
             'password' => 'required|string|min:6|confirmed',
             ]);
-        }
+    }
         
     protected function create(array $data)
     {
-        switch($data['group']){
-            case '1':
-                $group = "1";
-                break;
-            case '99':
-                $group = "2";
-                break;
-            default:
-                $group = "1";
-        }        
-        
+        $status = '1'; // Active
+        $group = '2'; // Min 
+        if(isset($data['isreseller'])){
+            if($data['isreseller'] == 'on'){
+                echo "Es mayo";
+                $status = '0'; // Suspended
+                $group = "3"; // Reseller
+            } 
+        } 
+
         return Customer::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'username' => $data['username'],
             'email' => $data['email'],
-            'status' => '0',
+            'status' => $status,
             'password' => bcrypt($data['password']),
             'group' => $group
-        ]);
+            ]);
     }
 
     protected function guard(){
@@ -97,15 +96,14 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        // $this->guard()->login($user);
+        $this->guard()->login($user);
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
     }
 
-    public function holdRegisterLogin()
+    public function registerSuccess()
     {
-        return view('store.register-hold');
+        return redirect('tienda/login')->with('message','Gracias por registrarse !!.');
     }
-
 }

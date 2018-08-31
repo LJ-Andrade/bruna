@@ -73,6 +73,10 @@
                     @endif
                 </div>
             </div>
+            <div class="col-xs-12 text-xs-center text-md-left bordered-box">
+                <input type="checkbox" name="isreseller"> Deseo aplicar para ser cliente mayorísta <br>
+                <span class="text-muted">(Quedará en proceso de espera hasta ser aceptado por<br> <b>Bruna Indumentaria</b>)</span>
+            </div>
             <input type="hidden" name="group" value="1">
             {{-- Submit --}}
             <button type="submit" class="btn btn-primary btn-block"><i class="icon-unlock"></i> Registrarse</button>

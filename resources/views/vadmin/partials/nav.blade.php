@@ -25,8 +25,12 @@
 						<span class="MessagesAmmount">{{ $newMessages->count() }} </span></span>@endif</a>
 						<ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
 							<li class="dropdown-menu-header">
-								<h6 class="dropdown-header m-0"><span class="grey darken-2">Mensajes</span>
-								<span class="notification-tag tag tag-default tag-info float-xs-right m-0"><span class="MessagesAmmount">{{ $newMessages->count() }}</span> Nuevos</span></h6>
+								<h6 class="dropdown-header m-0">
+									<span class="grey darken-2">Mensajes</span>
+									<span class="notification-tag tag tag-default tag-info float-xs-right m-0">
+										<span class="MessagesAmmount">{{ $newMessages->count() }}</span> Nuevos
+									</span>
+								</h6>
 							</li>
 							<li class="list-group scrollable-container ps-container ps-theme-dark ps-active-y">
 								@foreach($newMessages as $message)
@@ -216,10 +220,25 @@
 				</a>
 			</ul>
 		</li>
-		<li class="has-sub is-shown {{ Menu::activeMenu('customers') }}"><a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item"><i class="icon-users2"></i>	Clientes</a>
+		<li class="has-sub is-shown {{ Menu::activeMenu('customers') }}">
+			<a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item"><i class="icon-users2"></i>
+				Clientes @if($newResellers > 0) <span class="green">&bull;</span> @endif
+			</a>
 			<ul class="menu-content">
-				<li class="is-shown {{ Menu::activeMenu('customers') }}"><a href="{{ route('customers.index') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item"><i class="icon-list"></i> Listado</a></li>
-				<li class="is-shown {{ Menu::activeMenu('customers') }}"><a href="{{ route('customers.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item"><i class="icon-plus-round"></i> Nuevo Cliente</a></li>
+				<li class="is-shown {{ Menu::activeMenu('customers') }}">
+					<a href="{{ route('customers.index') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+						Listado
+					</a>
+				</li>
+				<li><a href="{{ route('customers.index', ['group' => '3', 'status' => '0']) }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+					Esperando aprobación @if($newResellers > 0) <span class="green">&bull;</span> @endif
+					</a>
+				</li>
+				<li class="is-shown {{ Menu::activeMenu('customers') }}">
+					<a href="{{ route('customers.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+						<i class="icon-plus-round"></i> Crear Cliente
+					</a>
+				</li>
 			</ul>
 		</li>
 		@if(Auth::guard('user')->user()->role <= 2)

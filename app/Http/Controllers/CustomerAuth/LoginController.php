@@ -54,10 +54,11 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if($user->status == 0){
-            auth()->guard()->logout();
+        if(auth()->guard('customer')->user()->status == 0 && auth()->guard('customer')->user()->group == 3)
+        {
             $request->session()->invalidate();
-            return redirect('tienda/proceso');
+            auth()->guard()->logout();
+            return redirect('tienda')->with('message', 'Ha solicitado ser cliente mayorísta. En cuanto sea aprobado podrá loguearse para comprar.');
         }
     }
 

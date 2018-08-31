@@ -70,6 +70,11 @@ class Customer extends Authenticatable
         $query->where('group', $group);
     }   
 
+    public function scopeSearchGroupStatus($query, $group, $status)
+    {
+        $query->where('group', $group)->where('status', $status);
+    }   
+
     //Send password reset notification
     public function sendPasswordResetNotification($token)
     {

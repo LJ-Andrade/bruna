@@ -1,5 +1,52 @@
 <?php
 
+Auth::routes();
+
+/*
+|--------------------------------------------------------------------------
+| STORE LOGIN / REGISTER :: ROUTES
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function() {   
+    // Store Login
+    Route::get('login', ['as' => 'customer.login', 'uses' => 'CustomerAuth\LoginController@showLoginForm']);
+    Route::post('login', ['uses' => 'CustomerAuth\LoginController@login']);
+    Route::post('logout', ['as' => 'customer.logout', 'uses' => 'CustomerAuth\LoginController@logout']);
+    // Store Registration Routes
+    Route::get('register', ['as' => 'customer.register', 'uses' => 'CustomerAuth\RegisterController@showRegistrationForm']);
+    Route::post('register', ['uses' => 'CustomerAuth\RegisterController@register']);
+    // Store Password Reset Routes
+    Route::get('password/reset', ['as' => 'customer.password.reset', 'uses' => 'CustomerAuth\ForgotPasswordController@showLinkRequestForm']);
+    Route::post('password/email', ['as' => 'customer.password.email', 'uses' => 'CustomerAuth\ForgotPasswordController@sendResetLinkEmail']);
+    Route::get('password/reset/{token}', ['as' => 'customer.password.reset.token', 'uses' => 'CustomerAuth\ResetPasswordController@showResetForm']);
+    Route::post('password/reset', ['uses' => 'CustomerAuth\ResetPasswordController@reset']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| VADMIN LOGIN / REGISTER :: ROUTES
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix'=> 'vadmin'], function() {
+    // Login Routes
+    Route::get('login', ['as' => 'vadmin.login', 'uses' => 'Auth\LoginController@showLoginForm']);
+    Route::post('login', ['uses' => 'Auth\LoginController@login']);
+    Route::post('logout', ['as' => 'vadmin.logout', 'uses' => 'Auth\LoginController@logout']);
+    
+    // Registration Routes
+    Route::get('register', ['as' => 'vadmin.register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
+    Route::post('register', ['uses' => 'Auth\RegisterController@register']);
+    
+    // Password Reset Routes
+    Route::get('password/reset', ['as' => 'vadmin.password.reset', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
+    Route::post('password/email', ['as' => 'vadmin.password.email', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
+    Route::get('password/reset/{token}', ['as' => 'vadmin.password.reset.token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
+    Route::post('password/reset', ['uses' => 'Auth\ResetPasswordController@reset']);
+});
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web
@@ -8,8 +55,6 @@
 */
 
 // Route::get('/', ['as' => 'web', 'uses' => 'WebController@home']);
-
-
 // Route::get('contacto', function(){ return view('web.web.contacto'); });
 
 /*
@@ -36,7 +81,7 @@ Route::get('tienda', ['as' => 'store', 'uses' => 'Store\StoreController@index'])
 // Searchs
 Route::get('tienda/talle/{name}', ['as' => 'store.search.size', 'uses' => 'Store\StoreController@searchSize']);
 Route::get('tienda/etiqueta/{name}', ['as' => 'store.search.tag', 'uses' => 'Store\StoreController@searchTag']);
-Route::get('store-register-hold', ['as' => 'store-register-hold', 'uses' => 'CustomerAuth\RegisterController@holdRegisterLogin'])->middleware('active-customer');
+Route::get('registro-completo', ['as' => 'registro-completo', 'uses' => 'CustomerAuth\RegisterController@registerSuccess'])->middleware('active-customer');
 Route::get('tienda/proceso', function(){ return view('store.proceso'); })->middleware('active-customer');
 
 Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function() {    
@@ -73,49 +118,8 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
     Route::post('addArticleToFavs', ['as' => 'customer.addArticleToFavs', 'uses' => 'Store\StoreController@addArticleToFavs']);
     Route::post('removeArticleFromFavs', ['as' => 'customer.removeArticleFromFavs', 'uses' => 'Store\StoreController@removeArticleFromFavs']);
     Route::post('removeAllArticlesFromFavs', ['as' => 'customer.removeAllArticlesFromFavs', 'uses' => 'Store\StoreController@removeAllArticlesFromFavs']);
-
-    // Store Login Routes
-
-    Route::get('login', ['as' => 'customer.login', 'uses' => 'CustomerAuth\LoginController@showLoginForm']);
-    Route::post('login', ['uses' => 'CustomerAuth\LoginController@login']);
-    Route::post('logout', ['as' => 'customer.logout', 'uses' => 'CustomerAuth\LoginController@logout']);
-    
-    // Store Registration Routes
-    Route::get('register', ['as' => 'customer.register', 'uses' => 'CustomerAuth\RegisterController@showRegistrationForm']);
-    Route::post('register', ['uses' => 'CustomerAuth\RegisterController@register']);
-    
-    // Store Password Reset Routes
-    Route::get('password/reset', ['as' => 'customer.password.reset', 'uses' => 'CustomerAuth\ForgotPasswordController@showLinkRequestForm']);
-    Route::post('password/email', ['as' => 'customer.password.email', 'uses' => 'CustomerAuth\ForgotPasswordController@sendResetLinkEmail']);
-    Route::get('password/reset/{token}', ['as' => 'customer.password.reset.token', 'uses' => 'CustomerAuth\ResetPasswordController@showResetForm']);
-    Route::post('password/reset', ['uses' => 'CustomerAuth\ResetPasswordController@reset']);
-        
 });
 
-/*
-|--------------------------------------------------------------------------
-| VADMIN
-|--------------------------------------------------------------------------
-*/
-
-Auth::routes();
-// AUTH ROUTES
-Route::group(['prefix'=> 'vadmin'], function() {
-    // Login Routes...
-    Route::get('login', ['as' => 'vadmin.login', 'uses' => 'Auth\LoginController@showLoginForm']);
-    Route::post('login', ['uses' => 'Auth\LoginController@login']);
-    Route::post('logout', ['as' => 'vadmin.logout', 'uses' => 'Auth\LoginController@logout']);
-    
-    // Registration Routes...
-    Route::get('register', ['as' => 'vadmin.register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
-    Route::post('register', ['uses' => 'Auth\RegisterController@register']);
-    
-    // Password Reset Routes...
-    Route::get('password/reset', ['as' => 'vadmin.password.reset', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
-    Route::post('password/email', ['as' => 'vadmin.password.email', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
-    Route::get('password/reset/{token}', ['as' => 'vadmin.password.reset.token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
-    Route::post('password/reset', ['uses' => 'Auth\ResetPasswordController@reset']);
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -240,6 +244,7 @@ Route::prefix('vadmin')->middleware('admin')->group(function () {
     Route::post('destroy_shippings', 'Catalog\ShippingsController@destroy');
     Route::post('destroy_payments', 'Catalog\PaymentsController@destroy');
     Route::post('destroy_carts', 'Store\CartsController@destroy');
+    
 });
 
 /*

@@ -86,7 +86,7 @@
 								<td>{{ $item->username }}</td>
 								<td>{{ $item->email }}</td>
 								<td>
-									{!! Form::select('group', [1 => 'Nuevo', 2 => 'Minorísta', 3 => 'Mayorísta'], $item->group, ['class' => 'form-control', 'onChange' => 'updateCustomerGroup(this, this.dataset.id)', 'data-id' => $item->id]) !!}
+									{!! Form::select('group', [1 => 'Esperando aprobación', 2 => 'Minorísta', 3 => 'Mayorísta'], $item->group, ['class' => 'form-control', 'onChange' => 'updateCustomerGroup(this, this.dataset.id)', 'data-id' => $item->id]) !!}
 								</td>
 								{{-- {{ clientGroupTrd($item->group) }}</td> --}}
 								<td class="w-50 pad0 centered">

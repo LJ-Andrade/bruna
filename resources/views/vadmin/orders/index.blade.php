@@ -14,12 +14,10 @@
 		@slot('actions')
 			{{-- Actions --}}
 			<div class="list-actions">
-				{{-- <a href="{{ route('payments.create') }}" class="btn btnBlue"><i class="icon-plus-round"></i>  Nuevo </a> --}}
 				<button id="SearchFiltersBtn" class="btn btnBlue"><i class="icon-ios-search-strong"></i></button>
-				
 				{{-- Delete --}}
 				{{--  THIS VALUE MUST BE THE NAME OF THE SECTION CONTROLLER  --}}
-				<input id="ModelName" type="hidden" value="orders">
+				<input id="ModelName" type="hidden" value="carts">
 				<button class="DeleteBtn btn btnRed Hidden"><i class="icon-bin2"></i> Eliminar</button>
 				<input id="RowsToDeletion" type="hidden" name="rowstodeletion[]" value="">
 				{{-- If Search --}}
