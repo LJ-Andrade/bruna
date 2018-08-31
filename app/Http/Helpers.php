@@ -14,7 +14,7 @@ function calcFinalPriceConvert($cost, $percent, $currencyActualValue)
     
 function calcValuePercentNeg($price, $percent)
 {
-    $percent = $price * $percent / 100;
+    $percent = $price * $percent / (int)100;
     $result =  $price - $percent;
     return convertAndRoundDecimal($result, 2);
 }
