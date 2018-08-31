@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'username' => 'required|string|max:20|unique:customers',
             'email' => 'required|string|email|max:255|unique:customers',
             'password' => 'required|string|min:6|confirmed',
-            ]);
+        ]);
     }
         
     protected function create(array $data)
@@ -65,9 +65,8 @@ class RegisterController extends Controller
         $group = '2'; // Min 
         if(isset($data['isreseller'])){
             if($data['isreseller'] == 'on'){
-                echo "Es mayo";
                 $status = '0'; // Suspended
-                $group = "3"; // Reseller
+                $group = '3'; // Reseller
             } 
         } 
 
@@ -104,6 +103,6 @@ class RegisterController extends Controller
 
     public function registerSuccess()
     {
-        return redirect('tienda/login')->with('message','Gracias por registrarse !!.');
+        return redirect('tienda/login')->with('message','Gracias por registrarse.');
     }
 }

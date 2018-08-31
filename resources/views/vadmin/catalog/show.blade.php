@@ -77,7 +77,7 @@
 							@else %  {{ $article->reseller_discount }}
 							@endif
 						</span><br>
-						<b> Precio c/ Desc.: </b> <span class="custom-badge btnGreen"> $ {{ calcValuePercentNeg($article->price, $article->discount)}}</span>
+						<b> Precio c/ Desc.: </b> <span class="custom-badge btnGreen"> $ {{ calcValuePercentNeg($article->reseller_price, $article->reseller_discount)}}</span>
 					</div>
 					<div class="col-md-3 col-sm-6">
 						<b>Stock:</b> {{ $article->stock }} <br>
