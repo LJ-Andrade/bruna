@@ -13,6 +13,8 @@ BRUNA
 Implementar
 //---------------------------------------------------------
 
+Mensajes personalizados en login de tienda. 
+Ej: Cuando se registra un mayorista le avisa que queda en suspenso
 
 
 Errores - Fallas - Bugs
@@ -20,7 +22,6 @@ Errores - Fallas - Bugs
 
 Dar mensaje cuando se agrega item a carrom de compra
 
-ONLINE no filtra por categorías
 
 
 
@@ -28,6 +29,9 @@ ONLINE no filtra por categorías
 
 RESUELTOS
 //---------------------------------------------------------
+
+(RESUELTO)
+ONLINE no filtra por categorías
 
 (RESUELTO)
 Agregar producto vía ajax - No funciona - Ok

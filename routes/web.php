@@ -264,5 +264,8 @@ Route::get('500', ['as' => '500', 'uses' => 'ErrorController@fatal']);
 Route::get('/vadmin/clients', function(){
     return view('vadmin.dev.clients');
 });
-//->middleware('auth');
+
+Route::middleware('auth:api')->get('/user', function(Request $request){
+    return $request->user();
+});
 

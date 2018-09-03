@@ -1,5 +1,6 @@
 let mix = require('laravel-mix');
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 /*
 |--------------------------------------------------------------------------
 | Mix Asset Management
@@ -34,6 +35,11 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/vadmin-forms.js', 'public/js')
 
     .sass('resources/assets/sass/vadmin/vadmin.sass', 'public/css')
+    .webpackConfig({
+        plugins: [
+            new VueLoaderPlugin()
+        ]
+    })
     .options({
         processCssUrls: false,
         outputStyle: 'compressed'
@@ -42,6 +48,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
         sourcemaps: 'inline-source-map'
     })
     .browserSync('http://localhost/bruna/public/');
+
 
 // Only Styles
 // mix.sass('resources/assets/sass/store/store-custom.sass', 'public/css')

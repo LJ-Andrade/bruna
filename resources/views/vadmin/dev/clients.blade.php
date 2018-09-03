@@ -7,19 +7,21 @@
 
 @section('content')
 	<div class="dashboard">
-            <passport-clients></passport-clients>
-            <passport-authorized-clients></passport-authorized-clients>
-            <passport-personal-access-tokens></passport-personal-access-tokens>
-		<div class="content-body">
-			<section id="global-settings" class="card">
-				<div class="card-header">
-					<h4 class="card-title"><i class="icon-key"></i> API | Clientes</h4>
+        <div class="content-body">
+            <section id="global-settings" class="card">
+                <div class="card-header">
+                    <h4 class="card-title"><i class="icon-key"></i> API | Clientes</h4>
                 </div>
                 
 				<div class="card-body collapse in">
-					<div class="card-block">
-						<div class="card-text">
+                    <div class="card-block">
+                        <div class="card-text">
                             <div class="centered-form">
+                                <div id="clients">
+                                    <passport-clients></passport-clients>
+                                    <passport-authorized-clients></passport-authorized-clients>
+                                    <passport-personal-access-tokens></passport-personal-access-tokens>
+                                </div>
                             {{-- <form action="{{ url('/oauth/clients') }}" class="" method="POST">
                                 <label for="">Cliente</label>
                                 <input class="form-control" type="text" name="name" />
@@ -35,7 +37,9 @@
                             </div>
 						</div>
 					</div>
-				</div>
+                </div>
+                
+           
 			</section>
         </div>
 	</div>
@@ -43,8 +47,10 @@
 @endsection
 
 @section('scripts')
-    <script type="text/javascript" src="{{ asset('plugins/vuejs/vue.min.js')}} "></script>
-	<script type="text/javascript" src="{{ asset('js/app.js')}} "></script>
+    
+    <script type="text/javascript" src="{{ asset('js/app.js')}} "></script> 
+    
+    
 @endsection
 
 
