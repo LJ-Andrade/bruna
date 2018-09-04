@@ -20,14 +20,14 @@
                  <span style="color: #ada8a8">Perfil | </span>{{ $customer->name }}
             @endslot
             @slot('content')
-                <div class="col-md-5">
+                <div class="col-md-3">
                     <div class="round-image-card">
                         <div class="inner">
                             <div class="image">
                                 @if($customer->avatar == '')
-                                    <img id="Avatar" class="Image-Container CheckImg" src="{{ asset('images/customers/default.jpg') }}" alt="Imágen de Usuario">
+                                    <img id="Avatar" class="Image-Container CheckImg" src="{{ asset('images/users/default.jpg') }}" alt="Imágen de Usuario">
                                 @else	
-                                    <img id="Avatar" class="Image-Container CheckImg" src="{{ asset('images/customers/'.$customer->avatar) }}" alt="Imágen de Usuario">
+                                    <img id="Avatar" class="Image-Container CheckImg" src="{{ asset('images/users/'.$customer->avatar) }}" alt="Imágen de Usuario">
                                 @endif
                                 <span class="over-text">Cambiar imágen</span>
                             </div>
@@ -45,34 +45,55 @@
                         {{-- <button id="UpdateProfileBtn" class="btn btnGreen"><i class="icon-check2"></i> Actualizar</button> --}}
                     </div>
                 </div>
-                <div class="col-md-7">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>Nombre de usuario: </td>
-                                <td>{{ $customer->username }}</td>
-                            </tr>
-                            <tr>
-                                <td>Nombre y apellido: </td>
-                                <td>{{ $customer->name }} {{ $customer->surname }}</td>
-                            </tr>
-
-                            <tr>
-                                <td>E-Mail: </td>
-                                <td>{{ $customer->email }}</td>
-                            </tr>
-
-                            <tr>
-                                <td>Tipo de cliente: </td>
-                                <td>{{ clientGroupTrd($customer->group) }}</td>
-                            </tr>
-
-                            <tr>
-                                <td>Fecha de ingreso: </td>
-                                <td>{{ transDateT($customer->created_at) }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="col-md-9">
+                    <div class="column-data">
+                        <div class="row item">
+                            <div class="label"><b>Nombre de usuario: </b></div>
+                            <span class="data">{{ $customer->username }}</span>
+                        </div> <br>
+                        <div class="row item">
+                            <div class="label"><b>Nombre y apellido: </b></div>
+                            <span class="data">{{ $customer->name }} {{ $customer->surname }}</span>
+                        </div><br>
+                        <div class="row item">
+                            <div class="label"><b>E-Mail: </b></div>
+                            <span class="data">{{ $customer->email }}</span>
+                        </div><br>
+                        <div class="row item">
+                            <div class="label"><b>Dirección: </b></div>
+                            <span class="data">{{ $customer->address }}</span>
+                        </div><br>
+                        <div class="row item">
+                            <div class="label"><b>Provincia: </b></div>
+                            <span class="data">@if(!$customer->geoprov) @else
+                                    {{ $customer->geoprov->name }}@endif</span>
+                        </div><br>
+                        <div class="row item">
+                            <div class="label"><b>Localidad: </b></div>
+                            <span class="data">@if(!$customer->geoloc) @else
+                                    {{ $customer->geoloc->name }}@endif</span>
+                        </div><br>
+                        <div class="row item">
+                            <div class="label"><b>Código Postal: </b></div>
+                            <span class="data">{{ $customer->cp }}</span>
+                        </div><br>
+                        <div class="row item">
+                            <div class="label"><b>Teléfono: </b></div>
+                            <span class="data">{{ $customer->phone }}</span>
+                        </div><br>
+                        <div class="row item">
+                                <div class="label"><b>Teléfono 2: </b></div>
+                                <span class="data">@if($customer->phone2) {{ $customer->phone2 }} @endif</span>
+                            </div><br>
+                        <div class="row item">
+                            <div class="label"><b>Tipo de cliente: </b></div>
+                            <span class="data">{{ clientGroupTrd($customer->group) }}</span>
+                        </div><br>
+                        <div class="row item">
+                            <div class="label"><b>Fecha de ingreso: </b></div>
+                            <span class="data">{{ transDateT($customer->created_at) }}</span>
+                        </div>
+                    </div>
                 </div>
             @endslot
         @endcomponent

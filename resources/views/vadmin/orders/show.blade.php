@@ -128,8 +128,16 @@
                     <b>Nombre de Usuario:</b> {{ $customer->username }} <br>
                     <b>E-Mail:</b> {{ $customer->email }} <br>
                     <b>Dirección:</b> {{ $customer->address }} <br>
-                    <b>Provincia:</b> {{ $customer->geoprov->name }} <br>
-                    <b>Localidad:</b> {{ $customer->geoloc->name }} <br>
+                    <b>Provincia:</b> @if(!$customer->geoprov)) 
+                                        {{ $customer->geoprov->name }}
+                                        @else
+                                        <span class="text-danger">* Debe completar este dato</span>
+                                        @endif <br>
+                    <b>Localidad:</b> @if(!is_null($customer->geoloc)) 
+                                        {{ $customer->geoloc->name }}
+                                        @else
+                                        <span class="text-danger">* Debe completar este dato</span>	
+                                        @endif <br>
                     <b>C.P:</b> {{ $customer->cp }} <br>
                     <hr class="softhr">
                     <b>Teléfono:</b> {{ $customer->phone }} <br>
