@@ -44,8 +44,11 @@
                 </p>
             @endslot
             @slot('actions')
-                Comprobante: <a href="{{ url('vadmin/descargar-comprobante', [$order['rawdata']->id, 'stream']) }}" target="_blank">Ver</a> | 
-                <a href="{{ url('vadmin/descargar-comprobante', [$order['rawdata']->id, 'download']) }}" target="_blank">Descargar</a>
+                Comprobante:
+                <a class="badge badge-green" href="{{ url('vadmin/descargar-comprobante', [$order['rawdata']->id, 'download']) }}" target="_blank">.Pdf</a> |
+                <a class="badge badge-green" href="{{ url('vadmin/exportOrderCsv', [$order['rawdata']->id]) }}" target="_blank">.Csv</a> | 
+                <a class="badge badge-green" href="{{ url('vadmin/exportOrderXls', [$order['rawdata']->id]) }}" target="_blank">.Xls</a> |
+                <a class="badge badge-blue" href="{{ url('vadmin/descargar-comprobante', [$order['rawdata']->id, 'stream']) }}" target="_blank">Ver online</a>
             @endslot
             @slot('tableTitles')
                 <th></th>

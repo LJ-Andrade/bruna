@@ -8,6 +8,7 @@ use App\Cart;
 use App\Customer;
 use App\Traits\CartTrait;
 use PDF;
+use Excel;
 
 class OrdersController extends Controller
 {
@@ -79,61 +80,37 @@ class OrdersController extends Controller
     }
     
 
+    public function exportOrderXls($id)
+    {   
+        $order = $this->calcCartData(Cart::find($id));
+        Excel::create('Bruna-Pedido-'.$id, function($excel) use($order){
+            $excel->sheet('Listado', function($sheet) use($order) { 
+                $sheet->getDefaultStyle()->getFont()->setName('Arial');
+                $sheet->getDefaultStyle()->getFont()->setSize(12);
+                $sheet->getColumnDimension()->setAutoSize(true);
+                $sheet->loadView('vadmin.orders.invoiceXls', 
+                compact('order'));
+            });
+        })->export('xls');         
+    }
 
-    // public function show($id)
-    // {
-    //     dd($id);
-    //     $order = Cart::find($id);
-    //     $customer = Customer::find($order->customer_id);
-        
-    //     $prices = $this->calcCartTotalPrice($order);
-        
-    //     $subtotal = $prices['subtotal'];
-    //     $total = $prices['total'];
+    public function exportOrderCsv($id)
+    {   
+        $order = $this->calcCartData(Cart::find($id));
+        $filename = 'Bruna-Pedido-'.$id.'-Cliente-'.$order['rawdata']->customer->name.' '.$order['rawdata']->customer->surname;
+        Excel::create($filename, function($excel) use($order){
+            $excel->sheet('Listado', function($sheet) use($order) { 
+                $sheet->getDefaultStyle()->getFont()->setName('Arial');
+                $sheet->getDefaultStyle()->getFont()->setSize(12);
+                $sheet->getColumnDimension()->setAutoSize(true);
+                $sheet->getRowDimension(2)->setRowHeight(20);
+                $sheet->loadView('vadmin.orders.invoiceXls', 
+                compact('order'));
+            });
+        })->export('csv');         
+    }
 
-    //     return view('vadmin.orders.show')
-    //         ->with('order', $order)
-    //         ->with('subtotal', $subtotal)
-    //         ->with('total', $total)
-    //         ->with('customer', $customer);
-    // }
     
-    // public function calcCartTotalPrice($cart)
-    // {
-
-    //     $articlesPrice = 0;
-    //     $shippingCost = 0;
-    //     $paymentCost = 0;
-    //     $total = 0;
-        
-    //     // Sum all article prices
-    //     foreach($cart->details as $detail)
-    //     {
-    //         // Check discounts
-    //         if($detail->discount != '0'){
-    //             $articlesPrice += calcValuePercentNeg($detail->price, $detail->discount);
-    //         } else {
-    //             $articlesPrice += $detail->price;
-    //         }
-    //     }
-
-    //     $subtotal = $articlesPrice;
-        
-    //     // Check for shipping cost
-    //     if($cart->shipping_id != null){
-    //         $shippingCost = $cart->shipping->price;
-    //     }
-
-    //     // Check for payment cost
-    //     if($cart->payment_method_id != null){
-    //         $paymentCost  = calcValuePercentNeg($subtotal, $cart->payment->percent);
-    //     }
-        
-    //     $total = $subtotal + $shippingCost + $paymentCost;
-              
-    //     return array("subtotal" => $subtotal, "total" => $total);
-    // }
-
     /*
     |--------------------------------------------------------------------------
     | UPDATE

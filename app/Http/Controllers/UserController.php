@@ -74,7 +74,6 @@ class UserController extends Controller
         $pdf = PDF::loadView('vadmin.users.invoice', array('items' => $items));
         $pdf->setPaper('A4', 'landscape');
         return $pdf->download('listado-de-usuarios.pdf');
-        
     }
 
     public function exportXls($params)

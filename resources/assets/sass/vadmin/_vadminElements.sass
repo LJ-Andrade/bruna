@@ -710,6 +710,18 @@ input:checked + .slider:before
 	border-radius: 10px
 	margin-bottom: 5px
 
+.badge
+	border-radius: 5px
+	color: #fff
+	@include transition(0.2s)
+	&:hover
+		cursor: pointer
+		filter: brightness(1.1)
+.badge-blue
+	background-color: $blue
+.badge-green
+	background-color: $green
+	
 .softhr
 	border-top: 1px solid #E4E4E4
 
