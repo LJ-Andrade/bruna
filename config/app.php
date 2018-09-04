@@ -187,12 +187,11 @@ return [
         // MercadoPago Api
         SantiGraviano\LaravelMercadoPago\Providers\MercadoPagoServiceProvider::class,
         // Debug Bar
-        Barryvdh\Debugbar\ServiceProvider::class,
+        // Barryvdh\Debugbar\ServiceProvider::class,
         // PDF Export
         Barryvdh\DomPDF\ServiceProvider::class,
         // Excel Export
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        
     ],
 
     /*
@@ -243,7 +242,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         // Custom Packages
         // DebugBar
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        //'Debugbar' => Barryvdh\Debugbar\Facade::class,
         // Mercado Pago
         'MP' => SantiGraviano\LaravelMercadoPago\Facades\MP::class,
         // PDF Export
