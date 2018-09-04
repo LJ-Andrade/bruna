@@ -3,26 +3,38 @@
 		<div class="navbar-header">
 			<ul class="nav navbar-nav">
 				<li class="nav-item mobile-menu hidden-md-up float-xs-left">
-					<a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5 font-large-1"></i></a></li>
+					<a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5 font-large-1"></i></a>
+				</li>
 				<li class="nav-item"><a href="{{ url('vadmin') }}" class="navbar-brand nav-link">
 					<img alt="Vadmin" src="{{ asset('vadmin-ui/app-assets/images/logo/app-logo.png') }}" 
 					data-expand="{{ asset('vadmin-ui/app-assets/images/logo/app-logo.png') }}" 
 					data-collapse="{{ asset('vadmin-ui/app-assets/images/logo/app-logo-small.png') }}" class="brand-logo"></a></li>
-				<li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container"><i class="icon-ellipsis pe-2x icon-icon-rotate-right-right"></i></a></li>
+				<li class="nav-item hidden-md-up float-xs-right">
+					<a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container">
+						<i class="icon-ellipsis pe-2x icon-icon-rotate-right-right"></i>
+					</a>
+				</li>
 			</ul>
 		</div>
 		<div class="navbar-container content container-fluid">
 			<div id="navbar-mobile" class="collapse navbar-toggleable-sm">
 				<ul class="nav navbar-nav">
-					<li class="nav-item hidden-sm-down"><a  id="ToggleMenu"   class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5"></i></a></li>
+					<li class="nav-item hidden-sm-down">
+						<a id="ToggleMenu" class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5"></i></a>
+					</li>
 					{{-- <li class="nav-item hidden-sm-down"><a href="#" class="nav-link nav-link-expand"><i class="ficon icon-expand2"></i></a></li> --}}
 				</ul>
 				<ul class="nav navbar-nav float-xs-right">
 					{{--  Messages  --}}
-					<li class="dropdown dropdown-notification nav-item"><a href="#" data-toggle="dropdown" class="nav-link nav-link-label"><i class="ficon icon-mail6"></i>
-						@if($newMessages->count() > 0) 
-						<span class="tag tag-pill tag-default tag-info tag-default tag-up">
-						<span class="MessagesAmmount">{{ $newMessages->count() }} </span></span>@endif</a>
+					<li class="dropdown dropdown-notification nav-item">
+						<a href="#" data-toggle="dropdown" class="nav-link nav-link-label">
+							<i class="ficon icon-mail6"></i>
+							@if($newMessages->count() > 0) 
+								<span class="tag tag-pill tag-default tag-info tag-default tag-up">
+									<span class="MessagesAmmount">{{ $newMessages->count() }} </span>
+								</span
+							>@endif
+						</a>
 						<ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
 							<li class="dropdown-menu-header">
 								<h6 class="dropdown-header m-0">
@@ -59,18 +71,36 @@
 									<div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 269px;"></div>
 								</div>  --}}
 							</li>
-							<li class="dropdown-menu-footer"><a href="javascript:void(0)" class="setAllMessagesAsReaded dropdown-item text-muted text-xs-center">Marcar todos como leídos</a></li>
+							<li class="dropdown-menu-footer">
+								<a href="javascript:void(0)" class="setAllMessagesAsReaded dropdown-item text-muted text-xs-center">
+									Marcar todos como leídoMarcar todos como leídos
+								</a>
+							</li>
 						</ul>
 					</li>
 					{{--  Account  --}}
-					<li class="dropdown dropdown-user nav-item"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link"><span class="avatar avatar-online"><img src="{{ asset('images/users/'.Auth::guard('user')->user()->avatar ) }}" alt="avatar" class="CheckImg"><i></i></span><span class="user-name">{{ Auth::guard('user')->user()->name }}</span></a>
-						<div class="dropdown-menu dropdown-menu-right"><a href="{{ url('vadmin/users/'.Auth::guard('user')->user()->id) }}"  class="dropdown-item"><i class="icon-head"></i> Perfil</a><a href="#" class="dropdown-item"><i class="icon-mail6"></i> Mensajes (<span class="MessagesAmmount">{{ $newMessages->count()}}</span>)</a><a href="#" class="dropdown-item">
-							<div class="dropdown-divider"></div>
-							<a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-								<i class="icon-power3"></i> Desconectar
-								<form id="logout-form" action="{{ route('vadmin.logout') }}" method="POST" style="display: none;">
-									{{ csrf_field() }}
-								</form>	
+					<li class="dropdown dropdown-user nav-item">
+						<a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link">
+							<span class="avatar avatar-online">
+								<img src="{{ asset('images/users/'.Auth::guard('user')->user()->avatar ) }}" alt="avatar" class="CheckImg">
+							</span>
+							<span class="user-name">{{ Auth::guard('user')->user()->name }}</span>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right">
+							<a href="{{ url('vadmin/users/'.Auth::guard('user')->user()->id) }}"  class="dropdown-item">
+								<i class="icon-head"></i> Perfil
+							</a>
+							<a href="{{ url('vadmin/mensajes_recibidos/*') }}" class="dropdown-item">
+								<i class="icon-mail6"></i> Mensajes (<span class="MessagesAmmount">{{ $newMessages->count()}}</span>)
+							</a>
+							<a href="#" class="dropdown-item">
+								<div class="dropdown-divider"></div>
+								<a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+									<i class="icon-power3"></i> Desconectar
+									<form id="logout-form" action="{{ route('vadmin.logout') }}" method="POST" style="display: none;">
+										{{ csrf_field() }}
+									</form>	
+								</a>
 							</a>
 						</div>
 					</li>

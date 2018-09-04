@@ -28,16 +28,30 @@ class ArticlesController extends Controller
         $code     = $request->get('code');
         $name     = $request->get('name');
         $category = $request->get('category');
-        
-        if(isset($code) || isset($name) || isset($category))
+        $order    = $request->get('orden');
+        $p = 20;
+        $rowName = 'stock';
+        if(!isset($order))
         {
-            $articles = CatalogArticle::search($code, $name, $category)->orderBy('id', 'ASC')->paginate(10); 
-        } else {
-            $articles = CatalogArticle::orderBy('id', 'DESCC')->paginate(10);    
+            $rowName = 'id';
+            $order = 'ASC';
+        }
+
+        if(isset($code))
+        {
+            $articles = CatalogArticle::where('code', 'LIKE', "%".$code."%")->paginate($p);
+        }
+        elseif(isset($name) || isset($category))
+        {
+            $articles = CatalogArticle::search($name, $category)->orderBy($rowName, $order)->paginate($p);
+        } 
+        else 
+        {
+            $articles = CatalogArticle::orderBy($rowName, $order)->paginate($p);
         }
 
         //$cats = CatalogCategory::orderBy('id','ASC')->get();
-        $categories = CatalogCategory::orderBy('id','ASC')->pluck('name','id');
+        $categories = CatalogCategory::orderBy('id', 'ASC')->pluck('name','id');
 
         return view('vadmin.catalog.index')
             ->with('articles', $articles)

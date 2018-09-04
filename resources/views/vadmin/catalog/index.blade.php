@@ -35,8 +35,18 @@
 
 {{-- CONTENT --}}
 @section('content')
+{{-- {{dd($articles)}} --}}
 	<div class="list-wrapper">
 		{{-- Search --}}
+		<div class="row inline-links">
+			<span>
+				<b>Órden:</b> 
+				<a href="{{ route('catalogo.index', ['orden' => 'ASC']) }}">Stock Bajo</a> | 
+				<a href="{{ route('catalogo.index', ['orden' => 'DESC']) }}">Stock Alto</a>
+				{{-- Not Implemented
+				<a href="{{ route('catalogo.index', ['orden' => 'limitados']) }}" >Menos que el mínimo</a> --}}
+			</span>
+		</div>
 		<div class="row">
 			@component('vadmin.components.list')
 				@slot('actions')
@@ -57,6 +67,7 @@
 						<th>Cód.</th>
 						<th>Título</th>
 						<th>Stock</th>
+						<th>Stock Min.</th>
 						<th>Precio</th>
 						<th>% Oferta</th>
 						<th>Precio May.</th>
@@ -65,6 +76,7 @@
 					@endslot
 					@slot('tableContent')
 						@foreach($articles as $item)
+							
 							<tr id="ItemId{{$item->id}}">
 								<td class="mw-50">
 									<label class="CheckBoxes custom-control custom-checkbox list-checkbox">
@@ -86,11 +98,18 @@
 									<a href="{{ url('vadmin/catalogo/'.$item->id) }}">{{ $item->name }}</a>
 								</td>
 								{{--  STOCK --}}
-								<td class="with-notification">
+								<td class="with-notification mw-50">
 									<input class="editable-input mw-50" onfocus="event.target.select()" type="number" value="{{ $item->stock }}" min="0">
 									<div class="editable-input-data " data-id="{{ $item->id }}" 
-									data-route="update_catalog_field" data-field="stock" data-type="int" data-action="reload" data-value=""></div>
-									@if($item->stock < $item->stockmin) <div class="cell-notification"><i class="icon-notification"></i></div> @endif
+											data-route="update_catalog_field" data-field="stock" data-type="int" data-action="reload" data-value=""></div>
+											@if($item->stock < $item->stockmin) <div class="cell-notification"><i class="icon-notification"></i></div> @endif
+									</div>
+								</td>	
+								<td class="mw-50">
+									<input class="editable-input mw-50" onfocus="event.target.select()" type="number" value="{{ $item->stockmin }}" min="0">
+									<div class="editable-input-data " data-id="{{ $item->id }}" 
+										data-route="update_catalog_field" data-field="stockmin" data-type="int" data-action="reload" data-value=""></div>	
+									</div>
 								</td> 
 								{{-- PRICE --}}
 								<td>
@@ -146,10 +165,12 @@
 				@endslot
 			@endcomponent
 			{{--  Pagination  --}}
-			@if(isset($_GET['title']))
-				{!! $articles->appends(['title' => $_GET['title']])->render() !!}
+			@if(isset($_GET['name']))
+				{!! $articles->appends(['name' => $_GET['name']])->render() !!}
 			@elseif(isset($_GET['category']))
 				{!! $articles->appends(['category' => $_GET['category']])->render() !!}
+			@elseif(isset($_GET['code']))
+				{!! $articles->appends(['code' => $_GET['code']])->render() !!}
 			@else
 				{!! $articles->render() !!}
 			@endif
@@ -165,10 +186,10 @@
 
 @section('custom_js')
 	<script>
-		function selectText(e)
-		{
-			console.log(e);
-			$(this).select();
-		}
+		// function selectText(e)
+		// {
+		// 	console.log(e);
+		// 	$(this).select();
+		// }
 	</script>
 @endsection

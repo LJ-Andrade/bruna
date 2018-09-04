@@ -1,6 +1,6 @@
 <div id="SearchFilters" class="search-filters">
     <div class="row">
-        {!! Form::open(['id' => 'SearchForm', 'method' => 'GET', 'route' => 'catalogo.index', 'class' => 'col-md-3 col-xs-12 pad0', 'role' => 'search']) !!} 
+        {!! Form::open(['id' => 'SearchForm', 'method' => 'GET', 'route' => 'catalogo.index', 'class' => 'col-md-2 col-xs-12 pad0', 'role' => 'search']) !!} 
             <div class="form-control">
                 {!! Form::label('code', 'Buscar por código') !!}
                 <div class="input-group">
