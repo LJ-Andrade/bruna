@@ -12,6 +12,7 @@ use App\GeoProv;
 use App\GeoLoc;
 use Mail;
 use App\Mail\SendMail;
+use App\Mail\SendSupportMail;
 
 
 class VadminController extends Controller
@@ -210,22 +211,33 @@ class VadminController extends Controller
         }
     }
 
-    public function sendMail()
+    public function sendMail(Request $request)
     {
-        //dd('Ok, estoy en mail');
         $subject = 'Asunto de la notificación';
         $content = 'Pruebita';
 
-        try {
+        try {  
             Mail::to(APP_EMAIL_1)->send(new SendMail($subject, $content));
 
             return redirect('vadmin')->with('message','Mail Enviado');
         } catch (\Exception $e) {
             dd($e);
-            return view('vadmin.vadmin')->with('error', 'Ha ocurrido un error '. $e);
+            return back()->with('error', 'Ha ocurrido un error '. $e);
         }
     }
 
+    public function sendSupportMail(Request $request)
+    {
+        $subject = "**Vadmin | Consulta por soporte técnico **";
+        try {  
+            Mail::to(APP_EMAIL_1)->send(new SendSupportMail($subject, $request->all()));
+            return back()->with('message','Gracias por su paciencia. Pronto nos pondremos en contacto.');
+        } catch (\Exception $e) {
+            dd($e);
+            return back()->with('error', 'Ha ocurrido un error '. $e);
+        }
+
+    }
     /*
     |--------------------------------------------------------------------------
     | GENERIC FUNCTIONS

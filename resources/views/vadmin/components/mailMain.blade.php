@@ -6,7 +6,10 @@
         @endcomponent
     @endslot
 
-    {{ $content }}
+    Nombre: {{ $content['fullname']}}<br>
+    E-Mail: {{ $content['email']}}<br>
+    Teléfono: {{ $content['contact']}}<br>
+    Mensaje: {{ $content['comment']}}<br>
 
     @slot('subcopy')
         @component('mail::subcopy')
@@ -18,7 +21,7 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            Mensaje enviado desde el sistema Vadmin - <?php echo date('y') ?>
+            Mensaje enviado desde el sistema Vadmin ?>
         @endcomponent
     @endslot
 @endcomponent

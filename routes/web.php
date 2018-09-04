@@ -86,7 +86,7 @@ Route::get('tienda/proceso', function(){ return view('store.proceso'); })->middl
 
 Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function() {    
     Route::get('articulo/{id}', 'Store\StoreController@show');
-
+    
     // Customer Actions
     Route::group(['middleware'=> 'customer'], function() {
         // User Avatar
@@ -114,7 +114,7 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
         Route::post('updatePassword', ['as' => 'store.updatePassword', 'uses' => 'Store\CustomerController@updatePassword']);
         
     });
-
+    
     Route::post('addArticleToFavs', ['as' => 'customer.addArticleToFavs', 'uses' => 'Store\StoreController@addArticleToFavs']);
     Route::post('removeArticleFromFavs', ['as' => 'customer.removeArticleFromFavs', 'uses' => 'Store\StoreController@removeArticleFromFavs']);
     Route::post('removeAllArticlesFromFavs', ['as' => 'customer.removeAllArticlesFromFavs', 'uses' => 'Store\StoreController@removeAllArticlesFromFavs']);
@@ -127,10 +127,13 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
 |--------------------------------------------------------------------------
 */
 
-Route::get('sendmail', 'VadminController@sendMail');
-
 // Functions that all users can access
 Route::group(['prefix' => 'vadmin'], function(){
+    
+    
+    Route::post('sendMail', ['as' => 'vadmin.sendMail', 'uses' => 'VadminController@sendMail']);
+    Route::post('sendSupportMail', ['as' => 'vadmin.sendSupportMail', 'uses' => 'VadminController@sendSupportMail']);
+
     Route::post('updateAvatar', 'UserController@updateAvatar');
     // -- SUPPORT --
     Route::get('docs', function(){ return view('vadmin.support.docs'); });
@@ -182,7 +185,7 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'admin'], function(){
     Route::resource('categories', 'Portfolio\CategoriesController');
     Route::resource('tags', 'Portfolio\TagsController');
     Route::post('deleteArticleImg/{id}', 'Portfolio\ArticlesController@deleteArticleImg');
-
+    
     // -- CATALOG --
     Route::resource('catalogo', 'Catalog\ArticlesController');
     Route::post('update_catalog_field', 'Catalog\ArticlesController@updateField');
@@ -209,7 +212,7 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'admin'], function(){
     Route::resource('orders', 'Store\OrdersController');
     Route::get('descargar-comprobante/{id}/{action}', 'Store\OrdersController@downloadInvoice');
     Route::get('super-vadmin', 'VadminController@superVadmin');
-
+    
 });
 
 /*
@@ -220,7 +223,7 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'admin'], function(){
 
 // Get Localities
 Route::get('getGeoLocs/{id}', 'SharedController@getGeoLocs');
-    
+
 /*
 |--------------------------------------------------------------------------
 | Destroy
@@ -246,6 +249,7 @@ Route::prefix('vadmin')->middleware('admin')->group(function () {
     Route::post('destroy_carts', 'Store\CartsController@destroy');
     
 });
+
 
 /*
 |--------------------------------------------------------------------------

@@ -28,7 +28,8 @@
                                 Detallenos el evento y nos pondremos en contacto lo antes posible.
                             </p>
                         </div>
-                        <form class="form">
+                        <form class="form" action="{{ route('vadmin.sendSupportMail') }}" method="POST">
+                            {{ csrf_field() }}
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-md-4">
