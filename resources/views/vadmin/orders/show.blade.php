@@ -128,7 +128,7 @@
                     <b>Nombre de Usuario:</b> {{ $customer->username }} <br>
                     <b>E-Mail:</b> {{ $customer->email }} <br>
                     <b>Dirección:</b> {{ $customer->address }} <br>
-                    <b>Provincia:</b> @if(!$customer->geoprov)) 
+                    <b>Provincia:</b> @if(!is_null($customer->geoprov)) 
                                         {{ $customer->geoprov->name }}
                                         @else
                                         <span class="text-danger">* Debe completar este dato</span>
