@@ -22,7 +22,7 @@ trait CartTrait {
         $discount = calcPercent($cartSubTotal, $cart->order_discount);
         // Fixed Costs
         $paymentCost = calcPercent($cartSubTotal, $cart->payment_percent);
-	$cartSubTotal = okNum($cartSubTotal);
+	    $cartSubTotal = okNum($cartSubTotal);
         $cartPreTotal = $cartSubTotal + $paymentCost + $cart->shipping_price;        
         
         $cartTotal = $cartPreTotal - $discount;        

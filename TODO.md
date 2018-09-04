@@ -60,3 +60,14 @@ En Vadmin precios mayoristas y min dependiendo customer
 
 (RESUELTO)
 En store checkout no se pueden borrar items
+
+
+Dev Permisos 
+//---------------------------------------------
+1 - 
+sudo chown -R javzero.www-data CARPETA
+2 - 
+sudo chown -R $javzero:www-data storage;
+sudo chown -R $javzero:www-data bootstrap/cache;
+sudo chmod -R 775 storage;
+sudo chmod -R 775 bootstrap/cache;

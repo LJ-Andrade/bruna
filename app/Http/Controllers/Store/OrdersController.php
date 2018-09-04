@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Cart;
 use App\Customer;
 use App\Traits\CartTrait;
+use PDF;
 
 class OrdersController extends Controller
 {
@@ -50,6 +51,34 @@ class OrdersController extends Controller
             ->with('order', $order)
             ->with('customer', $customer);
     }
+
+
+    
+    // DOWNLOAD INVOICE PDF
+    public function downloadInvoice($id, $action)
+    {
+        // Return Options
+        // return $pdf->dowload($filename.'.pdf');
+        // return $pdf->stream($filename.'.pdf');
+        $order = Cart::find($id);
+        if($order != null){
+            $cart = $this->calcCartData($order);
+            $pdf = PDF::loadView('store.checkout-invoice', compact('order', 'cart'))->setPaper('a4', 'portrait');
+            $filename = 'Comprobante-Pedido-N-'.$order->id;
+            if($action == 'stream')
+            {
+                return $pdf->stream($filename.'.pdf');
+            } else {
+                return $pdf->download($filename.'.pdf');
+            }
+            die();
+
+        } else {
+            return redirect()->route('store')->with('message','Estás intentando una acción ilegal...');
+        }
+    }
+    
+
 
     // public function show($id)
     // {

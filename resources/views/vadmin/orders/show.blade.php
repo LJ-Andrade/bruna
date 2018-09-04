@@ -44,8 +44,8 @@
                 </p>
             @endslot
             @slot('actions')
-                Comprobante: <a href="{{ url('tienda/descargar-comprobante', [$order['rawdata']->id, 'stream']) }}" target="_blank">Ver</a> | 
-                <a href="{{ url('tienda/descargar-comprobante', [$order['rawdata']->id, 'download']) }}" target="_blank">Descargar</a>
+                Comprobante: <a href="{{ url('vadmin/descargar-comprobante', [$order['rawdata']->id, 'stream']) }}" target="_blank">Ver</a> | 
+                <a href="{{ url('vadmin/descargar-comprobante', [$order['rawdata']->id, 'download']) }}" target="_blank">Descargar</a>
             @endslot
             @slot('tableTitles')
                 <th></th>

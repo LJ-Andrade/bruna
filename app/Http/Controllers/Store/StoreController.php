@@ -21,7 +21,6 @@ use App\CartItem;
 use App\CatalogCoupon;
 use Carbon\Carbon;
 use PDF;
-use MP;
 use App\Traits\CartTrait;
 use Illuminate\Support\Facades\View;
 
@@ -300,6 +299,7 @@ class StoreController extends Controller
     // DOWNLOAD INVOICE PDF
     public function downloadInvoice($id, $action)
     {
+        
         // Return Options
         // return $pdf->dowload($filename.'.pdf');
         // return $pdf->stream($filename.'.pdf');

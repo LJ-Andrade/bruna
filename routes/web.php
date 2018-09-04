@@ -207,7 +207,7 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'admin'], function(){
     
     // Carts (Orders) Management
     Route::resource('orders', 'Store\OrdersController');
-
+    Route::get('descargar-comprobante/{id}/{action}', 'Store\OrdersController@downloadInvoice');
     Route::get('super-vadmin', 'VadminController@superVadmin');
 
 });
@@ -264,8 +264,5 @@ Route::get('500', ['as' => '500', 'uses' => 'ErrorController@fatal']);
 Route::get('/vadmin/clients', function(){
     return view('vadmin.dev.clients');
 });
-
-Route::middleware('auth:api')->get('/user', function(Request $request){
-    return $request->user();
-});
+//->middleware('auth');
 
