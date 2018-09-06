@@ -71,7 +71,6 @@
 		</div>
 		<div id="Error"></div>
     </div>
-    <i class="fas fa-file-pdf"></i>
 @endsection
 
 @section('custom_js')
