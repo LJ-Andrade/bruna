@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'vadmin@brunaindumentaria.com.ar'),
-        'name' => env('MAIL_FROM_NAME', 'Vadmin'),
+        'address' => env('MAIL_FROM_ADDRESS', 'info@brunaindumentaria.com.ar'),
+        'name' => env('MAIL_FROM_NAME', 'Bruna'),
     ],
 
     /*

@@ -23,7 +23,7 @@
         {{ csrf_field() }}
         <input type="file" name="avatar" class="Hidden" id="CustomerAvatarInput" required>
         <input type="hidden" name="id" value="{{ Auth::guard('customer')->user()->id }}">
-        <input type="submit" class="btn btn-outline-primary btn-sm Hidden" style="margin-left: 20px" id="ConfirmChange" value="Confirmar">
+        <button type="submit" class="btn btn-outline-primary btn-sm Hidden" style="margin-left: 20px" id="ConfirmChange"><i class="fa fa-check"></i> Confirmar cambio</button>
     {!! Form::close() !!}  
 </aside>
 

@@ -5,8 +5,6 @@ SISTEMA GEO
 Tamaño de imágenes
 750x500
 
-
-
 Configurar la actualización de estado de portfolio. updateStatus es ahora una función generica.
 
 BRUNA
@@ -21,10 +19,12 @@ Errores - Fallas - Bugs
 //---------------------------------------------------------
 
 Dar mensaje cuando se agrega item a carrom de compra
+Algunas páginas de error muestran el menu de Santa Osadía (roto)
 
-
-
-
+Preguntas Bruna
+//--------------------------------------------------------
+- Cada cuando se recupera el stock que está en carros de compra activos ?
+-
 
 
 RESUELTOS
