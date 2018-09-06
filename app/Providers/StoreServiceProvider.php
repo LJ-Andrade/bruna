@@ -27,6 +27,7 @@ class StoreServiceProvider extends ServiceProvider
             'store.customer-wishlist',
             'store.customer-orders',
             'store.customer-order',
+            'store.checkout-success',
             'store.show',
             'store.cartdetail',
             'store.wishlist'

@@ -482,6 +482,7 @@ ul.pagination
 		padding-right: 40px
 		padding-bottom: 40px
 		position: relative
+		min-height: 430px
 		.title-desktop
 		.fav-container
 			position: absolute
@@ -492,13 +493,32 @@ ul.pagination
 				color: $red
 		.back-btn
 			position: absolute
-			bottom: 10px
+			bottom: -30px
 			right: 12px
 			font-size: 1rem
 			color: #000
 
 		h2
 			padding-top: 0
+	.descriptions
+		font-size: 1.1rem
+		.item
+			white-space: nowrap
+			.title
+				float: left
+				min-width: 60px
+				font-family: $font2
+
+			.prop
+	.price-and-stock
+		position: absolute
+		bottom: 10px
+		left: 0
+		.stock
+			margin-bottom: 15px
+		.price
+			input
+				max-width: 100px
 
 @media (max-width: 575px)
 	.product-show
@@ -660,7 +680,6 @@ ul.pagination
 @media (max-width: 991px)
 	.sidebar
 		max-width: 100%
-
 
 
 //////////////////////////////////////

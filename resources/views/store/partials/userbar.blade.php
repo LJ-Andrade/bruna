@@ -43,7 +43,7 @@
                                 <div class="column text-right"><span class="text-lg text-medium">$ {{ $activeCart['cartSubTotal'] }} &nbsp;</span></div>
                             </div>
                             <div class="toolbar-dropdown-group">
-                                <div class="column"><a class="btn btn-sm btn-block btn-main" href="{{ route('store.checkout') }}">Ir al carro</a></div>
+                                <div class="column"><a class="btn btn-sm btn-block btn-main" href="{{ route('store.checkout') }}"><i class="fas fa-shopping-cart"></i> Ir al carro</a></div>
                             </div>
                         </div>
                     </div>

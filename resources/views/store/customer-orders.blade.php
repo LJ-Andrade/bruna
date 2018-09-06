@@ -49,7 +49,23 @@
                 </div>
                 <hr>
             @if($activeCart != null)
-                <div class="column"><a class="btn btn-sm btn-block btn-secondary" href="{{ route('store.checkout') }}">Ver carro de compras activo</a></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="column"><a class="btn btn-sm btn-block btn-primary" href="{{ route('store.checkout') }}"> <i class="fas fa-shopping-cart"></i> Ver carro de compras activo</a></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="column">
+                            {!! Form::open(['route' => 'store.removeCartReturnStock', 'method' => 'POST']) !!}	
+                                {{ csrf_field() }}
+                                <input type="hidden" name="itemid" value="{{ $activeCart['rawdata']->id }}">
+                                <button type="submit" class="btn btn-sm btn-block btn-danger">
+                                    <i class="far fa-trash-alt"></i> Eliminar carro activo
+                                </button>
+                            {!! Form::close() !!}
+
+                        </div>
+                    </div>
+                </div>
             @endif
             </div>
 		</div>

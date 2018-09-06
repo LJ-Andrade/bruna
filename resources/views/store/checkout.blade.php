@@ -7,7 +7,6 @@
 			<div class="col-xl-9 col-lg-8">
 				<h3>Carro de Compras | Checkout</h3> 
 				<p>Pedido N: #{{ $activeCart['rawdata']->id }}</p>
-
 				{{-- Checkout Data Missing Messages --}}
 				{{-- Missing shipping method Message --}}
 				@if(session('error')=='missing-shipping')
@@ -59,9 +58,13 @@
 														</a>
 														<div class="product-info">
 															<h4 class="product-title">
-																<a href="shop-single.html">{{ $item->article->name }}<small>{{ $item->article->size }}</small></a>
+																<a href="{{ url('tienda/articulo/'.$item->article->id) }}">{{ $item->article->name }}<small>{{ $item->article->size }}</small></a>
 															</h4>
-															<span><em>Código:</em> #{{ $item->id }}</span><span><em>Talle: {{ $item->size }}</em></span>
+															
+															<span><em>Código:</em> #{{ $item->article->code }}</span>
+															<span><em>Talle: @foreach($item->article->atribute1 as $atribute) {{ $atribute->name }} @endforeach</em></span>
+															<span><em>Color: {{ $item->color }}</em></span>
+															<span><em>Textil: {{ $item->textile }}</em></span>
 														</div>
 													</div>
 												</td>
@@ -87,9 +90,12 @@
 													@endif
 												@endif
 												<td>{{ $item->quantity }}</td>
+												{{-- REMOVE ITEMS FROM CART --}}
 												<td class="text-center">
-													{!! Form::open(['route' => 'store.removefromcart', 'method' => 'POST']) !!}	
+													{!! Form::open(['route' => 'store.removeFromCart', 'method' => 'POST']) !!}	
+														{{ csrf_field() }}
 														<input type="hidden" name="itemid" value="{{ $item->id }}">
+														<input type="hidden" name="quantity" value="{{ $item->quantity }}">
 														<button type="submit" class="icon-only-btn"><i class="far fa-trash-alt"></i></button>
 													{!! Form::close() !!}
 												</td>
@@ -225,20 +231,7 @@
 
 
 @section('custom_js')
-	<script>
-		// Check for locality
-		//$(document).ready(function(){
-		//	getGeoLocs("{{ Auth::guard('customer')->user()->geoprov_id }}");
-		//	$('.GeoProvSelect').on('change', function(){
-		//		let prov_id = $(this).val();
-		//		getGeoLocs(prov_id);
-		//	});
-		//});
-
-		//$('#checkout-accordion').collapse({
-		//	toggle: false
-		//})
-		
+	<script>	
 		$( "form" ).on('submit', function() {
 			$('#full-loader').removeClass('Hidden');
 			return true;
@@ -248,7 +241,5 @@
 			$('#full-loader').removeClass('Hidden');
 			return true;
 		});
-
-		
 	</script>
 @endsection

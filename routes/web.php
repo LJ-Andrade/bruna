@@ -94,14 +94,16 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
         
         // Cart
         Route::post('addtocart', ['as' => 'store.addtocart', 'uses' => 'Store\CartItemController@store']);
-        Route::post('removefromcart', ['as' => 'store.removefromcart', 'uses' => 'Store\CartItemController@destroy']);
+        Route::post('removeFromCart', ['as' => 'store.removeFromCart', 'uses' => 'Store\CartItemController@destroy']);
+        Route::post('eliminar-carro', ['as' => 'store.removeCartReturnStock', 'uses' => 'Store\CartsController@removeCartReturnStock']);
+        // Checkout
         Route::get('checkout', ['as' => 'store.checkout', 'uses' => 'Store\StoreController@checkout']);
         Route::post('checkear-cupon', ['as' => 'store.validateAndSetCoupon', 'uses' => 'Store\StoreController@validateAndSetCoupon']);
         Route::post('updateCartPayment', ['as' => 'store.updatePaymentAndShipping', 'uses' => 'Store\CartsController@updatePaymentAndShipping']);
         Route::post('finalizando-compra', ['as' => 'store.processCheckout', 'uses' => 'Store\StoreController@processCheckout']);
         Route::get('finalizando-compra', 'Store\StoreController@index'); 
         Route::get('descargar-comprobante/{id}/{action}', 'Store\StoreController@downloadInvoice');
-        //Route::post('mp-connect', ['as' => 'store.getCreatePreference', 'uses' => 'MercadoPagoController@getCreatePreference']);
+        // Route::post('mp-connect', ['as' => 'store.getCreatePreference', 'uses' => 'MercadoPagoController@getCreatePreference']);
         Route::post('mp-connect', ['as' => 'store.getCreatePreference', 'uses' => 'Store\StoreController@mpConnect']);
         // Sections    
         Route::get('cuenta', ['as' => 'store.customer-account', 'uses' => 'Store\StoreController@customerAccount']);
@@ -112,7 +114,6 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
         Route::post('updateCustomer', ['as' => 'store.updateCustomer', 'uses' => 'Store\CustomerController@update']);
         Route::get('updatePassword', ['as' => 'store.updatePassword', 'uses' => 'Store\StoreController@updatePassword']);
         Route::post('updatePassword', ['as' => 'store.updatePassword', 'uses' => 'Store\CustomerController@updatePassword']);
-        
     });
     
     Route::post('addArticleToFavs', ['as' => 'customer.addArticleToFavs', 'uses' => 'Store\StoreController@addArticleToFavs']);
@@ -252,7 +253,7 @@ Route::prefix('vadmin')->middleware('admin')->group(function () {
     Route::post('destroy_shippings', 'Catalog\ShippingsController@destroy');
     Route::post('destroy_payments', 'Catalog\PaymentsController@destroy');
     Route::post('destroy_carts', 'Store\CartsController@destroy');
-    
+    Route::post('destroy_cartitem', 'Store\CartsController@destroy');
 });
 
 
@@ -274,4 +275,15 @@ Route::get('/vadmin/clients', function(){
     return view('vadmin.dev.clients');
 });
 //->middleware('auth');
+
+// Render Mails Test
+// use App\Cart;
+// Route::get('/mail', function(){
+//     $cart = Cart::findOrFail(29);  
+//     // Bussiness
+//     //return new App\Mail\SendMail('Compra Recibida', 'Checkout', $cart);
+//     // Customer
+//     return new App\Mail\SendMail('Bruna Indumentaria | Compra recibida !', 'CustomerCheckout', $cart);
+// });
+
 

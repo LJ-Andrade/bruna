@@ -113,13 +113,16 @@ Más helpers en /app/Http/Helpers.php
 ### Funcionalidades genéricas
 Para llamar modelo dinámicamente usar:
 
-> public function dinamicModel($model, $id)
+> public function dynamicModel($model, $id)
   {
     $model_name = '\\App\\'.$model;
     $model = new $model_name;
     // Query
     $item = $model->findOrFail($id);
   }
+
+> updateCartItemStock(CART ID, REQUESTED QUANTITY)
+If is stock discount must be negative value
 
 
 

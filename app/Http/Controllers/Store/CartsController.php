@@ -128,25 +128,48 @@ class CartsController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function destroy(Request $request)
-    {   
-        $ids = json_decode('['.str_replace("'",'"',$request->id).']', true);
-    
-        try {
-            foreach ($ids as $id) {
-                $item = Cart::find($id);
-                $item->delete();
+    public function removeCartReturnStock(Request $request)
+    {
+        $cart = Cart::find($request->itemid);
+        try
+        {
+            foreach($cart->items as $item){
+                $this->updateCartItemStock($item->article->id, $item->quantity);
             }
-            return response()->json([
-                'success'   => true,
-            ]); 
-        }  catch (\Exception $e) {
-            return response()->json([
-                'success'   => false,
-                'error'    => 'Error: '.$e
-            ]);    
-        } 
+            $cart->delete();
+        }
+        catch (\Exception $e)
+        {
+            dd($e->getMessage());
+        }
+        return back()->with('message', 'Carro de compras eliminado');
     }
+
+
+    // public function destroy(Request $request)
+    // {   
+        
+    //     $ids = json_decode('['.str_replace("'",'"',$request->id).']', true);
+    //     try 
+    //     {
+    //         foreach ($ids as $id) {
+    //             $item = Cart::find($id);
+                
+    //             // $this->updateCartItemStock($article->id, -$request->quantity);
+    //             $item->delete();
+    //         }
+    //         return response()->json([
+    //             'success'   => true,
+    //         ]); 
+    //     }  
+    //     catch (\Exception $e)
+    //     {
+    //         return response()->json([
+    //             'success'   => false,
+    //             'error'    => 'Error: '.$e->getMessage()
+    //         ]);    
+    //     } 
+    // }
 
 
 }

@@ -236,7 +236,6 @@ class VadminController extends Controller
             dd($e);
             return back()->with('error', 'Ha ocurrido un error '. $e);
         }
-
     }
     /*
     |--------------------------------------------------------------------------

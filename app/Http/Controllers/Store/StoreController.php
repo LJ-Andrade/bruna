@@ -23,6 +23,8 @@ use Carbon\Carbon;
 use PDF;
 use App\Traits\CartTrait;
 use Illuminate\Support\Facades\View;
+use Mail;
+use App\Mail\SendMail;
 
 
 class StoreController extends Controller
@@ -168,7 +170,7 @@ class StoreController extends Controller
         $actual_date = Carbon::parse($actual_date, 'America/Araguaina');
         if($coupon_expire->lt($actual_date))
         {
-            return response()->json(['response' => null, 'message' => "El cupón ingresado ha expirado :(, (Fecha actual: )". $actual_date . "Fecha de expiracion: ".$coupon_expire]);
+            return response()->json(['response' => null, 'message' => "El cupón ingresado ha expirado :("]);
         } 
         
         // Group User Not Included in promo
@@ -220,12 +222,26 @@ class StoreController extends Controller
                 $order->final_price = calcValuePercentNeg($item->article->reseller_price, $item->article->reseller_discount);
             } else {
                 $order->final_price = calcValuePercentNeg($item->article->price, $item->article->discount);
-            }
-            
+            }   
             $order->save();    
         }
+
         $cart->status = 'Process';
-        $cart->save();
+        
+        try {
+            $cart->save();
+            // Notify Bussiness
+            Mail::to(APP_EMAIL_1)->send(new SendMail('Compra Recibida', 'Checkout', $cart));
+            // Notify Customer
+            //$customerEmail = auth()->guard('customer')->user()->email);
+            $customerEmail = 'javzero1@gmail.com';
+            Mail::to($customerEmail)->send(new SendMail('Bruna Indumentaria - Compra recibida !', 'CustomerCheckout', ''));
+        } catch (\Exception $e) {
+            dd($e);
+            return back()->with('error', 'Ha ocurrido un error '. $e);
+        }    
+    
+        // return back()->with('message','Su compra se ha registrado. Muchas gracias !.');
         return view('store.checkout-success')
             ->with('cart', $cart);
     }

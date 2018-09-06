@@ -2,10 +2,12 @@
  
 namespace App\Traits;
 use App\Cart;
+use App\CatalogArticle;
 
 trait CartTrait {
  
-    // This shows STORED carts - prices must be FIXED
+    // Calc Cart Fixed Prices
+    // ----------------------------------------------------------
     public function calcCartData($cart)
     {
         $cartSubTotal = '0';
@@ -44,6 +46,8 @@ trait CartTrait {
 
     }
 
+    // Return ActiveCart
+    // ----------------------------------------------------------
     public function activeCart()
     {
         $cartTotal = 0;
@@ -78,6 +82,8 @@ trait CartTrait {
         return $activeCart;
     }
 
+    // Cacl Subtotal
+    // ----------------------------------------------------------
     public function calcSubtotal($items, $group)
     {
         $result = '0';
@@ -103,4 +109,24 @@ trait CartTrait {
         }
         return $result;
     }
+
+    // Stock Update
+    // ----------------------------------------------------------
+    public function updateCartItemStock($articleId, $quantity)
+    {
+        try{
+            //CatalogArticle::where('id', $articleId)->update(['stock'=>$newStock]);
+            $article = CatalogArticle::where('id', $articleId)->first();
+            $newStock = intval($article->stock) + intval($quantity);
+            $article->stock = $newStock;
+            $article->save();
+        } 
+        catch(\Exception $e)
+        {
+            return dd("Error");
+        }
+        return $newStock;
+    }
+
+
 }

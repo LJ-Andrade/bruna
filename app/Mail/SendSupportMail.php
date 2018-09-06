@@ -32,8 +32,6 @@ class SendSupportMail extends Mailable
      */
     public function build()
     {
-
-        
         return $this->subject($this->subject)->markdown('vadmin.components.mailMain')
             ->with(['message' => $this->content]);
     }

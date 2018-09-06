@@ -2,17 +2,20 @@
 <div class="topbar">
 	<div class="topbar-column">
 		Seguinos: 
-		<a class="social-button sb-facebook shape-none sb-dark" href="" target="_blank">
+		<a class="social-button sb-facebook shape-none sb-dark" href="https://www.facebook.com/br.ndumentaria/" target="_blank">
 			<i class="socicon-facebook"></i>
 		</a>
-		<a class="social-button sb-twitter shape-none sb-dark" href="" target="_blank">
+		<a class="social-button sb-twitter shape-none sb-dark" href="https://www.instagram.com/bruna.indumentaria1/" target="_blank">
 			<i class="socicon-twitter"></i>
 		</a>
 	</div>
 	<div class="topbar-column">
-		<a class="hidden-xs-down">&nbsp;<b> 4545-4545 </b>| 15 4245-4545</a>
-		<a class="hidden-xs-down" href="info@bruna.com.ar">
+		<a class="hidden-xs-down">&nbsp;<b>11-6761-8867 </b></a>
+		<a class="hidden-xs-down" href="mailto:info@bruna.com.ar">
 			<i class="icon-mail"></i>&nbsp; info@bruna.com.ar
 		</a>
+		@if($activeCart)
+			<a href="{{ route('store.checkout') }}"><i class="fas fa-shopping-cart"></i></a>
+		@endif
 	</div>
 </div>

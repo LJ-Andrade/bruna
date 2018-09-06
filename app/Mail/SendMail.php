@@ -19,10 +19,11 @@ class SendMail extends Mailable
      *
      * @return void
      */
-    public function __construct($subject, $content)
+    public function __construct($subject, $view, $data)
     {
-        $this->content = $content;
+        $this->data = $data;
         $this->subject = $subject;
+        $this->view    = $view;
     }
 
     /**
@@ -32,7 +33,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->subject)->markdown('vadmin.components.mailMain')
-            ->with(['message' => $this->content]);
+        return $this->subject($this->subject)->markdown('vadmin.components.mail'.$this->view)
+            ->with(['data' => $this->data]);
     }
 }

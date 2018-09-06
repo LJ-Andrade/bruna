@@ -2,21 +2,20 @@
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
-            Sistema VADMIN
+            {{ APP_BUSSINESS_NAME }} Indumentaria
         @endcomponent
     @endslot
 
-    Nombre: {{ $content['fullname']}}<br>
-    E-Mail: {{ $content['email']}}<br>
-    Teléfono: {{ $content['contact']}}<br>
-    Mensaje: {{ $content['comment']}}<br>
+#<center>Hemos recibido su por su compra</center>
+###<center> Nos pondremos en contacto a la brevedad</center>
+
+#<center> Muchas gracias !</center>
 
     @slot('subcopy')
         @component('mail::subcopy')
             <!-- subcopy here -->
         @endcomponent
     @endslot
-
 
     {{-- Footer --}}
     @slot('footer')

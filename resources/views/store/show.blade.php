@@ -86,30 +86,38 @@
 					<span class="h2 d-block">$ {{ $article->price }}</span>
 				@endif
 			@endif
-			<div class="mb-3"><span class="text-medium">Código:</span> #{{ $article->id }}</div>
-			
+			<div class="mb-3"><span class="text-medium">Código:</span> #{{ $article->code }}</div>
+			{{-- Id: {{ $article->id }} <br> --}}
 			{{-- Article Description --}}
 			<p>{{ strip_tags($article->description) }}</p>
 			<div class="row">
-				<div class="col-sm-12">
-					<span class="text-medium"><b>Talle:</b></span>
-					<a class="navi-link" href="#">@foreach($article->atribute1 as $atribute) {{ $atribute->name }} @endforeach</a> <br>
-					<span class="text-medium"><b>Color:</b></span>
-					<a class="navi-link" href="#">{{ $article->color }}</a> <br>
-					<span class="text-medium"><b>Tela:</b></span>
-					<a class="navi-link" href="#">{{ $article->textile }}</a>
+				<div class="col-sm-12 descriptions">
+					<div class="item"><div class="title">Talle:</div> <span class="prop">@foreach($article->atribute1 as $atribute) {{ $atribute->name }} @endforeach</span></div>
+					<div class="item"><div class="title">Color:</div> <span class="prop">{{ $article->color }}</span></div>
+					<div class="item"><div class="title">Tela:</div> <span class="prop">{{ $article->textile }}</span></div>
 				</div>
 			</div>
 			<div class="row margin-top-1x">
 				{{-- Form --}}
-				<div class="col-sm-6">
-					{!! Form::open(['route' => 'store.addtocart', 'method' => 'POST', 'class' => 'form-group']) !!}	
+				<div class="col-sm-12 price-and-stock">
+					@if($article->stock > 0)
+						@if(Auth::guard('customer')->check())
+						<div class="stock">
+							Stock disponible: {{ $article->stock }}
+						</div>
+						{!! Form::open(['route' => 'store.addtocart', 'method' => 'POST', 'class' => 'form-group price']) !!}	
 						<div class="input-with-btn">
 							<input class="form-control input-field short-input" name="quantity" type="number" min="1" max="{{ $article->stock }}" value="1" placeholder="1" required>
 							<button class="btn input-btn">Agregar al carro</button>
 						</div>
 						<input type="hidden" value="{{ $article->id }}" name="articleId">
-					{!! Form::close() !!}
+						{!! Form::close() !!}
+						@else
+						<a href="{{ url('tienda/login') }}" class="btn input-btn">Comprar</a>
+						@endif
+					@else
+						No hay stock dispo
+					@endif
 				</div>
 			</div>
 			<hr class="mb-3">
