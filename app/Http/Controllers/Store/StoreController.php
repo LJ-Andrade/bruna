@@ -237,8 +237,8 @@ class StoreController extends Controller
             //$customerEmail = 'javzero1@gmail.com';
             Mail::to($customerEmail)->send(new SendMail('Bruna Indumentaria - Compra recibida !', 'CustomerCheckout', ''));
         } catch (\Exception $e) {
-            dd($e);
-            return back()->with('error', 'Ha ocurrido un error '. $e);
+            //dd($e->getMessage());
+            // return back()->with('error', 'Ha ocurrido un error '. $e);
         }    
     
         // return back()->with('message','Su compra se ha registrado. Muchas gracias !.');
