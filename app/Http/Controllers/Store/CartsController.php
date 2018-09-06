@@ -146,30 +146,29 @@ class CartsController extends Controller
     }
 
 
-    // public function destroy(Request $request)
-    // {   
+    public function destroy(Request $request)
+    {   
         
-    //     $ids = json_decode('['.str_replace("'",'"',$request->id).']', true);
-    //     try 
-    //     {
-    //         foreach ($ids as $id) {
-    //             $item = Cart::find($id);
-                
-    //             // $this->updateCartItemStock($article->id, -$request->quantity);
-    //             $item->delete();
-    //         }
-    //         return response()->json([
-    //             'success'   => true,
-    //         ]); 
-    //     }  
-    //     catch (\Exception $e)
-    //     {
-    //         return response()->json([
-    //             'success'   => false,
-    //             'error'    => 'Error: '.$e->getMessage()
-    //         ]);    
-    //     } 
-    // }
+        $ids = json_decode('['.str_replace("'",'"',$request->id).']', true);
+        try 
+        {
+            foreach ($ids as $id) {
+                $item = Cart::find($id);
+                // $this->updateCartItemStock($article->id, -$request->quantity);
+                $item->delete();
+            }
+            return response()->json([
+                'success'   => true,
+            ]); 
+        }  
+        catch (\Exception $e)
+        {
+            return response()->json([
+                'success'   => false,
+                'error'    => 'Error: '.$e->getMessage()
+            ]);    
+        } 
+    }
 
 
 }
