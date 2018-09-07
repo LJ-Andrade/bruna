@@ -116,7 +116,7 @@
 						<a href="{{ url('tienda/login') }}" class="btn input-btn">Comprar</a>
 						@endif
 					@else
-						No hay stock dispo
+						No hay stock disponible
 					@endif
 				</div>
 			</div>

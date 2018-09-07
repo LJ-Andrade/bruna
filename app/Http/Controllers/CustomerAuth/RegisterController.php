@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use App\GeoProv;
+use Mail;
+use App\Mail\SendMail;
 
 class RegisterController extends Controller
 {
@@ -30,8 +33,16 @@ class RegisterController extends Controller
      * @var string
      */
     
-    protected $redirectTo = '/registro-completo';
-
+    // protected $redirectTo = '/registro-completo';
+    protected function redirectTo()
+    {
+        $customer = auth()->guard('customer')->user();
+        if($customer->group == '3' && $customer->status == '0' ){
+            return '/registro-en-proceso';
+        } else {
+            return '/registro-completo';
+        }
+    }
     /**
      * Create a new controller instance.
      *
@@ -55,6 +66,7 @@ class RegisterController extends Controller
             'surname' => 'required|string|max:255',
             'username' => 'required|string|max:20|unique:customers',
             'email' => 'required|string|email|max:255|unique:customers',
+            'cuit' => 'numeric|unique:customers',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -69,6 +81,11 @@ class RegisterController extends Controller
                 $group = '3'; // Reseller
             } 
         } 
+        
+        $cuit = null;
+        if(isset($data['cuit'])){
+            $cuit = $data['cuit'];
+        }
 
         return Customer::create([
             'name' => $data['name'],
@@ -76,9 +93,10 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'status' => $status,
+            'cuit' => $cuit,
             'password' => bcrypt($data['password']),
             'group' => $group
-            ]);
+        ]);
     }
 
     protected function guard(){
@@ -86,7 +104,10 @@ class RegisterController extends Controller
     }
 
     public function showRegistrationForm(){
-        return view('store.register');
+        $geoprovs = GeoProv::pluck('name','id');
+        
+        return view('store.register')
+        ->with('geoprovs',$geoprovs);
     }
 
     public function register(Request $request)
@@ -96,13 +117,20 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create($request->all())));
 
         $this->guard()->login($user);
+        try{
+            if($user->group == '3'){
+                $subject = 'Solicitud de cliente mayorísta';
+                $message = 'Un usuario ha solicitado ser cliente mayorísta';
+            } else {
+                $subject = 'Nuevo usuario registrado';
+                $message = 'Nuevo usuario registrado';
+            }
+            Mail::to(APP_EMAIL_1)->send(new SendMail($subject, 'SimpleMail', $message));
+        } catch (\Exception $e) {
+            //
+        }
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
-    }
-
-    public function registerSuccess()
-    {
-        return redirect('tienda/login')->with('message','Gracias por registrarse.');
     }
 }

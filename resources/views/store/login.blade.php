@@ -6,7 +6,7 @@
 
 		<form class="login-box inner" method="POST" action="{{ route('customer.login') }}">
 			{{ csrf_field() }}
-			<h3>Ingresar</h3>
+			<h3  class="text-center">Ingresar</h3>
 			<fieldset class="form-group{{ $errors->has('email') ? ' has-error' : '' }} position-relative has-icon-left mb-0">
 				<div class="form-group input-group">
 					<span class="input-group-addon"><i class="icon-lock"></i></span>

@@ -22,6 +22,12 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
     Route::post('password/reset', ['uses' => 'CustomerAuth\ResetPasswordController@reset']);
 });
 
+// After
+
+Route::get('registro-completo', function(){ return view('store.register-success'); })->middleware('active-customer');
+Route::get('registro-en-proceso', function(){ return view('store.register-in-process'); })->middleware('active-customer');
+
+
 /*
 |--------------------------------------------------------------------------
 | VADMIN LOGIN / REGISTER :: ROUTES
@@ -81,8 +87,6 @@ Route::get('tienda', ['as' => 'store', 'uses' => 'Store\StoreController@index'])
 // Searchs
 Route::get('tienda/talle/{name}', ['as' => 'store.search.size', 'uses' => 'Store\StoreController@searchSize']);
 Route::get('tienda/etiqueta/{name}', ['as' => 'store.search.tag', 'uses' => 'Store\StoreController@searchTag']);
-Route::get('registro-completo', ['as' => 'registro-completo', 'uses' => 'CustomerAuth\RegisterController@registerSuccess'])->middleware('active-customer');
-Route::get('tienda/proceso', function(){ return view('store.proceso'); })->middleware('active-customer');
 
 Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function() {    
     Route::get('articulo/{id}', 'Store\StoreController@show');
@@ -277,13 +281,14 @@ Route::get('/vadmin/clients', function(){
 //->middleware('auth');
 
 // Render Mails Test
-// use App\Cart;
-// Route::get('/mail', function(){
-//     $cart = Cart::findOrFail(29);  
-//     // Bussiness
-//     //return new App\Mail\SendMail('Compra Recibida', 'Checkout', $cart);
-//     // Customer
-//     return new App\Mail\SendMail('Bruna Indumentaria | Compra recibida !', 'CustomerCheckout', $cart);
-// });
+//use App\Cart;
+//Route::get('/mail', function(){
+//    $cart = Cart::findOrFail(29);  
+//    $message = 'Mensaje de dfdfhsdjkf';
+//    // Bussiness
+//    return new App\Mail\SendMail('Subject', 'SimpleMail', $message);
+//    // Customer
+//    //return new App\Mail\SendMail('Bruna Indumentaria | Compra recibida !', 'CustomerCheckout', $cart);
+//});
 
 

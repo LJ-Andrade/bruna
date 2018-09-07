@@ -77,21 +77,26 @@
                             <select id='GeoLocsSelect' name="geoloc_id" 
                                 data-actualloc="{{ Auth::guard('customer')->user()->geoloc->name }}" 
                                 data-actuallocid="{{ Auth::guard('customer')->user()->geoloc->id }}" 
-                                class="form-control GeoLocsSelect">
+                                class="form-control GeoLocsSelect" required>
                             </select>
                             @else
                             <select id='GeoLocsSelect' name="geoloc_id" 
                                 data-actualloc="" 
                                 data-actuallocid="" 
-                                class="form-control GeoLocsSelect">
+                                class="form-control GeoLocsSelect" required>
                             </select>
                             @endif
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>CUIT</label>
+                            <input class="form-control" type="text" name="cuit" value="{{ Auth::guard('customer')->user()->cuit }}" placeholder="Ingrese su número de CUIT"
+                             @if(Auth::guard('customer')->user()->group == '3') required @endif/>
+                        </div>
+                    </div>
                     <div class="col-12">
                         <div class="d-flex flex-wrap justify-content-between align-items-center">
-                            <label class="custom-control custom-checkbox d-block"> 
-                            </label>
                             <button class="btn btn-main margin-right-none" type="submit">Actualizar Datos</button>
                         </div>
                     </div>

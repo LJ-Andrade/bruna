@@ -12,6 +12,13 @@ class CustomerController extends Controller
     {
         $user = auth()->guard('customer')->user();
         $item = Customer::find($user->id);
+
+        if($request->cuit != null )
+        {
+            $this->validate($request,[
+                'cuit' => 'max:11|unique:customers,cuit,'.$user->id
+            ]);
+        }
         
         $this->validate($request,[
             'name' => 'required|string|max:255',
@@ -23,10 +30,10 @@ class CustomerController extends Controller
             'cp' => 'required|max:255',
             'geoprov_id' => 'required|max:255',
             'geoloc_id' => 'required|max:255',
-            ]);
+        ]);
             
-            $item->fill($request->all());
-            $item->save();
+        $item->fill($request->all());
+        $item->save();
             
         if($request->from == "checkout"){
             return redirect()->route('store.checkout')->with('message','Datos actualizados');

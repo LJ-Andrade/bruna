@@ -6,7 +6,7 @@
 		<div class="centered-notification">
 			<div class="content">
 				<h3>Gracias por registrarse !</h3>
-				Su nuevo usuario está en proceso de revisión. <br>
+				Como ha solicitado ser cliente mayorísta su usuario ha quedado en proceso de revisión. <br>
 				En cuanto sea aprobado se lo notificaremos vía e-mail.
 			</div>
 			<div class="bottom">

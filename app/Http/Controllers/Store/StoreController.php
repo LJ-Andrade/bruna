@@ -293,6 +293,10 @@ class StoreController extends Controller
         
         unset($customer['id'], $customer['created_at'], $customer['updated_at'], $customer['avatar'], $customer['phone2']);
         
+        // If customer is not reseller dont ask for CUIT
+        if($customer['group'] != '3')
+            unset($customer['cuit']);
+
         $emptyValues = array();
         foreach ($customer as $key => $val) {
             if($val == '' or $val === '0' or $val === null){

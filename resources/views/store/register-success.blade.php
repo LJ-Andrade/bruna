@@ -5,10 +5,11 @@
 	<div class="row centered-form">
 		<div class="centered-notification">
 			<div class="content">
-				<h3>Gracias por registrarse !</h3>
+				<h3>Gracias por registrarte !</h3>
+				<p style="font-size: 1rem; font-weight: 300">Ya podés empezar a comprar.</p>
+				<a href="{{ url('tienda') }}" class="btn btn-primary btn-sm"> Ir a la tienda </a>
 			</div>
 			<div class="bottom">
-				<a href="{{ url('tienda') }}" class="btn btn-outline-primary btn-sm"> Seguir viendo la tienda </a>
 			</div>
 		</div>
 	</div>

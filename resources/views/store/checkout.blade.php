@@ -208,6 +208,13 @@
 													  @else
 													  <span class="text-danger">* Debe completar este dato</span>	
 													  @endif <br>
+									<b>Cuit: </b>	  @if(!is_null(Auth::guard('customer')->user()->cuit))
+														{{ Auth::guard('customer')->user()->cuit }}
+													  @else
+															@if(Auth::guard('customer')->user()->group == '3')
+																<span class="text-danger">* Debe completar este dato</span>	
+															@endif
+													  @endif
 									<a href="{{ route('store.customer-account', array('from' => 'checkout')) }}"> <h6>Editar</h6></a>
 								</p>
 							</div>
