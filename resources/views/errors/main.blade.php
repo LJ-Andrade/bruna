@@ -11,7 +11,12 @@
 		<link rel="shortcut icon" href="{{ asset('web/img/so-logo_new.jpg') }}"><!-- Favicon -->
 		<link rel="stylesheet" type="text/css" href="{{ asset('web/css/bootstrap.css') }}">
 		{{-- Original Styles --}}
-		<link id="mainStyles" rel="stylesheet" media="screen" href="{{ asset('css/web.css') }}">
+		<link rel="stylesheet" media="screen" href="{{ asset('css/store-custom.css') }}">
+		<style>
+			body {
+				margin: 0
+			}
+		</style>
 	</head>
 	<body>
 		@yield('content')

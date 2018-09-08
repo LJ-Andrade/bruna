@@ -5,12 +5,11 @@
 
 @section('content')
     <div class="container error-page">
-        <div class="row">
+        <div class="row inner">
             <h1>UPS !</h1>
             <p>La página que está buscando no existe</p>
             <hr class="softhr">
-            <a href="{{ url('/') }}"><button class="button btnHollowGreen">Volver al inicio</button></a>
-            <a href="{{ route('store') }}"><button class="button btnHollowGreen">Ir a la tienda</button></button></a>
+            <a href="{{ url('/') }}"><button class="btn">Volver al inicio</button></button></a>
         </div>
     </div>
 @endsection

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container padding-bottom-3x mb-2 marg-top-25">
         <div class="row">
-            <div class="container padding-bottom-3x mb-1">
+            <div class="container white-container padding-bottom-3x mb-1">
                 <h2>Pedido N° {{ $cart['rawdata']->id }}</h2>
                 Estado:  {{ orderStatusTrd($cart['rawdata']->status) }}
                 <!-- Shopping Cart-->
@@ -23,7 +23,7 @@
                                 <tr id="Detail{{$item->id}}">
                                     <td>
                                         <div class="product-item"><a class="product-thumb" href="{{ url('tienda/articulo/'.$item->article->id) }}">
-                                            <img src="{{ asset('webimages/catalogo/'. $item->article->featuredImageName() ) }}" alt="{{ $item->name }}"></a>
+                                            <img class="CheckCatalogImg" src="{{ asset('webimages/catalogo/'. $item->article->featuredImageName() ) }}" alt="{{ $item->name }}"></a>
                                             <div class="product-info">
                                                 <h4 class="product-title"><a href="{{ url('tienda/articulo/'.$item->article->id) }}">{{ $item->article->name }}</a></h4>
                                                 <span><b>Código:</b> #{{ $item->article->code }}</span>
@@ -84,8 +84,8 @@
                         <a class="btn btn-outline-secondary" href="{{ route('store') }}"><i class="icon-arrow-left"></i>&nbsp;Volver a la tienda</a>
                     </div>
                     <div class="column">
-                        <a class="btn btn-outline-primary" href="{{ url('tienda/descargar-comprobante', [$cart['rawdata']->id, 'download']) }}" target="_blank"><i class="icon-download"></i> Descargar Comprobante</a>
-                        <a class="btn btn-outline-primary" href="{{ url('tienda/descargar-comprobante', [$cart['rawdata']->id, 'stream']) }}" target="_blank"><i class="icon-eye"></i> Ver Comprobante</a>
+                        <a class="btn btn-primary" href="{{ url('tienda/descargar-comprobante', [$cart['rawdata']->id, 'download']) }}" target="_blank"><i class="fas fa-download"></i> Descargar Comprobante</a>
+                        <a class="btn btn-primary" href="{{ url('tienda/descargar-comprobante', [$cart['rawdata']->id, 'stream']) }}" target="_blank"><i class="fas fa-file-pdf"></i> Ver Comprobante</a>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,3 @@
-Recordar descomentar los $request->session()->invalidate();
-en los LoginController tanto de admin como customers.
-
-SISTEMA GEO
-Tamaño de imágenes
-750x500
-
-Configurar la actualización de estado de portfolio. updateStatus es ahora una función generica.
 
 BRUNA
 Implementar
@@ -15,18 +7,10 @@ Mensajes personalizados en login de tienda.
 Ej: Cuando se registra un mayorista le avisa que queda en suspenso
 Cuando se borran carros en masa desde Vadmin devolver stock
 
-
-
-
 Errores - Fallas - Bugs
 //---------------------------------------------------------
 
 - Agregar exportaciones necesarias
-Dar mensaje cuando se agrega item a carro de compra
-Algunas páginas de error muestran el menu de Santa Osadía (roto)
-
-
-
 
 Preguntas Bruna
 //--------------------------------------------------------
@@ -36,6 +20,11 @@ Preguntas Bruna
 
 RESUELTOS
 //---------------------------------------------------------
+(RESUELTO)
+Algunas páginas de error muestran el menu de Santa Osadía (roto)
+
+(RESUELTO)
+Dar mensaje cuando se agrega item a carro de compra
 
 (RESUELTO)
 ONLINE no filtra por categorías

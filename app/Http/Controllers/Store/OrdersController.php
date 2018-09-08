@@ -41,10 +41,22 @@ class OrdersController extends Controller
         return view('vadmin.orders.index')->with('items', $items);    
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | SHOW
+    |--------------------------------------------------------------------------
+    */
+
     public function show($id)
     {
-        
-        $cart = Cart::find($id);
+        try
+        {
+            $cart = Cart::findOrFail($id);
+        } 
+        catch(\Exception $e)
+        {
+            return redirect('vadmin');
+        }
         $customer = Customer::find($cart->customer_id);
         
         $order = $this->calcCartData($cart);
@@ -53,8 +65,12 @@ class OrdersController extends Controller
             ->with('customer', $customer);
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | EXPORT
+    |--------------------------------------------------------------------------
+    */
 
-    
     // DOWNLOAD INVOICE PDF
     public function downloadInvoice($id, $action)
     {

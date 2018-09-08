@@ -60,8 +60,8 @@
 						<th class="w-50"></th>
 						<th>N°</th>
 						<th>Cliente</th>
-						{{-- <th>Valor</th> --}}
 						<th>Estado</th>
+						<th>Items</th>
 						<th>Fecha</th>
 						<th></th>
 					@endslot
@@ -76,31 +76,30 @@
 										<span class="custom-control-description"></span>
 									</label>
 								</td>
-								<td class="w-50">#{{ $item->id }}</td>
+								<td class="w-50 show-link"><a href="{{ url('vadmin/orders/'.$item->id) }}">#{{ $item->id }}</a></td>
 								<td class="show-link max-text">
 									<a href="{{ url('vadmin/customers/'.$item->customer_id) }}">
 										{{ $item->customer->name }} {{ $item->customer->surname }} ({{ $item->customer->username }})
 									</a>
 								</td>
-								{{-- <td>Valor</td> --}}
-								<td>
+								<td class="w-200">
 									<div class="input-group"> 
 										<span class="input-group-btn">
 											<span class="btn btnSquare grey-back">
 												@switch($item->status)
-													@case('Active')
+												@case('Active')
 														<i class="icon-download"></i>
 														@break
-													@case('Process')
+														@case('Process')
 														<i class="icon-cog"></i>
 														@break
 													@case('Approved')
-														<i class="icon-forward2"></i>
+													<i class="icon-forward2"></i>
 														@break
 													@case('Canceled')
 														<i class="icon-cancel-circle"></i>
 														@break
-													@case('Finished')
+														@case('Finished')
 														<i class="icon-checkmark2"></i>
 														@break
 													@default
@@ -113,8 +112,25 @@
 										$item->status, ['class' => 'form-control custom-select minWidth150', 'onChange' => 'updateCartStatus(this, this.dataset.id)', 'data-id' => $item->id]) !!}
 									</div>
 								</td>
+								<td>{{ $item->items->count() }}</td>
 								<td class="w-200">{{ transDateT($item->created_at) }}</td>
-								<td class="w-50"><a href="{{ url('vadmin/orders/'.$item->id) }}" class="btn btnSm btnGreen"><i class="icon-eye6"></i></a></td>
+								{{-- EXPORTS --}}
+								<td class="w-50">
+									@if($item->status != 'Active')
+									<a href="{{ url('vadmin/exportOrderCsv', [$item->id]) }}" class="icon-container green" target="_blank" data-toggle="tooltip" title="Exportar .XLS">
+										<i class="fas fa-file-excel"></i>
+									</a>
+									<a href="{{ url('vadmin/exportOrderXls', [$item->id]) }}" class="icon-container blue" target="_blank" data-toggle="tooltip" title="Exportar .CSV">
+										<i class="fas fa-file-excel"></i>
+									</a>
+									<a href="{{ url('vadmin/descargar-comprobante', [$item->id, 'download']) }}" class="icon-container red" target="_blank" data-toggle="tooltip" title="Exportar .PDF">
+										<i class="fas fa-file-pdf"></i>
+									</a>
+									@endif
+									<a href="{{ url('vadmin/orders/'.$item->id) }}" class="icon-container black" data-toggle="tooltip" title="Detalle del pedido">
+										<i class="fas fa-eye"></i>
+									</a>
+								</td>
 							</tr>						
 						@endforeach
 					@endif

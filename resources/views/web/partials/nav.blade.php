@@ -1,4 +1,4 @@
-<div id="sologo"><a href="{{ url('/') }}"><img src="{{ asset('web/img/so-logo_new.jpg') }}" width="161" height="104" alt="Santaosadia" /></a></div>
+{{-- <div id="sologo"><a href="{{ url('/') }}"><img src="{{ asset('web/img/so-logo_new.jpg') }}" width="161" height="104" alt="Santaosadia" /></a></div>
 <h1 id="logo">Santa Osad&iacute;a</h1>
 
 <ul class="dropdown">
@@ -25,4 +25,4 @@
     <li><a href="https://twitter.com/santaosadia" target="_blank" class="tw">Twitter</a></li>
     <li><a href="{{ asset('descargar-pdf/catalogo2017.pdf') }}" target="_blank" class="cat">Catalogo</a></li>
     <li><a href="{{ url('contacto') }}" class="msj">Contacto</a></li>
-</ul>
+</ul> --}}

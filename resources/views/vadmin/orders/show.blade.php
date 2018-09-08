@@ -37,18 +37,24 @@
         @component('vadmin.components.list')
             @slot('title')
             Pedido #{{ $order['rawdata']->id }}
-                    <span class="small"> | {{ transDateT($order['rawdata']->created_at) }}</span><br>
+                    <span class="small"> | <b>Cliente: <a href="" data-toggle="modal" data-target="#CustomerDataModal"></b>
+                        {{ $order['rawdata']->customer->name }} {{ $order['rawdata']->customer->surname }}</a> 
                 <p>
-                    <b>Cliente: <a href="" data-toggle="modal" data-target="#CustomerDataModal"></b>
-                    {{ $order['rawdata']->customer->name }} {{ $order['rawdata']->customer->surname }}</a>
+                    {{ transDateT($order['rawdata']->created_at) }}</span>
                 </p>
             @endslot
             @slot('actions')
-                Comprobante:
-                <a class="badge badge-green" href="{{ url('vadmin/descargar-comprobante', [$order['rawdata']->id, 'download']) }}" target="_blank">.Pdf</a> |
-                <a class="badge badge-green" href="{{ url('vadmin/exportOrderCsv', [$order['rawdata']->id]) }}" target="_blank">.Csv</a> | 
-                <a class="badge badge-green" href="{{ url('vadmin/exportOrderXls', [$order['rawdata']->id]) }}" target="_blank">.Xls</a> |
-                <a class="badge badge-blue" href="{{ url('vadmin/descargar-comprobante', [$order['rawdata']->id, 'stream']) }}" target="_blank">Ver online</a>
+            
+            @if($order['rawdata']->status != 'Active')
+            <a class="icon-container green" href="{{ url('vadmin/exportOrderCsv', [$order['rawdata']->id]) }}" data-toggle="tooltip" title="Exportar .XLS" target="_blank">
+                <i class="fas fa-file-excel"></i></a>
+            <a class="icon-container blue" href="{{ url('vadmin/exportOrderXls', [$order['rawdata']->id]) }}" data-toggle="tooltip" title="Exportar .CSV" target="_blank">
+                <i class="fas fa-file-excel"></i></a>
+            <a class="icon-container red" href="{{ url('vadmin/descargar-comprobante', [$order['rawdata']->id, 'download']) }}" data-toggle="tooltip" title="Exportar .PDF" target="_blank">
+                <i class="fas fa-file-pdf"></i></a>
+            <a class="icon-container black" href="{{ url('vadmin/descargar-comprobante', [$order['rawdata']->id, 'stream']) }}" data-toggle="tooltip" title="Ver PDF online" target="_blank">
+                <i class="fas fa-eye"></i></a>
+            @endif
             @endslot
             @slot('tableTitles')
                 <th></th>
@@ -59,7 +65,7 @@
                 <th>Total</th>
             @endslot
             @slot('tableContent')
-                    @foreach($order['rawdata']->items as $item)
+                @foreach($order['rawdata']->items as $item)
                 <tr>
                     <td></td>
                     {{-- <td class="w-50">
@@ -70,49 +76,123 @@
                         </label>
                     </td> --}}
                     <td><a href="">{{ $item->article->name }} (#{{ $item->article->code }})</a></td>
-                    <td>{{ $item->size }} | {{ $item->color }} | {{ $item->textile }}</td>
-                    <td>$ {{ $item->final_price }}</td>
+                    
+                    <td>@foreach($item->article->atribute1 as $atribute) {{ $atribute->name }} @endforeach | {{ $item->color }} | {{ $item->textile }}</td>
+                    
+                    @if($order['rawdata']->status != 'Active')
+                    {{-- FIXED PRICES | ORDER READY --}}
+                        <td>$ {{ $item->final_price }}</td>
+                        <td>{{ $item->quantity }}</td>
+                        <td >$ {{ number_format($item->quantity * $item->final_price,2) }}</td>
+                    @else
+                    {{-- DYNAMIC PRICES | ACTIVE CART --}}
+                    <td>
+                        @if($order['rawdata']->customer->group == '3')
+                            {{-- Reseller Prices --}}
+                            @if($item->article->discount > 0)
+                                $ {{ $price = calcValuePercentNeg($item->article->reseller_price, $item->article->reseller_discount) + 0 }}
+                            @else
+                                $ {{ $price = $item->article->reseller_price + 0 }}
+                            @endif
+                        @else
+                            {{-- Standard Prices --}}
+                            @if($item->article->discount > 0)
+                                $ {{ $price = calcValuePercentNeg($item->article->price, $item->article->discount) + 0 }}
+                            @else
+                                $ {{ $price = $item->article->price + 0 }}
+                            @endif
+                        @endif
+                    </td>
                     <td>{{ $item->quantity }}</td>
-                    <td >$ {{ number_format($item->quantity * $item->final_price,2) }}</td>
+                    <td >$ {{ $item->quantity * $price + 0 }}</td>
+                    @endif
+
                 </tr>
                 @endforeach
-                <tr style="border-top: 10px solid #f9f9f9">
-                    <td></td><td></td><td></td><td></td>
-                    <td><b>SUBTOTAL</b></td>
-                    <td><b>$ {{ $order['subTotal'] }}</b></td>
-                </tr>
-                @if($order['orderDiscount'] != '0')
-                <tr>
-                    <td></td><td></td><td></td><td></td>
-                    <td><b>Descuento: </b> <span class="dont-break">% {{ $order['orderDiscount'] }}</span></td>
-                    <td>$ - {{ $order['discountValue'] }}</td>
-                </tr>
+                @if($order['rawdata']->status != 'Active')
+                {{-- FIXED PRICES | ORDER READY --}}
+                    <tr style="border-top: 10px solid #f9f9f9">
+                        <td></td><td></td><td></td><td></td>
+                        <td><b>SUBTOTAL</b></td>
+                        <td><b>$ {{ $order['subTotal'] }}</b></td>
+                    </tr>
+                    @if($order['orderDiscount'] != '0')
+                    <tr>
+                        <td></td><td></td><td></td><td></td>
+                        <td><b>Descuento: </b> <span class="dont-break">% {{ $order['orderDiscount'] }}</span></td>
+                        <td>$ - {{ $order['discountValue'] }}</td>
+                    </tr>
+                    @endif
+                    <tr>
+                        <td></td><td></td><td></td><td></td>
+                        @if($order['rawdata']->shipping_id != null)
+                        <td><b>Envío:</b> {{ $order['rawdata']->shipping->name }}</td>
+                        <td>$ {{ $order['shippingCost'] }}</td>
+                        @else
+                        <td>Envío no seleccionado</td>
+                        <td>-</td>
+                        @endif
+                    </tr>
+                        <td></td><td></td><td></td><td></td>
+                        @if($order['rawdata']->payment_method_id != null)
+                        <td><b>Forma de Pago:</b> {{ $order['rawdata']->payment->name }} (%{{$order['rawdata']->payment_percent}})</td>
+                        <td>$ {{ $order['paymentCost'] }}</td>
+                        @else
+                        <td>Forma de pago no seleccionada</td>
+                        <td>-</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        <td></td><td></td><td></td><td></td>
+                        <td><b>TOTAL</b></td>
+                        <td><b>$ {{ $order['total'] }}</b></td>
+                    </tr>
+                @else
+                {{-- DYNAMIC PRICES | ACTIVE CART --}}
+                    {{-- Subtotal --}}
+                    <tr>
+                        <td></td><td></td><td></td><td></td>
+                        <td>SubTotal: </td>
+                        <td>-</td>
+                    </tr>
+                    {{-- Discount --}}
+                    @if($order['orderDiscount'] != '0')
+                    <tr>
+                        <td></td><td></td><td></td><td></td>
+                        <td><b>Descuento: </b> <span class="dont-break">% {{ $order['orderDiscount'] }}</span></td>
+                        <td>$ - {{ $order['discountValue'] }}</td>
+                    </tr>
+                    @endif
+                    {{-- Shipping Method --}}
+                    <tr>
+                        <td></td><td></td><td></td><td></td>
+                        @if($order['rawdata']->shipping_id != null)    
+                        <td>{{ $order['rawdata']->shipping->name }} (${{ $order['rawdata']->shipping->price }})</td>
+                        <td>-</td>
+                        @else
+                        <td>Envío no seleccionado</td>
+                        <td>-</td>
+                        @endif
+                    </tr>
+                    {{-- Payment Method --}}
+                    <tr>
+                        <td></td><td></td><td></td><td></td>
+                        @if($order['rawdata']->payment_method_id != null)    
+                        <td>{{ $order['rawdata']->payment->name }} (% {{ $order['rawdata']->payment->percent }})</td>
+                        <td>-</td>
+                        @else
+                        <td>Forma de pago no seleccionada</td>
+                        <td>-</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        <td></td><td></td><td></td><td></td>
+                        <td><b>TOTAL:</b> </td>
+                        <td>Esperando confirmación</td>
+                    </tr>
                 @endif
-                <tr>
-                    <td></td><td></td><td></td><td></td>
-                    @if($order['rawdata']->shipping_id != null)
-                    <td><b>Envío:</b> {{ $order['rawdata']->shipping->name }}</td>
-                    <td>$ {{ $order['shippingCost'] }}</td>
-                    @else
-                    <td>Envío no seleccionado</td>
-                    <td>-</td>
-                    @endif
-                </tr>
-                <tr>
-                    <td></td><td></td><td></td><td></td>
-                    @if($order['rawdata']->payment_method_id != null)
-                    <td><b>Método de pago:</b> {{ $order['rawdata']->payment->name }} (% {{ $order['paymentPercent'] }})</td>
-                    <td>${{ $order['paymentCost'] }}</td>
-                    @else
-                    <td>Método de pago no seleccionado</td>
-                    <td>-</td>
-                    @endif
-                </tr>
-                <tr>
-                    <td></td><td></td><td></td><td></td>
-                    <td><b>TOTAL</b></td>
-                    <td><b>$ {{ $order['total'] }}</b></td>
-                </tr>                                
+                
+                
             @endslot
         @endcomponent
     </div>
