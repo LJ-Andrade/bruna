@@ -82,9 +82,13 @@
                             <span class="data">{{ $customer->phone }}</span>
                         </div><br>
                         <div class="row item">
-                                <div class="label"><b>Teléfono 2: </b></div>
-                                <span class="data">@if($customer->phone2) {{ $customer->phone2 }} @endif</span>
-                            </div><br>
+                            <div class="label"><b>Teléfono 2: </b></div>
+                            <span class="data">@if($customer->phone2) {{ $customer->phone2 }} @endif</span>
+                        </div><br>
+                        <div class="row item">
+                            <div class="label"><b>Cuit: </b></div>
+                            <span class="data">{{ $customer->cuit }}</span>
+                        </div><br>
                         <div class="row item">
                             <div class="label"><b>Tipo de cliente: </b></div>
                             <span class="data">{{ clientGroupTrd($customer->group) }}</span>

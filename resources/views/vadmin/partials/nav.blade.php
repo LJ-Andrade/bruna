@@ -284,12 +284,16 @@
 			</ul>
 		</li>
 		@endif
+		{{-- MESSAGES --}}
 		<li class="{{ Menu::activeMenu('mensajes_recibidos') }}"><a href="{{ url('vadmin/mensajes_recibidos/*') }}" class="menu-item"><i class="icon-envelop"></i> Mensajes 
 			@if($newMessages->count() > 0) 
 				<span class="tag tag-primary tag-pill float-xs-right mr-2"><span class="MessagesAmmount">{{ $newMessages->count() }}</span></span>
 			@endif
 		</a></li>
-
+		{{-- SETTINGS --}}
+		{{-- <li class="{{ Menu::activeMenu('mensajes_recibidos') }}"><a href="{{ route('vadmin.settings') }}" class="menu-item">
+			<i class="fas fa-sliders-h"></i> Opciones 
+		</a></li> --}}
 		{{-- Public sections --}}
 		<li class="navigation-header"><span data-i18n="nav.category.support">Secciones Públicas</span>
 			<i data-toggle="tooltip" data-placement="right" data-original-title="Support" class="icon-ellipsis icon-ellipsis"></i>

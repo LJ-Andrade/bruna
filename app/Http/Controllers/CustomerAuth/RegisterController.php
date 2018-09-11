@@ -92,7 +92,10 @@ class RegisterController extends Controller
             'surname' => $data['surname'],
             'username' => $data['username'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
             'status' => $status,
+            'geoprov_id' => $data['geoprov_id'],
+            'geoloc_id' => $data['geoloc_id'],
             'cuit' => $cuit,
             'password' => bcrypt($data['password']),
             'group' => $group

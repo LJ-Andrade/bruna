@@ -7,6 +7,7 @@ use App\Cart;
 use App\Traits\CartTrait;
 use App\Contact;
 use App\Customer;
+use App\Settings;
 
 class VadminComposer
 {
@@ -14,6 +15,9 @@ class VadminComposer
 
     public function compose(View $view)
     {
+        $settings = Settings::findOrFail(1);
+        
+        $test = 'Teseer';
         $newMessages = Contact::where('status', '=', '0')->get();
         $newOrders = Cart::where('status', '=', 'Process')->count();
         $newResellers = Customer::where('status', '=', '0')->where('group', '=', '3')->count();
@@ -21,6 +25,7 @@ class VadminComposer
         $view->with('newMessages', $newMessages)
              ->with('newOrders', $newOrders)
              ->with('newResellers', $newResellers)
-             ->with('activeOrders', $activeOrders);
+             ->with('activeOrders', $activeOrders)
+             ->with('test', $test);
     }
 }

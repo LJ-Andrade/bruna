@@ -137,6 +137,8 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'active-user'], function(){
     
     Route::get('/', 'VadminController@index');
 
+    Route::get('opciones', ['as' => 'vadmin.settings', 'uses' => 'VadminController@settings']);
+
     Route::post('sendMail', ['as' => 'vadmin.sendMail', 'uses' => 'VadminController@sendMail']);
     Route::post('sendSupportMail', ['as' => 'vadmin.sendSupportMail', 'uses' => 'VadminController@sendSupportMail']);
 
@@ -158,8 +160,6 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'active-user'], function(){
     Route::get('exportOrderXls/{params}', ['as' => 'vadmin.exportOrderXls', 'uses' => 'Store\OrdersController@exportOrderXls']);
     
     Route::get('mailChecker', ['as' => 'vadmin.mailChecker', 'uses' => 'ToolsController@mailChecker']);
-    Route::get('configs', ['as' => 'vadmin.configs', 'uses' => 'VadminController@configs']);
-    // Route::get('infophp', ['as' => 'vadmin.infophp', 'uses' => 'VadminController@infophp'])->middleware('admin');
     // Autocomplete
     Route::get('search', ['as' => 'search', 'uses' => 'VadminController@searchData']);
 

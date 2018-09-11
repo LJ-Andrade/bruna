@@ -12,6 +12,7 @@
 @section('content')
 	<div class="dashboard">
 		<div class="content-body"><!--native-font-stack -->
+			{{ dd($activeOrders) }}
 			<section id="global-settings" class="card">
 				{{-- --}}
 				<div class="card-header">

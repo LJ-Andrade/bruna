@@ -73,8 +73,6 @@
                     @endif
                 </div>
             </div>
-
-
             {{-- RESELLER BOX REQUIRED --}}
             <div id="ResellerBox">
                 <div class="row">
@@ -97,16 +95,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="row ">
-                    <div class="col-md-12 form-group">
-                        <label for="reg-fn">CUIT (Sin guiones)</label>
-                        <input type="number" name="cuit" class="IfResellerEnable form-control round" pattern="[0-9]{11}" placeholder="Ingrese su número de CUIT" disabled="disabled" required>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label>CUIT (Sin guiones)</label>
+                        <input type="number" name="cuit" class="IfResellerEnable form-control round" min="0" placeholder="Ingrese su número de CUIT" disabled="disabled" required>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Teléfono</label>
+                        <input type="text" name="phone" class="IfResellerEnable form-control round" placeholder="Ingrese teléfono" disabled="disabled" required>
                     </div>
                 </div>
             </div>
-            {{-- RESELLER BOX REQUIRED Edisplay: none;--}}
-
-            
+            {{-- RESELLER BOX REQUIRED Edisplay: none;--}}            
             <div class="col-xs-12 text-xs-center text-md-left bordered-box">
                 <input id="IsResellerCeckbox" type="checkbox" name="isreseller"> Deseo aplicar para ser cliente mayorísta <br>
                 <span class="text-muted">(Quedará en proceso de espera hasta ser aceptado por<br> <b>Bruna Indumentaria</b>)</span>

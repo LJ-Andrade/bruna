@@ -217,6 +217,7 @@ class VadminController extends Controller
         $content = 'Pruebita';
 
         try {  
+            
             Mail::to(APP_EMAIL_1)->send(new SendMail($subject, $content));
 
             return redirect('vadmin')->with('message','Mail Enviado');
@@ -285,10 +286,12 @@ class VadminController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function configs()
+    public function settings()
     {
-        return view('vadmin.configs');
+        return view('vadmin.tools.settings');
+        
     }
+
 
     /*
     |--------------------------------------------------------------------------
