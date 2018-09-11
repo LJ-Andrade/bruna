@@ -13,6 +13,7 @@ use App\CatalogAtribute1;
 use File;
 use PDF;
 use Excel;
+use Cookie;
 
 class ArticlesController extends Controller
 {
@@ -25,33 +26,77 @@ class ArticlesController extends Controller
 
     public function index(Request $request)
     {
+        
         $code     = $request->get('code');
         $name     = $request->get('name');
         $category = $request->get('category');
         $order    = $request->get('orden');
-        $p = 20;
         $rowName = 'stock';
+        
+        // -------- Pagination -----------
+        if($request->get('results'))
+        {
+            $pagination = $request->get('results');
+            // With expiration
+            Cookie::queue('stock-pagination', $pagination, 2000);
+            
+            // Forever
+            // Cookie::forever('stock-pagination', $pagination);
+            
+            // Read Cookie
+            // dd(Cookie::get('stock-pagination'));
+        }
+        else
+        {   
+            if($request->get('redirect') != null && Cookie::get('stock-pagination'))
+            {
+                $pagination = Cookie::get('stock-pagination');
+            }
+            else 
+            {
+                $pagination = 15;
+            }
+        }    
+        
+        // ---------- Order --------------
         if(!isset($order))
         {
             $rowName = 'id';
             $order = 'ASC';
         }
 
-        if(isset($code))
+        if($order == 'limitados')
         {
-            $articles = CatalogArticle::where('code', 'LIKE', "%".$code."%")->paginate($p);
+            $articles = CatalogArticle::whereRaw('catalog_articles.stock < catalog_articles.stockmin')->paginate($pagination);
+            // dd($articles);
         }
-        elseif(isset($name) || isset($category))
-        {
-            $articles = CatalogArticle::search($name, $category)->orderBy($rowName, $order)->paginate($p);
-        } 
         else 
         {
-            $articles = CatalogArticle::orderBy($rowName, $order)->paginate($p);
+            // ---------- Queries ------------    
+            if(isset($code))
+            {
+                $articles = CatalogArticle::where('code', 'LIKE', "%".$code."%")->paginate($pagination);
+            }
+            elseif(isset($name) || isset($category))
+            {
+                $articles = CatalogArticle::search($name, $category)->orderBy($rowName, $order)->paginate($pagination);
+            } 
+            else 
+            {
+                $articles = CatalogArticle::orderBy($rowName, $order)->paginate($pagination);
+            }
+            
         }
-
-        //$cats = CatalogCategory::orderBy('id','ASC')->get();
         $categories = CatalogCategory::orderBy('id', 'ASC')->pluck('name','id');
+        
+
+        // ---------- Redirect -------------
+        if($request->redirect == 'stock')
+        {
+            return view('vadmin.catalog.stock')
+                ->with('articles', $articles)
+                ->with('categories', $categories);
+        }
 
         return view('vadmin.catalog.index')
             ->with('articles', $articles)
@@ -74,46 +119,81 @@ class ArticlesController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function exportPdf($params)
+    public function exportPdf($params, $action)
     {   
         $items = $this->getData($params);
-
+        
         $pdf = PDF::loadView('vadmin.catalog.invoice', array('items' => $items));
         $pdf->setPaper('A4', 'landscape');
+        
+        if($action == 'stream')
+            return $pdf->stream('listado-catalogo.pdf');
+
         return $pdf->download('listado-catalogo.pdf');
     }
 
-    public function exportExcel($params)
+    public function exportSheet($params, $format)
     {
         $items = $this->getData($params);
         
-		Excel::create('Excel', function($excel) use($items){
+		Excel::create('listado-catalogo', function($excel) use($items){
             $excel->sheet('Listado', function($sheet) use($items) {   
                 $sheet->loadView('vadmin.catalog.invoice-excel', 
                 compact('items'));
             });
-        })->export('xls');       
+        })->export($format);
     }
 
     public function getData($params)
     {
         if($params == 'all'){
-            $items = CatalogArticle::orderBy('id', 'DESCC')->paginate(15);    
+            $items = CatalogArticle::orderBy('id', 'DESC')->get();    
             return $items;
         }
-
         parse_str($params , $query);
-
-        $code     = $query['code'];
-        $name     = $query['name'];
-        $category = $query['category'];
-
-        if(isset($code) || isset($name) || isset($category))
+        
+        $code = $name = $category = null;
+        
+        if(isset($query['code']))
+            $code = $query['code']; 
+        if(isset($query['name']))
+            $name = $query['name'];
+        if(isset($query['category']))
+            $category = $query['category'];
+        
+        
+        $order = 'DESC';
+        if(isset($query['orden']))
         {
-            $items = CatalogArticle::search($code, $name, $category)->orderBy('id', 'ASC')->paginate(15); 
-        } else {
-            $items = CatalogArticle::orderBy('id', 'DESCC')->paginate(15);    
+            // Show limited by stock
+            if($query['orden'] == 'limitados'){
+                $items = CatalogArticle::whereRaw('catalog_articles.stock < catalog_articles.stockmin')->get();
+            }
+            else {
+                $order = $query['orden'];
+
+                // Show with queries
+                if(isset($name))
+                {
+                    $items = CatalogArticle::searchName($name)->orderBy('id', $order)->get();
+                } 
+                elseif(isset($code)) 
+                {
+                    $items = CatalogArticle::searchCode($code)->orderBy('id', $order)->get(); 
+                }
+                elseif(isset($limited))
+                {
+                    
+                }
+                else
+                {
+                    $items = CatalogArticle::orderBy('id', $order)->get();    
+                }
+            }
         }
+
+        
+        
 
         return $items;
     }

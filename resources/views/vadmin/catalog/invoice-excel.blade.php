@@ -7,8 +7,8 @@
             <th>Cód.</th>
             <th>Título</th>
             <th>Stock</th>
-            <th>Precio</th>
-            <th>Oferta (%)</th>
+            <th>Precio Min.</th>
+            <th>Precio May.</th>
             <th>Categoría</th>
         </tr>
     </thead>
@@ -20,24 +20,28 @@
             {{--  STOCK  --}}
             <td>
                 @if($item->stock > $item->stockmin)
-                    <div class="">{{ $item->stock }}</div>
+                    <div class="center">{{ $item->stock }}</div>
                 @else
-                    <div class="highlight">{{ $item->stock }}</div>
+                    <div class="center highlight">{{ $item->stock }}</div>
                 @endif
             </td>
-            {{--  PRICE  --}}
+            {{-- Standard Price --}}
             <td>
-                <span class="Extra-Data">$ </span><span class="DisplayPriceData">{{ $item->price }}</span>
-            </td>
-            {{--  Discount PERCENT and PRICE  --}}
-            <td>
-                @if($item->discount == '0')
-                    <span class="Extra-Data">-</span>
+                @if($item->discount > '0')
+                <span class="Extra-Data"> $ {{ calcValuePercentNeg($item->price, $item->discount) + 0 }}</span>
+                <span class="Extra-Data">(%</span><span class="DisplayDiscountData">{{ $item->discount }})</span>
                 @else
-                    <span class="Extra-Data">%</span><span class="DisplayDiscountData">{{ $item->discount }}</span>
-                    <span class="Extra-Data"> ($ {{ calcValuePercentNeg($item->price, $item->discount) }})</span>
+                    <span class="Extra-Data">$ </span><span class="DisplayPriceData">{{ $item->price + 0}}</span>
                 @endif
-                <div class="UpdateDiscountBtn action-button Hidden" data-id="{{ $item->id }}"><i class="icon-checkmark2"></i></div>
+            </td>
+            {{-- Reseller Price --}}
+            <td>
+                @if($item->reseller_discount > '0')
+                <span class="Extra-Data"> $ {{ calcValuePercentNeg($item->reseller_price, $item->reseller_discount) + 0 }}</span>
+                <span class="Extra-Data">(%</span><span class="DisplayDiscountData">{{ $item->reseller_discount }})</span>
+                @else
+                    <span class="Extra-Data">$ </span><span class="DisplayPriceData">{{ $item->reseller_price + 0}}</span>
+                @endif    
             </td>
             {{--  DATE   --}}
             <td class="w-200">{{ $item->category->name }}</td>		

@@ -1,18 +1,15 @@
 
-BRUNA
+# BRUNA
 Implementar
 //---------------------------------------------------------
 
-Mensajes personalizados en login de tienda. 
-Ej: Cuando se registra un mayorista le avisa que queda en suspenso
-Cuando se borran carros en masa desde Vadmin devolver stock
 
-Errores - Fallas - Bugs
+## Errores - Fallas - Bugs
 //---------------------------------------------------------
 
 - Agregar exportaciones necesarias
 
-Preguntas Bruna
+## Preguntas Bruna
 //--------------------------------------------------------
 - Cada cuando se recupera el stock que está en carros de compra activos ?
 - Artículos con 0 stock o menos que el mínimo se pausan? Salen en los listado ?
@@ -20,6 +17,14 @@ Preguntas Bruna
 
 RESUELTOS
 //---------------------------------------------------------
+
+(RESUELTO)
+Mensajes personalizados en login de tienda. 
+Ej: Cuando se registra un mayorista le avisa que queda en suspenso
+
+(RESUELTO)
+Cuando se borran carros en masa desde Vadmin devolver stock
+
 (RESUELTO)
 Algunas páginas de error muestran el menu de Santa Osadía (roto)
 

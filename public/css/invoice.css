@@ -5,6 +5,14 @@
     margin-left: 20px
 }
 
+.highlight{
+    border: 1px solid rgba(red,.3);
+}
+
+.center {
+    text-align: center
+}
+
 
 td,th {
     padding-left: 20px;

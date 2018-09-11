@@ -71,6 +71,18 @@ class CatalogArticle extends Model
             ->orWhere('textile', 'like', "%" . $term . "%");
     }
 
+    public function scopeSearchName($query, $term)
+    {
+        return $query
+            ->where('name', 'like', "%" . $term . "%");
+    }
+     
+    public function scopeSearchCode($query, $term)
+    {
+        return $query
+            ->orWhere('code', 'like', "%" . $term . "%");
+    }
+       
     public function scopeSize($query, $term)
     {  
         return $query

@@ -157,6 +157,8 @@
 			<ul class="menu-content" style="">
 				<li class="{{ Menu::activeMenu('catalogo') }}"><a href="{{ route('catalogo.index') }}" class="menu-item">
 					<i class="icon-list"></i> Listado</a></li>
+				<li class="{{ Menu::activeMenu('stock') }}"><a href="{{ route('catalogo.index', ['redirect' => 'stock']) }}" class="menu-item">
+					<i class="fas fa-box-open"></i> Stock</a></li>
 				<li class="{{ Menu::activeMenu('catalogo') }}"><a href="{{ route('catalogo.create') }}" class="menu-item">
 					<i class="icon-plus-round"></i> Nuevo Artículo</a></li>
 				<li class="has-sub is-shown"><a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">Categorías</a>

@@ -25,6 +25,55 @@
 					</div>
 				</div> --}}
 			</section>
+			<div class="row">
+				<div class="col-xl-6 col-md-6 col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-block">
+								<h4 class="card-title"><i class="icon-cart4"></i> Tienda</h4>
+								<p class="card-text">Resumen de actividad</p>
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									@if($activeCartsCount == 1)
+									En este momento hay 1 carro de compras abierto
+									@elseif($activeCartsCount >= 2)
+									En este momento hay {{ $activeCartsCount }} carros de compras abiertos
+									@else
+									En este momento no hay carros de compras abiertos
+									@endif
+									{{-- <span class="tag tag-default tag-pill bg-warning float-xs-right">{{ $activeCartsCount }}</span> --}}
+								</li>
+								<li class="list-group-item">
+									<span class="tag tag-default tag-pill bg-danger float-xs-right">{{ $processCartsCount }}</span> Pedidos en espera
+								</li>
+								<li class="list-group-item">
+									<span class="tag tag-default tag-pill bg-info float-xs-right">{{ $approvedCartsCount }}</span> Pedidos aprobados
+								</li>
+								<li class="list-group-item">
+									<span class="tag tag-default tag-pill bg-warning float-xs-right">{{ $finishedCartsCount }}</span> Pedidos finalizadas
+								</li>
+							</ul>
+						</div>
+						<br>
+					</div>
+				</div>
+				<div class="col-xl-6 col-md-6 col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-block fast-access">
+								<h4 class="card-title"><i class="fas fa-paper-plane"></i> Accesos rápidos</h4>
+								<a href="{{ route('catalogo.index') }}" class="btn btnBlue"><i class="fas fa-list"></i> Artículos</a>
+								<a href="{{ route('catalogo.create') }}" class="btn btnBlue"><i class="fas fa-plus"></i> Nuevo Artículo</a>
+								<a href="{{ route('catalogo.index', ['redirect' => 'stock']) }}" class="btn btnBlue"><i class="fas fa-box-open"></i> Stock</a>
+								<a href="{{ route('orders.index', ['status' => 'Process']) }}" class="btn btnBlue"><i class="fas fa-smile-beam"></i> Pedidos Nuevos</a>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 			<div class="row match-height">
 				<a href="{{ route('catalogo.index') }}">
 					<div class="col-xl-4 col-lg-4">
@@ -72,66 +121,8 @@
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-xl-8 col-md-6 col-sm-12">
-					<div class="card" style="height: 500px;">
-						<div class="card-body">
-							<div class="card-block">
-							
-								<h4 class="card-title"><i class="icon-cart4"></i> Tienda</h4>
-								<p class="card-text">Resumen de actividad</p>
-							</div>
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">
-									@if($activeCartsCount == 1)
-									En este momento hay 1 carro de compras abierto
-									@elseif($activeCartsCount >= 2)
-									En este momento hay {{ $activeCartsCount }} carros de compras abiertos
-									@else
-									En este momento no hay carros de compras abiertos
-									@endif
-									{{-- <span class="tag tag-default tag-pill bg-warning float-xs-right">{{ $activeCartsCount }}</span> --}}
-								</li>
-								<li class="list-group-item">
-									<span class="tag tag-default tag-pill bg-danger float-xs-right">{{ $processCartsCount }}</span> Pedidos en espera
-								</li>
-								<li class="list-group-item">
-									<span class="tag tag-default tag-pill bg-info float-xs-right">{{ $approvedCartsCount }}</span> Pedidos aprobados
-								</li>
-								<li class="list-group-item">
-									<span class="tag tag-default tag-pill bg-warning float-xs-right">{{ $finishedCartsCount }}</span> Pedidos finalizadas
-								</li>
-							</ul>
-						</div>
-						<br>
-					</div>
 			
-				</div>
-			</div>
 		</div>		
 	</div>
 	<div id="Error"></div>
-@endsection
-
-@section('scripts')
-	
-@endsection
-
-@section('custom_js')
-	<script>
-		//$('#UpdateStockByName').autocomplete({
-		//	source: "{!!URL::route('search')!!}",
-		//	minlength: 1,
-		//	autoFocus: true,
-		//	search: function()
-		//	{
-		//		// Loader
-		//	},
-		//	select: function(e,ui)
-		//	{
-		//		var id = ui.item.codigo;
-		//		$('#UpdateStockByCode').val(id);
-		//	}
-		//});
-	</script>
 @endsection

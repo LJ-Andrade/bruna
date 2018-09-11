@@ -133,19 +133,17 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
 */
 
 // Functions that all users can access
-Route::group(['prefix' => 'vadmin'], function(){
+Route::group(['prefix' => 'vadmin', 'middleware' => 'active-user'], function(){
     
-    
+    Route::get('/', 'VadminController@index');
+
     Route::post('sendMail', ['as' => 'vadmin.sendMail', 'uses' => 'VadminController@sendMail']);
     Route::post('sendSupportMail', ['as' => 'vadmin.sendSupportMail', 'uses' => 'VadminController@sendSupportMail']);
 
     Route::post('updateAvatar', 'UserController@updateAvatar');
-    // -- SUPPORT --
-    Route::get('docs', function(){ return view('vadmin.support.docs'); });
-    Route::get('help', function(){ return view('vadmin.support.help'); });
+
     // Exports
     Route::get('exportViewPdf/{view}/{params}/{model}/{filename}', ['as' => 'vadmin.exportViewPdf', 'uses' => 'invoiceController@exportViewPdf']);
-    
     // Export Users
     Route::get('exportUsersListPdf/{params}', ['as' => 'vadmin.exportUsersListPdf', 'uses' => 'UserController@exportPdf']);
     Route::get('exportUsersListXls/{params}', ['as' => 'vadmin.exportUsersListXls', 'uses' => 'UserController@exportXls']);
@@ -153,9 +151,8 @@ Route::group(['prefix' => 'vadmin'], function(){
     Route::get('exportCustomersListPdf/{params}', ['as' => 'vadmin.exportCustomersListPdf', 'uses' => 'CustomerController@exportPdf']);
     Route::get('exportCustomersListXls/{params}', ['as' => 'vadmin.exportCustomersListXls', 'uses' => 'CustomerController@exportXls']);
     // Export Catalog List
-    Route::get('exportCatalogListPdf/{params}', ['as' => 'vadmin.exportCatalogListPdf', 'uses' => 'Catalog\ArticlesController@exportPdf']);
-    Route::get('exportCatalogListXls/{params}', ['as' => 'vadmin.exportCatalogListXls', 'uses' => 'Catalog\ArticlesController@exportExcel']);
-
+    Route::get('exportCatalogListPdf/{params}/{action}', ['as' => 'vadmin.exportCatalogListPdf', 'uses' => 'Catalog\ArticlesController@exportPdf']);
+    Route::get('exportCatalogListSheet/{params}/{format}', ['as' => 'vadmin.exportCatalogListSheet', 'uses' => 'Catalog\ArticlesController@exportSheet']);
     // Export Orders
     Route::get('exportOrderCsv/{params}', ['as' => 'vadmin.exportOrderCsv', 'uses' => 'Store\OrdersController@exportOrderCsv']);
     Route::get('exportOrderXls/{params}', ['as' => 'vadmin.exportOrderXls', 'uses' => 'Store\OrdersController@exportOrderXls']);
@@ -165,12 +162,17 @@ Route::group(['prefix' => 'vadmin'], function(){
     // Route::get('infophp', ['as' => 'vadmin.infophp', 'uses' => 'VadminController@infophp'])->middleware('admin');
     // Autocomplete
     Route::get('search', ['as' => 'search', 'uses' => 'VadminController@searchData']);
+
+    // -- SUPPORT --
+    Route::get('docs', function(){ return view('vadmin.support.docs'); });
+    Route::get('help', function(){ return view('vadmin.support.help'); });
 });
 
-Route::group(['prefix' => 'vadmin', 'middleware' => 'admin'], function(){
+
+// Admin and SuperAdmin Only
+Route::group(['prefix' => 'vadmin', 'middleware' => ['active-user', 'admin']], function(){
     
     //Route::get('/home', 'VadminController@index');
-    Route::get('/', 'VadminController@index');
     Route::get('panel-de-control', ['as' => 'storeControlPanel', 'uses' => 'VadminController@storeControlPanel']);
     
     Route::post('updateStatus/{model}/{id}', 'VadminController@updateStatus');
@@ -199,6 +201,7 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'admin'], function(){
     // -- CATALOG --
     Route::resource('catalogo', 'Catalog\ArticlesController');
     Route::post('update_catalog_field', 'Catalog\ArticlesController@updateField');
+    
     // Categories
     Route::resource('cat_categorias', 'Catalog\CategoriesController');
     Route::resource('cat_tags', 'Catalog\TagsController');
@@ -217,7 +220,6 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'admin'], function(){
     Route::resource('coupons', 'Catalog\CouponController');
     Route::post('generateCatalogCoupon', 'Catalog\CouponController@generateCatalogCoupon');
     Route::post('updateCartStatus', 'Store\CartsController@updateStatus');
-    
     // Carts (Orders) Management
     Route::resource('orders', 'Store\OrdersController');
     Route::get('descargar-comprobante/{id}/{action}', 'Store\OrdersController@downloadInvoice');

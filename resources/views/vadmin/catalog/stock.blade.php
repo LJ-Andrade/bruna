@@ -1,0 +1,148 @@
+@extends('vadmin.partials.main')
+@section('title', 'Vadmin | Listados de artículos del catálogo')
+
+{{-- HEADER --}}
+@section('header')
+	@component('vadmin.components.header-list')
+		@slot('breadcrums')
+		    <li class="breadcrumb-item"><a href="{{ url('vadmin')}}">Inicio</a></li>
+            <li class="breadcrumb-item active">Listado de artículos</li>
+		@endslot
+		@slot('actions')
+			{{-- Actions --}}
+			<div class="list-actions">
+				<a href="{{ route('catalogo.create') }}" class="btn btnBlue"><i class="icon-plus-round"></i>  Nuevo artículo</a>
+				<button id="SearchFiltersBtn" class="btn btnBlue"><i class="icon-ios-search-strong"></i></button>
+				{{-- Edit --}}
+				<button class="EditBtn btn btnGreen Hidden"><i class="icon-pencil2"></i> Editar</button>
+				<input id="EditId" type="hidden">
+				{{-- Delete --}}
+				{{-- THIS VALUE MUST BE THE NAME OF THE SECTION CONTROLLER --}}
+				<input id="ModelName" type="hidden" value="catalogo">
+				<button class="DeleteBtn btn btnRed Hidden"><i class="icon-bin2"></i> Eliminar</button>
+				<input id="RowsToDeletion" type="hidden" name="rowstodeletion[]" value="">
+				{{-- If Search --}}
+				@if(isset($_GET['code']) || isset($_GET['title']) || isset($_GET['category']) || isset($_GET['orden'])   )
+				<a href="{{ route('catalogo.index', ['redirect' => 'stock']) }}"><button type="button" class="btn btnGrey">Mostrar Todos</button></a>
+				@endif
+			</div>
+		@endslot
+		@slot('searcher')
+			@include('vadmin.catalog.stockSearcher')
+		@endslot
+	@endcomponent
+@endsection
+
+{{-- CONTENT --}}
+@section('content')
+{{-- {{dd($articles)}} --}}
+	<div class="list-wrapper">
+		{{-- Search --}}
+		<div class="row inline-links">
+			<span class="with-background">
+				<b>Órden:</b> 
+				<a href="{{ route('catalogo.index', ['orden' => 'DESC', 'redirect' => 'stock']) }}">Stock Alto</a> |
+				<a href="{{ route('catalogo.index', ['orden' => 'ASC', 'redirect' => 'stock']) }}">Stock Bajo</a> | 
+				<a href="{{ route('catalogo.index', ['orden' => 'limitados', 'redirect' => 'stock']) }}" >Stock Limitado</a>
+            </span>
+            <span class="with-background">
+                <b>Resultados por página:</b>
+                <a href="{{ route('catalogo.index', ['orden' => 'ASC', 'redirect' => 'stock', 'results' => '50']) }}">50</a> | 
+                <a href="{{ route('catalogo.index', ['orden' => 'ASC', 'redirect' => 'stock', 'results' => '100']) }}">100</a>
+            </span>
+		</div>
+		<div class="row">
+			@component('vadmin.components.list')
+				@slot('actions')
+					@if(isset($_GET['code']) || isset($_GET['title']) || isset($_GET['category']))
+						<a href="{{ route('vadmin.exportCatalogListPdf', ['params' => http_build_query($_GET)]) }}" data-toggle="tooltip" title="Exportar a PDF"><i class="icon-file-pdf"></i></a>
+						<a href="{{ route('vadmin.exportCatalogListXls', ['params' => http_build_query($_GET)]) }}" data-toggle="tooltip" title="Exportar a XLS"><i class="icon-file-excel"></i></a>
+					@else
+						<a href="{{ route('vadmin.exportCatalogListPdf', ['params' => 'all']) }}" data-toggle="tooltip" title="Exportar a PDF"><i class="icon-file-pdf"></i></a>
+						<a href="{{ route('vadmin.exportCatalogListXls', ['params' => 'all']) }}" data-toggle="tooltip" title="Exportar a XLS"><i class="icon-file-excel"></i></a>
+					@endif
+				@endslot
+
+				@slot('title', 'Listado de artículos de la tienda')
+				@slot('tableTitles')
+                    @if(!$articles->count() == '0')
+                        <th class="w-50"></th>
+						<th>Cód.</th>
+						<th>Título</th>
+						<th>Stock</th>
+						<th>Stock Min.</th>
+						<th>Estado</th>
+					@endslot
+					@slot('tableContent')
+						@foreach($articles as $item)
+							
+							<tr id="ItemId{{$item->id}}">
+								<td class="mw-50">
+									<label class="CheckBoxes custom-control custom-checkbox list-checkbox">
+										<input type="checkbox" class="List-Checkbox custom-control-input row-checkbox" data-id="{{ $item->id }}">
+										<span class="custom-control-indicator"></span>
+										<span class="custom-control-description"></span>
+									</label>
+								</td>
+								<td>#{{ $item->code }}
+								</td>
+								{{-- NAME --}}
+								<td class="show-link max-text">
+									<a href="{{ url('vadmin/catalogo/'.$item->id) }}">{{ $item->name }}</a>
+								</td>
+								{{--  STOCK --}}
+								<td class="with-notification mw-50">
+									<input class="editable-input mw-50" onfocus="event.target.select()" type="number" value="{{ $item->stock }}" min="0">
+									<div class="editable-input-data " data-id="{{ $item->id }}" 
+											data-route="update_catalog_field" data-field="stock" data-type="int" data-action="reload" data-value=""></div>
+											@if($item->stock < $item->stockmin) <div class="cell-notification"><i class="icon-notification"></i></div> @endif
+									</div>
+								</td>	
+								<td class="mw-50">
+									<input class="editable-input mw-50" onfocus="event.target.select()" type="number" value="{{ $item->stockmin }}" min="0">
+									<div class="editable-input-data " data-id="{{ $item->id }}" 
+										data-route="update_catalog_field" data-field="stockmin" data-type="int" data-action="reload" data-value=""></div>	
+									</div>
+								</td> 
+						
+								<td class="w-50 pad0 centered">
+									<label class="switch">
+										<input class="UpdateStatus switch-checkbox" type="checkbox" 
+										data-model="CatalogArticle" data-id="{{ $item->id }}"
+										@if($item->status == '1') checked @endif>
+										<span class="slider round"></span>
+									</label>
+								</td>
+							</tr>					
+						@endforeach
+						@else 
+							@slot('tableTitles')
+								<th></th>
+							@endslot
+							@slot('tableContent')
+								<tr>
+									<td class="w-200">No se han encontrado items</td>
+								</tr>
+							@endslot
+						@endif
+				@endslot
+			@endcomponent
+			{{--  Pagination  --}}
+			@if(isset($_GET['name']))
+            {!! $articles->appends(['name' => $_GET['name']])->render() !!}
+			@elseif(isset($_GET['category']))
+            {!! $articles->appends(['category' => $_GET['category']])->render() !!}
+			@elseif(isset($_GET['code']))
+            {!! $articles->appends(['code' => $_GET['code']])->render() !!}
+			@else
+            {!! $articles->render() !!}
+			@endif
+		</div>
+		<div id="Error"></div>
+	</div>
+@endsection
+
+{{-- SCRIPT INCLUDES --}}
+@section('scripts')
+	@include('vadmin.components.bladejs')
+@endsection
