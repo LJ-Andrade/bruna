@@ -174,8 +174,10 @@ class ArticlesController extends Controller
             else {
                 $order = $query['orden'];
                 // Show with queries
+                $items = CatalogArticle::orderBy('stock', $order)->get();
                 if(isset($name))
                 {
+                    dd($order);
                     $items = CatalogArticle::searchName($name)->orderBy('id', $order)->get();
                 } 
                 elseif(isset($code)) 
