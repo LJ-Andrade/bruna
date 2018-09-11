@@ -193,8 +193,8 @@ class CustomerController extends Controller
     // ---------- Update Avatar --------------- //
 
 
-    public function updateCustomerAvatar(Request $request){
-        
+    public function updateCustomerAvatar(Request $request)
+    {
         if ($request->hasFile('avatar')) {
             $customer = Customer::findOrFail(Auth::guard('customer')->user()->id);
             $avatar = $request->file('avatar');
@@ -219,7 +219,8 @@ class CustomerController extends Controller
         }
     }
 
-    public function updateCustomerGroup(Request $request){
+    public function updateCustomerGroup(Request $request)
+    {
         $customer = Customer::find($request->id);
         $customer->group = $request->group;
         $customer->save();

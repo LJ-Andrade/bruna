@@ -8,7 +8,7 @@ class VadminServiceProvider extends ServiceProvider
     
     public function boot(View $view)
     {
-        View::composer(['vadmin.partials.main'], 'App\Http\ViewComposers\VadminComposer');
+        View::composer(['vadmin.partials.main', 'vadmin.index', 'vadmin.tools.settings'], 'App\Http\ViewComposers\VadminComposer');
     }
     
     public function register()

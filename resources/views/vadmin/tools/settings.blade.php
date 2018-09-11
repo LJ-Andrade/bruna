@@ -12,13 +12,11 @@
 			<h1>Opciones</h1>
             <hr class="softhr">
             <div class="row">
-                {{-- {{ $test }} --}}
                 <div class="container-fluid">
-                    {!! Form::open(['route' => 'portfolio.store', 'method' => 'POST', 'class' => 'settings-form']) !!}	
+                    {!! Form::open(['route' => 'updateSettings', 'method' => 'POST', 'class' => 'settings-form']) !!}	
                         {{ csrf_field() }}
-                        
                         <label for="">E-mail primario</label>
-                <input class="form-control" type="text" name="email_1" value="">
+                        <input class="form-control" type="text" name="email_1" value="{{ $settings->email_1 }}">
                         <input class="btnSm btnBlue" type="submit" value="Actualizar">
                     {!! Form::close() !!}
                 </div>
@@ -34,7 +32,8 @@
                                     data-model="Customer" data-id=""
                                     @if($settings->email_notifications == 1)
                                     checked
-                                    @endif>
+                                    @endif
+                                    >
                                     <span class="slider round"></span>
                                 </label>
                             </td>

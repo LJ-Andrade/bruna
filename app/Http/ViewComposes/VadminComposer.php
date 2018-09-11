@@ -17,7 +17,6 @@ class VadminComposer
     {
         $settings = Settings::findOrFail(1);
         
-        $test = 'Teseer';
         $newMessages = Contact::where('status', '=', '0')->get();
         $newOrders = Cart::where('status', '=', 'Process')->count();
         $newResellers = Customer::where('status', '=', '0')->where('group', '=', '3')->count();
@@ -26,6 +25,6 @@ class VadminComposer
              ->with('newOrders', $newOrders)
              ->with('newResellers', $newResellers)
              ->with('activeOrders', $activeOrders)
-             ->with('test', $test);
+             ->with('settings', $settings);
     }
 }

@@ -143,7 +143,9 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'active-user'], function(){
     Route::post('sendSupportMail', ['as' => 'vadmin.sendSupportMail', 'uses' => 'VadminController@sendSupportMail']);
 
     Route::post('updateAvatar', 'UserController@updateAvatar');
-
+    Route::post('updateCustomerAvatar', 'CustomerController@updateCustomerAvatar');
+    
+    // Route::post('actualizar-avatar', ['as' => 'vadmin.updateCustomerAvatar', 'uses' => 'CustomerController@updateCustomerAvatar']);
     // Exports
     Route::get('exportViewPdf/{view}/{params}/{model}/{filename}', ['as' => 'vadmin.exportViewPdf', 'uses' => 'invoiceController@exportViewPdf']);
     // Export Users
@@ -172,7 +174,8 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'active-user'], function(){
 // Admin and SuperAdmin Only
 Route::group(['prefix' => 'vadmin', 'middleware' => ['active-user', 'admin']], function(){
     
-    //Route::get('/home', 'VadminController@index');
+    Route::post('actualizar-opciones', ['as' => 'updateSettings', 'uses' => 'VadminController@updateSettings']);
+    
     Route::get('panel-de-control', ['as' => 'storeControlPanel', 'uses' => 'VadminController@storeControlPanel']);
     
     Route::post('updateStatus/{model}/{id}', 'VadminController@updateStatus');

@@ -24,26 +24,25 @@
                     <div class="round-image-card">
                         <div class="inner">
                             <div class="image">
-                                @if($customer->avatar == '')
+                                <img id="Avatar" src="{{ asset('webimages/customers/'.$customer->avatar ) }}" class="Image-Container CheckImg" alt="">
+                                {{-- @if($customer->avatar == '')
                                     <img id="Avatar" class="Image-Container CheckImg" src="{{ asset('images/users/default.jpg') }}" alt="Imágen de Usuario">
                                 @else	
                                     <img id="Avatar" class="Image-Container CheckImg" src="{{ asset('images/users/'.$customer->avatar) }}" alt="Imágen de Usuario">
-                                @endif
-                                <span class="over-text">Cambiar imágen</span>
+                                @endif --}}
+                                {{-- <span class="over-text">Cambiar imágen</span> --}}
                             </div>
                         </div>
                     </div>
-                    <div class="ActionContainer Hidden">
+                    {{-- <div class="ActionContainer Hidden">
                         <hr class="softhr">
-                        {!! Form::open(['url' => 'vadmin/updateAvatar', 'method' => 'POST', 'class' => 'UpdateAvatarForm Hidden', 'files' => true]) !!}
-                            {{-- <form enctype="multipart/form-data" action="profile" method="POST"> --}}
+                        {!! Form::open(['url' => 'vadmin/updateCustomerAvatar', 'method' => 'POST', 'class' => 'UpdateAvatarForm Hidden', 'files' => true]) !!}
                             {{ csrf_field() }}
                             <input type="file" name="avatar" class="Hidden" id="ImageInput">
                             <input type="hidden" name="id" value="{{ $customer->id }}">
                             <input type="submit" class="btn btnGreen" id="ConfirmChange" value="Confirmar">
-                        {!! Form::close() !!}    
-                        {{-- <button id="UpdateProfileBtn" class="btn btnGreen"><i class="icon-check2"></i> Actualizar</button> --}}
-                    </div>
+                        {!! Form::close() !!}
+                    </div> --}}
                 </div>
                 <div class="col-md-9">
                     <div class="column-data">
@@ -105,7 +104,7 @@
 @endsection
 
 @section('custom_js')
-	<script>
+	{{-- <script>
     	$(document).ready(function() {
 			$('#Avatar').click(function(){
 				$('#ImageInput').click();
@@ -126,5 +125,5 @@
 			readURL(this);
 			$('.UpdateAvatarForm').removeClass('Hidden');
 		});
-	</script>
+	</script> --}}
 @endsection
