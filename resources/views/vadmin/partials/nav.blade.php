@@ -155,11 +155,14 @@
 		<li class="nav-item has-sub {{ Menu::activeMenu('catalogo') }}"><a href="#"><i class="icon-clipboard"></i>
 			<span data-i18n="nav.menu_levels.main" class="menu-title">Catálogo</span></a>
 			<ul class="menu-content" style="">
-				<li class="{{ Menu::activeMenu('catalogo') }}"><a href="{{ route('catalogo.index') }}" class="menu-item">
+				<li class="@if(app('request')->input('redirect') != 'stock')
+					{{ Menu::activeMenu('catalogo') }}
+					@endif">
+					<a href="{{ route('catalogo.index') }}" class="menu-item">
 					<i class="icon-list"></i> Listado</a></li>
-				<li class="{{ Menu::activeMenu('stock') }}"><a href="{{ route('catalogo.index', ['redirect' => 'stock']) }}" class="menu-item">
+				<li class="@if(app('request')->input('redirect') == 'stock') active @endif"><a href="{{ route('catalogo.index', ['redirect' => 'stock']) }}" class="menu-item">
 					<i class="fas fa-box-open"></i> Stock</a></li>
-				<li class="{{ Menu::activeMenu('catalogo') }}"><a href="{{ route('catalogo.create') }}" class="menu-item">
+				<li class="{{ Menu::activeMenu('catalogo.create') }}"><a href="{{ route('catalogo.create') }}" class="menu-item">
 					<i class="icon-plus-round"></i> Nuevo Artículo</a></li>
 				<li class="has-sub is-shown"><a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">Categorías</a>
 					<ul class="menu-content" style="">

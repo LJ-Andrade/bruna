@@ -162,6 +162,8 @@ class ArticlesController extends Controller
             $category = $query['category'];
         
         
+        $items = CatalogArticle::orderBy('code', 'ASC')->get();
+        
         $order = 'DESC';
         if(isset($query['orden']))
         {
@@ -171,7 +173,6 @@ class ArticlesController extends Controller
             }
             else {
                 $order = $query['orden'];
-
                 // Show with queries
                 if(isset($name))
                 {
@@ -181,20 +182,8 @@ class ArticlesController extends Controller
                 {
                     $items = CatalogArticle::searchCode($code)->orderBy('id', $order)->get(); 
                 }
-                elseif(isset($limited))
-                {
-                    
-                }
-                else
-                {
-                    $items = CatalogArticle::orderBy('id', $order)->get();    
-                }
             }
         }
-
-        
-        
-
         return $items;
     }
 

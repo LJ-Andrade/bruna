@@ -54,13 +54,33 @@
 		<div class="row">
 			@component('vadmin.components.list')
 				@slot('actions')
-					@if(isset($_GET['code']) || isset($_GET['title']) || isset($_GET['category']))
-						<a href="{{ route('vadmin.exportCatalogListPdf', ['params' => http_build_query($_GET)]) }}" data-toggle="tooltip" title="Exportar a PDF"><i class="icon-file-pdf"></i></a>
-						<a href="{{ route('vadmin.exportCatalogListXls', ['params' => http_build_query($_GET)]) }}" data-toggle="tooltip" title="Exportar a XLS"><i class="icon-file-excel"></i></a>
-					@else
-						<a href="{{ route('vadmin.exportCatalogListPdf', ['params' => 'all']) }}" data-toggle="tooltip" title="Exportar a PDF"><i class="icon-file-pdf"></i></a>
-						<a href="{{ route('vadmin.exportCatalogListXls', ['params' => 'all']) }}" data-toggle="tooltip" title="Exportar a XLS"><i class="icon-file-excel"></i></a>
-					@endif
+                @if(isset($_GET['name']) || isset($_GET['code']) || isset($_GET['title']) || isset($_GET['category']) || isset($_GET['orden']))
+                <a href="{{ route('vadmin.exportCatalogListSheet', ['params' => http_build_query($_GET), 'format' => 'xls']) }}" data-toggle="tooltip" title="Exportar a .XLS"  class="icon-container green" target="_blank">
+                    <i class="fas fa-file-excel"></i>
+                </a>
+                <a href="{{ route('vadmin.exportCatalogListSheet', ['params' => http_build_query($_GET), 'format' => 'csv']) }}" data-toggle="tooltip" title="Exportar a .CSV"  class="icon-container blue" target="_blank">
+                    <i class="fas fa-file-excel"></i>
+                </a>
+                <a href="{{ route('vadmin.exportCatalogListPdf', ['params' => http_build_query($_GET), 'action' => 'download']) }}" data-toggle="tooltip" title="Exportar a .PDF" class="icon-container red" target="_blank">
+                    <i class="fas fa-file-pdf"></i>
+                </a>
+                <a href="{{ route('vadmin.exportCatalogListPdf', ['params' => http_build_query($_GET), 'action' => 'stream']) }}" data-toggle="tooltip" title="Exportar a .PDF" class="icon-container red" target="_blank">
+                    <i class="fas fa-eye"></i>
+                </a>
+            @else
+                <a href="{{ route('vadmin.exportCatalogListSheet', ['params' => 'all', 'format' => 'xls']) }}" data-toggle="tooltip" title="Exportar a XLS"  class="icon-container green" target="_blank">
+                    <i class="fas fa-file-excel"></i>
+                </a>
+                <a href="{{ route('vadmin.exportCatalogListSheet', ['params' => 'all', 'format' => 'csv']) }}" data-toggle="tooltip" title="Exportar a .CSV"  class="icon-container blue" target="_blank">
+                    <i class="fas fa-file-excel"></i>
+                </a>
+                <a href="{{ route('vadmin.exportCatalogListPdf', ['params' => 'all', 'action' => 'download']) }}" data-toggle="tooltip" title="Exportar a .PDF" class="icon-container black" target="_blank">
+                    <i class="fas fa-file-pdf"></i>
+                </a>
+                <a href="{{ route('vadmin.exportCatalogListPdf', ['params' => 'all', 'action' => 'stream']) }}" data-toggle="tooltip" title="Exportar a .PDF" class="icon-container black" target="_blank">
+                    <i class="fas fa-eye"></i>
+                </a>
+            @endif
 				@endslot
 
 				@slot('title', 'Listado de artículos de la tienda')
