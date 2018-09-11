@@ -150,6 +150,7 @@ class ArticlesController extends Controller
             $items = CatalogArticle::orderBy('id', 'DESC')->get();    
             return $items;
         }
+        
         parse_str($params , $query);
         
         $code = $name = $category = null;
@@ -177,7 +178,6 @@ class ArticlesController extends Controller
                 $items = CatalogArticle::orderBy('stock', $order)->get();
                 if(isset($name))
                 {
-                    dd($order);
                     $items = CatalogArticle::searchName($name)->orderBy('id', $order)->get();
                 } 
                 elseif(isset($code)) 
