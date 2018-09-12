@@ -35,18 +35,17 @@ class CartItemController extends Controller
             // * Note the minus (-) sign in $request->quantity
             $newStock = $this->updateCartItemStock($article->id, -$request->quantity);
         }
-
+        
         $cartItem->article_name = $article->name;
         $cartItem->color = $article->color;
+        $cartItem->size = $article->atribute1->first()->name;
         $cartItem->textile = $article->textile;
-
 
         try{
             $cartItem->save();
         }  catch (\Exception $e)  {
             dd($e->getMessage());
         }
-
 
         return redirect()->back()->with('message', 'Producto agegado al carro de compras');
     }
