@@ -83,19 +83,24 @@ class RegisterController extends Controller
         } 
         
         $cuit = null;
-        if(isset($data['cuit'])){
-            $cuit = $data['cuit'];
-        }
+        $phone = null;
+        $geoProvId = null;
+        $geoLocId = null;
+        if(isset($data['cuit']))       { $cuit = $data['cuit']; }
+        if(isset($data['phone']))      { $phone = $data['phone']; }
+        if(isset($data['geoprov_id'])) { $geoProvId = $data['geoprov_id']; }
+        if(isset($data['geoloc_id']))  { $geoLocId = $data['geoloc_id']; }
+
 
         return Customer::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'username' => $data['username'],
             'email' => $data['email'],
-            'phone' => $data['phone'],
+            'phone' => $phone,
             'status' => $status,
-            'geoprov_id' => $data['geoprov_id'],
-            'geoloc_id' => $data['geoloc_id'],
+            'geoprov_id' => $geoProvId,
+            'geoloc_id' => $geoLocId,
             'cuit' => $cuit,
             'password' => bcrypt($data['password']),
             'group' => $group
