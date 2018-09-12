@@ -6,6 +6,8 @@
         <h3 class="widget-title">Resumen de Pedido</h3>
         {{-- {{ dd($activeCart['shippingPrice']) }} --}}
         {!! Form::open(['route' => 'store.processCheckout', 'method' => 'POST']) !!}	
+            <div class="top-info-cs"> Cantidad de items: <b>{{ $activeCart['totalItems'] }}</b></div>
+            <input type="hidden" name="goalQuantity" value="{{ $activeCart['goalQuantity'] }}">
             <input type="hidden" name="cart_id" value="{{ $activeCart['rawdata']->id }}">
             <table class="table checkout-table">
             <tr>

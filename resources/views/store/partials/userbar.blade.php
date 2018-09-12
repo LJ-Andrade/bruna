@@ -2,8 +2,11 @@
 <div class="toolbar">
     <div class="inner">
         <a class="site-logo-mobile" href="{{ url('/') }}"><img style="width: 110px" src="{{ asset('images/logos/app-logo.png') }}" alt="Logo"></a>
+        <div class="text-links">
+            <a href="{{ url('politica-de-exclusividad') }}">Política de Exclusividad</a>
+            <a href="{{ url('como-comprar') }}"><i class="far fa-question-circle"></i> Como comprar</a> 
+        </div>
         <div class="tools">
-            {{--  <div class="search"><i class="icon-search"></i></div>  --}}
             @if(Auth::guard('customer')->check())
                 @if(isset($activeCart))
                     <div class="cart">

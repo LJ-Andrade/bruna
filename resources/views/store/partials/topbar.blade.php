@@ -10,8 +10,8 @@
 		</a>
 	</div>
 	<div class="topbar-column">
-		<a class="hidden-xs-down">&nbsp;<b>11-6761-8867 </b></a>
-		<a class="hidden-xs-down" href="mailto:info@bruna.com.ar">
+		<a class="">&nbsp;<b>11-6761-8867 </b></a>
+		<a class="e-mail-field" href="mailto:info@bruna.com.ar">
 			<i class="icon-mail"></i>&nbsp; info@bruna.com.ar
 		</a>
 		@if(isset($activeCart))

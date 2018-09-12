@@ -15,7 +15,11 @@
         @endif --}}
         </div>  
         <div class="user-data">
-            <h4>{{ Auth::guard('customer')->user()->name }} {{ Auth::guard('customer')->user()->surname }}</h4><span>Miembro desde {{ transDateT(Auth::guard('customer')->user()->created_at) }}</span>    
+            <h4>{{ Auth::guard('customer')->user()->name }} {{ Auth::guard('customer')->user()->surname }}</h4>
+            <span>Miembro desde {{ transDateT(Auth::guard('customer')->user()->created_at) }}</span>    
+            @if(Auth::guard('customer')->user()->group == '3')
+                <span><i style="color: #aace1c" class="fas fa-certificate"></i> <b>{{  groupTrd(Auth::guard('customer')->user()->group) }}</b></span>
+            @endif
         </div>
     </div>
     {!! Form::open(['url' => 'tienda/updateCustomerAvatar', 'method' => 'POST', 'files' => true]) !!}

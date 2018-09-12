@@ -15,3 +15,9 @@
 	<!-- Main Navigation-->
 	@include('store.partials.userbar')
 </header>
+<div class="under-nav-container">
+	<div class="text-links">
+		<a href="{{ url('politica-de-exclusividad') }}">Política de Exclusividad</a>
+		<a href="{{ url('como-comprar') }}">Como comprar</a> 
+	</div>
+</div>

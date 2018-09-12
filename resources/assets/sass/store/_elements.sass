@@ -557,6 +557,29 @@ ul.pagination
 .toolbar .cart>.toolbar-dropdown
 	top: 36px
 
+.toolbar
+	.text-links
+		display: none
+@media (min-width: 680px)
+	.toolbar
+		.text-links
+			display: block
+			margin-right: 10px
+			a
+				margin: 0 15px
+	.under-nav-container
+		display: none
+
+@media (max-width: 680px)
+	.under-nav-container
+		text-align: center
+		padding: 10px
+		display: block
+		.text-links
+			margin-right: 10px
+			a
+				margin: 0 15px
+
 // Index List
 .product-card
 	.max-text
@@ -579,6 +602,14 @@ ul.pagination
 		background-color: #fff
 		padding-top: 30px
 		padding-left: 20px
+	.warning
+		margin-bottom: 15px
+		span
+			border: 1px solid #ccc
+			padding: 5px
+			i
+				margin-right: 10px
+
 @media (max-width: 991px)
 	.checkout-container
 		> .row	
@@ -588,6 +619,12 @@ ul.pagination
 			padding: 10px
 	.back-to-store
 		display: none
+
+.checkout-sidebar
+	.top-info-cs
+		padding: 0.75rem
+		padding-top: 0
+
 
 .shopping-cart
 	.product-item
@@ -681,6 +718,15 @@ ul.pagination
 	.sidebar
 		max-width: 100%
 
+
+.info-text
+	padding: 30px
+	background: #fff
+	border-radius: 5px
+	@include box-shadow()
+	p
+		font-size: 1.2rem
+		font-weight: 300
 
 //////////////////////////////////////
 //                                  //

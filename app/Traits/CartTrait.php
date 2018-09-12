@@ -55,7 +55,8 @@ trait CartTrait {
         $payment_percent = 0;
         $shipping_price = 0;
         $activeCart = null;
-        
+        $minQuantity = 12;
+
         if(auth()->guard('customer')->check())
         {
             $cart = Cart::where('status', '=', 'Active')->where('customer_id', auth()->guard('customer')->user()->id)->first();
@@ -64,19 +65,28 @@ trait CartTrait {
                 $cartSubTotal = $this->calcSubtotal($cart->items, auth()->guard('customer')->user()->group);
                 $orderDiscount = calcPercent($cartSubTotal, $cart->order_discount);
                 $cartTotal = $cartSubTotal + calcPercent($cartSubTotal, $cart->payment_percent) + $cart->shipping_price - $orderDiscount;
+                $totalItems = '0';
+                foreach($cart->items as $item)
+                {
+                    $totalItems += $item->quantity;
+                }
+                $goalQuantity = $minQuantity - $totalItems;
+
                 $activeCart = array
-                            (
-                                "rawdata" => $cart,
-                                "totalItems" => $cart->items->count(),
-                                "paymentPercent" => $cart->payment_percent,
-                                "paymentId" =>$cart->payment_method_id,
-                                "shippingPrice" => $cart->shipping_price,
-                                "shippingId" => $cart->shipping_id,
-                                "orderDiscount" => $cart->order_discount,
-                                "orderDiscountValue" => $orderDiscount,
-                                "cartSubTotal" => $cartSubTotal,
-                                "cartTotal" => $cartTotal
-                            );
+                    (
+                        "rawdata" => $cart,
+                        "totalItems" => $cart->items->count(),
+                        "paymentPercent" => $cart->payment_percent,
+                        "paymentId" =>$cart->payment_method_id,
+                        "shippingPrice" => $cart->shipping_price,
+                        "shippingId" => $cart->shipping_id,
+                        "orderDiscount" => $cart->order_discount,
+                        "orderDiscountValue" => $orderDiscount,
+                        "cartSubTotal" => $cartSubTotal,
+                        "cartTotal" => $cartTotal,
+                        'totalItems' => $totalItems,
+                        'goalQuantity' => $goalQuantity
+                    );
             }
         } 
         return $activeCart;

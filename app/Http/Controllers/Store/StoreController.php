@@ -215,6 +215,12 @@ class StoreController extends Controller
         if($cart->shipping_id == null)
             return back()->with('error', 'missing-shipping');
         
+        // Check minimun quantity - reseller
+        if(auth()->guard('customer')->user()->group == '3') {
+            if($request->goalQuantity > 0)
+            return back()->with('error', 'low-quantity');
+        }
+
         // Set fixed prices on checkout confirmation
         foreach($cart->items as $item){
             $order = CartItem::find($item->id);

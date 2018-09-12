@@ -6,8 +6,20 @@
    		<div class="row">
 			<div class="col-xl-9 col-lg-8">
 				<h3>Carro de Compras | Checkout</h3> 
-				<p>Pedido N: #{{ $activeCart['rawdata']->id }}</p>
-				{{-- Checkout Data Missing Messages --}}
+				{{-- <p>Pedido N: #{{ $activeCart['rawdata']->id }}</p> --}}
+				@if(Auth::guard('customer')->user()->group == '3')
+				<div class="warning"><span>Compra mínima: <b>12 unidades</b></span></div>
+				@endif
+				{{--------- Checkout Error Messages ----------}}
+				{{-- Missing shipping method Message --}}
+				@if(session('error')=='low-quantity')
+					<div class="alert alert-success alert-dismissible fade show text-center margin-bottom-1x">
+						<span class="alert-close" data-dismiss="alert"></span>
+						<strong>Para realizar compras mayorístas debe incluír al menos 12 prendas.</strong> <br>
+						<span>Prendas incluídas: {{ $activeCart['totalItems'] }} </span><br>
+						<span>Resta incluír: {{ $activeCart['goalQuantity'] }} </span> 
+					</div>
+				@endif
 				{{-- Missing shipping method Message --}}
 				@if(session('error')=='missing-shipping')
 					<div class="alert alert-success alert-dismissible fade show text-center margin-bottom-1x">

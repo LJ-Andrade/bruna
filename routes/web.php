@@ -84,6 +84,8 @@ Route::post('mail_sender', 'WebController@mail_sender');
 */
 Route::get('/', 'Store\StoreController@index')->middleware('active-customer');
 Route::get('tienda', ['as' => 'store', 'uses' => 'Store\StoreController@index'])->middleware('active-customer');
+Route::get('politica-de-exclusividad', function(){ return view('store.reseller-policy'); });
+Route::get('como-comprar', function(){ return view('store.how-to-buy'); });
 // Searchs
 Route::get('tienda/talle/{name}', ['as' => 'store.search.size', 'uses' => 'Store\StoreController@searchSize']);
 Route::get('tienda/etiqueta/{name}', ['as' => 'store.search.tag', 'uses' => 'Store\StoreController@searchTag']);
