@@ -243,8 +243,7 @@ class StoreController extends Controller
         // Check if customer choose payment method and shipping
         if($cart->shipping_id == null)
         return back()->with('error', 'missing-shipping');
-        sleep(5);
-        dd('OK');
+        
         // Set fixed prices on checkout confirmation
         foreach($cart->items as $item){
             $order = CartItem::find($item->id);
