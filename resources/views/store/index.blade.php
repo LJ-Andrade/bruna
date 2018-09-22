@@ -129,13 +129,13 @@
 						</div>
 					@endforeach
 				</div>
-				{!! $articles->appends(request()->query())->render()!!}
 				<span class="pagination-results">
 					<b>Resultados por página:</b>
 					<a href="{{ route('store', ['results' => '20']) }}">20</a> | 
 					<a href="{{ route('store', ['results' => '40']) }}">40</a> |
 					<a href="{{ route('store', ['results' => '60']) }}">60</a>
 				</span>
+				{!! $articles->appends(request()->query())->render()!!}
 			</div>
 		</div>
 	</div>
