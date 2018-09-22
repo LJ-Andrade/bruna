@@ -17,7 +17,7 @@
 			</div>
 			<!-- Products -->
 			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
-				<!-- Products Grid -->
+				{{-- <!-- Products Grid -->
 				@if(isset($search) && $search == true || count($_GET) > 0)
 					<div class="top-info">
 						<a href="{{ url('tienda') }}" class="btn btn-outline-primary btn-sm">Volver al listado</a> 
@@ -30,7 +30,7 @@
 							{{ $articles->count() }} artículos encontrados <br>
 						@endif
 					</div>
-				@endif
+				@endif --}}
 				<div class="row articles-container">
 					@foreach($articles as $article)
 						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 article">
