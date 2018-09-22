@@ -309,7 +309,7 @@ class StoreController extends Controller
         ]);
         $data = $data->all();
             
-        if($customer->group = '3')
+        if($customer->group == '3')
         {
             if($data['cuit'] == '' || $data['cuit'] == null)
             {    
