@@ -10,9 +10,9 @@
                 <h2>Datos de contacto y entrega</h2>
                 <div class="padding-top-2x mt-2 hidden-lg-up"></div>
                 @if(app('request')->input('from') == 'checkout')
-                <form class="row" method="POST" action="{{ route('store.updateCustomer', array('from' => 'checkout')) }}">
+                <form class="row small-form" method="POST" action="{{ route('store.updateCustomer', array('from' => 'checkout')) }}">
                 @else
-                <form class="row" method="POST" action="{{ route('store.updateCustomer') }}">
+                <form class="row small-form" method="POST" action="{{ route('store.updateCustomer') }}">
                 @endif
                     {{ csrf_field() }}
                     <div class="col-md-6">
@@ -110,24 +110,20 @@
 @endsection
 
 @section('scripts')
-	@include('store.components.bladejs')
-@endsection
-
-@section('custom_js')
-<script>
-    
-    // Check for locality
-    $(document).ready(function(){
-        var actualGeoProv = "{{ Auth::guard('customer')->user()->geoprov_id }}";
-        
-        if(actualGeoProv != ''){
-            getGeoLocs(actualGeoProv);
-        }
-        
-        $('.GeoProvSelect').on('change', function(){
-            let prov_id = $(this).val();
-            getGeoLocs(prov_id);
+    @include('store.components.bladejs')
+    <script>
+        // Check for locality
+        $(document).ready(function(){
+            var actualGeoProv = "{{ Auth::guard('customer')->user()->geoprov_id }}";
+            
+            if(actualGeoProv != ''){
+                getGeoLocs(actualGeoProv);
+            }
+            
+            $('.GeoProvSelect').on('change', function(){
+                let prov_id = $(this).val();
+                getGeoLocs(prov_id);
+            });
         });
-    });
-</script>
+        </script>
 @endsection

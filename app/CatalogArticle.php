@@ -55,12 +55,12 @@ class CatalogArticle extends Model
         }
 
         
-        return 'webimages/gen/catalog-gen.jpg';
+        return 'images/gen/catalog-gen.jpg';
 
     }
 
     public function scopeActive($query){
-        return $query->where('status', '1');
+        return $query->where('status', '1')->where('stock', '>', '0');
     }
 
     public function scopeSearch($query, $term)

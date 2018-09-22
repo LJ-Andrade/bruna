@@ -25,7 +25,8 @@
     | COUPON
     |--------------------------------------------------------------------------
     */
-    $('#CheckCoupon').click(function(){
+    $('#CheckCoupon').click(function(e){
+        e.preventDefault();
         let code = $('#CuponCodeInput').val();
         let cartid = $('#CartId').val();
         validateAndSetCoupon(code, cartid);

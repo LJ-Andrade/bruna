@@ -15,13 +15,19 @@
 <aside id="Sidebar" class="sidebar">
 	<section class="sidebar-widget">
 		{!! Form::open(['route' => 'store', 'method' => 'GET', 'class' => 'input-group form-group search-input']) !!}
-			<span class="input-group-btn">
-				<button type="submit"><i class="icon-search"></i></button>
-			</span>
-			<input class="form-control" name="buscar" type="search" placeholder="Buscar...">
+		<span class="input-group-btn">
+			<button type="submit"><i class="icon-search"></i></button>
+		</span>
+		<input class="form-control" name="buscar" type="search" placeholder="Buscar...">
 		{!! Form::close() !!}
 	</section>
 	<section class="sidebar-widget">
+		
+		<h4>Precio</h4>
+		<div class="price"><a href="{{ route('store', ['precio' => 'mayor']) }}"><i class="fas fa-arrow-up"></i> Mayor precio</a></div>  
+		<div class="price"><a href="{{ route('store', ['precio' => 'menor']) }}"><i class="fas fa-arrow-down"></i> Menor precio</a></div>
+	</section>
+	{{-- <section class="sidebar-widget">
 		<h4>Talles</h4>
 		<div class="horizontal-list">
 			<ul>
@@ -32,7 +38,7 @@
 				@endforeach
 			</ul>
 		</div>
-	</section>
+	</section> --}}
 	<section class="sidebar-widget">
 		<h4>Etiquetas</h4>
 		<div class="horizontal-list">

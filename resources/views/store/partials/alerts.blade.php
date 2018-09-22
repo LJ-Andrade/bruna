@@ -9,11 +9,16 @@
     </ul>
 </div>
 @endif
-
 {{-- Messages --}}
 @if(Session::has('message'))
 <div class="alert alert-success alert-dismissible fade show text-center margin-bottom-1x">
     <span class="alert-close" data-dismiss="alert"></span>
-    <strong>{{ Session::get('message') }}</strong>
+    <span class="text" style="color: #fff">{{ Session::get('message') }}</span>
 </div>
 @endif
+{{-- 
+<div class="alert alert-success alert-dismissible fade show text-center margin-bottom-1x">
+    <span class="alert-close" data-dismiss="alert"></span>
+    <span class="text">{{ Session::get('message') }}</span>
+    Texto de alerta
+</div> --}}

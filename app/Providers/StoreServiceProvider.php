@@ -21,6 +21,7 @@ class StoreServiceProvider extends ServiceProvider
         View::composer([
             'store.index', 
             'store.checkout',
+            'store.checkout-final',
             'store.checkout-mp',
             'store.customer-active-cart',
             'store.customer-account',

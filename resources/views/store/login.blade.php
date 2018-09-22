@@ -1,7 +1,7 @@
 @extends('store.partials.main')
 
 @section('content')
-<div class="container padding-bottom-3x mb-2 marg-top-25">
+<div class="container padding-bottom-3x">
 	<div class="row centered-form">
 
 		<form class="login-box inner" method="POST" action="{{ route('customer.login') }}">

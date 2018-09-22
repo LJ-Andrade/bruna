@@ -112,7 +112,12 @@
 										$item->status, ['class' => 'form-control custom-select minWidth150', 'onChange' => 'updateCartStatus(this, this.dataset.id)', 'data-id' => $item->id]) !!}
 									</div>
 								</td>
-								<td>{{ $item->items->count() }}</td>
+								@php
+									$count = '0';
+									foreach($item->items as $item)
+										$count += $item->quantity;
+								@endphp
+								<td>{{ $count }}</td>
 								<td class="w-200">{{ transDateT($item->created_at) }}</td>
 								{{-- EXPORTS --}}
 								<td class="w-50">

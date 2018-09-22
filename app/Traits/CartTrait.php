@@ -138,5 +138,19 @@ trait CartTrait {
         return $newStock;
     }
 
+    public function replaceCartItemStock($articleId, $newStock)
+    {
+        try{
+            //CatalogArticle::where('id', $articleId)->update(['stock'=>$newStock]);
+            $article = CatalogArticle::where('id', $articleId)->first();
+            $article->stock = $newStock;
+            $article->save();
+        } 
+        catch(\Exception $e)
+        {
+            return dd("Error");
+        }
+        return $newStock;
+    }
 
 }

@@ -47,7 +47,49 @@ class CartItemController extends Controller
             dd($e->getMessage());
         }
 
-        return redirect()->back()->with('message', 'Producto agegado al carro de compras');
+        return redirect()->back()->with('message', 'Artículo "' .$article->name. '" agegado al carro de compras');
+    }
+
+    public function addQtoCartItem(Request $request)
+    {
+        $cartItem = CartItem::findOrFail($request->itemId);
+        
+        if($request->quantity == $cartItem->quantity)
+        {
+            return redirect()->back();
+        }
+        elseif($request->quantity > ($cartItem->article->stock + $cartItem->quantity))
+        {   
+            return redirect()->back()->with('message', 'Stock actual excedido');
+        }
+
+        try
+        {
+            $value = $cartItem->article->stock - $request->quantity + $cartItem->quantity;
+            $this->replaceCartItemStock($cartItem->article->id, $value);
+            // dd("Stock actual: ". $cartItem->article->stock. "| Stock reserv.: " .$cartItem->quantity. "| Ingresado: ". $request->quantity.
+            // '|| Stock actual: '. $value
+            // );
+            // Return stock
+            // if($request->quantity < $cartItem->quantity)
+            // {
+            //     $value = ($cartItem->quantity - $request->quantity);
+            //     $this->updateCartItemStock($cartItem->article->id,  $value);
+            // } else {
+            //     $value = ($request->quantity - $cartItem->quantity);
+            //     // Discount Stock
+            //     $this->updateCartItemStock($cartItem->article->id, -$value);
+            // }
+            
+            $cartItem->quantity = $request->quantity;
+            $cartItem->save();
+    
+            return redirect()->back()->with('message', 'Cantidad modificada');
+        }
+        catch (\Exception $e)  {
+            dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
     }
 
     public function destroy(Request $request)

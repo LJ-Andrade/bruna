@@ -1,5 +1,16 @@
 <script>
 
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel Token
+    |--------------------------------------------------------------------------
+    */
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -52,11 +63,11 @@
         });
     }
 
-
-
-    //$('.UpdateCustomerAvatar').click(function(){
-    //   
-    //});
+    /*
+    |--------------------------------------------------------------------------
+    | Customer Avatar
+    |--------------------------------------------------------------------------
+    */
 
     $(document).ready(function() {
         $('#UpdateCustomerAvatarBtn').click(function(){
@@ -81,14 +92,5 @@
     $('.CheckImg').on('error', function(){
         var defaultImg = "{{ asset('images/users/default.jpg') }}"
         $(this).attr('src', defaultImg);
-    });
-    // Laravel Token
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-			
-
-
+    });		
 </script>

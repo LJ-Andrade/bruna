@@ -12,7 +12,7 @@
                     <h2 class="card-title">Gracias por tu compra!</h2>
                     <h4 class="card-text">Tu pedido ya está en proceso.</h4>
                     <div class="short-divisor"><div class="inner"></div></div>
-                    No te olvides de agendar el número del mismo: <b>#{{ $cart->id }}</b></p>
+                    No te olvides de agendar el número: <b>#{{ $cart->id }}</b></p>
                     <p class="card-text">Podés revisar el estado del mismo en la <b><a href="{{ route('store.customer-orders') }}">"Lista de Pedidos"</a></b> desde tu perfil<br>
                     
                     <div class="padding-top-1x padding-bottom-1x">
@@ -29,10 +29,6 @@
 
 @section('scripts')
 	@include('store.components.bladejs')
-@endsection
-
-
-@section('custom_js')
     <script>
         // Prevent backbtn
         history.pushState(null, null, location.href);

@@ -83,6 +83,6 @@
 
 @endsection
 
-@section('custom_js')
+@section('scripts')
 	@include('store.components.bladejs')
 @endsection

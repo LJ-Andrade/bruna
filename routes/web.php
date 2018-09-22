@@ -100,14 +100,16 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
         
         // Cart
         Route::post('addtocart', ['as' => 'store.addtocart', 'uses' => 'Store\CartItemController@store']);
+        Route::post('addQtoCart', ['as' => 'store.addQtoCartItem', 'uses' => 'Store\CartItemController@addQtoCartItem']);
         Route::post('removeFromCart', ['as' => 'store.removeFromCart', 'uses' => 'Store\CartItemController@destroy']);
         Route::post('eliminar-carro', ['as' => 'store.removeCartReturnStock', 'uses' => 'Store\CartsController@removeCartReturnStock']);
         // Checkout
-        Route::get('checkout', ['as' => 'store.checkout', 'uses' => 'Store\StoreController@checkout']);
+        Route::get('checkout', ['as' => 'store.checkout', 'uses' => 'Store\StoreController@checkoutArticles']);
+        Route::get('checkout-final', ['as' => 'store.checkout-final', 'uses' => 'Store\StoreController@checkoutFinal']);
         Route::post('checkear-cupon', ['as' => 'store.validateAndSetCoupon', 'uses' => 'Store\StoreController@validateAndSetCoupon']);
         Route::post('updateCartPayment', ['as' => 'store.updatePaymentAndShipping', 'uses' => 'Store\CartsController@updatePaymentAndShipping']);
         Route::post('finalizando-compra', ['as' => 'store.processCheckout', 'uses' => 'Store\StoreController@processCheckout']);
-        Route::get('finalizando-compra', 'Store\StoreController@index'); 
+        Route::get('finalizando-compra',  ['as' => 'store.checkout-final', 'uses' => 'Store\StoreController@checkoutFinal']);
         Route::get('descargar-comprobante/{id}/{action}', 'Store\StoreController@downloadInvoice');
         // Route::post('mp-connect', ['as' => 'store.getCreatePreference', 'uses' => 'MercadoPagoController@getCreatePreference']);
         Route::post('mp-connect', ['as' => 'store.getCreatePreference', 'uses' => 'Store\StoreController@mpConnect']);

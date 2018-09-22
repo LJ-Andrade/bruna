@@ -23,7 +23,7 @@
                                 <tr id="Detail{{$item->id}}">
                                     <td>
                                         <div class="product-item"><a class="product-thumb" href="{{ url('tienda/articulo/'.$item->article->id) }}">
-                                            <img class="CheckCatalogImg" src="{{ asset('webimages/catalogo/'. $item->article->featuredImageName() ) }}" alt="{{ $item->name }}"></a>
+                                            <img class="CheckCatalogImg" src="{{ asset($item->article->featuredImageName() ) }}" alt="{{ $item->name }}"></a>
                                             <div class="product-info">
                                                 <h4 class="product-title"><a href="{{ url('tienda/articulo/'.$item->article->id) }}">{{ $item->article->name }}</a></h4>
                                                 <span><b>Código:</b> #{{ $item->article->code }}</span>
@@ -95,6 +95,6 @@
 
 @endsection
 
-@section('custom_js')
+@section('scripts')
 	@include('store.components.bladejs')
 @endsection

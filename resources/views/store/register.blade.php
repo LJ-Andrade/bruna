@@ -2,7 +2,7 @@
 
 
 @section('content')
-<div class="container padding-bottom-3x mb-2 marg-top-25">
+<div class="container padding-bottom-3x">
 	<div class="row centered-form">
         <form class="login-box form-simple inner" method="POST" action="{{ route('customer.register') }}">
             {{ csrf_field() }}
@@ -122,37 +122,31 @@
 
 @section('scripts')
 	@include('store.components.bladejs')
-@endsection
+    <script>
+        const isReseller = $('#IsResellerCeckbox');
+        const resellerInputs = $('.IfResellerEnable');
+        const resellerBox = $('#ResellerBox');
+        resellerBox.hide();
 
-@section('custom_js')
-<script>
-    const isReseller = $('#IsResellerCeckbox');
-    const resellerInputs = $('.IfResellerEnable');
-    const resellerBox = $('#ResellerBox');
-    resellerBox.hide();
+        isReseller.on('change', function(e){
+            e.preventDefault();
 
-    isReseller.on('change', function(e){
-        e.preventDefault();
+            if(isReseller.prop('checked')){
 
-        if(isReseller.prop('checked')){
-
-            resellerInputs.prop('disabled', false);
-            resellerBox.show(100);
-        } else {
-            resellerInputs.prop('disabled', true);
-            resellerBox.hide(100);
-        }
-    });
-
-
-    
-
-    $(document).ready(function(){
- 
-        $('.GeoProvSelect').on('change', function(){
-            let prov_id = $(this).val();
-            getGeoLocs(prov_id);
+                resellerInputs.prop('disabled', false);
+                resellerBox.show(100);
+            } else {
+                resellerInputs.prop('disabled', true);
+                resellerBox.hide(100);
+            }
         });
-    });
-</script>
+
+        $(document).ready(function(){
+    
+            $('.GeoProvSelect').on('change', function(){
+                let prov_id = $(this).val();
+                getGeoLocs(prov_id);
+            });
+        });
+    </script>
 @endsection

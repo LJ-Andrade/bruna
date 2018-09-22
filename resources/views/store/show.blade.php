@@ -164,12 +164,6 @@
 <div id="Error"></div>
 @endsection
 
-@section('custom_js')
-	@include('store.components.bladejs')
-@endsection
-
 @section('scripts')
-	<script>
-		
-	</script>
+	@include('store.components.bladejs')
 @endsection

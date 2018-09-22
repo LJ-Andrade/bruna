@@ -30,6 +30,13 @@ class CustomerController extends Controller
             'cp' => 'required|max:255',
             'geoprov_id' => 'required|max:255',
             'geoloc_id' => 'required|max:255',
+        ],[
+            'username.unique' => 'Ese nombre de usuario ya existe',
+            'phone.required' => 'Debe ingresar su número de teléfono',
+            'addres.required' => 'Debe ingresar su dirección',
+            'geoprov_id.required' => 'Debe ingresar su provincia',
+            'geoloc_id.required' => 'Debe ingresar su localidad',
+            'cp.required' => 'Debe ingresar su código postal'
         ]);
             
         $item->fill($request->all());

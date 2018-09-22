@@ -89,8 +89,9 @@
 .site-logo
 	width: 190px
 
-.index-header
-	margin-bottom: 25px
+@media (min-width: 768px)
+	.index-header
+		margin-bottom: 25px
 
 .login-box
 	background: #fff
@@ -103,6 +104,12 @@
 		text-align: center
 		bottom: 10px
 		left: 0
+
+
+@media (max-width: 768px)
+	.login-box
+		margin: 0
+
 
 @media (max-width: 481px)
 	.navbar
@@ -279,7 +286,30 @@
 	&:hover
 		filter: brightness(1.2)
 
+.floating-bottom-cta
+	display: none
+	position: fixed
+	left: 10px
+	bottom: 10px
+	.inner
+		padding: 13px 14px
+		width: 50px
+		height: 50px
+		border-radius: 50%
+		background-color: #2cb742
+		i
+			color: #fff
+			font-size: 1.6rem
 
+@media (max-width: 800px)
+	.floating-bottom-cta
+		display: block
+
+.icon-button
+	background: 0
+	border: 0
+	font-size: 1.2rem
+	
 //////////////////////////////////////
 //                                  //
 //             FORMS                //
@@ -307,13 +337,16 @@
 
 .input-with-btn
 	display: flex
+	position: relative
 	.input-field
 		flex: 1
 		border-radius: 5px 0px 0px 5px
 	.short-input
 		width: 100px
 	.input-btn
+		background: transparent
 		white-space: nowrap
+		border: 1px solid #383838
 		border-left: 0
 		border-radius: 0px 5px 5px 0px
 		margin: 0
@@ -321,7 +354,40 @@
 			background-color: $main-color
 			color: #fff
 
+@media (max-width: 415px)
+	.input-with-btn-mobile
+		display: block
+		.small-input
+			width: 60px
+			text-align: center
+		.input-btn
+			background: transparent
+			border: 1px solid #383838
+			border-top: 0
+			border-radius: 0
+			width: 60px
+			height: 35px
 
+.small-input
+	max-width: 70px
+	padding: 5px 10px
+	border-radius: 0 
+	border: 1px solid $main-color 
+
+.under-input
+	position: absolute
+	bottom: -25px
+	left: 0
+
+.small-form
+	input,select
+		border: 1px solid #ccc
+		height: 35px !important
+		border-radius: 0
+		padding: 0 18px 3px 18px
+	label
+		margin-bottom: 1px
+		padding-left: 8px
 //////////////////////////////////////
 //                                  //
 //           PAGINATION             //
@@ -333,35 +399,45 @@ ul.pagination
 	// background-color: #0da9ef
 	display: block
 	margin: 0
+	margin-top: 25px
 	padding: 0
-	margin-top: 5px
 	list-style: none
 	border-top: 0
-
+	margin-bottom: 20px
 	li
-		padding: 6px 12px
 		display: inline-block
 		text-align: center
 		border-radius: 5px
 		font-size: 1rem
 		font-weight: bold
 		line-height: 24px
-		border: 1px solid $main-color
-		background-color: transparent
-		color: $main-color
-		&:hover
-			a
-				color: #000
 		a
+			padding: 10px 15px
 			text-decoration: none
 			margin-left: 2px
 			color: $main-color
 			font-weight: 600
+			font-size: 1.2rem
+			background-color: $main-color
+			color: #fff
+		span
+			color: #fff
+		&:hover
+			a
+				color: #fff
+		
 	li.disabled,li.active
 		font-weight: 300
 		color: #6b6161
+		span
+			padding: 10px 15px
+			background-color: $main-color
+			color: #fff
 		&:hover
 			cursor: not-allowed
+
+.pagination-results
+	margin-top: 20px
 
 //////////////////////////////////////
 //                                  //
@@ -385,16 +461,34 @@ ul.pagination
 					margin-left: 15px
 					margin-right: 15px
 					font-size: 1.5rem
+				.overlay
+					position: absolute
+					width: 100%
+					height: 100%
+					top: 0
+					left: 0
+					@include flex-center()
+					background-color: rgba($main-color,.9)
+					color: #ffffff
+					font-size: 1.5rem
+					font-weight: 300
+					opacity: 0
+					@include transition(0.5s)
+				&:hover
+					.overlay
+						opacity: 1	
 			.content
 				padding: 5px
-				height: 140px
+				// height: 140px
+				height: 110px
 				text-align: center
 				width: 100%
 				padding-bottom: 50px
 				.title-info
 					font-family: $font2
 					width: 100%
-					height: 80px
+					// height: 80px
+					height: 61px
 					@include flex-column()
 					h3
 						font-size: 1.1rem
@@ -406,6 +500,24 @@ ul.pagination
 					position: absolute
 					bottom: 4px
 					left: 0
+					.col-add
+						white-space: nowrap
+						.quantity-input
+							margin-right: 0
+							width: 45px
+							height: 34px
+							border: 1px solid #8e8e8e
+							border-right: 0
+							border-radius: 0
+							box-shadow: 0 0 0
+							text-align: center
+							margin-right: -4px
+						.btn
+							padding: 0 10px
+							height: 34px
+							border-radius: 0
+						.form-group
+							margin-bottom: 0
 					.col-price
 						@include flex-column()
 						.price
@@ -423,6 +535,34 @@ ul.pagination
 					.col
 						.del
 							font-size: 0.9rem
+
+
+@media (max-width: 576px)
+	.articles-container
+		.article
+			.inner
+				.image
+				.content
+					height: auto
+					padding: 0 10px
+					.footer
+						display: block
+						position: relative
+						bottom: 10px
+						margin-top: 0
+						.btn
+							margin: 0
+						.col-price
+							display: block
+
+@media (max-width: 576px)
+	.articles-container
+		.col-sm-6
+			-webkit-box-flex: 0
+			-webkit-flex: 0 0 50%
+			-ms-flex: 0 0 50%
+			flex: 0 0 50%
+			max-width: 50%
 
 @media (min-width: 1199px) and (max-width: 1340px)
 	.articles-container .article .inner .content .footer
@@ -560,6 +700,26 @@ ul.pagination
 .toolbar
 	.text-links
 		display: none
+	.access-icons
+		display: none
+
+@media (max-width: 600px)
+	.toolbar
+		position: relative
+		.access-buttons
+			display: none
+		.access-icons
+			display: block
+			position: absolute
+			right: 5px
+			top: 5px
+			i
+				color: $main-color
+
+@media (max-width: 300px)
+	.toolbar
+		padding-right: 70px
+
 @media (min-width: 680px)
 	.toolbar
 		.text-links
@@ -600,8 +760,7 @@ ul.pagination
 .checkout-container 
 	> .row	
 		background-color: #fff
-		padding-top: 30px
-		padding-left: 20px
+		padding-top: 10px
 	.warning
 		margin-bottom: 15px
 		span
@@ -609,6 +768,14 @@ ul.pagination
 			padding: 5px
 			i
 				margin-right: 10px
+	.sub-title
+		border-bottom: 1px solid #ccc
+		font-size: 1.1rem
+		margin-bottom: 10px
+		i
+			margin-right: 10px
+			color: $main-color
+
 
 @media (max-width: 991px)
 	.checkout-container
@@ -630,6 +797,8 @@ ul.pagination
 	.product-item
 		.product-thumb
 			max-width: 80px
+
+
 
 .coupon-message
 	.inner
@@ -686,6 +855,12 @@ ul.pagination
 		font-size: 1.5rem
 	.sidebar-widget
 		margin-bottom: 15px
+		.price
+			display: inline
+			white-space: nowrap
+			margin-right: 15px
+			i
+				font-size: 0.8rem
 		ul
 			padding: 0
 			list-style: none
@@ -735,16 +910,45 @@ ul.pagination
 //////////////////////////////////////
 
 .alert
+	position: absolute
+	right: -100px
+	// right: 1px
+	top: 106px
+	z-index: 9000
+	padding: 14px 55px
+	color: #fff !important
+	-webkit-animation: slide 0.5s forwards
+    -webkit-animation-delay: 2s
+    animation: slide 0.5s forwards
+    animation-delay: 2s
+	span
+		color: #fff !important
 	ul 
 		li
 			list-style: outside none none
+	.text
+		font-weight: 400
 			
+@-webkit-keyframes slide
+	100%
+		right: -2px
+
+@keyframes slide
+	100%
+		right: -2px
+
 
 .alert-success
-	background-color: $green
-	color: #000
+	background-color: #D12F59
+	color: #fff
+	margin-top: 20px 
+
+.alert-danger
+	background-color: #D12F59
+	color: #fff
 	margin-top: 20px 
 	
+
 .alert-success > :not(.text-white), .alert-success > :not(.text-light), .alert-success h1:not(.text-white), .alert-success h1:not(.text-light), .alert-success h2:not(.text-white), .alert-success h2:not(.text-light), .alert-success h3:not(.text-white), .alert-success h3:not(.text-light), .alert-success h4:not(.text-white), .alert-success h4:not(.text-light), .alert-success h5:not(.text-white), .alert-success h5:not(.text-light), .alert-success h6:not(.text-white), .alert-success h6:not(.text-light), .alert-success p:not(.text-white), .alert-success p:not(.text-light), .alert-success ul:not(.text-white), .alert-success ul:not(.text-light), .alert-success ol:not(.text-white), .alert-success ol:not(.text-light), .alert-success a:not(.text-white), .alert-success a:not(.text-light)
 	color: #000
 
@@ -768,54 +972,3 @@ ul.pagination
 	@include flex-center
 	text-align: center
 	height: 100vh
-
-//////////////////////////////////////
-//                                  //
-//           HELPERS                //
-//                                  //
-//////////////////////////////////////
-
-.Hidden
-	display: none !important
-.brd
-  	border: 1px solid red
-.txtL
-  	text-align: left
-.txtR
-  	text-align: right
-.txtC
- 	 text-align: center
-.pad0
-  	padding: 0
-.dont-break
-	white-space: nowrap
-.dont-wrap
-	display: flex
-	flex-wrap: nowrap
-	
-.marg-top-25
-	margin-top: 25px
-.pad0
-	padding: 0
-.cursor-pointer
-	&:hover
-		cursor: pointer
-.anchor
-	display: block
-	position: relative
-	top: -50px
-	visibility: hidden
-
-.horizontal-list
-	ul
-		padding-left: 0
-		padding: 0
-		margin: 0
-		li
-			display: inline-block
-			list-style: none
-
-.flex-h-100
-	display: flex
-	.flex-h-inner
-		width: 100%
