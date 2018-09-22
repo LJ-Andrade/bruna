@@ -1,10 +1,20 @@
 // Loaders
 // -------------------------------------------
-$( ".DeleteCartItem, .loader-on-submit" ).on('change submit', function() {
+$( ".loader-on-change" ).on('change', function() {
     $('#full-loader').removeClass('Hidden');
     return true;
 });
 
+$( ".loader-on-submit" ).on('submit', function() {
+    $('#full-loader').removeClass('Hidden');
+    return true;
+});
+
+$('.dont-submit-on-enter, .dson').keypress(function(e){
+    console.log("ENTER");
+    if ( e.which == 13 ) return false;
+    if ( e.which == 13 ) e.preventDefault();
+ }); 
 
 // Modify cart item quantity 
 // -------------------------------------------

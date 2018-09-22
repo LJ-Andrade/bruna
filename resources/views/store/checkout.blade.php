@@ -81,7 +81,7 @@
 								@endif
 								{{-- Add Quantity to Cart Item --}}
 								<td>
-									{!! Form::open(['route' => 'store.addQtoCartItem', 'method' => 'POST']) !!}	
+									{!! Form::open(['route' => 'store.addQtoCartItem', 'method' => 'POST', 'class' => 'loader-on-submit']) !!}	
 										{{ csrf_field() }}
 										<div class="input-with-btn input-with-btn-mobile">
 											<input name="itemId" type="hidden" value="{{ $item->id }}">
@@ -95,7 +95,7 @@
 								<td class="TotalItemPrice">$ {{ ($articlePrice * $item->quantity) }}</td>
 								{{-- REMOVE ITEMS FROM CART --}}
 								<td class="text-center">
-									{!! Form::open(['class' => 'DeleteCartItem', 'route' => 'store.removeFromCart', 'method' => 'POST']) !!}	
+									{!! Form::open(['route' => 'store.removeFromCart', 'method' => 'POST', 'class' => 'loader-on-submit']) !!}	
 										{{ csrf_field() }}
 										<input type="hidden" name="itemid" value="{{ $item->id }}">
 										<input type="hidden" name="quantity" value="{{ $item->quantity }}">

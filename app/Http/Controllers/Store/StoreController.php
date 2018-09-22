@@ -254,7 +254,6 @@ class StoreController extends Controller
             }   
             $order->save();    
         }
-        
         $cart->status = 'Process';
         
         try {
