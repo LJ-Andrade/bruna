@@ -15,7 +15,8 @@
 				<div class="col-xs-12 col-sm-3 col-md-3 pad0">
 					<ul class="product-thumbnails">
 						@foreach($article->images as $image)
-							<li><a href="#{{ $image->id }}">
+							<li>
+								<a href="#{{ $image->id }}">
 									<img src="{{ asset('webimages/catalogo/'. $image->name) }}" class="CheckCatalogImg" alt="Producto Bruna">
 								</a>
 							</li>
@@ -53,7 +54,7 @@
 					</a>
 					@else
 					<a href="{{ url('tienda/login') }}" class="fa-icon fav-icon-nofav"></a>
-					@endif
+				@endif
 			</div>
 			{{-- Title Desktop --}}
 			<div class="title-desktop">
@@ -102,15 +103,22 @@
 				<div class="col-sm-12 price-and-stock">
 					@if($article->stock > 0)
 						@if(Auth::guard('customer')->check())
-						<div class="stock">
+						<div class="AvailableStock stock">
 							Stock disponible: {{ $article->stock }}
 						</div>
-						{!! Form::open(['route' => 'store.addtocart', 'method' => 'POST', 'class' => 'form-group price']) !!}	
-						<div class="input-with-btn">
-							<input class="form-control input-field short-input" name="quantity" type="number" min="1" max="{{ $article->stock }}" value="1" placeholder="1" required>
-							<button class="btn input-btn">Agregar al carro</button>
-						</div>
-						<input type="hidden" value="{{ $article->id }}" name="articleId">
+						{{-- {!! Form::open(['class' => 'AddToCart price']) !!}	
+							{{ csrf_field() }}
+							<input type="number" min="0" max="{{ $article->stock }}" name="quantity" class="quantity-input" value="1">
+							<input type="submit" class="input-button" value="Agregar">
+							<input type="hidden" value="{{ $article->id }}" name="articleId">
+						{!! Form::close() !!} --}}
+						{!! Form::open(['class' => 'AddToCart form-group price']) !!}
+							{{ csrf_field() }}	
+							<div class="input-with-btn">
+								<input class="form-control input-field short-input" name="quantity" type="number" min="1" max="{{ $article->stock }}" value="1" placeholder="1" required>
+								<button class="btn input-btn">Agregar al carro</button>
+							</div>
+							<input type="hidden" value="{{ $article->id }}" name="articleId">
 						{!! Form::close() !!}
 						@else
 						<a href="{{ url('tienda/login') }}" class="btn input-btn">Comprar</a>

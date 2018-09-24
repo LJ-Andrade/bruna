@@ -33,7 +33,7 @@
 				@endif --}}
 				<div class="row articles-container">
 					@foreach($articles as $article)
-						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 article">
+						<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 article">
 							<div class="inner">
 								{{-- =========== Discount Badge =========== --}}
 								{{-- ====================================== --}}
@@ -58,10 +58,10 @@
 								{{-- =============== Image ================ --}}
 								{{-- ====================================== --}}
 								<div class="image">
-									<img class="CheckCatalogImg" src="{{ asset($article->featuredImageName()) }}" alt="Producto del Catálogo">
+									<img src="{{ asset($article->featuredImageName()) }}" alt="Producto del Catálogo">
 									@if(Auth::guard('customer')->check())
 									{{--  Check if product is in favs  --}}
-									<a class="AddToFavs fa-icon fav-icon-nofav fav-btn
+									<a class="AddToFavs add-to-favs fa-icon fav-icon-nofav fav-btn
 										@if(in_array($article->id, $favs['articleFavs'])) fav-icon-isfav @endif"
 										data-id="{{ $article->id }}" data-toggle="tooltip" title="Agregar a Favoritos">
 									</a>
@@ -84,7 +84,7 @@
 									</div>
 									{{-- =============== Footer =============== --}}
 									<div class="footer">
-										<div class="col col-price pad0">
+										<div class="col-price pad0">
 											@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
 												@if($article->reseller_discount > 0)
 													<del>$ {{ $article->reseller_price + 0 }}</del> 
@@ -105,7 +105,7 @@
 												@endif
 											@endif
 										</div>
-										<div class="col col-favs col-add pad0">
+										<div class="col-add pad0">
 											{{-- @if(Auth::guard('customer')->check()) --}}
 											{{--  Check if product is in favs  --}}
 											{{-- <a class="AddToFavs fa-icon fav-icon-nofav fav-btn
@@ -114,9 +114,10 @@
 											</a>
 											@endif --}}
 											@if(Auth::guard('customer')->check())
-												{!! Form::open(['route' => 'store.addtocart', 'method' => 'POST', 'class' => 'form-group price']) !!}	
+												{!! Form::open(['class' => 'AddToCart price']) !!}	
+													{{ csrf_field() }}
 													<input type="number" min="0" max="{{ $article->stock }}" name="quantity" class="quantity-input" value="1">
-													<button type="submit" class="btn btn-outline-primary btn-sm">Agregar</button>
+													<input type="submit" class="input-button" value="Agregar">
 													<input type="hidden" value="{{ $article->id }}" name="articleId">
 												{!! Form::close() !!}
 											@else
@@ -139,7 +140,7 @@
 			</div>
 		</div>
 	</div>
-	{{-- <div id="Error"></div> --}}
+	<div id="Error"></div>
 @endsection
 
 @section('scripts')

@@ -100,6 +100,7 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
         
         // Cart
         Route::post('addtocart', ['as' => 'store.addtocart', 'uses' => 'Store\CartItemController@store']);
+        Route::post('addToCartLive', ['as' => 'store.addToCartLive', 'uses' => 'Store\CartItemController@store']);
         Route::post('addQtoCart', ['as' => 'store.addQtoCartItem', 'uses' => 'Store\CartItemController@addQtoCartItem']);
         Route::post('removeFromCart', ['as' => 'store.removeFromCart', 'uses' => 'Store\CartItemController@destroy']);
         Route::post('eliminar-carro', ['as' => 'store.removeCartReturnStock', 'uses' => 'Store\CartsController@removeCartReturnStock']);

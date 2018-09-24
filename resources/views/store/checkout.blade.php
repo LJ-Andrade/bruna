@@ -92,7 +92,7 @@
 										</div>
 									{!! Form::close() !!}
 								</td>
-								<td class="TotalItemPrice">$ {{ ($articlePrice * $item->quantity) }}</td>
+								<td class="TotalItemPrice">$ <span class="TotalItemPriceVal">{{ ($articlePrice * $item->quantity) }}</span></td>
 								{{-- REMOVE ITEMS FROM CART --}}
 								<td class="text-center">
 									{!! Form::open(['route' => 'store.removeFromCart', 'method' => 'POST', 'class' => 'loader-on-submit']) !!}	
@@ -104,6 +104,13 @@
 								</td>
 							</tr>
 							@endforeach
+							<tr>
+								<td></td>
+								<td></td>
+								<td><b>SUBTOTAL</b></td>
+								<td>$ <b><span class="SubTotal"></span></b></td>
+								<td></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -117,4 +124,16 @@
 
 @section('scripts')
 	@include('store.components.bladejs')
+	<script>
+	
+		let itemSum = $('.TotalItemPrice').html();
+		sum = 0;
+
+		$('.TotalItemPriceVal').each(function( index ) {
+			sum += parseInt($(this).html());
+		});
+		console.log(sum);
+		$('.SubTotal').html(sum);
+
+	</script>
 @endsection

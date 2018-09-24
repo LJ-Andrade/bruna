@@ -45,3 +45,11 @@ setTimeout(function(){
     $('.alert').hide(100);
 }, 4000);
 
+
+// Cart Resumen
+// -------------------------------------------
+
+window.showCartResumeMobile = function()
+{
+    $('.cart-resume-details-mobile').toggleClass('Hidden', 100);
+}

@@ -5,6 +5,7 @@
 Estadisticas
 - Mas vendidos
 - Mas favoritos
+- Poder dar orden a articulos de listado
 
 - Vadmin agregar seccion vendedores
 - Usuarios no miembros solo ven: Pedidos y Clientes ()
@@ -19,7 +20,6 @@ Estadisticas
 - Agregar paginacion con cookies
 - Despues de paginar volver a la misma pagina
 - Dividir checkout en 2
-- Poder dar orden a articulos de listado
 - Modificar cantidad de producto desde checkout
 - Boton mostrar todos cambiar por: Volver al listado
 - Agregar filtros por precio en web

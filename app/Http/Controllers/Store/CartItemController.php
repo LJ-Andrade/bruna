@@ -15,40 +15,72 @@ class CartItemController extends Controller
 
     public function store(Request $request)
     {
-        if(!auth()->guard('customer')->check()){
-            return redirect('tienda/login');
-        }
-        
         $cartItem = new CartItem();
         $cartItem->cart_id = auth()->guard('customer')->user()->cart->id;
         $cartItem->article_id = $request->articleId;
         $cartItem->quantity = $request->quantity;
         $cartItem->size = $request->size;
-        
+
         $article = CatalogArticle::where('id', $request->articleId)->first();
-        
+
         // Stock management 
         if($request->quantity > $article->stock){
-            return redirect()->back()->with('message', 'Seleccionó una cantidad mayor al stock disponible');    
+            return response()->json(['response' => 'warning', 'message' => 'Seleccionó una cantidad mayor al stock disponible']); 
         } else {
             // Discount Stock
             // * Note the minus (-) sign in $request->quantity
             $newStock = $this->updateCartItemStock($article->id, -$request->quantity);
         }
-        
+
         $cartItem->article_name = $article->name;
         $cartItem->color = $article->color;
         $cartItem->size = $article->atribute1->first()->name;
         $cartItem->textile = $article->textile;
-
+        
         try{
             $cartItem->save();
-        }  catch (\Exception $e)  {
-            dd($e->getMessage());
+            return response()->json(['response' => 'success', 'message' => 'Producto "'. $article->name .'" agregado']); 
+        } catch (\Exception $e) {
+            return response()->json(['response' => 'error', 'message' => $e->getMessage()]); 
         }
-
-        return redirect()->back()->with('message', 'Artículo "' .$article->name. '" agegado al carro de compras');
     }
+
+    // public function store(Request $request)
+    // {
+    //     if(!auth()->guard('customer')->check()){
+    //         return redirect('tienda/login');
+    //     }
+        
+    //     $cartItem = new CartItem();
+    //     $cartItem->cart_id = auth()->guard('customer')->user()->cart->id;
+    //     $cartItem->article_id = $request->articleId;
+    //     $cartItem->quantity = $request->quantity;
+    //     $cartItem->size = $request->size;
+        
+    //     $article = CatalogArticle::where('id', $request->articleId)->first();
+        
+    //     // Stock management 
+    //     if($request->quantity > $article->stock){
+    //         return redirect()->back()->with('message', 'Seleccionó una cantidad mayor al stock disponible');    
+    //     } else {
+    //         // Discount Stock
+    //         // * Note the minus (-) sign in $request->quantity
+    //         $newStock = $this->updateCartItemStock($article->id, -$request->quantity);
+    //     }
+        
+    //     $cartItem->article_name = $article->name;
+    //     $cartItem->color = $article->color;
+    //     $cartItem->size = $article->atribute1->first()->name;
+    //     $cartItem->textile = $article->textile;
+
+    //     try{
+    //         $cartItem->save();
+    //     }  catch (\Exception $e)  {
+    //         dd($e->getMessage());
+    //     }
+
+    //     return redirect()->back()->with('message', 'Artículo "' .$article->name. '" agegado al carro de compras');
+    // }
 
     public function addQtoCartItem(Request $request)
     {
@@ -67,19 +99,6 @@ class CartItemController extends Controller
         {
             $value = $cartItem->article->stock - $request->quantity + $cartItem->quantity;
             $this->replaceCartItemStock($cartItem->article->id, $value);
-            // dd("Stock actual: ". $cartItem->article->stock. "| Stock reserv.: " .$cartItem->quantity. "| Ingresado: ". $request->quantity.
-            // '|| Stock actual: '. $value
-            // );
-            // Return stock
-            // if($request->quantity < $cartItem->quantity)
-            // {
-            //     $value = ($cartItem->quantity - $request->quantity);
-            //     $this->updateCartItemStock($cartItem->article->id,  $value);
-            // } else {
-            //     $value = ($request->quantity - $cartItem->quantity);
-            //     // Discount Stock
-            //     $this->updateCartItemStock($cartItem->article->id, -$value);
-            // }
             
             $cartItem->quantity = $request->quantity;
             $cartItem->save();

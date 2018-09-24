@@ -1,8 +1,6 @@
 <script>
 
-
-    var loader = "<img src='{{ asset('images/gral/loader-sm.svg') }}'>";
-    
+    const loader = "<img src='{{ asset('images/gral/loader-sm.svg') }}'>";
     
     /*
     |--------------------------------------------------------------------------
@@ -10,7 +8,6 @@
     |--------------------------------------------------------------------------
     */
     
-
     // Sum divs text
     function sumDivs(origins, target){
         let sum = 0;
@@ -25,6 +22,7 @@
     | COUPON
     |--------------------------------------------------------------------------
     */
+
     $('#CheckCoupon').click(function(e){
         e.preventDefault();
         let code = $('#CuponCodeInput').val();
@@ -63,6 +61,42 @@
             },
             complete: function(){
                 $('.CouponLoader').addClass('Hidden');
+            }
+        });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCTS
+    |--------------------------------------------------------------------------
+    */
+
+    $('.AddToCart').on('submit', function(e){
+        e.preventDefault();
+        let data = $(this).serialize();
+        addToCart(data);
+    });
+
+    function addToCart(data)
+    {
+        $.ajax({	
+            url: "{{ route('store.addToCartLive') }}",
+            method: 'POST',             
+            dataType: 'JSON',
+            data: data,
+            success: function(data){
+                if(data.response == 'success'){
+                    toast_success('Ok!', data.message, 'bottomCenter');
+                    $(".CartResumen").load(location.href + " .CartResumen");
+                    $(".AvailableStock").load(location.href + " .AvailableStock");
+                } else if($data.response == 'warning') {
+                    toast_success('Ups!', data.message, 'bottomCenter');
+                }
+                console.log(data);
+            },
+            error: function(data){
+                $('#Error').html(data.responseText);
+                console.log(data);
             }
         });
     }
@@ -255,7 +289,6 @@
     |--------------------------------------------------------------------------
     */
 
-
     function getGeoLocs(geoprov_id){
 
         let route = "{{ url('getGeoLocs') }}/"+geoprov_id+"";
@@ -286,7 +319,4 @@
         });
         
     }
-    
-     
-
 </script>
