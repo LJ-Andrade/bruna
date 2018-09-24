@@ -9,7 +9,7 @@
         <div class="tools">
             @if(Auth::guard('customer')->check())
                 @if(isset($activeCart))
-                    <div class="cart-resumen-desktop">
+                    <div class="CartResumen cart-resumen-desktop">
                         @include('store.partials.cart-resumen-desktop')
                     </div>
                     <div onclick="showCartResumeMobile()" class="cart-resumen-mobile">
@@ -18,9 +18,8 @@
                             <span class="subtotal">$ {{ $activeCart['cartSubTotal'] }}</span>
                         </div>
                     </div>
-                @else  
-                    <div class="cart"><a href="#"></a><i class="icon-bag"></i><span class="count">0</span>
-                    </div>
+                @else
+                    <div class="cart"><a href="#"></a><i class="icon-bag"></i><span class="count">0</span></div>
                 @endif
                 <div class="account"><a href="#" onclick="event.preventDefault();"></a>
                     <img src="{{ asset('webimages/customers/'.Auth::guard('customer')->user()->avatar ) }}" class="CheckImg" alt="">

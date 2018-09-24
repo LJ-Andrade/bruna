@@ -1,4 +1,4 @@
-<div class="CartResumen cart">
+<div class="cart">
     <i class="icon-bag"></i><span class="count">{{ $activeCart['totalItems'] }}</span>
     <span class="subtotal">$ {{ $activeCart['cartSubTotal'] }}</span>
     <div class="toolbar-dropdown toolbar-user-dropdown">

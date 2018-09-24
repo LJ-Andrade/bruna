@@ -87,7 +87,7 @@
             success: function(data){
                 if(data.response == 'success'){
                     toast_success('Ok!', data.message, 'bottomCenter');
-                    $(".CartResumen").load(location.href + " .CartResumen");
+                    // $(".CartResumen").load(location.href + " .CartRcartesumen");           
                     $(".AvailableStock").load(location.href + " .AvailableStock");
                 } else if($data.response == 'warning') {
                     toast_success('Ups!', data.message, 'bottomCenter');
