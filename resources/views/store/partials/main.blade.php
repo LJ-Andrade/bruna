@@ -40,9 +40,11 @@
 		@include('store.partials.topbar')
 		@include('store.partials.mobilemenu')
 		@include('store.partials.nav') {{-- ToolBar in inside this nav include --}}
+		@if(Auth::guard('customer')->check())
 		<div class="CartResumeMobile">
 			@include('store.partials.cart-resumen-mobile')
 		</div>
+		@endif
 		<!-- Off-Canvas Wrapper-->
 		{{-- <div class="offcanvas-wrapper">
 		<!-- Page Title-->
