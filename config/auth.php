@@ -103,8 +103,8 @@ return [
             'table' => 'password_resets',
             'expire' => 15,
         ],
-        'customer' => [
-            'provider' => 'customers',
+        'customers' => [
+            'provider' => 'customer',
             'table' => 'customer_password_resets',
             'expire' => 60,
         ],

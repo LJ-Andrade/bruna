@@ -31,12 +31,13 @@
 				<button type="submit" class="btn btn-primary btn-block">
 					<i class="icon-unlock2"></i> Conectar
 				</button>
-				<div class="col-md-6 col-xs-12 text-xs-center text-md-left rememberme-box">
-					<input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recordarme
-				</div>
-				<div class="col-md-6 col-xs-12 text-xs-center text-md-left rememberme-box">
-				<br>
-					<a href="{{ route('customer.password.reset') }}">Olvidé mi contraseña</a>
+				<div class="row">
+					<div class="col-sm-6 col-xs-12 text-xs-left text-md-left rememberme-box">
+						<input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recordarme
+					</div>
+					<div class="col-sm-6 col-xs-12 text-sm-right text-md-right">
+						<a href="{{ route('customer.password.reset') }}">Olvidé mi contraseña</a>
+					</div>
 				</div>
 			</fieldset>
 			<div class="bottom-text">No tiene cuenta? | <a href="{{ route('customer.register') }}">Registrarme</a></div>

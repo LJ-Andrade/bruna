@@ -18,8 +18,8 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
     // Store Password Reset Routes
     Route::get('password/reset', ['as' => 'customer.password.reset', 'uses' => 'CustomerAuth\ForgotPasswordController@showLinkRequestForm']);
     Route::post('password/email', ['as' => 'customer.password.email', 'uses' => 'CustomerAuth\ForgotPasswordController@sendResetLinkEmail']);
-    Route::get('password/reset/{token}', ['as' => 'customer.password.reset.token', 'uses' => 'CustomerAuth\ResetPasswordController@showResetForm']);
     Route::post('password/reset', ['uses' => 'CustomerAuth\ResetPasswordController@reset']);
+    Route::get('password/reset/{token}', ['as' => 'customer.password.reset.token', 'uses' => 'CustomerAuth\ResetPasswordController@showResetForm']);
 });
 
 // After

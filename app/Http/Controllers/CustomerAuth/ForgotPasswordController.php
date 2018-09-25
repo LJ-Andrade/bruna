@@ -5,42 +5,25 @@ namespace App\Http\Controllers\CustomerAuth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-//Password Broker Facade
 use Illuminate\Support\Facades\Password;
 
 class ForgotPasswordController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset emails and
-    | includes a trait which assists in sending these notifications from
-    | your application to your users. Feel free to explore this trait.
-    |
-    */
 
     use SendsPasswordResetEmails;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('guest');
-    // }
-
-    public function showLinkRequestForm()
+    public function __construct()
     {
-        return view('store.passwords.email');
+        $this->middleware('guest:customer');
     }
     
     public function broker()
     {
-         return Password::broker('customer');
+        return Password::broker('customers');
+    }
+    
+    public function showLinkRequestForm() {
+        return view('store.passwords.email');
     }
 
 }

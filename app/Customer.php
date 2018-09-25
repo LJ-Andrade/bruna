@@ -3,12 +3,16 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\CustomerResetPasswordNotification;
 use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Notifications\Notifiable;
 use App\CatalogFav;
 use App\Cart;
 
 class Customer extends Authenticatable
 {
+    use Notifiable;
+    
     protected $guard = 'customer';
 
     protected $table = 'customers';
@@ -20,6 +24,12 @@ class Customer extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomerResetPasswordNotification($token));
+    }
+
 
     //Relations
     public function catalogFavs()
@@ -75,12 +85,5 @@ class Customer extends Authenticatable
         $query->where('group', $group)->where('status', $status);
     }   
 
-    //Send password reset notification
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetCustomerPasswordNotification($token));
-    }
-
-    
 
 }
