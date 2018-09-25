@@ -114,9 +114,9 @@
 								</td>
 								@php
 									$count = '0';
-									foreach($item->items as $item)
-										$count += $item->quantity;
-								@endphp
+									foreach($item->items as $sum)
+									$count += $sum->quantity;
+									@endphp
 								<td>{{ $count }}</td>
 								<td class="w-200">{{ transDateT($item->created_at) }}</td>
 								{{-- EXPORTS --}}

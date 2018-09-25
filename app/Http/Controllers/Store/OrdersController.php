@@ -55,7 +55,7 @@ class OrdersController extends Controller
         } 
         catch(\Exception $e)
         {
-            return redirect('vadmin');
+            return redirect()->back()->with('message', 'Error: '.$e->getMessage());
         }
         $customer = Customer::find($cart->customer_id);
         
