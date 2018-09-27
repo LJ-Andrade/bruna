@@ -5,7 +5,6 @@
 <div class="container padding-bottom-3x mb-2 marg-top-25">
 	<div class="back-to-store"><a href="{{ url('tienda') }}"><i class="icon-arrow-left"></i> Volver a la tienda</a></div>
     <div class="row">
-
         <div class="container padding-bottom-3x mb-2">
             <div class="card text-center">
                 <div class="card-block padding-top-2x">

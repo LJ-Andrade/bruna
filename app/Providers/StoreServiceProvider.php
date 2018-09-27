@@ -22,6 +22,7 @@ class StoreServiceProvider extends ServiceProvider
             'store.index', 
             'store.checkout',
             'store.checkout-final',
+            'store.checkout-last',
             'store.checkout-mp',
             'store.customer-active-cart',
             'store.customer-account',

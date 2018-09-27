@@ -2,6 +2,10 @@
 # BRUNA
 ## Implementar
 
+- Cuando se elije el primer producto en la tienda no está el disparador del dropdown del carro de compras.
+- En Vadmin en la vista de un pedido en particular no cuenta bien la cantidad total de prendas.
+
+
 Estadisticas
 - Mas vendidos
 - Mas favoritos

@@ -41,9 +41,9 @@ function modifyCartItemQ(e, newPriceTarget, newValue)
 
 // Hide alerts
 // -------------------------------------------
-setTimeout(function(){
-    $('.alert').hide(100);
-}, 4000);
+// setTimeout(function(){
+//     $('.alert').hide(100);
+// }, 4000);
 
 
 // Cart Resumen

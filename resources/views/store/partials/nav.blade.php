@@ -14,6 +14,7 @@
 	</div>
 	<!-- Main Navigation-->
 	@include('store.partials.userbar')
+
 </header>
 <div class="under-nav-container">
 	<div class="text-links">

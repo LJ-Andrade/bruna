@@ -14,8 +14,6 @@
 		<a class="e-mail-field" href="mailto:info@bruna.com.ar">
 			<i class="icon-mail"></i>&nbsp; info@bruna.com.ar
 		</a>
-		@if(isset($activeCart))
-			<a href="{{ route('store.checkout') }}"><i class="fas fa-shopping-cart"></i></a>
-		@endif
+		<a href="{{ route('store.checkout') }}"><i class="fas fa-shopping-cart"></i></a>
 	</div>
 </div>

@@ -183,49 +183,59 @@ class StoreController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function checkoutArticles(Request $request)
+    public function checkoutItems(Request $request)
     {
         $activeCart = Cart::where('customer_id', auth()->guard('customer')->user()->id)->where('status', 'active')->get();
 
         $activeCart = $this->activeCart();
-        if(count($activeCart) == 0)
+        if($activeCart == null || count($activeCart) == 0)
         {
-            return redirect()->route('store')->with('message', 'La página solicitada no existe o ha expirado');
+            return redirect()->route('store')->with('message', 'No tiene productos en el carro de compras');
         }
-
         return view('store.checkout');            
     }
 
-    public function checkoutFinal(Request $request)
+    public function checkoutSetItems(Request $request)
     {
+        $updateQuantities = $this->updateItemsQuantities($request->all());
         $activeCart = $this->activeCart();
         
         if($activeCart == null)
-            return redirect()->route('store')->with('message', 'La página solicitada no existe o ha expirado');
+            return response()->json(['response' => 'error', 'message' => 'La página solicitada no existe o ha expirado']);
+            // return redirect()->route('store')->with('message', 'La página solicitada no existe o ha expirado');
 
         if(count($activeCart['rawdata']->items) == 0)
         {
-            return redirect()->route('store')->with('message', 'La página solicitada no existe o ha expirado');
+            return response()->json(['response' => 'error', 'message' => 'La página solicitada no existe o ha expirado']);
+            // return redirect()->route('store')->with('message', 'La página solicitada no existe o ha expirado');
         }
 
         // Check minimun quantity - reseller
         if(auth()->guard('customer')->user()->group == '3') {
             if($activeCart['goalQuantity'] > 0)
-            return redirect()->back()->with('error', 'low-quantity');
+            return response()->json(['response' => 'error', 'message' => 'Debe incluír al menos 12 prendas']);
+            // return redirect()->back()->with('error', 'low-quantity');
+        }
+ 
+        return response()->json(['response' => 'success', 'message' => "Go to checkout, bye !"]);
+    }
+    
+    public function checkoutLast()
+    {
+        if($this->activeCart() == null){
+            return redirect()->route('store')->with('message', 'La página ha expirado');
         }
 
-        
         $geoprovs = GeoProv::pluck('name','id');
         $shippings = Shipping::orderBy('name', 'ASC')->get();
         $payment_methods = Payment::orderBy('name', 'ASC')->get();
         
-        return view('store.checkout-final')
-        ->with('geoprovs', $geoprovs)
+        return view('store.checkout-last')
+            ->with('geoprovs', $geoprovs)
             ->with('shippings', $shippings)
-            ->with('payment_methods', $payment_methods)
-            ->with('geoprovs', $geoprovs);
+            ->with('payment_methods', $payment_methods);
     }
-    
+
     public function processCheckout(Request $request)
     {
         // Check if customer has required data completed
@@ -233,7 +243,7 @@ class StoreController extends Controller
         
         if($checkCustomer['response'] == 'error')
         {
-            return redirect()->route('store.checkout-final')->with('message', $checkCustomer['message']);
+            return redirect()->route('store.checkout-last')->with('message', $checkCustomer['message']);
         }
         
         $cart = Cart::findOrFail($request->cart_id);  
@@ -271,7 +281,7 @@ class StoreController extends Controller
             }
 
         } catch (\Exception $e) {
-            //dd($e->getMessage());
+            dd($e->getMessage());
             // return back()->with('error', 'Ha ocurrido un error '. $e);
         }    
     
@@ -280,6 +290,57 @@ class StoreController extends Controller
             ->with('cart', $cart);
     }
     
+    public function updateItemsQuantities($data)
+    {
+        $message = '';
+        foreach($data['data'] as $item)
+        {
+            $cartItem = CartItem::findOrFail($item['id']);
+            $maxAvailable = $cartItem->article->stock + $cartItem->quantity;
+            // dd("Stock de art: ".$cartItem->article->stock." | Stock reservado: ". $cartItem->quantity."
+            //  | Stock ingresado: ". $item['quantity']. " |  Máximo disponible: '". $maxAvailable);
+            
+            if($item['quantity'] == $cartItem->quantity)
+            {
+                $newStock = $cartItem->article->stock;
+            }
+            elseif($item['quantity'] <= 0)
+            {
+                $message = "Ingresó un artículo con cantidad negativa";
+                $newStock = $cartItem->article->stock;
+            }
+            else
+            {
+                if($item['quantity'] > $maxAvailable)
+                {
+                    $newStock = '0';
+                    $cartItem->quantity = $maxAvailable;
+                    // dd("Supera || Ingresado: " . $item['quantity'] . "| Maximo Disponible ". $maxAvailable);
+                }
+                else
+                {
+                    $newStock = $cartItem->article->stock - intVal($item['quantity']) + intVal($cartItem->quantity);
+                    $cartItem->quantity = $item['quantity'];       
+                    // dd("No supera || Requerido: " . $item['quantity'] . "| Nuevo Stock es: ". $newStock);
+                }
+            }
+            // dd("Cantidad a comprar:" . $cartItem->quantity. "| Nuevo Stock es: ". $newStock);
+            try
+            {
+                $cartItem->save();
+                // Return or discount stock
+                $this->replaceCartItemStock($cartItem->article->id, $newStock);
+            }
+            catch (\Exception $e)
+            {
+                $message .= " | Error: ".$e->getMessage();
+            }
+                
+        }
+        $response = ['response' => 'success', 'message' => $message];
+        return $response;
+    }
+
     // Check if customer has required data completed
     public function checkAndUpdateCustomerData($customerId, $data)
     {

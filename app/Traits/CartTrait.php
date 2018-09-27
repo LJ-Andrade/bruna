@@ -133,7 +133,7 @@ trait CartTrait {
         } 
         catch(\Exception $e)
         {
-            return dd("Error");
+            return $e->getMessage();
         }
         return $newStock;
     }
@@ -148,7 +148,7 @@ trait CartTrait {
         } 
         catch(\Exception $e)
         {
-            return dd("Error");
+            return dd($e);
         }
         return $newStock;
     }

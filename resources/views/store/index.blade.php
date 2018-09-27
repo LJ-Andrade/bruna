@@ -116,7 +116,7 @@
 											@if(Auth::guard('customer')->check())
 												{!! Form::open(['class' => 'AddToCart price']) !!}	
 													{{ csrf_field() }}
-													<input type="number" min="0" max="{{ $article->stock }}" name="quantity" class="quantity-input" value="1">
+													<input type="number" min="1" max="{{ $article->stock }}" name="quantity" class="quantity-input" value="1">
 													<input type="submit" class="input-button" value="Agregar">
 													<input type="hidden" value="{{ $article->id }}" name="articleId">
 												{!! Form::close() !!}

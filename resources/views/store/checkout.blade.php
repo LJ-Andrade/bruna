@@ -13,6 +13,7 @@
 		</div>
 	@endif
   	<div class="container checkout-container padding-bottom-3x mb-2 marg-top-25">
+		<div class="back-to-store"><a href="{{ url('tienda') }}"><i class="icon-arrow-left"></i> Volver a la tienda</a></div>
    		<div class="row">
 			<div class="col-md-12">
 				<h3>Carro de Compras | Checkout</h3> 
@@ -81,18 +82,15 @@
 								@endif
 								{{-- Add Quantity to Cart Item --}}
 								<td>
-									{!! Form::open(['route' => 'store.addQtoCartItem', 'method' => 'POST', 'class' => 'loader-on-submit']) !!}	
-										{{ csrf_field() }}
-										<div class="input-with-btn input-with-btn-mobile">
-											<input name="itemId" type="hidden" value="{{ $item->id }}">
-											<input class="InputBtnQ small-input under-element" name="quantity" type="number" min="1" value="{{ $item->quantity }}" placeholder="1" required="">
-											<input class="ArticlePrice" name="price" type="hidden" value="{{ $articlePrice }}">
-											<button class="InputBtnQ input-btn mobile-break green-back Hidden"><i class="fa fa-check"></i></button>
-											<div class="under-input"> Stock: {{ $item->article->stock }} </div>
-										</div>
-									{!! Form::close() !!}
+									<div class="input-with-btn input-with-btn-mobile">
+										{{-- Send this data to JSON via js with .Item-Data class --}}
+										<input class="Item-Data small-input under-element" name="data" type="number" 
+										min="1"  max="{{ $item->quantity + $item->article->stock }}" value="{{ $item->quantity }}" placeholder="1" required="" 
+										data-price="{{$articlePrice}}" data-id="{{ $item->id }}">
+										<div class="under-input"> Stock: {{ $item->article->stock }} </div>
+									</div>
 								</td>
-								<td class="TotalItemPrice">$ <span class="TotalItemPriceVal">{{ ($articlePrice * $item->quantity) }}</span></td>
+								<td>$ <span class="{{ $item->id }}-TotalItemPrice TotalItemPrice">{{ ($articlePrice * $item->quantity) }}</span></td>
 								{{-- REMOVE ITEMS FROM CART --}}
 								<td class="text-center">
 									{!! Form::open(['route' => 'store.removeFromCart', 'method' => 'POST', 'class' => 'loader-on-submit']) !!}	
@@ -114,7 +112,10 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="text-right"><a href="{{ url('tienda/checkout-final') }}" class="btn main-btn">Continuar <i class="fa fa-arrow-right"></i></a></div>
+					<div class="text-right">
+						<button id="UpdateDataBtn" type="button" class="btn main-btn">Actualizar <i class="fas fa-sync-alt"></i></button>
+						<button id="SubmitDataBtn" type="button" class="btn main-btn">Continuar <i class="fa fa-arrow-right"></i></button>
+					</div>
 				<div class="back-to-store"><a href="{{ url('tienda') }}"><i class="icon-arrow-left"></i> Volver a la tienda</a></div>
 			</div>{{-- / col-md-12 --}}
 		</div> {{-- / Row --}}
@@ -125,15 +126,86 @@
 @section('scripts')
 	@include('store.components.bladejs')
 	<script>
-	
-		let itemSum = $('.TotalItemPrice').html();
-		sum = 0;
+		
+		setItemsData();
+		sumAllItems();
+		// let itemSum = $('.TotalItemPrice').html();
+		// sum = 0;
 
-		$('.TotalItemPriceVal').each(function( index ) {
-			sum += parseInt($(this).html());
+		$('.Item-Data').on('keyup change', function(){
+			setItemsData();	
 		});
-		console.log(sum);
-		$('.SubTotal').html(sum);
+		
+		
+		function sumAllItems()
+		{
+			sum = 0;
+			$('.TotalItemPrice').each(function( index ) {
+				sum += parseInt($(this).html());
+			});
+			$('.SubTotal').html(sum);
+		}
+		
+		
+		function setItemsData() {
+			itemData = [];
+			$('.Item-Data').each(function() {
+				var id = $(this).data('id');
+				var price = $(this).data('price');
+				var quantity = $(this).val();
+
+				item = {}
+				item ['id'] = id;
+				item ['price'] = price;
+				item ['quantity'] = quantity;
+				// Update display total item price
+				total = price * quantity;
+				$('.'+id+'-TotalItemPrice').html(total);
+
+				itemData.push(item);
+			});
+			// Update Total
+			console.info(itemData);
+			sumAllItems();
+			$('#Items-Data').val(itemData);
+		}
+	
+		$("#SubmitDataBtn").on('click', function(){
+			submitForm("{{ route('store.processCheckout')}}", itemData);
+		});
+
+		$("#UpdateDataBtn").on('click', function(){
+			submitForm("reload", itemData);
+		});
+
+		function submitForm(target, data)
+		{
+			const route = "{{ route('store.checkout-set-items') }}";
+			$.ajax({	
+				url: route,
+				method: 'POST',             
+				dataType: 'JSON',
+				data: { data },
+				success: function(data){
+					if(data.response == 'success'){
+						if(target == 'reload'){
+							location.reload();
+						} else {
+							window.location.href = target;
+						}
+					} else {
+						console.log(data);
+						toast_success('', data.message, 'bottomCenter');
+						// $('#Error').html(data.responseText);
+					}
+				},
+				error: function(data){
+					$('#Error').html(data.responseText);
+					console.log(data);
+				}
+			});
+			
+		}
 
 	</script>
 @endsection
