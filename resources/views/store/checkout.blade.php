@@ -171,21 +171,21 @@
 		}
 	
 		$("#SubmitDataBtn").on('click', function(){
-			submitForm("{{ route('store.processCheckout')}}", itemData);
+			submitForm("{{ route('store.processCheckout')}}", itemData, "continue");
 		});
 
 		$("#UpdateDataBtn").on('click', function(){
-			submitForm("reload", itemData);
+			submitForm("reload", itemData, "update");
 		});
 
-		function submitForm(target, data)
+		function submitForm(target, data, action)
 		{
 			const route = "{{ route('store.checkout-set-items') }}";
 			$.ajax({	
 				url: route,
 				method: 'POST',             
 				dataType: 'JSON',
-				data: { data },
+				data: { data, action: action },
 				success: function(data){
 					if(data.response == 'success'){
 						if(target == 'reload'){

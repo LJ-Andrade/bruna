@@ -37,8 +37,7 @@
 		<div class="back-to-store"><a href="{{ url('tienda/checkout') }}"><i class="icon-arrow-left"></i> Atrás</a></div>
    		<div class="row">
 			<div class="col-md-12">
-                <h3>Carro de Compras | Checkout</h3> 
-
+                <h3>Carro de Compras | Checkout</h3>
 			</div>{{-- / col-md-12 --}}
 		</div> {{-- / Row --}}
 		{{-- Data & Sidebar --}}

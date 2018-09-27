@@ -211,7 +211,8 @@ class StoreController extends Controller
         }
 
         // Check minimun quantity - reseller
-        if(auth()->guard('customer')->user()->group == '3') {
+
+        if(auth()->guard('customer')->user()->group == '3' && $request->action == 'continue' ) {
             if($activeCart['goalQuantity'] > 0)
             return response()->json(['response' => 'error', 'message' => 'Debe incluír al menos 12 prendas']);
             // return redirect()->back()->with('error', 'low-quantity');
