@@ -1,15 +1,34 @@
 
+Nuevos cambios subidos:
+
+Filtros por populares y descuentos.
+Arreglada paginacion
+Arreglado busqueda por categoría desde input text
+En tienda inicio puse un TOOL TIP con stock máximo, probar si gusta y sino poner selector.
+
+
 # BRUNA
+
+Por otra parte, respecto a la decisión del menú lateral, cuando esté eso eliminaríamos el mensaje que aparece cada vez que agrego un producto al carrito porque ya me aparece de costado (adjunto foto)
+
+Ah, y algo que me quedó de un mail anterior, que tenía una clienta mayorista de la que no puedo ver sus datos de localidad (el tema puntual con ella ya lo resolví porque me contacto por whatsapp, pero no se si es un error que no me salga o que pasó), es nair quevedo
+
+
+
 ## Implementar
+
+
+- En tienda inicio puse un TOOL TIP con stock máximo, probar si gusta y sino poner selector.
 
 - Cuando se elije el primer producto en la tienda no está el disparador del dropdown del carro de compras.
 - En Vadmin en la vista de un pedido en particular no cuenta bien la cantidad total de prendas.
 
 
 Estadisticas
+- Poder dar orden a articulos de listado
+
 - Mas vendidos
 - Mas favoritos
-- Poder dar orden a articulos de listado
 
 - Vadmin agregar seccion vendedores
 - Usuarios no miembros solo ven: Pedidos y Clientes ()

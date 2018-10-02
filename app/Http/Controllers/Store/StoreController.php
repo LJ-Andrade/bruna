@@ -39,15 +39,16 @@ class StoreController extends Controller
         //$customer = auth()->guard('customer')->user();     
     }
     
-    public function index(Request $request)
-    {   
-        
-        $pagination = 20;
+    public function getSetPaginationCookie($request)
+    {
 
-        // Set and Get pagination cookie
-        if($request->get('results'))
+        $pagination = 24;
+        if($request == null)
+            return $pagination;
+        
+        if($request)
         {
-            $pagination = $request->get('results');
+            $pagination = $request;
             Cookie::queue('store-pagination', $pagination, 2000);
         }
         else
@@ -56,11 +57,13 @@ class StoreController extends Controller
             {
                 $pagination = Cookie::get('store-pagination');
             }
-            else 
-            {
-                $pagination = 15;
-            }
-        }    
+        } 
+    }
+
+    public function index(Request $request)
+    {   
+        $pagination = 24;
+        $this->getSetPaginationCookie($request->get('results'));
 
         $order = 'DESC';
         $orderBy = 'id';
@@ -88,8 +91,26 @@ class StoreController extends Controller
         
         if(isset($request->buscar))
         {
-            $articles = CatalogArticle::search($request->buscar)->active()->paginate($pagination);
+            $categories = CatalogCategory::with(['articles' => function($query) { $query->where('status','=', '1'); } ])->get();
+            $articles = CatalogArticle::search($request->buscar, $categories)->active()->paginate($pagination);
         } 
+        else if(isset($request->filtrar))
+        {
+            if($request->filtrar == 'populares')
+            {  
+                // $favs = CatalogFav::all();
+                // dd($favs);
+                $articles = CatalogArticle::has('hasFavs')->paginate($pagination);
+                // $posts = CatalogArticle::whereHas('catalog_favs', function ($query) {
+                //     $query->where('content', 'like', 'foo%');
+                // })->get();
+
+
+            } else if($request->filtrar == 'descuentos')
+            {
+                $articles = CatalogArticle::orderBy($orderBy, $order)->active()->where('discount', '>', '0')->paginate($pagination);
+            }
+        }
         else if(isset($request->categoria))
         {
             $articles = CatalogArticle::orderBy($orderBy, $order)->active()->where('category_id', $request->categoria)->paginate($pagination);
@@ -118,8 +139,12 @@ class StoreController extends Controller
 
     public function searchSize($name)
 	{
+        $pagination = 24;
+        // Set and Get pagination cookie
+        $this->getSetPaginationCookie(null);
+
         $size = CatalogAtribute1::searchName($name)->first();
-		$articles = $size->articles()->paginate(15);
+		$articles = $size->articles()->paginate($pagination);
         $articles->each(function($articles){
             $articles->category;
             $articles->images;
@@ -136,8 +161,12 @@ class StoreController extends Controller
     
     public function searchTag($name)
 	{
+        $pagination = 24;
+        // Set and Get pagination cookie
+        $this->getSetPaginationCookie(null);
+
         $tag = CatalogTag::searchName($name)->first();
-		$articles = $tag->articles()->paginate(15);
+		$articles = $tag->articles()->paginate($pagination);
         $articles->each(function($articles){
             $articles->category;
             $articles->images;

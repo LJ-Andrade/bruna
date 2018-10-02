@@ -12,25 +12,25 @@
 	<div class="container-fluid padding-bottom-3x mb-1">
 		<div class="row">
 			<!-- SideBar -->
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
 				@include('store.partials.sidebar')
 			</div>
 			<!-- Products -->
-			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
-				{{-- <!-- Products Grid -->
-				@if(isset($search) && $search == true || count($_GET) > 0)
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
+				<!-- Products Grid -->
+				@if(isset($search) && $search == true || count($_GET) > 0 && !isset($_GET['results']))
 					<div class="top-info">
 						<a href="{{ url('tienda') }}" class="btn btn-outline-primary btn-sm">Volver al listado</a> 
 						<br>	
 						@if($articles->count() == '1')
-							{{ $articles->count() }} artículo encontrado <br>
+							1 artículo encontrado <br>
 						@elseif($articles->count() == '0')
-							No hay artículos
+							No se han encontrado artículos
 						@else
-							{{ $articles->count() }} artículos encontrados <br>
+							{{ $articles->total() }} artículos encontrados <br>
 						@endif
 					</div>
-				@endif --}}
+				@endif 
 				<div class="row articles-container">
 					@foreach($articles as $article)
 						<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 article">
@@ -116,8 +116,9 @@
 											@if(Auth::guard('customer')->check())
 												{!! Form::open(['class' => 'AddToCart price']) !!}	
 													{{ csrf_field() }}
-													<input type="number" min="1" max="{{ $article->stock }}" name="quantity" class="quantity-input" value="1">
-													<input type="submit" class="input-button" value="Agregar">
+													<input type="number" min="1" max="{{ $article->stock }}" name="quantity" class="quantity-input" value="1"
+													data-toggle="tooltip" data-placement="top" title="Stock máximo {{ $article->stock }}">
+													<input type="submit" class="input-button" value="Agregar" data-toggle="tooltip" data-placement="top" title="Stock máximo {{ $article->stock }}">
 													<input type="hidden" value="{{ $article->id }}" name="articleId">
 												{!! Form::close() !!}
 											@else
@@ -130,12 +131,14 @@
 						</div>
 					@endforeach
 				</div>
+				@if($articles->count() != '0')
 				<span class="pagination-results">
 					<b>Resultados por página:</b>
-					<a href="{{ route('store', ['results' => '20']) }}">20</a> | 
-					<a href="{{ route('store', ['results' => '40']) }}">40</a> |
-					<a href="{{ route('store', ['results' => '60']) }}">60</a>
+					<a href="{{ route('store', ['results' => '24']) }}">24</a> | 
+					<a href="{{ route('store', ['results' => '96']) }}">96</a> |
+					<a href="{{ route('store', ['results' => '142']) }}">142</a>
 				</span>
+				@endif
 				{!! $articles->appends(request()->query())->render()!!}
 			</div>
 		</div>

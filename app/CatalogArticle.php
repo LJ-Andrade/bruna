@@ -19,6 +19,11 @@ class CatalogArticle extends Model
     	return $this->belongsTo('App\CatalogFav', 'article_id');
     }
     
+    public function hasFavs()
+    {
+        return $this->belongsTo('App\CatalogFav', 'id');
+    }
+
     public function cartDetails(){
     	return $this->hasMany('App\CartDetail', 'id');
     }
@@ -63,12 +68,15 @@ class CatalogArticle extends Model
         return $query->where('status', '1')->where('stock', '>', '0');
     }
 
-    public function scopeSearch($query, $term)
+    public function scopeSearch($query, $term, $categories)
     {  
         return $query
             ->where('name', 'like', "%" . $term . "%")
             ->orWhere('color', 'like', "%" . $term . "%")
-            ->orWhere('textile', 'like', "%" . $term . "%");
+            ->orWhere('textile', 'like', "%" . $term . "%")
+            ->orWhereHas('category', function($categories) use($term){
+                $categories->where('name', 'like', "%" . $term ."%");
+            });
     }
 
     public function scopeSearchName($query, $term)

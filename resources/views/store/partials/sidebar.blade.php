@@ -22,10 +22,27 @@
 		{!! Form::close() !!}
 	</section>
 	<section class="sidebar-widget">
-		
-		<h4>Precio</h4>
-		<div class="price"><a href="{{ route('store', ['precio' => 'mayor']) }}"><i class="fas fa-arrow-up"></i> Mayor precio</a></div>  
-		<div class="price"><a href="{{ route('store', ['precio' => 'menor']) }}"><i class="fas fa-arrow-down"></i> Menor precio</a></div>
+		<h4>Ordenar por</h4>
+		{{-- <div class="price"><a href="{{ route('store', ['precio' => 'menor']) }}"><i class="fas fa-arrow-down"></i> Menor precio</a></div>
+		<div class="price"><a href="{{ route('store', ['precio' => 'mayor']) }}"><i class="fas fa-arrow-up"></i> Mayor precio</a></div>
+		<div class="price"><a href="{{ route('store', ['precio' => 'menor']) }}"><i class="fas fa-percentage"></i> Con Descuento</a></div>
+		<div class="price"><a href="{{ route('store', ['precio' => 'mayor']) }}"><i class="fas fa-heart"></i> Populares</a></div>  --}}
+		<div class="horizontal-list">
+			<ul>
+				<a href="{{ route('store', ['precio' => 'menor']) }}">
+					<li class="sq-badge font-1"><span><i class="fas fa-arrow-down"></i> Menor precio</span></li>
+				</a>
+				<a href="{{ route('store', ['precio' => 'mayor']) }}">
+					<li class="sq-badge font-1"><span><i class="fas fa-arrow-up"></i> Mayor precio</span></li>
+				</a>
+				<a href="{{ route('store', ['filtrar' => 'descuentos']) }}">
+					<li class="sq-badge font-1"><span><i class="fas fa-percentage"></i> Con Descuento</span></li>
+				</a>
+				<a href="{{ route('store', ['filtrar' => 'populares']) }}">
+					<li class="sq-badge font-1"><span><i class="fas fa-heart"></i> Populares</span></li>
+				</a>
+			</ul>
+		</div>
 	</section>
 	{{-- <section class="sidebar-widget">
 		<h4>Talles</h4>
