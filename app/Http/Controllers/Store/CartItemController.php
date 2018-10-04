@@ -114,21 +114,36 @@ class CartItemController extends Controller
     public function destroy(Request $request)
     {
         $item = CartItem::where('id', $request->itemid)->first();
-        
         try{
             // Return Stock
             $this->updateCartItemStock($item->article->id, $request->quantity);
             $item->delete();
-            } catch (\Exception $e) {
-                return redirect()->back()->with('message', 'Error al eliminar');
-            }
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect()->back()->with('message', 'Error al eliminar');
+        }
         // If last article is deleted also delete activecart
         $cart = Cart::findOrFail($item->cart->id);
         if($cart->Items->count() < 1)
         {
             $cart->delete();
-            return redirect('tienda')->with('message', 'Carro de compras eliminado');
+            if(isset($request->action) && $request->action == 'reload')
+            {
+                return response()->json(['response' => 'cart-removed', 'message' => 'Carro de compras eliminado']); 
+            }
+            else 
+            {
+                return redirect('tienda')->with('message', 'Carro de compras eliminado');
+            }
         } else {
+            if(isset($request->action) && $request->action == 'reload')
+            {
+                return response()->json(['response' => 'success', 'message' => 'Artículo eliminado del carro de compras']); 
+            }
+            else 
+            {
+                return redirect('tienda')->with('message', 'Carro de compras eliminado');
+            }
             return redirect()->back()->with('message', 'Artículo eliminado');
         }
     }

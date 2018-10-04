@@ -1,37 +1,41 @@
 @extends('store.partials.main')
 
 @section('header-image')
-	<div class="index-header">
-		
+	<div class="index-header">		
 	</div>
 @endsection
 
 @section('content')
-
 	<!-- Page Content -->
-	<div class="container-fluid padding-bottom-3x mb-1">
+	<div id="main" class="main-container container-fluid padding-bottom-3x mb-1">
+		<div class="row">
+			@include('store.partials.filterbar')
+		</div>
 		<div class="row">
 			<!-- SideBar -->
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
-				@include('store.partials.sidebar')
-			</div>
-			<!-- Products -->
-			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
+			<div class="col-xs-12 col-lg-12">
+
+				@if(!isset($_GET['checkout-on']))
+					@if(isset($search) && $search == true || count($_GET) > 0 && !isset($_GET['results']))
+						<div class="results-info">
+							@if($articles->count() == '1')
+								1 artículo encontrado <br>
+							@elseif($articles->count() == '0')
+					
+							@else
+								Mostrando resultados de la búsqueda.
+							@endif
+						</div>
+					@endif 
+				@endif
+
 				<!-- Products Grid -->
-				@if(isset($search) && $search == true || count($_GET) > 0 && !isset($_GET['results']))
-					<div class="top-info">
-						<a href="{{ url('tienda') }}" class="btn btn-outline-primary btn-sm">Volver al listado</a> 
-						<br>	
-						@if($articles->count() == '1')
-							1 artículo encontrado <br>
-						@elseif($articles->count() == '0')
-							No se han encontrado artículos
-						@else
-							{{ $articles->total() }} artículos encontrados <br>
-						@endif
-					</div>
-				@endif 
 				<div class="row articles-container">
+					@if($articles->count() == '0')
+					<div class="no-articles">
+						<h3>No se han encontrado artículos</h3>
+					</div>
+					@endif
 					@foreach($articles as $article)
 						<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 article">
 							<div class="inner">
@@ -149,7 +153,8 @@
 @section('scripts')
 	@include('store.components.bladejs')
 	<script>
-		function openSidebar(){
+		function openSidebar()
+		{
 			$('#Sidebar').toggle(100);
 		}
 	</script>

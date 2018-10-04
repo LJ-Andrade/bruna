@@ -30,41 +30,30 @@
 	</head>
 	<!-- Body-->
 	<body>
+		<div id="MainOverlay" class="main-overlay"></div>
+		@include('store.partials.sidecontainer')
 		<div id="full-loader" class="full-loader Hidden">
 			<div class="inner">
 				<img src="{{ asset('store-ui/images/loader.gif') }}" alt="Loader">
 			</div>
 		</div>
-		
 		@yield('modal')
 		@include('store.partials.topbar')
-		@include('store.partials.mobilemenu')
-		@include('store.partials.nav') {{-- ToolBar in inside this nav include --}}
-		@if(Auth::guard('customer')->check())
-			@if(isset($activeCart))
-				<div class="CartResumeMobile">
-					@include('store.partials.cart-resumen-mobile')
-				</div>
-			@endif
-		@endif
-		<!-- Off-Canvas Wrapper-->
-		{{-- <div class="offcanvas-wrapper">
-		<!-- Page Title-->
-		 <div class="page-title">
-			<div class="container">
-			<div class="column">
-				<h1>Santa Osadía | Tienda </h1>
-			</div>
-			</div>
-		</div>  --}}
+		@include('store.partials.nav') {{-- ToolBar is inside this nav include --}}
 		@include('store.partials.alerts')
 		<div class="container-fluid custom-page-title pad0">
 			@yield('header-image')
-			<div class="container">
-			</div>
 		</div>
-		@yield('content')
-		@include('store.partials.foot')
+		{{-- Site Content --}}
+		<div class="content">
+			@yield('content')
+		</div>
+		<!-- Site Footer-->
+		<footer class="site-footer">
+			<div class="container">
+				<p class="footer-copyright">© {{ date('Y') }} - Desarrollado por <a href="https://vimana.studio/es" target="_blank">&nbsp; Vimana Studio </a></p>
+			</div>
+		</footer>
 		{{-- Whats App --}}
 		<div class="floating-bottom-cta">
 			<div class="inner">
@@ -83,5 +72,10 @@
 		<script src="{{ asset('js/scripts.js') }}"></script>
 		@include('store.partials.scripts')
 		@yield('scripts')
+		@if(isset($_GET['checkout-on']))
+			<script>
+				checkoutSidebar("open");
+			</script>
+		@endif
 	</body>
 </html>

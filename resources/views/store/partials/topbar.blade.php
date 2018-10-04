@@ -14,6 +14,8 @@
 		<a class="e-mail-field" href="mailto:info@bruna.com.ar">
 			<i class="icon-mail"></i>&nbsp; info@bruna.com.ar
 		</a>
-		<a href="{{ route('store.checkout') }}"><i class="fas fa-shopping-cart"></i></a>
+		@if(Auth::guard('customer')->check())
+		<button onclick="checkoutSidebar('open')" class="icon-btn-small"|><i class="fas fa-shopping-cart"></i></button>
+		@endif
 	</div>
 </div>

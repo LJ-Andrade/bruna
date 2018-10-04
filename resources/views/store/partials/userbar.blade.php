@@ -8,19 +8,13 @@
         </div>
         <div class="tools">
             @if(Auth::guard('customer')->check())
-                @if(isset($activeCart))
-                    <div class="CartResumen cart-resumen-desktop">
-                        @include('store.partials.cart-resumen-desktop')
-                    </div>
-                    <div onclick="showCartResumeMobile()" class="cart-resumen-mobile">
-                        <div class="CartResumenMobile cart">
-                            <i class="icon-bag"></i><span class="count">{{ $activeCart['totalItems'] }}</span>
-                            <span class="subtotal">$ {{ $activeCart['cartSubTotal'] }}</span>
-                        </div>
-                    </div>
-                @else
-                    <div class="CartResumen CartResumenMobile cart"><a href="#"></a><i class="icon-bag"></i><span class="count">0</span></div>
-                @endif
+                {{-- @include('store.partials.cart-resumen-desktop') --}}
+                {{-- Cart Sidebar Trigger --}}
+                <div class="CartResumen cart" onclick="checkoutSidebar('open')">
+                    <i class="icon-bag"></i><span class="TotalCartItems count">@if($activeCart['totalItems'] == 0) 0 @else {{ $activeCart['totalItems'] }} @endif</span>
+                    <span class="CartSubTotal subtotal">@if($activeCart['totalItems'] != 0) $ {{ $activeCart['cartSubTotal'] }} @endif</span>
+                </div>
+                {{-- User Avatar --}}
                 <div class="account"><a href="#" onclick="event.preventDefault();"></a>
                     <img src="{{ asset('webimages/customers/'.Auth::guard('customer')->user()->avatar ) }}" class="CheckImg" alt="">
                     {{-- @if(Auth::guard('customer')->user()->avatar)

@@ -1,4 +1,9 @@
 
+Por la mitad
+Filtros En movil
+
+
+
 Nuevos cambios subidos:
 
 Filtros por populares y descuentos.
@@ -13,12 +18,28 @@ Por otra parte, respecto a la decisión del menú lateral, cuando esté eso elim
 
 Ah, y algo que me quedó de un mail anterior, que tenía una clienta mayorista de la que no puedo ver sus datos de localidad (el tema puntual con ella ya lo resolví porque me contacto por whatsapp, pero no se si es un error que no me salga o que pasó), es nair quevedo
 
+Vadmin:
+Actualización de precios y stock: que haya un botón por página de actualizar cambios. Demora mucho refrescar item por item, cuando quiero hacer una actualización de todos los precios o el stock de varios artículos. Hasta ahora no lo había notado porque no hice modificaciones grandes.
+
+Vadmin:
+Poder editar el nombre del artículo desde la página principal al igual que con el stock y los precios.
+
+Cuando hago click sobre un artículo para ediarlo aparece una página intermedia con toda la información. Sería más fácil entrar directamente y si quiero ver la info del artículo pero no editarlo en todo caso tener un boton para eso. O un botón que sea visualizar en la tienda o ver anuncio. No encuentro necesario ver ahí esa información.
+
+
+Cuando toco actualizar ítem me lleva al principio de la página 1, debería quedar donde ternimé de actualizar, sino tengo que volver a buscar donde estaba
+
+
+Al editar una publicación: que no tome el “enter” como actualizar item, tiendo a apretarlo sin querer y se me va de la página. Que se actualice sólo tocando ese botón.
+
+
+Cuando cargo más fotos en una publicación, para cambiar la destacada, tengo que tocar actualizar cambios, volver a entrar a la publicación y recién ahí elegir cual quiero destacar. Ahorraría mucho tiempo poder elegir la destacada ni bien se cargan las nuevas fotos.
+
 
 
 ## Implementar
 
 
-- En tienda inicio puse un TOOL TIP con stock máximo, probar si gusta y sino poner selector.
 
 - Cuando se elije el primer producto en la tienda no está el disparador del dropdown del carro de compras.
 - En Vadmin en la vista de un pedido en particular no cuenta bien la cantidad total de prendas.

@@ -86,22 +86,118 @@
             data: data,
             success: function(data){
                 if(data.response == 'success'){
-                    toast_success('Ok!', data.message, 'bottomCenter');
-                    $(".CartResumen").load(location.href + " .CartResumen");           
-                    $(".CartResumenMobile").load(location.href + " .CartResumenMobile");
-                    $(".AvailableStock").load(location.href + " .AvailableStock");
+                    toast_success('Ok!', data.message, 'bottomCenter', '', 1000);
+                    // Live Reloading stuff
+                    $("#SideContainerItems").load(window.location.href + " #SideContainerItems");
+                    $(".TotalCartItems").load(window.location.href + " .TotalCartItems");
+                    $(".CartSubTotal").load(window.location.href + " .CartSubTotal");
+                    $(".AvailableStock").load(window.location.href + " .AvailableStock");
+                    
                 } else if($data.response == 'warning') {
                     toast_success('Ups!', data.message, 'bottomCenter');
                 }
-                console.log(data);
             },
             error: function(data){
-                $('#Error').html(data.responseText);
+                // $('#Error').html(data.responseText);
+                console.log("Error en addtoCart()");
                 console.log(data);
             }
         });
     }
 
+    
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CHECKOUT
+    |--------------------------------------------------------------------------
+    */
+        
+    setItemsData();
+    sumAllItems();
+    // let itemSum = $('.TotalItemPrice').html();
+    // sum = 0;
+
+    $('.Item-Data').on('keyup change', function(){
+        setItemsData();	
+    });
+    
+    
+    function sumAllItems()
+    {
+        sum = 0;
+        $('.TotalItemPrice').each(function( index ) {
+            sum += parseInt($(this).html());
+        });
+        $('.SubTotal').html(sum);
+    }
+    
+    
+    function setItemsData() {
+        itemData = [];
+        $('.Item-Data').each(function() {
+            var id = $(this).data('id');
+            var price = $(this).data('price');
+            var quantity = $(this).val();
+
+            item = {}
+            item ['id'] = id;
+            item ['price'] = price;
+            item ['quantity'] = quantity;
+            // Update display total item price
+            total = price * quantity;
+            $('.'+id+'-TotalItemPrice').html(total);
+
+            itemData.push(item);
+        });
+        // Update Total
+        console.info(itemData);
+        sumAllItems();
+        $('#Items-Data').val(itemData);
+    }
+
+    $("#SubmitDataBtn").on('click', function(){
+        submitForm("{{ route('store.processCheckout')}}", itemData, "continue");
+    });
+
+    $("#UpdateDataBtn").on('click', function(){
+        submitForm("reload", itemData, "update");
+    });
+
+    function submitForm(target, data, action)
+    {
+        const route = "{{ route('store.checkout-set-items') }}";
+        $.ajax({	
+            url: route,
+            method: 'POST',             
+            dataType: 'JSON',
+            data: { data, action: action },
+            success: function(data){
+                if(data.response == 'success'){
+                    if(target == 'reload'){
+                        // Refresh page, delete parametters and open checkout sidebar
+                        window.location = window.location.href.split("?")[0] + "?checkout-on";
+                    } else {
+                        window.location.href = target;
+                    }
+                } else {
+                    console.log('Error en submitForm');
+                    console.log(data);
+                    toast_error('', data.message, 'bottomCenter', '');
+                    $('.SideContainerError').html(data.message);
+                    // $('#Error').html(data.responseText);
+                }
+            },
+            error: function(data){
+                // $('#Error').html(data.responseText);
+                console.log("Error en submitForm()");
+                console.log(data);
+                location.reload();
+            }
+        });
+    }
+   
     /*
     |--------------------------------------------------------------------------
     | WHISH-LISTS

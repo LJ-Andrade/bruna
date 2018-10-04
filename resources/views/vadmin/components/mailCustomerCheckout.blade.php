@@ -6,7 +6,7 @@
         @endcomponent
     @endslot
 
-#<center>Hemos recibido su por su compra</center>
+#<center>Hemos recibido tu compra</center>
 ###<center> Nos pondremos en contacto a la brevedad</center>
 
 #<center> Muchas gracias !</center>
@@ -20,7 +20,7 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-        Mensaje enviado desde <b>Vadmin</b> | Desarrollado por <a href="https://vimana.studio">Vimana Studio</a>
+        Mensaje enviado desde <b>Vadmin</b> | Desarrollado por <a href="https://vimana.studio/es">Vimana Studio</a>
         @endcomponent
     @endslot
 @endcomponent

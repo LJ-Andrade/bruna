@@ -49,7 +49,6 @@
 											<span><em>Talle: @foreach($item->article->atribute1 as $atribute) {{ $atribute->name }} @endforeach</em></span>
 											<span><em>Color: {{ $item->color }}</em></span>
 											<span><em>Textil: {{ $item->textile }}</em></span>
-											<span>Item Id: {{ $item->id }}</span>
 										</div>
 									</div>
 								</td>
@@ -68,7 +67,6 @@
 									@endif
 								@else
 									{{-- Estandar Item Prices --}}
-									
 									@if($item->article->discount > 0)
 										<td>
 											@php($articlePrice = calcValuePercentNeg($item->article->price, $item->article->discount))
@@ -126,86 +124,6 @@
 @section('scripts')
 	@include('store.components.bladejs')
 	<script>
-		
-		setItemsData();
-		sumAllItems();
-		// let itemSum = $('.TotalItemPrice').html();
-		// sum = 0;
-
-		$('.Item-Data').on('keyup change', function(){
-			setItemsData();	
-		});
-		
-		
-		function sumAllItems()
-		{
-			sum = 0;
-			$('.TotalItemPrice').each(function( index ) {
-				sum += parseInt($(this).html());
-			});
-			$('.SubTotal').html(sum);
-		}
-		
-		
-		function setItemsData() {
-			itemData = [];
-			$('.Item-Data').each(function() {
-				var id = $(this).data('id');
-				var price = $(this).data('price');
-				var quantity = $(this).val();
-
-				item = {}
-				item ['id'] = id;
-				item ['price'] = price;
-				item ['quantity'] = quantity;
-				// Update display total item price
-				total = price * quantity;
-				$('.'+id+'-TotalItemPrice').html(total);
-
-				itemData.push(item);
-			});
-			// Update Total
-			console.info(itemData);
-			sumAllItems();
-			$('#Items-Data').val(itemData);
-		}
-	
-		$("#SubmitDataBtn").on('click', function(){
-			submitForm("{{ route('store.processCheckout')}}", itemData, "continue");
-		});
-
-		$("#UpdateDataBtn").on('click', function(){
-			submitForm("reload", itemData, "update");
-		});
-
-		function submitForm(target, data, action)
-		{
-			const route = "{{ route('store.checkout-set-items') }}";
-			$.ajax({	
-				url: route,
-				method: 'POST',             
-				dataType: 'JSON',
-				data: { data, action: action },
-				success: function(data){
-					if(data.response == 'success'){
-						if(target == 'reload'){
-							location.reload();
-						} else {
-							window.location.href = target;
-						}
-					} else {
-						console.log(data);
-						toast_success('', data.message, 'bottomCenter');
-						// $('#Error').html(data.responseText);
-					}
-				},
-				error: function(data){
-					$('#Error').html(data.responseText);
-					console.log(data);
-				}
-			});
-			
-		}
 
 	</script>
 @endsection

@@ -101,6 +101,8 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
         Route::post('addToCartLive', ['as' => 'store.addToCartLive', 'uses' => 'Store\CartItemController@store']);
         Route::post('addQtoCart', ['as' => 'store.addQtoCartItem', 'uses' => 'Store\CartItemController@addQtoCartItem']);
         Route::post('removeFromCart', ['as' => 'store.removeFromCart', 'uses' => 'Store\CartItemController@destroy']);
+        Route::post('removeFromCartLive', ['as' => 'store.removeFromCartLive', 'uses' => 'Store\CartItemController@liveDestroy']);
+        
         Route::post('eliminar-carro', ['as' => 'store.removeCartReturnStock', 'uses' => 'Store\CartsController@removeCartReturnStock']);
         // Sections    
         Route::get('cuenta', ['as' => 'store.customer-account', 'uses' => 'Store\StoreController@customerAccount']);

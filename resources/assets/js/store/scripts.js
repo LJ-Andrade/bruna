@@ -39,6 +39,42 @@ function modifyCartItemQ(e, newPriceTarget, newValue)
 }
 
 
+// Checkout sidebar
+// -------------------------------------------		
+window.checkoutSidebar = function(action) 
+{
+    if(action == 'open')
+    {
+        $('#SideContainer').toggle(100);
+        $('#MainOverlay').fadeIn(100);
+        $('body').css('overflow', 'hidden');
+    }
+    if(action == 'close')
+    {
+        $('#SideContainer').toggle(100);
+        $('#MainOverlay').fadeOut(100);
+        $('body').css('overflow-y', 'scroll');
+    }
+}
+
+$('#MainOverlay').click(function(){
+    checkoutSidebar("close");
+});
+
+
+window.openFilters = function()
+{
+    const filters = $('#SearchFilters');
+    if(filters.css('display') == 'none')
+    {
+        filters.css('display','inherit');
+    }
+    else
+    {
+        filters.css('display','none');
+    }
+}
+
 // Hide alerts
 // -------------------------------------------
 // setTimeout(function(){
@@ -49,7 +85,41 @@ function modifyCartItemQ(e, newPriceTarget, newValue)
 // Cart Resumen
 // -------------------------------------------
 
-window.showCartResumeMobile = function()
+// window.showCartResumeMobile = function()
+// {
+//     $('.cart-resume-details-mobile').toggleClass('Hidden', 100);
+// }
+
+
+// Cart Actions
+// -------------------------------------------
+
+window.removeFromCart = function(route, id, quantity, div, action)
 {
-    $('.cart-resume-details-mobile').toggleClass('Hidden', 100);
+    $.ajax({	
+        url: route,
+        method: 'POST',             
+        dataType: 'JSON',
+        data: { itemid: id, quantity: quantity, action: action, method: 'ajax' },
+        success: function(data){
+            if(data.response == 'cart-removed'){
+                console.log(data);
+                window.location = window.location.href.split("?")[0];
+                setItemsData();
+            } else if(data.response == 'success')
+            {
+                $(div).hide(100);
+                $(div).remove();
+                console.log(div);
+                setItemsData();
+            }
+        },
+        error: function(data){
+            $('#Error').html(data.responseText);
+            console.log("Error en removeFromCart()");
+            console.log(data);
+            // If an error pops when destroying an item, reload and prevent bad magic
+            // location.reload();
+        }
+    });
 }
