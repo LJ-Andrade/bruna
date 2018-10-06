@@ -77,12 +77,10 @@
 		</div>
 		<div class="text-right">
 			<button id="UpdateDataBtn" type="button" class="main-btn-sm">Actualizar <i class="fas fa-sync-alt"></i></button>
+			<button id="SubmitDataBtn" type="button" class="main-btn-sm">Continuar <i class="fa fa-arrow-right"></i></button>
 			@if(isset($activeCart) && $activeCart != null)
-				<button id="SubmitDataBtn" type="button" class="main-btn-sm">Continuar <i class="fa fa-arrow-right"></i></button>
 			@endif
 		</div>
-		<div class="SideContainerError side-container-error">
-			{{-- Debe incluír al menos 12 prendas --}}
-		</div>
+		<div class="SideContainerError side-container-error"></div>
 	</div>{{-- / .inner --}}
 </div> {{-- / .side-container --}}
