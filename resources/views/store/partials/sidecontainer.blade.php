@@ -77,7 +77,7 @@
 		</div>
 		<div class="text-right">
 			<button id="UpdateDataBtn" type="button" class="main-btn-sm">Actualizar <i class="fas fa-sync-alt"></i></button>
-			@if($activeCart != null)
+			@if(isset($activeCart) && $activeCart != null)
 				<button id="SubmitDataBtn" type="button" class="main-btn-sm">Continuar <i class="fa fa-arrow-right"></i></button>
 			@endif
 		</div>
