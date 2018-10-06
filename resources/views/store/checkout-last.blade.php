@@ -34,7 +34,7 @@
 		</div>
 	@endif
   	<div class="container checkout-container padding-bottom-3x mb-2 marg-top-25">
-		<div class="back-to-store"><a href="{{ url('tienda/checkout') }}"><i class="icon-arrow-left"></i> Atrás</a></div>
+		<div class="back-to-store"><a href="{{ url('tienda') }}"><i class="icon-arrow-left"></i> Atrás</a></div>
    		<div class="row">
 			<div class="col-md-12">
                 <h3>Carro de Compras | Checkout</h3>

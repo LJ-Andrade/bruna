@@ -51,7 +51,7 @@
 							<br>
 							{{ $item->color }} | Talle: {{ $item->size }} 
 						</div>
-						<div class=" col-3 quantity">
+						<div class="col-3 quantity">
 							<div class="input-with-btn input-with-btn-mobile">
 									{{-- Send this data to JSON via js with .Item-Data class --}}
 								<input class="Item-Data small-input under-element" name="data" type="number" 

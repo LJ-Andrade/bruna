@@ -67,7 +67,7 @@
 								<a href="{{ route('catalogo.create') }}" class="btn btnBlue"><i class="fas fa-plus"></i> Nuevo Artículo</a>
 								<a href="{{ route('catalogo.index', ['redirect' => 'stock']) }}" class="btn btnBlue"><i class="fas fa-box-open"></i> Stock</a>
 								<a href="{{ route('orders.index', ['status' => 'Process']) }}" class="btn btnBlue"><i class="fas fa-smile-beam"></i> Pedidos Nuevos</a>
-								
+								<a href="{{ route('coupons.create') }}" class="btn btnBlue"><i class="fas fa-divide"></i> Crear Cupón</a>
 							</div>
 						</div>
 					</div>
