@@ -19,6 +19,7 @@ class StoreServiceProvider extends ServiceProvider
     public function composeStore()
     {
         View::composer([
+            'store.partials.main',
             'store.index', 
             'store.checkout',
             'store.checkout-final',
