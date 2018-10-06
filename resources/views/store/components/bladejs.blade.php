@@ -86,7 +86,7 @@
             data: data,
             success: function(data){
                 if(data.response == 'success'){
-                    toast_success('Ok!', data.message, 'bottomCenter', '', 1000);
+                    toast_success('Ok!', data.message, 'bottomCenter', '', 2500);
                     // Live Reloading stuff
                     $("#SideContainerItems").load(window.location.href + " #SideContainerItems");
                     $(".TotalCartItems").load(window.location.href + " .TotalCartItems");

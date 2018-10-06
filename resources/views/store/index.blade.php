@@ -8,27 +8,28 @@
 @section('content')
 	<!-- Page Content -->
 	<div id="main" class="main-container container-fluid padding-bottom-3x mb-1">
-		<div class="row">
+		<div class="row search-filters">
 			@include('store.partials.filterbar')
 		</div>
 		<div class="row">
 			<!-- SideBar -->
 			<div class="col-xs-12 col-lg-12">
-
 				@if(!isset($_GET['checkout-on']))
-					@if(isset($search) && $search == true || count($_GET) > 0 && !isset($_GET['results']))
-						<div class="results-info">
-							@if($articles->count() == '1')
-								1 artículo encontrado <br>
-							@elseif($articles->count() == '0')
-					
-							@else
-								Mostrando resultados de la búsqueda.
-							@endif
-						</div>
-					@endif 
+					@if(isset($_GET['page']) && !isset($search) && count($_GET) == 1)
+					@else
+						@if(isset($search) && $search == true || count($_GET) > 0 && !isset($_GET['results']))
+							<div class="results-info">
+								@if($articles->count() == '1')
+									1 artículo encontrado <br>
+								@elseif($articles->count() == '0')
+						
+								@else
+									Mostrando resultados de la búsqueda.
+								@endif
+							</div>
+						@endif
+					@endif
 				@endif
-
 				<!-- Products Grid -->
 				<div class="row articles-container">
 					@if($articles->count() == '0')
@@ -147,7 +148,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="Error"></div>
+	{{-- <div id="Error"></div> --}}
 @endsection
 
 @section('scripts')

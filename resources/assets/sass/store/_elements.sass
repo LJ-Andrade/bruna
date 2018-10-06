@@ -925,9 +925,12 @@ ul.pagination
 			display: block
 			position: absolute
 			right: 5px
-			top: 5px
+			top: 7px
 			i
 				color: $main-color
+			.icon-button
+				&:hover
+					cursor: pointer
 
 @media (max-width: 300px)
 	.toolbar
@@ -1058,8 +1061,13 @@ ul.pagination
 
 // ------------- Horizontal Filters --------------- //
 
+.search-filters
+	margin-bottom: 15px
+	padding-left: 10px
+	padding-right: 10px
+	
 .horizontal-filters
-	padding: 0 10px
+	padding: 0
 	position: relative
 	@include transition(0.2s)
 	input,select
@@ -1075,23 +1083,26 @@ ul.pagination
 			cursor: pointer
 			filter: brightness(1.2)
 
-.mobile-filters
+.search-filter
+	.search-input
+		padding-right: 0
 	.trigger
 		display: none
 
-@media (min-width: 785px)
+@media (max-width: 819px)
 	.horizontal-filters
 		form
-			margin-right: 10px
-
-@media (max-width: 785px)
-	.horizontal-filters
-		form
+			width: 100%
+			margin-right: 0
+		select,input
 			width: 100%
 	.general-filters
 		display: none
 		@include transition(0.2s)
-	.mobile-filters
+		.item
+			margin: 0
+			margin-bottom: 5px
+	.search-filter
 		margin-top: 10px
 		width: 100%
 		padding-right: 50px
@@ -1110,19 +1121,18 @@ ul.pagination
 			font-size: 1.5rem
 			@include flex-center()
 
+.back-to-list-mobile
+	display: none
 
-@media (max-width: 785px)
-	.horizontal-filters
-		select,input
-			width: 100%
-			
-	.general-filters
-		.item
-			margin: 0
-			margin-bottom: 5px
+@media (max-width: 768px)
+	.back-to-list-desktop
+		display: none
+	.search-filters
+		margin-bottom: 0
+	.back-to-list-mobile
+		display: block
 
 .results-info
-	padding-top: 10px
 	font-size: 1.2rem
 	font-family: $font2
 
