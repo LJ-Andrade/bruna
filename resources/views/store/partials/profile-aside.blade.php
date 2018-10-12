@@ -34,7 +34,7 @@
 <nav class="list-group">
     <a class="list-group-item {{ Menu::activeMenu('cuenta') }}" href="{{ route('store.customer-account') }}"><i class="icon-head"></i>Cuenta</a>
     <a class="list-group-item justify-content-between {{ Menu::activeMenu('pedidos') }}" href="{{ route('store.customer-orders') }}">
-            <span><i class="icon-bag"></i>Pedidos</span>
+            <span><i class="icon-bag"></i>Mis Pedidos</span>
     </a>
     <a class="list-group-item justify-content-between {{ Menu::activeMenu('favoritos') }}" href="{{ route('store.customer-wishlist') }}">
         <span><i class="icon-heart"></i>Favoritos</span>

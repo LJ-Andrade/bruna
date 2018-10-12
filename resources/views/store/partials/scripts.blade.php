@@ -33,7 +33,7 @@
                         location.reload();
                         break;
                     default:
-                        console.log('No action');
+                        // console.log('No action');
                         break;
                 }
             },
@@ -53,7 +53,7 @@
                         location.reload();
                         break;
                     case 'none':
-                        console.log('No action');
+                        // console.log('No action');
                         break;
                     default:
                         

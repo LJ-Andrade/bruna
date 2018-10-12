@@ -5,8 +5,8 @@
 		<a class="social-button sb-facebook shape-none sb-dark" href="https://www.facebook.com/br.ndumentaria/" target="_blank">
 			<i class="socicon-facebook"></i>
 		</a>
-		<a class="social-button sb-twitter shape-none sb-dark" href="https://www.instagram.com/bruna.indumentaria1/" target="_blank">
-			<i class="socicon-twitter"></i>
+		<a class="social-button sb-instagram shape-none sb-dark" href="https://www.instagram.com/bruna.indumentaria1/" target="_blank">
+			<i class="socicon-instagram"></i>
 		</a>
 	</div>
 	<div class="topbar-column">
@@ -15,7 +15,7 @@
 			<i class="icon-mail"></i>&nbsp; info@bruna.com.ar
 		</a>
 		@if(Auth::guard('customer')->check())
-		<button onclick="checkoutSidebar('open')" class="icon-btn-small"|><i class="fas fa-shopping-cart"></i></button>
+		<button onclick="checkoutSidebar('show')" class="icon-btn-small"|><i class="fas fa-shopping-cart"></i></button>
 		@endif
 	</div>
 </div>

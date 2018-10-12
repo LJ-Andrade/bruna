@@ -12,8 +12,8 @@
 			@include('store.partials.filterbar')
 		</div>
 		<div class="row">
-			<!-- SideBar -->
-			<div class="col-xs-12 col-lg-12">
+			{{-- col-xs-12 col-lg-9 col-sm-8 col-md-8 --}}
+			<div id="MainContent" class="col-xs-12">
 				@if(!isset($_GET['checkout-on']))
 					@if(isset($_GET['page']) && !isset($search) && count($_GET) == 1)
 					@else
@@ -146,19 +146,17 @@
 				@endif
 				{!! $articles->appends(request()->query())->render()!!}
 			</div>
+			<!-- SideBar -->
+			<div id="CheckoutSidebar" class="col-lg-3 col-sm-4 col-md-4 side-container ">
+				@include('store.partials.sidecontainer')
+			</div>
 		</div>
 	</div>
-	{{-- <div id="Error"></div> --}}
+	<div id="Error"></div>
 @endsection
 
 @section('scripts')
 	@include('store.components.bladejs')
-	<script>
-		function openSidebar()
-		{
-			$('#Sidebar').toggle(100);
-		}
-	</script>
 @endsection
 
 

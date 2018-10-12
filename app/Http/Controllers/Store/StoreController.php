@@ -88,9 +88,10 @@ class StoreController extends Controller
         }
 
         if(isset($request->buscar))
-        {
+        {   
+            $tags = CatalogTag::with(['articles' => function($query) { $query->where('status', '=', '1'); } ])->get();
             $categories = CatalogCategory::with(['articles' => function($query) { $query->where('status','=', '1'); } ])->get();
-            $articles = CatalogArticle::search($request->buscar, $categories)->active()->paginate($pagination);
+            $articles = CatalogArticle::search($request->buscar, $categories, $tags)->active()->paginate($pagination);
         } 
         else if(isset($request->filtrar))
         {
@@ -114,13 +115,7 @@ class StoreController extends Controller
         {
             $articles = CatalogArticle::orderBy($orderBy, $order)->orderBy($orderBy2, $order2)->active()->paginate($pagination);
         }
-        // dd($orderBy. ' '. $order);
-        
-        // Get only categories with active products
-        //$categories = CatalogCategory::with(['articles' => function($query) { $query->where('status','=', '1'); } ])->get();
-        //
-        //$tags = CatalogTag::orderBy('id', 'ASC')->select('name', 'id')->get();
-        //$atributes1 = CatalogAtribute1::orderBy('id', 'ASC')->select('name', 'id')->get();
+
         
         $favs = $this->getCustomerFavs();
         return view('store.index')
@@ -189,9 +184,12 @@ class StoreController extends Controller
             $isFav = false;
         }
 
+        $favs = $this->getCustomerFavs();
+
         return view('store.show')
             ->with('article', $article)
             ->with('isFav', $isFav)
+            ->with('favs', $favs)
             ->with('user', $user);
     }
 
@@ -605,20 +603,23 @@ class StoreController extends Controller
     {        
         $customer_id = auth()->guard('customer')->user()->id;
         try{
-            $favs= CatalogFav::where('customer_id', '=', $customer_id)->where('article_id', '=', $request->article_id)->pluck('id');
+            $favs = CatalogFav::where('customer_id', '=', $customer_id)->where('article_id', '=', $request->article_id)->pluck('id');
             if(!$favs->isEmpty()) {
                 $item = CatalogFav::find($favs[0]);
                 $item->delete();
-                return response()->json(['response' => true, 'result' => 'removed', 'message' => 'Hecho']); 
+                $favsCount = CatalogFav::where('customer_id', '=', $customer_id)->count();
+                return response()->json(['response' => true, 'result' => 'removed', 'message' => 'Hecho', 'favsCount' => $favsCount ]); 
             } else { 
                 $item = new CatalogFav($request->all());
                 $item->customer_id = $customer_id;
                 $item->save();
-                return response()->json(['response' => true, 'result' => 'added', 'message' => 'Hecho']); 
+                $favsCount = CatalogFav::where('customer_id', '=', $customer_id)->count();
+                return response()->json(['response' => true, 'result' => 'added', 'message' => 'Hecho', 'favsCount' => $favsCount ]); 
             }
-
+            
         } catch (\Exception $e){
-            return response()->json(['response' => false, 'message' => $e]); 
+            
+            return response()->json(['response' => false, 'message' => $e, 'favsCount' => 'Error']); 
         }
     }
 

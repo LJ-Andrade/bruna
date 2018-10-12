@@ -68,12 +68,15 @@ class CatalogArticle extends Model
         return $query->where('status', '1')->where('stock', '>', '0');
     }
 
-    public function scopeSearch($query, $term, $categories)
+    public function scopeSearch($query, $term, $categories, $tags)
     {  
         return $query
             ->where('name', 'like', "%" . $term . "%")
             ->orWhere('color', 'like', "%" . $term . "%")
             ->orWhere('textile', 'like', "%" . $term . "%")
+            ->orWhereHas('tags', function($tags) use($term){
+                $tags->where('name', 'like', "%" . $term ."%");
+            })
             ->orWhereHas('category', function($categories) use($term){
                 $categories->where('name', 'like', "%" . $term ."%");
             });

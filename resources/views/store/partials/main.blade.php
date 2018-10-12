@@ -30,8 +30,7 @@
 	</head>
 	<!-- Body-->
 	<body>
-		<div id="MainOverlay" class="main-overlay"></div>
-		@include('store.partials.sidecontainer')
+		{{-- <div id="MainOverlay" class="main-overlay"></div> --}}
 		<div id="full-loader" class="full-loader Hidden">
 			<div class="inner">
 				<img src="{{ asset('store-ui/images/loader.gif') }}" alt="Loader">
@@ -74,7 +73,7 @@
 		@yield('scripts')
 		@if(isset($_GET['checkout-on']))
 			<script>
-				checkoutSidebar("open");
+				checkoutSidebar('show');
 			</script>
 		@endif
 	</body>

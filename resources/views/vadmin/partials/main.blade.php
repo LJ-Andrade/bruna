@@ -101,23 +101,23 @@
 		@yield('custom_js')
 		<script>
 			
-			var count = 0;
+			let count = 0;
 			setInterval(function(){
 				count++;
-				var dots = new Array(count % 10).join('.');
+				let dots = new Array(count % 10).join('.');
 				document.getElementById('LoadingText').innerHTML = "." + dots;
 			}, 1000);
 
 			// Check If Img Is Broken and replace with default img 
 			// Add ".CheckImg" ass Class in any Img to add this function
-			$('.CheckImg').on('error', function(){
-				var defaultImg = "{{ asset('images/users/default.jpg') }}"
-				$(this).attr('src', defaultImg);
-			});
+			// $('.CheckImg').on('error', function(){
+			// 	var defaultImg = "{{ asset('images/users/default.jpg') }}"
+			// 	$(this).attr('src', defaultImg);
+			// });
 
 			$('.BtnLoader').click(function(){
-				var loadertext = $(this).data('loadertext');
-				var svg  = "<img src='{{ asset('images/gral/loader-sm.svg') }}'>";
+				let loadertext = $(this).data('loadertext');
+				let svg  = "<img src='{{ asset('images/gral/loader-sm.svg') }}'>";
 				$(this).html(svg + ' ' + loadertext);
 			});
 

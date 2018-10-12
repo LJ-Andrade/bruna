@@ -3,14 +3,21 @@
     <div class="inner">
         <a class="site-logo-mobile" href="{{ url('/') }}"><img style="width: 110px" src="{{ asset('images/logos/app-logo.png') }}" alt="Logo"></a>
         <div class="text-links">
-            <a href="{{ url('politica-de-exclusividad') }}">Política de Exclusividad</a>
+            @if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3' )
+                <a href="{{ url('politica-de-exclusividad') }}">Política de Exclusividad</a>
+            @endif
             <a href="{{ url('como-comprar') }}"><i class="far fa-question-circle"></i> Como comprar</a>
         </div>
         <div class="tools">
             @if(Auth::guard('customer')->check())
                 {{-- @include('store.partials.cart-resumen-desktop') --}}
                 {{-- Cart Sidebar Trigger --}}
-                <div class="CartResumen cart" onclick="checkoutSidebar('open')">
+                <div class="favs">
+                    <a href="{{ route('store.customer-wishlist') }}" data-toggle="tooltip" title="Mis Favoritos">
+                        <i class="FavMainIcon {{ count($favs['favs']) > 0 ? "fa" : "far" }} fa-heart"></i>
+                    </a>
+                </div>
+                <div class="CartResumen cart" onclick="checkoutSidebar();">
                     <i class="icon-bag"></i><span class="TotalCartItems count">@if($activeCart['totalItems'] == 0) 0 @else {{ $activeCart['totalItems'] }} @endif</span>
                     <span class="CartSubTotal subtotal">@if($activeCart['totalItems'] != 0) $ {{ $activeCart['cartSubTotal'] }} @endif</span>
                 </div>

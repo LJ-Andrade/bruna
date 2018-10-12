@@ -1,22 +1,17 @@
 
-Por la mitad
-Filtros En movil
-
-
+# Errores - Fallas - Bugs - Glitches
+- Cuando se hace el primero pedido y se pone continuar en el checkout sidebar rebota a tienda.
 
 Nuevos cambios subidos:
-
+Políticas de Exclusividad y Como comprar estilo nuevo.
+Filtros En movil
 Filtros por populares y descuentos.
 Arreglada paginacion
 Arreglado busqueda por categoría desde input text
 En tienda inicio puse un TOOL TIP con stock máximo, probar si gusta y sino poner selector.
 
-
-# BRUNA
-
+# Bruna
 Por otra parte, respecto a la decisión del menú lateral, cuando esté eso eliminaríamos el mensaje que aparece cada vez que agrego un producto al carrito porque ya me aparece de costado (adjunto foto)
-
-Ah, y algo que me quedó de un mail anterior, que tenía una clienta mayorista de la que no puedo ver sus datos de localidad (el tema puntual con ella ya lo resolví porque me contacto por whatsapp, pero no se si es un error que no me salga o que pasó), es nair quevedo
 
 Vadmin:
 Actualización de precios y stock: que haya un botón por página de actualizar cambios. Demora mucho refrescar item por item, cuando quiero hacer una actualización de todos los precios o el stock de varios artículos. Hasta ahora no lo había notado porque no hice modificaciones grandes.
@@ -37,15 +32,8 @@ Cuando cargo más fotos en una publicación, para cambiar la destacada, tengo qu
 
 
 
-## Implementar
-
-
-
-- Cuando se elije el primer producto en la tienda no está el disparador del dropdown del carro de compras.
-- En Vadmin en la vista de un pedido en particular no cuenta bien la cantidad total de prendas.
-
-
-Estadisticas
+# Implementar
+- Estadisticas
 - Poder dar orden a articulos de listado
 
 - Mas vendidos
@@ -59,7 +47,7 @@ Estadisticas
 - Vender producto similar
 - Agregar vista de listado
 
-## Hecho
+# Hecho
 - WhatsApp flotante
 - Agregar paginacion con cookies
 - Despues de paginar volver a la misma pagina
@@ -74,11 +62,6 @@ Estadisticas
 - Ocultar talle en listado en filtros de busqueda
 - Artículos con 0 stock o menos que el mínimo se pausan? Salen en los listado ? No salen
 
-# Errores - Fallas - Bugs - Glitches
-- Busqueda por texto no pagina con los resultados encontrados
-- No aparece foto generica en userbar
-
-    -   
 
 # Preguntas Bruna
 
@@ -86,6 +69,22 @@ Estadisticas
 
 
 # RESUELTOS
+
+> (RESUELTO)
+Cuando se elije el primer producto en la tienda no está el disparador del dropdown del carro de compras.
+
+> (RESUELTO)
+En Vadmin en la vista de un pedido en particular no cuenta bien la cantidad total de prendas.
+
+> (RESUELTO)
+Busqueda por texto no pagina con los resultados encontrados
+
+> (RESUELTO)
+No aparece foto generica en userbar
+
+> (RESUELTO)
+Filtros En movil
+
 >(RESUELTO)
 Cada cuando se recupera el stock que está en carros de compra activos ? 
 
@@ -137,10 +136,13 @@ En store checkout no se pueden borrar items
 # Dev Permisos 
 
 ### Local
-- sudo chown -R javzero.www-data CARPETA
+> sudo chown -R javzero.www-data CARPETA
  
 ### Requerido por Laravel
-- sudo chown -R $javzero:www-data storage;
-- sudo chown -R $javzero:www-data bootstrap/cache;
-- sudo chmod -R 775 storage;
-- sudo chmod -R 775 bootstrap/cache;
+> sudo chown -R $javzero:www-data storage;
+
+> sudo chown -R $javzero:www-data bootstrap/cache;
+
+> sudo chmod -R 775 storage;
+
+> sudo chmod -R 775 bootstrap/cache;

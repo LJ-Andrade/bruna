@@ -29,6 +29,7 @@
 
     $("#SubmitDataBtn").on('click', function(){
         // Route - Target - Data - Action 
+        // itemData is set in dom.
         submitForm("{{ route('store.checkout-set-items') }}", "{{ route('store.processCheckout')}}", itemData, "continue");
     });
 
@@ -81,6 +82,12 @@
         removeAllArticlesFromFavs("{{ route('customer.removeAllArticlesFromFavs') }}", customerid, action);
     });
 
+    function checkFavs()
+    {
+        let favscount = $('.FavMainIcon').data('favscount');
+        console.log(favscount);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MERCADO PAGO CHECKOUT
@@ -94,6 +101,7 @@
 
         createPreference(cartId, cartTotal, responseDiv, redirectBtn);
     });
+
     //url: "{{ route('store.getCreatePreference') }}",
     function createPreference(cartId, cartTotal, responseDiv, redirectBtn) {
 

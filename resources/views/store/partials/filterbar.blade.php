@@ -11,9 +11,9 @@
     <select class="form-control item" name="order" onchange="location = this.value;">
         <option value="Etiquetas" selected disabled>Ordenar por</option>
         <option value="{{ route('store', ['precio' => 'menor']) }}">Menor precio</option>
-        <option value="{{ route('store', ['precio' => 'menor']) }}">Mayor precio</option>
-        <option value="{{ route('store', ['precio' => 'menor']) }}">Con Descuento</option>
-        <option value="{{ route('store', ['precio' => 'menor']) }}">Populares</option>
+        <option value="{{ route('store', ['precio' => 'mayor']) }}">Mayor precio</option>
+        <option value="{{ route('store', ['filtrar' => 'descuentos']) }}">Con Descuento</option>
+        <option value="{{ route('store', ['filtrar' => 'populares']) }}">Populares</option>
     </select>
     {{-- Tags --}}
     <select class="form-control item" name="tags" onchange="location = this.value;">
