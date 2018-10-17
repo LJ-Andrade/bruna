@@ -54,7 +54,7 @@ class Customer extends Authenticatable
 
     public function getCartAttribute()
     {
-        $cart = $this->carts()->where('status', 'Active')->where('customer_id', $this->id)->first();
+        $cart = $this->carts()->where('status', 'Active')->where('customer_id', $this->id)->orderBy('created_at', 'DESC')->first();
         if($cart){
             return $cart;
         } else {
@@ -65,6 +65,8 @@ class Customer extends Authenticatable
             return $cart;
         }
     }
+
+
 
     // Search Scopes 
     public function scopeSearchname($query, $name)
@@ -84,6 +86,59 @@ class Customer extends Authenticatable
     {
         $query->where('group', $group)->where('status', $status);
     }   
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | STATISTICS
+    |--------------------------------------------------------------------------
+    */
+
+    public function staticstics($request)
+    {
+        switch ($request) {
+            case "totalItems":
+                $return = $this->totalItems();
+                break;
+            case "totalSpent":
+            $return = $this->totalSpent();
+                break;
+            default:
+            $return = null;
+                break;
+        }
+        return $return;    
+    }
+    
+
+    function totalItems()
+    {
+        $carts = $this->carts;
+        $totalItems = 0;
+        foreach($carts as $cart)
+        {
+            foreach($cart->items as $item)
+            {
+                $totalItems += $item->quantity;
+            }
+        }
+        return $totalItems;
+    }
+
+    function totalSpent()
+    {
+        $carts = $this->carts;
+        $totalSpent = 0;
+        foreach($carts as $cart)
+        {
+            foreach($cart->items as $item)
+            {
+                $totalSpent += $item->final_price * $item->quantity;
+            }
+        }
+        return $totalSpent;
+    }    
+
 
 
 }

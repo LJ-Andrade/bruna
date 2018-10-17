@@ -3,6 +3,7 @@
 namespace App\Traits;
 use App\Cart;
 use App\CatalogArticle;
+use App\CatalogFav;
 
 trait CartTrait {
  
@@ -153,4 +154,25 @@ trait CartTrait {
         return $newStock;
     }
 
+    public function getCustomerFavs()
+    {
+        if(auth()->guard('customer')->check()){
+            $favs = CatalogFav::where('customer_id', '=', auth()->guard('customer')->user()->id)->get();
+            
+            $articleFavs = CatalogFav::where('customer_id', '=', auth()->guard('customer')->user()->id)->pluck('article_id');
+            $articleFavs = $articleFavs->toArray();
+        
+            // Delete fav if product was removed and fav wasn't
+            foreach($favs as $item){
+                if(is_null($item->article)){
+                    $item->delete();
+                }
+            }
+
+        } else {
+            $favs = null;
+            $articleFavs = null;
+        }   
+        return array("articleFavs" => $articleFavs, "favs" => $favs);
+    }
 }

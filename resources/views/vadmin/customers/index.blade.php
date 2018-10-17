@@ -45,7 +45,22 @@
 		<div class="row">
 			@component('vadmin.components.list')
 				@slot('actions')
-					@if(isset($_GET['name']) || isset($_GET['role']) || isset($_GET['group']))
+
+					<a href="{{ route('vadmin.exportCustomersListSheet', ['params' => 'all', 'format' => 'xls']) }}" data-toggle="tooltip" title="Exportar a XLS"  class="icon-container green">
+						<i class="fas fa-file-excel"></i>
+					</a>
+					<a href="{{ route('vadmin.exportCustomersListSheet', ['params' => 'all', 'format' => 'csv']) }}" data-toggle="tooltip" title="Exportar a .CSV"  class="icon-container blue">
+						<i class="fas fa-file-excel"></i>
+					</a>
+					<a href="{{ route('vadmin.exportCustomersListPdf', ['params' => 'all', 'action' => 'download']) }}" data-toggle="tooltip" title="Exportar a .PDF" class="icon-container black">
+						<i class="fas fa-file-pdf"></i>
+					</a>
+					<a href="{{ route('vadmin.exportCustomersListPdf', ['params' => 'all', 'action' => 'stream']) }}" data-toggle="tooltip" title="Exportar a .PDF" class="icon-container black">
+						<i class="fas fa-eye"></i>
+					</a>
+
+					
+					{{-- @if(isset($_GET['name']) || isset($_GET['role']) || isset($_GET['group']))
 						<a href="{{ route('vadmin.exportCustomersListPdf', ['params' => http_build_query($_GET)]) }}" data-toggle="tooltip" title="Exportar a PDF">
 							<i class="icon-file-pdf"></i></a>
 						<a href="{{ route('vadmin.exportCustomersListXls', ['params' => http_build_query($_GET)]) }}" data-toggle="tooltip" title="Exportar a XLS">
@@ -53,7 +68,7 @@
 					@else
 						<a href="{{ route('vadmin.exportCustomersListPdf', ['params' => 'all']) }}" data-toggle="tooltip" title="Exportar a PDF"><i class="icon-file-pdf"></i></a>
 						<a href="{{ route('vadmin.exportCustomersListXls', ['params' => 'all']) }}" data-toggle="tooltip" title="Exportar a XLS"><i class="icon-file-excel"></i></a>
-					@endif
+					@endif --}}
 				@endslot	
 				@slot('title', 'Clientes')
 				@slot('tableTitles')

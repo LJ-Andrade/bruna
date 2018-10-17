@@ -37,11 +37,13 @@ class RegisterController extends Controller
     protected function redirectTo()
     {
         $customer = auth()->guard('customer')->user();
-        if($customer->group == '3' && $customer->status == '0' ){
-            return '/registro-en-proceso';
-        } else {
-            return '/registro-completo';
-        }
+        // If group 3 put register to hold
+        // if($customer->group == '3' && $customer->status == '0' ){
+        //     return '/registro-en-proceso';
+        // } else {
+        //     return '/registro-completo';
+        // }
+        return '/tienda';
     }
     /**
      * Create a new controller instance.
@@ -77,7 +79,8 @@ class RegisterController extends Controller
         $group = '2'; // Min 
         if(isset($data['isreseller'])){
             if($data['isreseller'] == 'on'){
-                $status = '0'; // Suspended
+                // $status = '0'; // Suspended
+                $status = '1'; // Active
                 $group = '3'; // Reseller
             } 
         } 

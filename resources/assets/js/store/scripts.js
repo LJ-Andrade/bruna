@@ -40,23 +40,23 @@ function modifyCartItemQ(e, newPriceTarget, newValue) {
 
 // Checkout sidebar
 // -------------------------------------------		
-window.checkoutSidebar = function(state) {
-    
+window.checkoutSidebar = function (state) {
+
     const sidebar = $('#CheckoutSidebar');
     const content = $('#MainContent');
-    
+
     const show = function () {
         sidebar.addClass('active');
-        content.addClass('col-xs-12 col-lg-9 col-sm-8 col-md-8');
+        content.addClass('col-xs-12 col-lg-9 fix-column fix-column-small');
     }
-    
+
     const hide = function () {
-        content.removeClass('col-lg-9 col-sm-8 col-md-8');
+        content.removeClass('col-lg-9 col-sm-8 col-md-8 fix-column fix-column-small');
         sidebar.removeClass('active');
     }
 
-    
-    if(state == undefined){
+
+    if (state == undefined) {
         if (sidebar.hasClass('active')) {
             hide();
         } else {
@@ -69,8 +69,19 @@ window.checkoutSidebar = function(state) {
         hide();
         return false;
     }
-
 }
+
+
+$(window).scroll(function (event) {
+    var scroll = $(window).scrollTop();
+
+    if (scroll > 125) {
+        $('.side-container').addClass('scrolled');
+    }
+    else {
+        $('.side-container').removeClass('scrolled');
+    }
+});
 
 
 // Sidebar checkout absolute
@@ -175,6 +186,7 @@ window.addToCart = function (route, data) {
         dataType: 'JSON',
         data: data,
         success: function (data) {
+            console.log(data);
             if (data.response == 'success') {
                 toast_success('Ok!', data.message, 'bottomCenter', '', 2500);
                 updateTotals();
@@ -182,14 +194,14 @@ window.addToCart = function (route, data) {
                 checkoutSidebar('show');
                 setTimeout(function () {
                     setItemsData();
+                    sumAllItems();
                 }, 100);
-
-            } else if ($data.response == 'warning') {
+          } else if (data.response == 'warning') {
                 toast_success('Ups!', data.message, 'bottomCenter');
             }
         },
         error: function (data) {
-            // $('#Error').html(data.responseText);
+            $('#Error').html(data.responseText);
             console.log("Error en addtoCart()");
             console.log(data);
         }

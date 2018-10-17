@@ -24,14 +24,9 @@
                     <div class="round-image-card">
                         <div class="inner">
                             <div class="image">
-                                <img id="Avatar" src="{{ asset('webimages/customers/'.$customer->avatar ) }}" class="Image-Container CheckImg" alt="">
-                                {{-- @if($customer->avatar == '')
-                                    <img id="Avatar" class="Image-Container CheckImg" src="{{ asset('images/users/default.jpg') }}" alt="Imágen de Usuario">
-                                @else	
-                                    <img id="Avatar" class="Image-Container CheckImg" src="{{ asset('images/users/'.$customer->avatar) }}" alt="Imágen de Usuario">
-                                @endif --}}
-                                {{-- <span class="over-text">Cambiar imágen</span> --}}
+                                <img id="Avatar" src="{{ asset('webimages/customers/'.$customer->avatar ) }}" class="Image-Container" alt="">
                             </div>
+                            
                         </div>
                     </div>
                     {{-- <div class="ActionContainer Hidden">

@@ -31,7 +31,7 @@
                     <ul class="toolbar-dropdown">
                         <li class="sub-menu-title"><span>Hola,</span> {{ Auth::guard('customer')->user()->name }}</li>
                         <li><a href="{{ route('store.customer-account') }}">Cuenta</a></li>
-                        <li><a href="{{ route('store.customer-orders') }}">Lista de Pedidos</a></li>
+                        <li><a href="{{ route('store.customer-orders') }}">Mis Pedidos</a></li>
                         <li><a href="{{ route('store.customer-wishlist') }}">Favoritos</a></li>
                         <li class="sub-menu-separator"></li>
                         <li>

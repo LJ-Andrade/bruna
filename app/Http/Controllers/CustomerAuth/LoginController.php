@@ -53,12 +53,21 @@ class LoginController extends Controller
     }
 
     protected function authenticated(Request $request, $user)
-    {
+    {   
         if(auth()->guard('customer')->user()->status == 0 && auth()->guard('customer')->user()->group == 3)
         {
-            $request->session()->invalidate();
-            auth()->guard()->logout();
-            return redirect('tienda')->with('message', 'Ha solicitado ser cliente mayorísta. En cuanto sea aprobado podrá loguearse para comprar.');
+            if(auth()->guard('customer')->user()->status == 0)
+            {
+                $request->session()->invalidate();
+                auth()->guard()->logout();
+                return redirect('tienda')->with('message', 'Su cuenta está en revisión.');
+            }
+            else
+            {
+                $request->session()->invalidate();
+                auth()->guard()->logout();
+                return redirect('tienda')->with('message', 'Ha solicitado ser cliente mayorísta. En cuanto sea aprobado podrá loguearse para comprar.');
+            }
         }
     }
 

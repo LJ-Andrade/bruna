@@ -6,11 +6,11 @@
                 <div class="col-md-12 title">
                     <i class="fas fa-shopping-cart"></i> Carro de Compras
                 </div>
-                <div class="col-md-6 text text-left">
-                    Total: <b>$<span>{{ $activeCart['cartTotal'] }}</span></b>
-                </div>
-                <div class="col-md-6 text-right">
-                        <button id="SubmitDataBtn" type="button" class="main-btn-sm">Continuar <i class="fa fa-arrow-right"></i></button>
+                <div class="items">
+                    <div class="text">Total: <b>$<span>{{ $activeCart['cartTotal'] }}</span></b></div>
+                    <div class="button">
+                        <button class="SubmitDataBtn main-btn-sm" type="button">Continuar <i class="fa fa-arrow-right"></i></button>
+                    </div>
                 </div>
             </div>
             @foreach($activeCart['rawdata']->items as $item)
@@ -55,9 +55,9 @@
                     </div>
                     <div class="input-with-btn quantity">
                         {{-- Send this data to JSON via js with .Item-Data class --}}
-                        <input class="Item-Data small-input under-element" name="data" type="number" 
+                        <input class="Item-Data small-input under-element" name="data" type="number"  
                         min="1" max="{{ $item->quantity + $item->article->stock }}" value="{{ $item->quantity }}" required="" 
-                        data-price="{{$articlePrice}}" data-id="{{ $item->id }}" data-toggle="tooltip" data-placement="top" title="Stock máximo {{ $article->stock }}">
+                        data-price="{{$articlePrice}}" data-id="{{ $item->id }}" data-toggle="tooltip" data-placement="top" title="Stock máximo {{ $item->article->stock }}">
                     </div>
                     <div class="delete-item">
                         <a onclick="removeFromCart('{{ route('store.removeFromCart') }}', {{ $item->id }}, {{ $item->quantity }}, '#Item'+{{ $item->id }}, 'reload');"><i class="far fa-trash-alt"></i></a>
@@ -77,9 +77,7 @@
             </div>
         </div>
         <div class="text-right">
-            <button id="SubmitDataBtn" type="button" class="main-btn-sm">Continuar <i class="fa fa-arrow-right"></i></button>
-            @if(isset($activeCart) && $activeCart != null)
-            @endif
+            <button type="button" class="SubmitDataBtn main-btn-sm">Continuar <i class="fa fa-arrow-right"></i></button>
         </div>
     @else
         <div class="empty-cart">

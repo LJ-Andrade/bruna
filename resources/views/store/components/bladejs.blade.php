@@ -27,7 +27,8 @@
         setItemsData();	
     });
 
-    $("#SubmitDataBtn").on('click', function(){
+    $(document).on('click', '.SubmitDataBtn', function(e){
+        e.preventDefault();
         // Route - Target - Data - Action 
         // itemData is set in dom.
         submitForm("{{ route('store.checkout-set-items') }}", "{{ route('store.processCheckout')}}", itemData, "continue");

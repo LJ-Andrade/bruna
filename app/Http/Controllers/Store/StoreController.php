@@ -100,7 +100,7 @@ class StoreController extends Controller
                 $articles = CatalogArticle::has('hasFavs')->paginate($pagination);
             } else if($request->filtrar == 'descuentos')
             {
-                $articles = CatalogArticle::orderBy($orderBy, $order)->active()->where('discount', '>', '0')->paginate($pagination);
+                $articles = CatalogArticle::orderBy('discount', 'DESC')->active()->paginate($pagination);
             }
         }
         else if(isset($request->categoria))
@@ -116,11 +116,9 @@ class StoreController extends Controller
             $articles = CatalogArticle::orderBy($orderBy, $order)->orderBy($orderBy2, $order2)->active()->paginate($pagination);
         }
 
-        
-        $favs = $this->getCustomerFavs();
+    
         return view('store.index')
-            ->with('articles', $articles)
-            ->with('favs', $favs);
+            ->with('articles', $articles);
     }
 
     public function searchSize($name)
@@ -135,13 +133,11 @@ class StoreController extends Controller
             $articles->images;
         });  
         
-        $favs = $this->getCustomerFavs();
         $search = true;
 
         return view('store.index')
             ->with('search', $search)
-            ->with('articles', $articles)
-            ->with('favs', $favs);
+            ->with('articles', $articles);
     }
     
     public function searchTag($name)
@@ -156,13 +152,11 @@ class StoreController extends Controller
             $articles->images;
         });  
 
-        $favs = $this->getCustomerFavs();
         $search = true;
 
         return view('store.index')
             ->with('search', $search)
-            ->with('articles', $articles)
-            ->with('favs', $favs);
+            ->with('articles', $articles);
     }
     
     public function show(Request $request)
@@ -184,12 +178,9 @@ class StoreController extends Controller
             $isFav = false;
         }
 
-        $favs = $this->getCustomerFavs();
-
         return view('store.show')
             ->with('article', $article)
             ->with('isFav', $isFav)
-            ->with('favs', $favs)
             ->with('user', $user);
     }
 
@@ -522,11 +513,9 @@ class StoreController extends Controller
 
     public function customerAccount(Request $request)
     {
-        $favs = $this->getCustomerFavs();
         $geoprovs = GeoProv::pluck('name','id');
 
         return view('store.customer-account')
-            ->with('favs', $favs)
             ->with('geoprovs',$geoprovs);
     }
 
@@ -572,8 +561,7 @@ class StoreController extends Controller
         }
         
         return view('store.customer-wishlist')
-            ->with('customer', $customer)
-            ->with('favs', $favs);
+            ->with('customer', $customer);
     }
     
     public function getCustomerFavs()

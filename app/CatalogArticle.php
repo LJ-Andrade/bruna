@@ -57,11 +57,8 @@ class CatalogArticle extends Model
         
         if($featuredImage){
             return 'webimages/catalogo/'.$featuredImage->name;
-        }
-
-        
+        }   
         return 'images/gen/catalog-gen.jpg';
-
     }
 
     public function scopeActive($query){

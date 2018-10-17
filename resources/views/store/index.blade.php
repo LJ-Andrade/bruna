@@ -7,6 +7,7 @@
 
 @section('content')
 	<!-- Page Content -->
+	{{-- {{ dd($articles)}} --}}
 	<div id="main" class="main-container container-fluid padding-bottom-3x mb-1">
 		<div class="row search-filters">
 			@include('store.partials.filterbar')
@@ -147,7 +148,7 @@
 				{!! $articles->appends(request()->query())->render()!!}
 			</div>
 			<!-- SideBar -->
-			<div id="CheckoutSidebar" class="col-lg-3 col-sm-4 col-md-4 side-container ">
+			<div id="CheckoutSidebar" class="col-sm-4 col-md-4 col-lg-3 side-container">
 				@include('store.partials.sidecontainer')
 			</div>
 		</div>

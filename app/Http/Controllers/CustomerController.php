@@ -62,24 +62,38 @@ class CustomerController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function exportPdf($params)
+    public function exportPdf($params, $action)
     {   
         $items = $this->getData($params);
-        $pdf = PDF::loadView('vadmin.customers.invoice', array('items' => $items));
+        $pdf = PDF::loadView('vadmin.customers.invoice-pdf', array('items' => $items));
         $pdf->setPaper('A4', 'landscape');
+        if($action == 'stream')
+            return $pdf->stream('listado-clientes.pdf');
+
         return $pdf->download('listado-de-clientes.pdf');
         
     }
 
-    public function exportXls($params)
-    {   
+    // public function exportXls($params)
+    // {   
+    //     $items = $this->getData($params);
+    //     Excel::create('listado-de-clientes', function($excel) use($items){
+    //         $excel->sheet('Listado', function($sheet) use($items) {   
+    //             $sheet->loadView('vadmin.customers.invoice-excel', 
+    //             compact('items'));
+    //         });
+    //     })->export('xls');         
+    // }
+
+    public function exportSheet($params, $format)
+    {
         $items = $this->getData($params);
         Excel::create('listado-de-clientes', function($excel) use($items){
             $excel->sheet('Listado', function($sheet) use($items) {   
-                $sheet->loadView('vadmin.customers.invoice-excel', 
+                $sheet->loadView('vadmin.customers.invoice-sheet', 
                 compact('items'));
             });
-        })->export('xls');         
+        })->export($format);
     }
 
 
@@ -103,8 +117,6 @@ class CustomerController extends Controller
         $items = Customer::orderBy('id', 'ASC')->get(); 
         return $items;
     }
-
-
 
     /*
     |--------------------------------------------------------------------------
