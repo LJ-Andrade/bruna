@@ -201,8 +201,9 @@ window.addToCart = function (route, data) {
             }
         },
         error: function (data) {
-            $('#Error').html(data.responseText);
+            //$('#Error').html(data.responseText);
             console.log("Error en addtoCart()");
+            location.reload();
             console.log(data);
         }
     });
