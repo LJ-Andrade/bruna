@@ -55,7 +55,7 @@
 					<a href="{{ route('vadmin.exportCustomersListPdf', ['params' => 'all', 'action' => 'download']) }}" data-toggle="tooltip" title="Exportar a .PDF" class="icon-container black">
 						<i class="fas fa-file-pdf"></i>
 					</a>
-					<a href="{{ route('vadmin.exportCustomersListPdf', ['params' => 'all', 'action' => 'stream']) }}" data-toggle="tooltip" title="Exportar a .PDF" class="icon-container black">
+					<a href="{{ route('vadmin.exportCustomersListPdf', ['params' => 'all', 'action' => 'stream']) }}" data-toggle="tooltip" title="Exportar a .PDF" class="icon-container black" target="_blank">
 						<i class="fas fa-eye"></i>
 					</a>
 
