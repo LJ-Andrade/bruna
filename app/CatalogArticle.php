@@ -79,6 +79,13 @@ class CatalogArticle extends Model
             });
     }
 
+    public function scopeSearchCategory($query, $term)
+    {
+        return $query->whereHas('category', function($categories) use($term){
+            $categories->where('name', 'like', "%" . $term ."%");
+        });
+    }
+
     public function scopeSearchName($query, $term)
     {
         return $query

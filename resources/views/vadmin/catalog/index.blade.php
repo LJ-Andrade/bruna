@@ -47,23 +47,6 @@
 			</span>
 		</div>
 		<div class="row">
-
-				{{-- <a href="{{ url('vadmin/exportOrderCsv', [$item->id]) }}" class="icon-container green" target="_blank" data-toggle="tooltip" title="Exportar .XLS">
-					<i class="fas fa-file-excel"></i>
-				</a>
-				<a href="{{ url('vadmin/exportOrderXls', [$item->id]) }}" class="icon-container blue" target="_blank" data-toggle="tooltip" title="Exportar .CSV">
-					<i class="fas fa-file-excel"></i>
-				</a>
-				<a href="{{ url('vadmin/descargar-comprobante', [$item->id, 'download']) }}" class="icon-container red" target="_blank" data-toggle="tooltip" title="Exportar .PDF">
-					<i class="fas fa-file-pdf"></i>
-				</a>
-				@endif
-				<a href="{{ url('vadmin/orders/'.$item->id) }}" class="icon-container black" data-toggle="tooltip" title="Detalle del pedido">
-					<i class="fas fa-eye"></i>
-				</a>
- --}}
-
-
 			@component('vadmin.components.list')
 				@slot('actions')
 					@if(isset($_GET['name']) || isset($_GET['code']) || isset($_GET['title']) || isset($_GET['category']) || isset($_GET['orden']))

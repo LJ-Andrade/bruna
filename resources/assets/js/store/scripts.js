@@ -441,4 +441,52 @@ window.removeAllArticlesFromFavs = function (route, customerid, action) {
     });
 }
 
+/*
+|--------------------------------------------------------------------------
+| LOGIN AND REGISTER
+|--------------------------------------------------------------------------
+*/
+
+$('#ResellerBox').hide();
+
+window.openResellerRegistration = function()
+{
+    $('#IsResellerCheckbox').prop('checked', true);
+    $('.IfResellerEnable').prop('disabled', false);
+    $('#ResellerBox').show(100);
+    $('#ResellerCTA').hide(0);
+    $('.NormaClientTitle').hide(0);
+    $('.ResellerTitle').show(0);
+}
+
+
+window.closeResellerRegistration = function()
+{
+    $('#IsResellerCheckbox').prop('checked', false);
+    $('.IfResellerEnable').prop('disabled', true);
+    $('#ResellerBox').hide(0);
+    $('#ResellerCTA').show(100);
+    $('.NormaClientTitle').show(0);
+    $('.ResellerTitle').hide(0);
+}
+
+$(document).ready(function(){
+    $('.GeoProvSelect').on('change', function(){
+        let prov_id = $(this).val();
+        getGeoLocs(prov_id);
+    });
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| GENERIC FUNCTIONS
+|--------------------------------------------------------------------------
+*/
+
+window.closeElement = function(selector)
+{
+    $(selector).hide(100);
+}
+
 

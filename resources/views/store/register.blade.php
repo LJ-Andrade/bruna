@@ -3,10 +3,27 @@
 
 @section('content')
 <div class="container padding-bottom-3x">
+    <div id="ResellerCTA" class="row centered-form text-center">
+        <div class="login-box inner" style="padding-bottom: 30px">
+            <a class="cursor-pointer top-right-element" onclick="closeElement('#ResellerCTA');">X</a>
+            <h3>Querés vender al por mayor?</h3>
+            {{-- RESELLER BOX REQUIRED Edisplay: none;--}}            
+            <button type="button" onclick="openResellerRegistration();" class="btn btn-primary btn-block">Registrarme como mayorísta</button>
+        </div>
+    </div>
 	<div class="row centered-form">
         <form class="login-box form-simple inner" method="POST" action="{{ route('customer.register') }}">
+            {{--  Check if reseller --}}
+            <input id="IsResellerCheckbox" type="checkbox" name="isreseller" class="Hidden">
             {{ csrf_field() }}
-            <h3 class="text-center">Registro de Usuario</h3>
+            <div class="NormaClientTitle">
+                <h3 class="text-center">Registro de Usuario</h3>
+            </div>
+            <div class="ResellerTitle text-center" style="display: none">
+                <a class="top-right-element cursor-pointer" onClick="closeResellerRegistration();">Volver</a>
+                <h3>Registro de Usuario Mayorísta</h3>
+                <p>Complete todos los datos</p>
+            </div>
             <div class="row">
                 {{-- Username --}}
                 <div class="col-sm-6 form-group{{ $errors->has('username') ? ' has-error' : '' }}">
@@ -106,47 +123,14 @@
                     </div>
                 </div>
             </div>
-            {{-- RESELLER BOX REQUIRED Edisplay: none;--}}            
-            <div class="col-xs-12 text-xs-center text-md-left bordered-box">
-                <input id="IsResellerCeckbox" type="checkbox" name="isreseller"> Deseo aplicar para ser cliente mayorísta <br>
-                <span class="text-muted">(Quedará en proceso de espera hasta ser aceptado por<br> <b>Bruna Indumentaria</b>)</span>
-            </div>
             {{-- Submit --}}
             <button type="submit" class="btn btn-primary btn-block"><i class="icon-unlock"></i> Registrarse</button>
             <div class="bottom-text">Ya tiene cuenta? | <a href="{{ route('customer.login') }}">Ingresar</a></div>
         </form>
-	</div>
+    </div>
 </div>
 @endsection
     
-
 @section('scripts')
 	@include('store.components.bladejs')
-    <script>
-        const isReseller = $('#IsResellerCeckbox');
-        const resellerInputs = $('.IfResellerEnable');
-        const resellerBox = $('#ResellerBox');
-        resellerBox.hide();
-
-        isReseller.on('change', function(e){
-            e.preventDefault();
-
-            if(isReseller.prop('checked')){
-
-                resellerInputs.prop('disabled', false);
-                resellerBox.show(100);
-            } else {
-                resellerInputs.prop('disabled', true);
-                resellerBox.hide(100);
-            }
-        });
-
-        $(document).ready(function(){
-    
-            $('.GeoProvSelect').on('change', function(){
-                let prov_id = $(this).val();
-                getGeoLocs(prov_id);
-            });
-        });
-    </script>
 @endsection

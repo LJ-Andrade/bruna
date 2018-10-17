@@ -97,6 +97,9 @@ class Customer extends Authenticatable
     public function staticstics($request)
     {
         switch ($request) {
+            case "totalCarts":
+                $return = $this->totalCarts();
+                break;
             case "totalItems":
                 $return = $this->totalItems();
                 break;
@@ -117,9 +120,12 @@ class Customer extends Authenticatable
         $totalItems = 0;
         foreach($carts as $cart)
         {
-            foreach($cart->items as $item)
+            if($cart->status != "Active")
             {
-                $totalItems += $item->quantity;
+                foreach($cart->items as $item)
+                {
+                    $totalItems += $item->quantity;
+                }
             }
         }
         return $totalItems;
@@ -139,6 +145,19 @@ class Customer extends Authenticatable
         return $totalSpent;
     }    
 
-
+    function totalCarts()
+    {
+        $carts = $this->carts;
+        $totalCarts = 0;
+        
+        foreach($carts as $cart)
+        {
+            if($cart->status != "Active")
+            {
+                $totalCarts += 1;
+            } 
+        }
+        return $totalCarts;
+    }    
 
 }

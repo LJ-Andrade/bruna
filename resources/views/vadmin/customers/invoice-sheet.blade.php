@@ -6,11 +6,16 @@
         <tr>
             <th>Cód.</th>
             <th>Nombre y Apellido</th>
+            <th>Tipo de Cliente</th>
             <th>E-Mail</th>
             <th>CUIT</th>
             <th>Dirección</th>
-            <th>Prov / Loc</th>
-            <th>Teléfonos</th>
+            <th>Provincia</th>
+            <th>Localidad</th>
+            <th>C.P.</th>
+            <th>Teléfono</th>
+            <th>Teléfono</th>
+            <th>Compras Realizadas</th>
             <th>Prendas Compradas</th>
             <th>Valor</th>
         </tr>
@@ -19,12 +24,17 @@
     @foreach($items as $item)
     <tr>
         <td class="w-50">#{{ $item->id }}</td>
-        <td class="max-text">{{ $item->name }} {{ $item->surname }}<br>({{ groupTrd($item->group) }})</td>
+        <td class="max-text">{{ $item->name }} {{ $item->surname }}</td>
+        <td>{{ groupTrd($item->group) }}</td>
         <td>{{ $item->email }}</td>
         <td>{{ $item->cuit }}</td>
-        <td>@if($item->address != '') {{ $item->address }} <br>({{$item->cp }}) @endif</td>
-        <td>@if($item->geoprov['name'] != '') {{ $item->geoprov['name'] }} <br>({{ $item->geoloc['name'] }}) @endif</td>
-        <td>{{ $item->phone }} <br> {{ $item->phone2 }}</td>
+        <td>{{ $item->address }}</td>
+        <td>{{ $item->geoprov['name'] }}</td>
+        <td>{{ $item->geoloc['name'] }}</td>
+        <td>{{$item->cp }}</td>
+        <td>{{ $item->phone }}</td>
+        <td>{{ $item->phone2 }}</td>
+        <td>@if($item->staticstics('totalCarts') != 0) {{ $item->staticstics('totalCarts') }} @endif</td>
         <td>@if($item->staticstics('totalItems') != 0) {{ $item->staticstics('totalItems') }} @endif</td>
         <td>@if($item->staticstics('totalSpent') != 0) ${{ $item->staticstics('totalSpent') }} @endif</td>
     </tr>

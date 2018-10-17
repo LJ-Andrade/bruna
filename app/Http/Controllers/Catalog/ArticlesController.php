@@ -77,10 +77,14 @@ class ArticlesController extends Controller
             {
                 $articles = CatalogArticle::where('code', 'LIKE', "%".$code."%")->paginate($pagination);
             }
-            elseif(isset($name) || isset($category))
+            elseif(isset($name))
             {
-                $articles = CatalogArticle::search($name, $category)->orderBy($rowName, $order)->paginate($pagination);
+                $articles = CatalogArticle::searchName($name)->orderBy($rowName, $order)->paginate($pagination);
             } 
+            elseif(isset($category))
+            {
+                $articles = CatalogArticle::where('category_id', $category)->orderBy($rowName, $order)->paginate($pagination);
+            }
             else 
             {
                 $articles = CatalogArticle::orderBy($rowName, $order)->paginate($pagination);
