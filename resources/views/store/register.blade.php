@@ -129,8 +129,18 @@
         </form>
     </div>
 </div>
+
 @endsection
     
 @section('scripts')
-	@include('store.components.bladejs')
+    @include('store.components.bladejs')
+    <script>
+        if(getParam("mostrar") == 'mayorista')
+        {
+            openResellerRegistration();
+        };
+        
+       
+
+    </script>
 @endsection

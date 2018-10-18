@@ -18,7 +18,10 @@
 </header>
 <div class="under-nav-container">
 	<div class="text-links">
+		@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3' )
 		<a href="{{ url('politica-de-exclusividad') }}">Política de Exclusividad</a>
+		@endif
 		<a href="{{ url('como-comprar') }}">Como comprar</a> 
+		<a href="{{ route('customer.register', ['mostrar' => 'mayorista']) }}">Vendé Bruna</a>
 	</div>
 </div>

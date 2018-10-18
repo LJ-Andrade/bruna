@@ -47,7 +47,7 @@
 								{{-- Reseller Discount --}}
 								@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
 									@if($article->reseller_discount > 0)
-										<div class="discount-badge">
+										<div class="overlay-ribbon top-right-ribbon">
 											<div class="triangle"></div>
 											<div class="text">	%{{ $article->reseller_discount }} <br> off !!</div>
 										</div> 
@@ -55,15 +55,22 @@
 								@else
 									{{-- Normal Customer Discount --}}
 									@if($article->discount > 0)
-										<div class="discount-badge">
+										<div class="overlay-ribbon top-right-ribbon">
 											<div class="triangle"></div>
 											<div class="text">	%{{ $article->discount }} <br> off !!</div>
 										</div> 
 									@endif
 								@endif
+								
 								{{-- =============== Image ================ --}}
 								{{-- ====================================== --}}
 								<div class="image">
+									@if($article->stock < $article->stockmin)
+										<div class="overlay-ribbon bottom-left-ribbon">
+											<div class="triangle"></div>
+											<div class="text">Bajo <br>Stock</div>
+										</div> 
+									@endif
 									<img src="{{ asset($article->featuredImageName()) }}" alt="Producto del Catálogo">
 									@if(Auth::guard('customer')->check())
 									{{--  Check if product is in favs  --}}

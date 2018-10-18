@@ -7,6 +7,7 @@
                 <a href="{{ url('politica-de-exclusividad') }}">Política de Exclusividad</a>
             @endif
             <a href="{{ url('como-comprar') }}"><i class="far fa-question-circle"></i> Como comprar</a>
+            
         </div>
         <div class="tools">
             @if(Auth::guard('customer')->check())
@@ -49,6 +50,7 @@
                 <div class="access-buttons">
                     <a href="{{ route('customer.login') }}"><button class="btn btn-outline-primary btn-sm">Ingresar</button></a>
                     <a href="{{ route('customer.register') }}"><button class="btn btn-outline-primary btn-sm">Registrarse</button></a>
+                    <a href="{{ route('customer.register', ['mostrar' => 'mayorista']) }}"><button class="btn btn-outline-primary btn-sm">Vendé Bruna</button></a>
                 </div>
                 <div class="access-icons">
                     <a href="{{ route('customer.login') }}"><button class="icon-button"><i class="fas fa-sign-in-alt"></i></button></a>

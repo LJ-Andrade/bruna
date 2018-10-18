@@ -899,7 +899,7 @@ ul.pagination
 			padding: 1px 5px
 			font-size: 0.7rem
 
-.discount-badge
+.top-right-ribbon
 	position: absolute
 	right: 0
 	top: 0
@@ -925,6 +925,37 @@ ul.pagination
 		right: 10px
 		z-index: 100
 		color: #fff
+
+.bottom-left-ribbon
+	position: absolute
+	left: 0
+	bottom: 0
+	width: 100px
+	height: 100px
+	overflow: hidden
+	.triangle
+		position: absolute
+		bottom: 0
+		left: -50px
+		text-align: center
+		padding: 10px
+		padding-top: 50px
+		background-color: rgba($main-color,.5)
+		transform: rotate(45deg)
+		width: 150px
+		z-index: 50
+	.text
+		font-family: $font1
+		position: absolute
+		font-weight: 700
+		top: 58px
+		right: 50px
+		line-height: 14px
+		z-index: 100
+		color: #fff
+		transform: rotate(45deg)
+		text-align: center
+
 
 .product-gallery
 	padding: 0
