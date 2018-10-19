@@ -16,6 +16,9 @@
 				{{-- Edit --}}
 				<button class="EditBtn btn btnGreen Hidden"><i class="icon-pencil2"></i> Editar</button>
 				<input id="EditId" type="hidden">
+				{{-- Add Similar --}}
+				<button class="CreateFromAnotherBtn btn btnBlue Hidden"><i class="icon-pencil2"></i> Publicar Similar</button>
+				<input id="CreateFromAnotherId" type="hidden">
 				{{-- Delete --}}
 				{{-- THIS VALUE MUST BE THE NAME OF THE SECTION CONTROLLER --}}
 				<input id="ModelName" type="hidden" value="catalogo">
@@ -106,16 +109,24 @@
 								</td>
 								{{-- THUMBNAIL --}}
 								<td class="thumb">
-									@if($item->featuredImageName())
-										<img class="CheckImg" src="{{ asset($item->featuredImageName()) }}">
-									@endif
+									<a href="{{ url('vadmin/catalogo/'.$item->id.'/edit') }}">
+										@if($item->featuredImageName())
+											<img class="CheckImg" src="{{ asset($item->featuredImageName()) }}">
+										@endif
+									</a>
 								</td>
-								<td class="mw-100">#{{ $item->code }}
+								<td class="mw-100"><a href="{{ url('vadmin/catalogo/'.$item->id.'/edit') }}"> #{{ $item->code }} </a>
 								</td>
 								{{-- NAME --}}
-								<td class="show-link max-text">
-									<a href="{{ url('vadmin/catalogo/'.$item->id) }}">{{ $item->name }}</a>
+								<td>
+									<input class="editable-input" onfocus="event.target.select()" type="text" value="{{ $item->name }}" min="0">
+									<div class="editable-input-data" data-id="{{ $item->id }}" 
+										data-route="update_catalog_field" data-field="name" data-type="string" data-action="reload" data-value="">
+									</div>
 								</td>
+								{{-- <td class="show-link max-text">
+									<a href="{{ url('vadmin/catalogo/'.$item->id) }}">{{ $item->name }}</a>
+								</td> --}}
 								{{--  STOCK --}}
 								<td class="with-notification mw-50">
 									<input class="editable-input mw-50" onfocus="event.target.select()" type="number" value="{{ $item->stock }}" min="0">

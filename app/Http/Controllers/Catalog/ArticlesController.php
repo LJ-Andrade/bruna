@@ -62,7 +62,7 @@ class ArticlesController extends Controller
         if(!isset($order))
         {
             $rowName = 'id';
-            $order = 'ASC';
+            $order = 'DESC';
         }
 
         if($order == 'limitados')
@@ -211,7 +211,6 @@ class ArticlesController extends Controller
             ->with('tags', $tags);
     }
 
-
     public function checkSlug($slug)
     {
         $checkSlug = CatalogArticle::where('slug', $slug)->first();
@@ -303,8 +302,20 @@ class ArticlesController extends Controller
             }
         }
     
-    
         return redirect()->route('catalogo.index')->with('message','Artículo agregado al catálogo');
+    }
+
+    public function createFromAnother($model, $id)
+    {
+        $inheritData = CatalogArticle::findOrFail($id);
+        $categories = CatalogCategory::orderBy('name', 'ASC')->pluck('name', 'id');
+        $atribute1  = CatalogAtribute1::orderBy('name', 'ASC')->pluck('name', 'id');
+        $tags       = CatalogTag::orderBy('name', 'ASC')->pluck('name', 'id');
+        return view('vadmin.catalog.create-from-another')
+            ->with('inheritData', $inheritData)
+            ->with('categories', $categories)
+            ->with('atribute1', $atribute1)
+            ->with('tags', $tags);
     }
 
     /*

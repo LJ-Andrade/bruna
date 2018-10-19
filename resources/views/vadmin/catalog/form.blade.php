@@ -8,7 +8,7 @@
     {{--  Product Code  --}}
     <div class="col-md-2 form-group">
         {!! Form::label('code', 'Código') !!}
-        {!! Form::text('code', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el código', 'required' => '']) !!}
+        {!! Form::text('code', null, ['id' => 'Code', 'class' => 'form-control', 'placeholder' => 'Ingrese el código', 'required' => '']) !!}
     </div>
     {{--  Sizes  --}}
     <div class="col-md-4 form-group">
@@ -137,30 +137,49 @@
             @endslot
         @endcomponent
     </div> --}}
-    @if(isset($article) && count($article->images) > 0 )
-        <div class="col-md-12 actual-images horizontal-list">
-            <h3>Imágenes Publicadas</h3>
+    @if(isset($inheritData) && count($inheritData->images) > 0)
+        {{-- <div class="col-md-12 actual-images horizontal-list">
+            <h3>Imágenes</h3>
             <ul>
-                @foreach($article->images->sortByDesc('featured') as $image)
+                @foreach($inheritData->images->sortByDesc('featured') as $image)
                 <li id="Img{{ $image->id }}" class="{{ $image->featured ? 'is-featured' : '' }}">	
                     <img class="CheckImg" src="{{ asset('webimages/catalogo/'.$image->name) }}">
                     <div class="overlayItemCenter">
                         <a><i class="Delete-Product-Img icon-ios-trash-outline delete-img" data-imgid="{{ $image->id }}"></i></a>
                         @if(!$image->featured)
-                            <a href="{{ url('vadmin/article/'.$article->id.'/images/setFeatured/'.$image->id) }}"><i class="icon-star"></i></a>
+                            <a href="{{ url('vadmin/article/'.$inheritData->id.'/images/setFeatured/'.$image->id) }}"><i class="icon-star"></i></a>
                         @endif
                     </div>
                 </li>
                 @endforeach
             </ul>
         <br>
-        </div>
-        @include('vadmin.components.addimgsform')
+        </div> --}}
     @else
-        <div class="col-md-12">
-            @include('vadmin.components.addimgsform')
-        </div>
+        @if(isset($article) && count($article->images) > 0 )
+            <div class="col-md-12 actual-images horizontal-list">
+                <h3>Imágenes Publicadas</h3>
+                <ul>
+                    @foreach($article->images->sortByDesc('featured') as $image)
+                    <li id="Img{{ $image->id }}" class="{{ $image->featured ? 'is-featured' : '' }}">	
+                        <img class="CheckImg" src="{{ asset('webimages/catalogo/'.$image->name) }}">
+                        <div class="overlayItemCenter">
+                            <a><i class="Delete-Product-Img icon-ios-trash-outline delete-img" data-imgid="{{ $image->id }}"></i></a>
+                            @if(!$image->featured)
+                                <a href="{{ url('vadmin/article/'.$article->id.'/images/setFeatured/'.$image->id) }}"><i class="icon-star"></i></a>
+                            @endif
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            <br>
+            </div>
+        @endif
     @endif
+    <div class="col-md-12">
+        @include('vadmin.components.addimgsform')
+    </div>
+    
         {{-- Slug --}}
     <div class="col-md-4">
         <div class="form-group">

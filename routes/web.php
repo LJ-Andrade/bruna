@@ -219,8 +219,9 @@ Route::group(['prefix' => 'vadmin', 'middleware' => ['active-user', 'admin']], f
     
     // -- CATALOG --
     Route::resource('catalogo', 'Catalog\ArticlesController');
+    Route::get('createFromAnother/{model}/{id}', 'Catalog\ArticlesController@createFromAnother');
+
     Route::post('update_catalog_field', 'Catalog\ArticlesController@updateField');
-    
     // Categories
     Route::resource('cat_categorias', 'Catalog\CategoriesController');
     Route::resource('cat_tags', 'Catalog\TagsController');

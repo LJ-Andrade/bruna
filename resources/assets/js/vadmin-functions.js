@@ -13,7 +13,6 @@ $.ajaxSetup({
 // Set List Action Buttons
 $(document).on("click", ".List-Checkbox", function(e){
     e.stopPropagation();
-
 	var selectedRows = [];
     $(".List-Checkbox:checked").each(function() {          
         selectedRows.push($(this).attr('data-id'));
@@ -21,13 +20,13 @@ $(document).on("click", ".List-Checkbox", function(e){
     });
        
     if(selectedRows.length == 1){
-        $('#EditId').val(selectedRows);
+		$('#EditId, #CreateFromAnotherId').val(selectedRows);
     } else if(selectedRows.length < 1){
-        $('#EditId').val('');
+		$('#EditId, #CreateFromAnotherId').val('');
     } else if(selectedRows.length > 1){
-        $('#EditId').val('');
+        $('#EditId, #CreateFromAnotherId').val('');
     } else {
-        $('#EditId').val('');
+        $('#EditId, #CreateFromAnotherId').val('');
     }
 
     showButtons(this);
@@ -47,12 +46,14 @@ function showButtons(trigger) {
 	if(countSelected == 1) {
         $('.DeleteBtn').removeClass('Hidden');
 		$('.EditBtn').removeClass('Hidden');
-		
+		$('.CreateFromAnotherBtn').removeClass('Hidden');
 	} else if(countSelected >= 2) {
-        $('.EditBtn').addClass('Hidden');
+		$('.EditBtn').addClass('Hidden');
+		$('.CreateFromAnotherBtn').addClass('Hidden');
     } else if(countSelected == 0) {
         $('.DeleteBtn').addClass('Hidden');
-        $('.EditBtn').addClass('Hidden');
+		$('.EditBtn').addClass('Hidden');
+		$('.CreateFromAnotherBtn').addClass('Hidden');
     }
 }
 
@@ -61,10 +62,13 @@ $(document).scroll(function(e){
 	var scrollAmount = $(window).scrollTop();
 	if(scrollAmount > 150){
 		$('.DeleteBtn').css({"position":"fixed", "bottom":"50px", "right":"10px", "z-index":"999"});
-		$('.EditBtn').css({"position":"fixed", "bottom":"50px", "right":"130px", "z-index":"999"});
+		$('.EditBtn').css({"position":"fixed", "bottom":"50px", "right":"300px", "z-index":"999"});
+		$('.CreateFromAnotherBtn').css({"position":"fixed", "bottom":"50px", "right":"130px", "z-index":"999"});
 	} else {
 		$('.DeleteBtn').css({"position":"relative", "bottom":"auto", "right":"auto", "z-index":"999"});
 		$('.EditBtn').css({"position":"relative", "bottom":"auto", "right":"auto", "z-index":"999"});
+		$('.CreateFromAnotherBtn').css({"position":"relative", "bottom":"auto", "right":"auto", "z-index":"999"});
+		
 	}
 });
 

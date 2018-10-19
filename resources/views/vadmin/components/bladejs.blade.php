@@ -13,6 +13,15 @@
         location.replace(route);
     });
 
+    // Create Item from another
+    $(document).on('click', '.CreateFromAnotherBtn', function(e) { 
+        var id    = $('#RowsToDeletion').val();
+        var model = $('#ModelName').val();
+        var route = "{{ url('vadmin') }}/createFromAnother/"+model+"/"+id;
+        location.replace(route);
+    });
+
+
     $(document).on('click', '.DeleteBtn', function(e) { 
         var id    = $('#RowsToDeletion').val();
         var model = $('#ModelName').val();
