@@ -32,7 +32,11 @@ class ArticlesController extends Controller
         $category = $request->get('category');
         $order    = $request->get('orden');
         $rowName = 'stock';
-        
+        if($request->orden_af)
+        {
+            $order = $request->orden_af;
+            $rowName = "name";
+        }
         // -------- Pagination -----------
         if($request->get('results'))
         {

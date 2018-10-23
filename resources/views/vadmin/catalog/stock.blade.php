@@ -41,6 +41,8 @@
 		<div class="row inline-links">
 			<span class="with-background">
 				<b>Órden:</b> 
+				<a href="{{ route('catalogo.index', ['orden_af' => 'ASC', 'redirect' => 'stock']) }}" >A-Z</a> |
+				<a href="{{ route('catalogo.index', ['orden_af' => 'DESC', 'redirect' => 'stock']) }}" >Z-A</a> |
 				<a href="{{ route('catalogo.index', ['orden' => 'DESC', 'redirect' => 'stock']) }}">Stock Alto</a> |
 				<a href="{{ route('catalogo.index', ['orden' => 'ASC', 'redirect' => 'stock']) }}">Stock Bajo</a> | 
 				<a href="{{ route('catalogo.index', ['orden' => 'limitados', 'redirect' => 'stock']) }}" >Stock Limitado</a>
@@ -148,7 +150,8 @@
 				@endslot
 			@endcomponent
 			{{--  Pagination  --}}
-			@if(isset($_GET['name']))
+			{!! $articles->appends(request()->query())->render()!!}
+			{{-- @if(isset($_GET['name']))
             {!! $articles->appends(['name' => $_GET['name']])->render() !!}
 			@elseif(isset($_GET['category']))
             {!! $articles->appends(['category' => $_GET['category']])->render() !!}
@@ -156,7 +159,7 @@
             {!! $articles->appends(['code' => $_GET['code']])->render() !!}
 			@else
             {!! $articles->render() !!}
-			@endif
+			@endif --}}
 		</div>
 		<div id="Error"></div>
 	</div>

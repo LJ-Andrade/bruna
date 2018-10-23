@@ -23,7 +23,6 @@
 		<link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/all.css') }}">
 		<!-- Main Template Styles-->
 		<link rel="stylesheet" media="screen" href="{{ asset('css/store-custom.css') }}">
-		
 		@yield('styles')
 		<!-- Modernizr-->
 		<script src="{{ asset('store-ui/js/modernizr.min.js') }}"></script>
@@ -40,29 +39,36 @@
 		@include('store.partials.topbar')
 		@include('store.partials.nav') {{-- ToolBar is inside this nav include --}}
 		@include('store.partials.alerts')
+		
 		<div class="container-fluid custom-page-title pad0">
 			@yield('header-image')
 		</div>
+		
 		{{-- Site Content --}}
 		<div class="content">
 			@yield('content')
 		</div>
+			
 		<!-- Site Footer-->
 		<footer class="site-footer">
 			<div class="container">
 				<p class="footer-copyright">© {{ date('Y') }} - Desarrollado por <a href="https://vimana.studio/es" target="_blank">&nbsp; Vimana Studio </a></p>
 			</div>
 		</footer>
-		{{-- Whats App --}}
+
+		{{-- Whats App Cta--}}
 		<div class="floating-bottom-cta">
 			<div class="inner">
 				<a href="https://wa.me/5491167618867" target="_blank"><i class="fab fa-whatsapp"></i></a>
 			</div>
 		</div>
+		
 		{{-- Back To Top Button --}}
 		<a class="scroll-to-top-btn" href="#"><i class="icon-arrow-up"></i></a>
+
 		{{-- Backdrop --}}
 		<div class="site-backdrop"></div>
+
 		{{-- JavaScript (jQuery) libraries, vendor and custom scripts --}}
 		<script src="{{ asset('store-ui/js/vendor.min.js') }}"></script>
 		<script src="{{ asset('store-ui/js/iziToast.min.js') }}"></script>

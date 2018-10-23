@@ -5,6 +5,7 @@
         <div class="text-links">
             @if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3' )
                 <a href="{{ url('politica-de-exclusividad') }}">Política de Exclusividad</a>
+                <a href="{{ url('condiciones-de-compra') }}">Condiciones de Compra</a>
             @endif
             <a href="{{ url('como-comprar') }}"><i class="far fa-question-circle"></i> Como comprar</a>
             
@@ -48,14 +49,14 @@
                 </div>
             @else
                 <div class="access-buttons">
-                    <a href="{{ route('customer.login') }}"><button class="btn btn-outline-primary btn-sm">Ingresar</button></a>
-                    <a href="{{ route('customer.register') }}"><button class="btn btn-outline-primary btn-sm">Registrarse</button></a>
-                    <a href="{{ route('customer.register', ['mostrar' => 'mayorista']) }}"><button class="btn btn-outline-primary btn-sm">Vendé Bruna</button></a>
+                    <a href="{{ route('customer.login') }}"><button class="btn btn-primary btn-sm">Ingresar</button></a>
+                    <a href="{{ route('customer.register') }}"><button class="btn btn-primary btn-sm">Comprá Por Menor</button></a>
+                    <a href="{{ route('customer.register', ['mostrar' => 'mayorista']) }}"><button class="btn btn-primary btn-sm">Comprá Por Mayor</button></a>
                 </div>
-                <div class="access-icons">
+                {{-- <div class="access-icons">
                     <a href="{{ route('customer.login') }}"><button class="icon-button"><i class="fas fa-sign-in-alt"></i></button></a>
                     <a href="{{ route('customer.register') }}"><button class="icon-button"><i class="fas fa-user-plus"></i></button></a>
-                </div>
+                </div> --}}
             @endif
         </div>
     </div>

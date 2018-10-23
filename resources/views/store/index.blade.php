@@ -155,8 +155,8 @@
 				{!! $articles->appends(request()->query())->render()!!}
 			</div>
 			<!-- SideBar -->
-			<div id="CheckoutSidebar" class="col-sm-4 col-md-4 col-lg-3 side-container">
-				@include('store.partials.sidecontainer')
+			<div class="CheckoutCart col-sm-4 col-md-4 col-lg-3 checkout-cart">
+				@include('store.partials.checkout-cart')
 			</div>
 		</div>
 	</div>

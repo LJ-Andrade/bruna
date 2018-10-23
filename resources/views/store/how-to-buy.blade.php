@@ -6,6 +6,11 @@
 @endsection
 
 @section('content')
+    @if(Auth::guard('customer')->check())
+    <div class="CheckoutCart checkout-cart checkout-cart-floating">
+        @include('store.partials.checkout-cart')
+    </div>
+    @endif
 	<div class="container info-container">
 		<div class="row">
             <div class="deco-title">

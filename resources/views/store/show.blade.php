@@ -1,7 +1,13 @@
 @extends('store.partials.main')
 
 @section('content')
+@if(Auth::guard('customer')->check())
+<div class="CheckoutCart checkout-cart checkout-cart-floating">
+    @include('store.partials.checkout-cart')
+</div>
+@endif
 <div class="container padding-bottom-3x mb-1 marg-top-25">
+	
 	<div class="row product-show">
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-6 col-xs-pull-12 image">
 			{{-- Title Mobile --}}
@@ -43,7 +49,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="padding-top-2x hidden-md-up"></div>
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 col-xl-6 products-details">
 			{{-- Favs --}}

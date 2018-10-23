@@ -85,13 +85,6 @@
 				display: inline-block
 				list-style: none
 
-.site-logo
-	width: 190px
-
-@media (min-width: 768px)
-	.index-header
-		margin-bottom: 25px
-
 .login-box
 	background: #fff
 	margin-top: 20px
@@ -117,13 +110,29 @@
 	.login-box
 		margin: 0
 
+.navbar
+	height: 65px
+	min-height: auto
 
-@media (max-width: 481px)
+.site-logo
+	width: 150px
+	max-width: 100%
+	padding: 5px 0 5px 30px
+
+@media (min-width: 768px)
+	.index-header
+		margin-bottom: 25px
+
+@media (max-width: 600px)
 	.navbar
+		min-height: auto
+		height: auto
 		.site-branding
 			position: relative
 			@include flex-center
 			.site-logo
+				padding: 0
+				padding-top: 20px
 				img
 					width: 150px
 		.toolbar
@@ -233,6 +242,7 @@
 	font-weight: 300
 	margin-top: 5px
 
+
 .btn:hover
 	filter: brightness(1.5)
 
@@ -244,11 +254,13 @@
 	line-height: 34px
 	width: 37px
 
-.btm-sm
-	padding: 0px 10px
-	height: 30px
+.btn-sm
+	padding: 2px 10px !important
+	height: 36px
 	line-height: 30px
 	font-size: 0.8rem
+
+
 
 .block-btn-hollow
 	background: transparent
@@ -270,6 +282,16 @@
 .btn-main
 	background-color: $main-color
 	color: #fff
+	&:hover
+		color: #fff
+	
+.btn-main-sm
+	background-color: $main-color
+	color: #fff
+	padding: 0px 10px
+	height: 30px
+	line-height: 0.5rem
+	font-size: 0.7rem
 	&:hover
 		color: #fff
 	
@@ -323,6 +345,28 @@
 		cursor: pointer
 
 
+.small-btn-and-input
+	.quantity-input
+		margin-right: 0
+		width: 45px
+		height: 34px
+		border: 1px solid #8e8e8e
+		border-right: 0
+		border-radius: 0
+		box-shadow: 0 0 0
+		text-align: center
+		margin-right: -4px
+	.input-button
+		background: #fff
+		border: 1px solid #8e8e8e
+		padding: 6px 10px
+		height: 34px
+		border-radius: 0
+		@include transition(0.2s)
+		&:hover
+			background: $main-color
+			color: #fff
+
 
 .sq-badge
 	border: 1px solid $grey
@@ -368,13 +412,14 @@
 	&:hover
 		filter: brightness(1.2)
 		cursor: pointer
-
+		color: #fff
 
 .floating-bottom-cta
 	display: none
 	position: fixed
 	left: 10px
 	bottom: 10px
+	z-index: 998
 	.inner
 		padding: 13px 14px
 		width: 50px
@@ -484,7 +529,7 @@
 
 // Side Container fixed
 
-//.side-container-fixed
+//.checkout-cart-fixed
 	// position: fixed
 	// top: 0
 	// right: 0
@@ -527,7 +572,7 @@
 	// 				cursor: pointer
 	// 				i
 	// 					color: #000
-	// 	.side-container-error
+	// 	.checkout-cart-error
 	// 		text-align: center
 	// 		margin-top: 15px
 	// 		padding: 15px
@@ -535,7 +580,7 @@
 	// 		font-family: $font2
 
 
-.side-container
+.checkout-cart
 	display: none
 	position: relative
 	height: 100%
@@ -544,14 +589,14 @@
 	@include transition(0.2s)
 	.inner
 		@include box-shadow
-		padding: 10px 15px
+		padding: 25px 15px
 		background-color: rgba(#fff,.9)
 		.top
 			margin-bottom: 20px
 			@include flex-center
 			.title
 				font-size: 1.2rem
-				margin-bottom: 20px	
+				margin-bottom: 10px	
 				i
 					font-size: 1rem
 					margin-right: 6px
@@ -561,14 +606,16 @@
 				text-align: right
 				padding: 0 15px
 				.text
-					margin-top: 10px
-					font-size: 1.2rem
+					font-size: 1rem
 					font-weight: 300
 					text-align: left
 					width: 50%
 				.button
 					float: right
 					width: 50%
+					padding-top: 10px
+					.main-btn-sm
+						padding: 9px 10px
 		.total-price-bottom
 			text-align: right
 			padding: 15px 0
@@ -634,7 +681,7 @@
 			margin-bottom: 10px
 					
 	
-		.side-container-error
+		.checkout-cart-error
 			text-align: center
 			margin-top: 15px
 			padding: 15px
@@ -645,24 +692,24 @@
 	.fix-column-small
 		flex: 0 0 70%
 		max-width: 70%
-	.side-container
+	.checkout-cart
 		flex: 1 0 25%
 		max-width: 30%
 
 // @media screen and (min-width: 930px) and (max-width: 1210px)
 
 @media (min-width: 930px)
-	.side-container.scrolled
+	.checkout-cart.scrolled
 		@include transition(0.2s)
 		position: fixed
 		right: 7px
 		top: 89px
-	.side-container
+	.checkout-cart
 		// max-width: 30%
 
 // SideBar Checkout absolute in mobile
 @media (max-width: 930px)
-	.side-container
+	.checkout-cart
 		position: absolute
 		top: -24px
 		right: 0
@@ -674,21 +721,33 @@
 			background-color: #fff
 
 @media (max-width: 768px)
-	.side-container
+	.checkout-cart
 		top: 0
 
 @media (max-width: 680px)
-	.side-container
+	.checkout-cart
 		top: -40px
 
 
-.side-container.active
+.checkout-cart.active
 	display: block
 
 
 @media (max-width: 700px)
-	.side-container
+	.checkout-cart
 		width: 100%
+
+
+
+.checkout-cart-floating
+	position: absolute
+	right: 0
+	top: 120px
+	z-index: 998
+	.inner
+		background: #fff
+		box-shadow: -1px 2px 19px -7px rgba(0, 0, 0, 0.55)
+
 
 .no-articles
 		position: absolute
@@ -852,6 +911,7 @@ ul.pagination
 					.col
 						.del
 							font-size: 0.9rem
+
 
 @media screen and (min-width: 1200px) and (max-width: 1640px)
 	.fix-column
@@ -1109,6 +1169,17 @@ ul.pagination
 				&:hover
 					cursor: pointer
 
+.login-register-btn-mobile
+	display: none
+@media (max-width: 600px)
+	.login-register-btn-mobile
+		display: block
+
+@media (max-width: 400px)
+	.login-register-btn-mobile
+		.btn
+			margin: 0
+			margin-bottom: 6px
 
 @media (max-width: 600px)
 	.toolbar
@@ -1130,7 +1201,7 @@ ul.pagination
 	.toolbar
 		padding-right: 70px
 
-@media (min-width: 680px)
+@media (min-width: 852px)
 	.toolbar
 		.text-links
 			display: block
@@ -1140,7 +1211,7 @@ ul.pagination
 	.under-nav-container
 		display: none
 
-@media (max-width: 680px)
+@media (max-width: 852px)
 	.under-nav-container
 		text-align: center
 		padding: 10px
@@ -1149,6 +1220,7 @@ ul.pagination
 			margin-right: 10px
 			a
 				margin: 0 15px
+				white-space: nowrap
 
 // Index List
 .product-card
@@ -1221,6 +1293,21 @@ ul.pagination
 			font-size: 2rem
 			color: green
 			
+// ------------- whislist --------------- //
+.wishlist-table
+	.product-item 
+		.product-title
+			margin-top: 0
+			padding-top: 0
+		.stock-title
+			margin-right: 5px
+
+@media (min-width: 854px)
+	.wishlist-table
+		.product-item 
+			.small-btn-and-input
+				margin-top: 15px !important
+
 
 // ------------- Show --------------- //
 

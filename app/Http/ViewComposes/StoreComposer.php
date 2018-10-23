@@ -14,8 +14,10 @@ class StoreComposer
 	{   
         $favs = $this->getCustomerFavs();
         $activeCart = $this->activeCart();
+        $currentView = '';
         $view
             ->with('activeCart', $activeCart)
-            ->with('favs', $favs);
+            ->with('favs', $favs)
+            ->with('currentView', $currentView);
 	}
 }

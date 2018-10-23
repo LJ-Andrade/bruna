@@ -69,7 +69,6 @@
 @endsection
 
 @section('custom_js')
-	
 	<script>
 		$('.CatalogLi').addClass('open');
 		// ---- Textarea Text Editor ----- //
@@ -77,11 +76,8 @@
 		$.trumbowyg.svgPath = '{{ asset('plugins/texteditor/icons.svg') }}';
 		// Init
         $('.Textarea-Editor').trumbowyg();
-        
-        $('#Code').val('');
-
+		$('#ColorInput, #CodeInput').val('');
 	</script>
-
 @endsection
 
 

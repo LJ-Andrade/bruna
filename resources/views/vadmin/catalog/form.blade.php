@@ -8,7 +8,7 @@
     {{--  Product Code  --}}
     <div class="col-md-2 form-group">
         {!! Form::label('code', 'Código') !!}
-        {!! Form::text('code', null, ['id' => 'Code', 'class' => 'form-control', 'placeholder' => 'Ingrese el código', 'required' => '']) !!}
+        {!! Form::text('code', null, ['id' => 'CodeInput', 'class' => 'form-control', 'placeholder' => 'Ingrese el código', 'required' => '']) !!}
     </div>
     {{--  Sizes  --}}
     <div class="col-md-4 form-group">
@@ -27,7 +27,7 @@
     {{--  Color  --}}
     <div class="col-md-3 form-group">
         {!! Form::label('color', 'Color') !!}
-        {!! Form::text('color', null, ['class' => 'form-control', 'placeholder' => 'Ingrese una color', 
+        {!! Form::text('color', null, ['id' => 'ColorInput', 'class' => 'form-control', 'placeholder' => 'Ingrese una color', 
         'required' => '', 'maxlength' => '50']) !!}
     </div>
      <div class="col-md-3 form-group">

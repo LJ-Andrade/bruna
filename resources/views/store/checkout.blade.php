@@ -111,8 +111,8 @@
 					</table>
 				</div>
 					<div class="text-right">
-						<button id="UpdateDataBtn" type="button" class="btn main-btn">Actualizar <i class="fas fa-sync-alt"></i></button>
-						<button id="SubmitDataBtn" type="button" class="btn main-btn">Continuar <i class="fa fa-arrow-right"></i></button>
+						<button type="button" class="UpdateDataBtn btn main-btn">Actualizar <i class="fas fa-sync-alt"></i></button>
+						<button type="button" class="SubmitDataBtn btn main-btn">Continuar <i class="fa fa-arrow-right"></i></button>
 					</div>
 				<div class="back-to-store"><a href="{{ url('tienda') }}"><i class="icon-arrow-left"></i> Volver a la tienda</a></div>
 			</div>{{-- / col-md-12 --}}

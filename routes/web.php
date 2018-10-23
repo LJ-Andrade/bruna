@@ -83,6 +83,7 @@ Route::post('mail_sender', 'WebController@mail_sender');
 Route::get('/', 'Store\StoreController@index')->middleware('active-customer');
 Route::get('tienda', ['as' => 'store', 'uses' => 'Store\StoreController@index'])->middleware('active-customer');
 Route::get('politica-de-exclusividad', function(){ return view('store.reseller-policy'); });
+Route::get('condiciones-de-compra', function(){ return view('store.buy-conditions'); });
 Route::get('como-comprar', function(){ return view('store.how-to-buy'); });
 
 // Searchs

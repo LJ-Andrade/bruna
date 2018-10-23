@@ -44,9 +44,12 @@
 		<div class="row inline-links">
 			<span class="with-background">
 				<b>Órden:</b> 
+				<a href="{{ route('catalogo.index', ['orden_af' => 'ASC']) }}" >A-Z</a> |
+				<a href="{{ route('catalogo.index', ['orden_af' => 'DESC']) }}" >Z-A</a> |
 				<a href="{{ route('catalogo.index', ['orden' => 'ASC']) }}">Stock Bajo</a> | 
 				<a href="{{ route('catalogo.index', ['orden' => 'DESC']) }}">Stock Alto</a> |
 				<a href="{{ route('catalogo.index', ['orden' => 'limitados']) }}" >Stock Limitado</a>
+
 			</span>
 		</div>
 		<div class="row">
@@ -195,7 +198,8 @@
 				@endslot
 			@endcomponent
 			{{--  Pagination  --}}
-			@if(isset($_GET['name']))
+			{!! $articles->appends(request()->query())->render()!!}
+			{{-- @if(isset($_GET['name']))
 				{!! $articles->appends(['name' => $_GET['name']])->render() !!}
 			@elseif(isset($_GET['category']))
 				{!! $articles->appends(['category' => $_GET['category']])->render() !!}
@@ -203,7 +207,7 @@
 				{!! $articles->appends(['code' => $_GET['code']])->render() !!}
 			@else
 				{!! $articles->render() !!}
-			@endif
+			@endif --}}
 		</div>
 		<div id="Error"></div>
 	</div>

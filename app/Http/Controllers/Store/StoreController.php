@@ -68,6 +68,7 @@ class StoreController extends Controller
         $order2 = 'ASC';
         $orderBy2 = 'discount';
         
+
         if($request->precio)
         {
             $orderBy = 'price';
@@ -327,7 +328,7 @@ class StoreController extends Controller
                 else
                 {
                     $newStock = $cartItem->article->stock - intVal($item['quantity']) + intVal($cartItem->quantity);
-                    $cartItem->quantity = $item['quantity'];       
+                    $cartItem->quantity = intval($item['quantity']);
                     // dd("No supera || Requerido: " . $item['quantity'] . "| Nuevo Stock es: ". $newStock);
                 }
             }

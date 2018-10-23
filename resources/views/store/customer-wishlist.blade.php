@@ -1,12 +1,17 @@
 @extends('store.partials.main')
 
 @section('content')
+	@if(Auth::guard('customer')->check())
+	<div class="CheckoutCart checkout-cart checkout-cart-floating">
+		@include('store.partials.checkout-cart')
+	</div>
+	@endif
     <div class="container padding-bottom-3x mb-2 marg-top-25">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-md-4">
                 @include('store.partials.profile-aside')
             </div>
-            <div class="col-lg-8 white-container">
+            <div class="col-lg-8 col-md-8 white-container">
 				<h2>Productos favoritos</h2>
 				<div class="padding-top-2x mt-2 hidden-lg-up"></div>
 				<!-- Wishlist Table-->
@@ -42,19 +47,36 @@
 															{{ $size->name }}
 														@endforeach
 													</div>
-													<div>Disponibilidad:
-														<div class="d-inline text-success">
-															@if($item->article->status == '0')
-																No disponible
-															@else
-																@if($item->article->stock > 1)
-																En stock
-																@else
-																Sin Stock
-																@endif
-															@endif
+													@if($item->article->status == '0')
+														<div class="dont-wrap">
+															<div class="stock-title">Disponibilidad: </div>
+															<div class="color-grey">No disponible</div>
 														</div>
-													</div>
+													@else
+														@if($item->article->stock > 1)
+															<div class="dont-wrap">
+																<div class="stock-title">Disponibilidad: </div>
+																<div class="color-green"> En stock</div>
+															</div>
+															@if(Auth::guard('customer')->check())
+															<div class="small-btn-and-input">
+																{!! Form::open(['class' => 'AddToCart price']) !!}	
+																	{{ csrf_field() }}
+																	<input type="number" min="1" max="{{ $item->article->stock }}" name="quantity" class="quantity-input" value="1"
+																	data-toggle="tooltip" data-placement="top" title="Stock máximo {{ $item->article->stock }}">
+																	<input type="submit" class="input-button" value="Agregar" data-toggle="tooltip" data-placement="top" title="Stock máximo {{ $item->article->stock }}">
+																	<input type="hidden" value="{{ $item->article->id }}" name="articleId">
+																{!! Form::close() !!}
+																@endif
+															</div>
+															{{-- <button class="btn btn-main-sm mt-1">Agregar al carro</button> --}}
+														@else
+														<div class="dont-wrap">
+															<div class="stock-title">Disponibilidad: </div>
+															<div class="color-grey"> Sin stock</div>
+														</div>
+														@endif
+													@endif
 												</div>
 											</div>
 										</td>

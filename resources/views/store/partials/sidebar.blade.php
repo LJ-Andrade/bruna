@@ -23,10 +23,6 @@
 	</section>
 	<section class="sidebar-widget">
 		<h4>Ordenar por</h4>
-		{{-- <div class="price"><a href="{{ route('store', ['precio' => 'menor']) }}"><i class="fas fa-arrow-down"></i> Menor precio</a></div>
-		<div class="price"><a href="{{ route('store', ['precio' => 'mayor']) }}"><i class="fas fa-arrow-up"></i> Mayor precio</a></div>
-		<div class="price"><a href="{{ route('store', ['precio' => 'menor']) }}"><i class="fas fa-percentage"></i> Con Descuento</a></div>
-		<div class="price"><a href="{{ route('store', ['precio' => 'mayor']) }}"><i class="fas fa-heart"></i> Populares</a></div>  --}}
 		<div class="horizontal-list">
 			<ul>
 				<a href="{{ route('store', ['precio' => 'menor']) }}">

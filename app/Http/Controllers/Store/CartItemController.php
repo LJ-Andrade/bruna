@@ -15,6 +15,7 @@ class CartItemController extends Controller
 
     public function store(Request $request)
     {   
+        
         // This come from Customer Model getCartAttribute()
         $activeCartId = auth()->guard('customer')->user()->cart->id;
 
@@ -45,7 +46,12 @@ class CartItemController extends Controller
     
             $cartItem->article_name = $article->name;
             $cartItem->color = $article->color;
-            $cartItem->size = $article->atribute1->first()->name;
+            
+            if(isset($article->atribute1->first()->name))
+            {
+                $cartItem->size = $article->atribute1->first()->name;
+            }
+
             $cartItem->textile = $article->textile;
             try{
                 $cartItem->save();

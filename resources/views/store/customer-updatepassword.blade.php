@@ -1,6 +1,11 @@
 @extends('layouts.store.main')
 
 @section('content')
+    @if(Auth::guard('customer')->check())
+    <div class="CheckoutCart checkout-cart checkout-cart-floating">
+        @include('store.partials.checkout-cart')
+    </div>
+    @endif
     <div class="container padding-bottom-3x mb-2 marg-top-25">
         <div class="row">
             <div class="col-lg-4">

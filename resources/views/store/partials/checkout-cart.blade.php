@@ -1,15 +1,20 @@
 <div class="inner">
     <div class="close" onclick="checkoutSidebar()">X</div>
-    <div id="SideContainerItems">
+    <div id="SideContainerItemsFixed">
         @if(isset($activeCart))
             <div class="top row">
                 <div class="col-md-12 title">
                     <i class="fas fa-shopping-cart"></i> Carro de Compras
+                    <hr>
                 </div>
                 <div class="items">
-                    <div class="text">Total: <b>$<span>{{ $activeCart['cartTotal'] }}</span></b></div>
+                    <div class="text"> 
+                        Prendas: <b><span class="TotalCartItemsSidebar count">@if($activeCart['totalItems'] == 0) 0 @else {{ $activeCart['totalItems'] }} @endif </b>
+                        <br>
+                        Total: <b>$<span>{{ $activeCart['cartTotal'] }}</span></b></div>
                     <div class="button">
-                        <button class="SubmitDataBtn main-btn-sm" type="button">Continuar <i class="fa fa-arrow-right"></i></button>
+                        {{-- <button class="SubmitDataBtn main-btn-sm" type="button">Continuar <i class="fa fa-arrow-right"></i></button> --}}
+                        <a href="{{ route('store.checkout')}}" class="main-btn-sm">Continuar <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -65,7 +70,7 @@
                 </div>{{-- / .item --}}
             @endforeach
         <div class="update-btn">
-            <button id="UpdateDataBtn" class="block-btn-hollow"><i class="fas fa-sync"></i> ACTUALIZAR TOTALES</button>
+            <button class="UpdateDataBtn block-btn-hollow"><i class="fas fa-sync"></i> ACTUALIZAR TOTALES</button>
         </div>
         <hr>
         <div class="total-price-bottom row">
@@ -73,11 +78,12 @@
                 Prendas: <b><span class="TotalCartItemsSidebar count">@if($activeCart['totalItems'] == 0) 0 @else {{ $activeCart['totalItems'] }} @endif </b>
             </div>
             <div class="text-right col-md-6">
-                Total:  <b>$<span>{{ $activeCart['cartTotal'] }}</span></b>
+                Total: <b>$<span>{{ $activeCart['cartTotal'] }}</span></b>
             </div>
         </div>
         <div class="text-right">
-            <button type="button" class="SubmitDataBtn main-btn-sm">Continuar <i class="fa fa-arrow-right"></i></button>
+            {{-- <button type="button" class="SubmitDataBtn main-btn-sm">Continuar <i class="fa fa-arrow-right"></i></button> --}}
+            <a href="{{ route('store.checkout')}}" class="main-btn-sm">Continuar <i class="fa fa-arrow-right"></i></a>
         </div>
     @else
         <div class="empty-cart">

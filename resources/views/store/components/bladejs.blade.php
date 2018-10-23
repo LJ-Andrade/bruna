@@ -33,12 +33,11 @@
         // itemData is set in dom.
         submitForm("{{ route('store.checkout-set-items') }}", "{{ route('store.processCheckout')}}", itemData, "continue");
     });
-
-    $("#UpdateDataBtn").on('click', function(){
+    
+    $(document).on('click', '.UpdateDataBtn', function(e){
         submitForm("{{ route('store.checkout-set-items') }}", "reload", itemData, "update");
     });
 
-   
     /*
     |--------------------------------------------------------------------------
     | ADD TO CART
@@ -50,7 +49,6 @@
         let data = $(this).serialize();
         addToCart("{{ route('store.addToCartLive') }}", data);
     });
-
 
     /*
     |--------------------------------------------------------------------------
