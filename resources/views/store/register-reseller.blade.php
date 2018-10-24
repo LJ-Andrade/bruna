@@ -3,16 +3,8 @@
 
 @section('content')
 <div class="container padding-bottom-3x">
-    <div id="ResellerCTA" class="row centered-form text-center">
-        <div class="login-box inner" style="padding-bottom: 30px">
-            <a class="cursor-pointer top-right-element" onclick="closeElement('#ResellerCTA');">X</a>
-            <h3>Querés vender al por mayor?</h3>
-            {{-- RESELLER BOX REQUIRED Edisplay: none;--}}            
-            <a href="{{ route('customer.register-reseller') }}"  class="btn btn-primary btn-block">Registrarme como mayorísta</a>
-        </div>
-    </div>
 	<div class="row centered-form">
-        <form class="login-box form-simple inner" method="POST" action="{{ route('customer.register') }}">
+        <form id="RegisterForm" class="login-box form-simple inner" method="POST" action="{{ route('customer.register') }}">
             {{--  Check if reseller --}}
             <input id="IsResellerCheckbox" type="checkbox" name="isreseller" class="Hidden">
             {{ csrf_field() }}
@@ -90,9 +82,43 @@
                     @endif
                 </div>
             </div>
-           
+            {{-- RESELLER BOX required --}}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Provincia</label>
+                        {!! Form::select('geoprov_id', $geoprovs, null,
+                        ['class' => 'GeoProvSelect IfResellerEnable form-control', 'placeholder' => 'Seleccione una opción', 'required' => '']) !!}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Localidad</label>
+                        <select id='GeoLocsSelect' name="geoloc_id" 
+                            data-actualloc="" 
+                            data-actuallocid="" 
+                            class="GeoLocsSelect IfResellerEnable form-control" required>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>CUIT (Sin guiones)</label>
+                    <input id="CuitInput" type="number" name="cuit" class="IfResellerEnable form-control round" min="0" placeholder="Ingrese número de CUIT">
+                </div>
+                <div class="col-md-6 form-group">
+                        <label>D.N.I</label>
+                        <input id="DniInput" type="number" name="dni" class="IfResellerEnable form-control round" min="0" placeholder="Ingrese número de DNI">
+                    </div>
+                <div class="col-md-6 form-group">
+                    <label>Teléfono</label>
+                    <input type="text" name="phone" class="IfResellerEnable form-control round" placeholder="Ingrese teléfono" required>
+                </div>
+            </div>
+            <div id="FormErrors"></div>
             {{-- Submit --}}
-            <button type="submit" class="btn btn-primary btn-block"><i class="icon-unlock"></i> Registrarse</button>
+            <button type="button" id="SubmitFormBtn" class="btn btn-primary btn-block"><i class="icon-unlock"></i> Registrarse</button>
             <div class="bottom-text">Ya tiene cuenta? | <a href="{{ route('customer.login') }}">Ingresar</a></div>
         </form>
     </div>
@@ -102,4 +128,47 @@
     
 @section('scripts')
     @include('store.components.bladejs')
+    <script>
+        $('.GeoProvSelect').val('');
+        
+        $('#SubmitFormBtn').on('click', function(e){
+            e.preventDefault();
+
+            let cuit = $('#CuitInput').val();
+            let dni = $('#DniInput').val();
+            let error = $('#FormErrors');
+
+            if(cuit == '' && dni == '')
+            {
+                error.html("Debe ingresar o un Cuit o un Dni");
+                error.addClass('error-active');
+            }
+            else
+            {
+                if(cuit == undefined){
+                    error.html("Debe ingresar un Cuit");
+                    error.addClass('error-active');
+                }
+                else if(cuit != '' && cuit.length != 11){
+                    error.html("El cuit debe tener 11 números");
+                    error.addClass('error-active');
+                }
+                else if(dni != '' && dni.length != 8)
+                {
+                    error.html("El Dni debe tener 8 números");
+                    error.addClass('error-active');
+                }
+                else
+                {
+                    $("#RegisterForm").submit();
+                    error.removeClass('error-active');
+                    error.html("");
+                }
+            }
+            
+
+        });
+
+
+    </script>
 @endsection

@@ -51,7 +51,7 @@
                 <div class="access-buttons">
                     <a href="{{ route('customer.login') }}"><button class="btn btn-primary btn-sm">Ingresar</button></a>
                     <a href="{{ route('customer.register') }}"><button class="btn btn-primary btn-sm">Comprá Por Menor</button></a>
-                    <a href="{{ route('customer.register', ['mostrar' => 'mayorista']) }}"><button class="btn btn-primary btn-sm">Comprá Por Mayor</button></a>
+                    <a href="{{ route('customer.register-reseller', ['mostrar' => 'mayorista']) }}"><button class="btn btn-primary btn-sm">Comprá Por Mayor</button></a>
                 </div>
                 {{-- <div class="access-icons">
                     <a href="{{ route('customer.login') }}"><button class="icon-button"><i class="fas fa-sign-in-alt"></i></button></a>

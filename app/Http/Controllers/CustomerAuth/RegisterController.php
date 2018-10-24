@@ -63,12 +63,24 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // dd($data);
+        if($data['cuit'] == null)
+        {
+            unset($data['cuit']);
+        }
+
+        if($data['dni'] == null)
+        {
+            unset($data['dni']);
+        }
+
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'username' => 'required|string|max:20|unique:customers',
             'email' => 'required|string|email|max:255|unique:customers',
-            'cuit' => 'numeric|unique:customers',
+            'cuit' => 'unique:customers',
+            'dni' => 'unique:customers',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -86,14 +98,15 @@ class RegisterController extends Controller
         } 
         
         $cuit = null;
+        $dni = null;
         $phone = null;
         $geoProvId = null;
         $geoLocId = null;
         if(isset($data['cuit']))       { $cuit = $data['cuit']; }
+        if(isset($data['dni']))       { $dni = $data['dni']; }
         if(isset($data['phone']))      { $phone = $data['phone']; }
         if(isset($data['geoprov_id'])) { $geoProvId = $data['geoprov_id']; }
         if(isset($data['geoloc_id']))  { $geoLocId = $data['geoloc_id']; }
-
 
         return Customer::create([
             'name' => $data['name'],
@@ -105,6 +118,7 @@ class RegisterController extends Controller
             'geoprov_id' => $geoProvId,
             'geoloc_id' => $geoLocId,
             'cuit' => $cuit,
+            'dni' => $dni,
             'password' => bcrypt($data['password']),
             'group' => $group
         ]);
@@ -120,6 +134,14 @@ class RegisterController extends Controller
         return view('store.register')
         ->with('geoprovs',$geoprovs);
     }
+
+    public function showRegistrationFormReseller(){
+        $geoprovs = GeoProv::pluck('name','id');
+        
+        return view('store.register-reseller')
+        ->with('geoprovs',$geoprovs);
+    }
+
 
     public function register(Request $request)
     {
