@@ -26,21 +26,23 @@ class CustomerController extends Controller
         $name  = $request->get('name');
         
         $paginate = 15;
+        $order = 'DESC';
+        $orderBy = 'created_at';
 
         if(isset($group) && isset($status)){
-            $items = Customer::searchGroupStatus($group, $status)->orderBy('id', 'ASC')->paginate($paginate);    
+            $items = Customer::searchGroupStatus($group, $status)->orderBy($orderBy, $order)->paginate($paginate);    
         }
         elseif(isset($name))
         {
-            $items = Customer::searchName($name)->orderBy('id', 'ASC')->paginate($paginate); 
+            $items = Customer::searchName($name)->orderBy($orderBy, $order)->paginate($paginate); 
         }
         elseif(isset($group))
         {
-            $items = Customer::searchGroup($group)->orderBy('id', 'ASC')->paginate($paginate); 
+            $items = Customer::searchGroup($group)->orderBy($orderBy, $order)->paginate($paginate); 
         }
         else 
         {
-            $items = Customer::orderBy('id', 'ASC')->paginate($paginate); 
+            $items = Customer::orderBy($orderBy, $order)->paginate($paginate); 
         }
 
 
