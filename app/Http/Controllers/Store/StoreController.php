@@ -45,7 +45,7 @@ class StoreController extends Controller
         if($request)
         {
             Cookie::queue('store-pagination', $request, 2000);
-            $pagination = Cookie::get('store-pagination');
+            $pagination = $request;
         }
         else
         {   
