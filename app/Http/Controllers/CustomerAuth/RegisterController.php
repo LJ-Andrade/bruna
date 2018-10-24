@@ -63,17 +63,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        // dd($data);
-        if(isset($data['cuit']) && $data['cuit'] == null)
+        if($data['cuit'] == null)
         {
             unset($data['cuit']);
         }
-
-        if(isset($data['dni']) && $data['dni'] == null)
+        
+        if($data['dni'] == null)
         {
             unset($data['dni']);
         }
-
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',

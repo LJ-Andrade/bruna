@@ -90,7 +90,8 @@
                     @endif
                 </div>
             </div>
-           
+            <input type="hidden" value="null" name="cuit">
+            <input type="hidden" value="null" name="dni">
             {{-- Submit --}}
             <button type="submit" class="btn btn-primary btn-block"><i class="icon-unlock"></i> Registrarse</button>
             <div class="bottom-text">Ya tiene cuenta? | <a href="{{ route('customer.login') }}">Ingresar</a></div>
