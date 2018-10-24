@@ -64,12 +64,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         // dd($data);
-        if($data['cuit'] == null)
+        if(isset($data['cuit']) && $data['cuit'] == null)
         {
             unset($data['cuit']);
         }
 
-        if($data['dni'] == null)
+        if(isset($data['dni']) && $data['dni'] == null)
         {
             unset($data['dni']);
         }
