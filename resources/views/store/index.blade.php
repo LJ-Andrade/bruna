@@ -145,12 +145,17 @@
 					@endforeach
 				</div>
 				@if($articles->count() != '0')
-				<span class="pagination-results">
-					<b>Resultados por página:</b>
+				<div class="pagination-results">
+					<span class="title"><b>Resultados por página:</b></span>
+					{{-- <select class="custom-select" name="action" id="pageResultsSelector" onchange="setPageResults();">
+						<option @if($pageResults == '24')  selected disabled @endif value="{{ route('store', ['results' => '24']) }}">24</option>
+						<option @if($pageResults == '96')  selected disabled @endif value="{{ route('store', ['results' => '96']) }}">96</option>
+						<option @if($pageResults == '142') selected disabled @endif value="{{ route('store', ['results' => '142']) }}">142</option>
+					</select> --}}
 					<a href="{{ route('store', ['results' => '24']) }}">24</a> | 
 					<a href="{{ route('store', ['results' => '96']) }}">96</a> |
 					<a href="{{ route('store', ['results' => '142']) }}">142</a>
-				</span>
+				</div>
 				@endif
 				{!! $articles->appends(request()->query())->render()!!}
 			</div>
@@ -165,6 +170,14 @@
 
 @section('scripts')
 	@include('store.components.bladejs')
+	<script>
+		function setPageResults()
+		{
+			let url = $('#pageResultsSelector').val();
+			window.location = url;
+			// location.reload();
+		}
+	</script>
 @endsection
 
 

@@ -70,7 +70,7 @@
                 </div>{{-- / .item --}}
             @endforeach
         <div class="update-btn">
-            <button class="UpdateDataBtn block-btn-hollow"><i class="fas fa-sync"></i> ACTUALIZAR TOTALES</button>
+            <button class="UpdateDataBtn block-btn-hollow"><i class="fas fa-sync"></i> Calcular nuevos totales</button>
         </div>
         <hr>
         <div class="total-price-bottom row">

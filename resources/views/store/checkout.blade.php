@@ -35,7 +35,7 @@
 						</thead>
 						<tbody>
 							@foreach($activeCart['rawdata']->items as $item)
-							<tr>
+							<tr id="Item{{$item->id}}">
 								<td>
 									<div class="product-item">
 										<a class="product-thumb" href="{{ url('tienda/articulo/'.$item->article->id) }}">
@@ -91,12 +91,13 @@
 								<td>$ <span class="{{ $item->id }}-TotalItemPrice TotalItemPrice">{{ ($articlePrice * $item->quantity) }}</span></td>
 								{{-- REMOVE ITEMS FROM CART --}}
 								<td class="text-center">
-									{!! Form::open(['route' => 'store.removeFromCart', 'method' => 'POST', 'class' => 'loader-on-submit']) !!}	
+									<a onclick="removeFromCart('{{ route('store.removeFromCart') }}', {{ $item->id }}, {{ $item->quantity }}, '#Item'+{{ $item->id }}, 'reload');" class="icon-only-btn"><i class="far fa-trash-alt"></i></a>
+									{{-- {!! Form::open(['route' => 'store.removeFromCart', 'method' => 'POST', 'class' => 'loader-on-submit']) !!}	
 										{{ csrf_field() }}
 										<input type="hidden" name="itemid" value="{{ $item->id }}">
 										<input type="hidden" name="quantity" value="{{ $item->quantity }}">
 										<button type="submit" class="icon-only-btn"><i class="far fa-trash-alt"></i></button>
-									{!! Form::close() !!}
+									{!! Form::close() !!} --}}
 								</td>
 							</tr>
 							@endforeach

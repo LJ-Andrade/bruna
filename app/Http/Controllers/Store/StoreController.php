@@ -116,9 +116,10 @@ class StoreController extends Controller
         {
             $articles = CatalogArticle::orderBy($orderBy, $order)->orderBy($orderBy2, $order2)->active()->paginate($pagination);
         }
-
-    
+        
+        $pageResults = $pagination;
         return view('store.index')
+            ->with('pageResults', $pageResults)
             ->with('articles', $articles);
     }
 

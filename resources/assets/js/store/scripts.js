@@ -242,7 +242,7 @@ window.removeFromCart = function (route, id, quantity, div, action) {
                 updateTotals();
                 console.log(div);
                 setItemsData();
-            }
+            }   
         },
         error: function (data) {
             //$('#Error').html(data.responseText);
