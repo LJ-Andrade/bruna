@@ -17,7 +17,7 @@
             <input id="IsResellerCheckbox" type="checkbox" name="isreseller" class="Hidden">
             {{ csrf_field() }}
             <div class="NormaClientTitle">
-                <h3 class="text-center">Registro de Usuario</h3>
+                <h3 class="text-center">Registro de Usuario Minorísta</h3>
             </div>
             <div class="ResellerTitle text-center" style="display: none">
                 <a class="top-right-element cursor-pointer" onClick="closeResellerRegistration();">Volver</a>
@@ -92,6 +92,7 @@
             </div>
             <input type="hidden" value="null" name="cuit">
             <input type="hidden" value="null" name="dni">
+            <input type="hidden" value="2" name="group">
             {{-- Submit --}}
             <button type="submit" class="btn btn-primary btn-block"><i class="icon-unlock"></i> Registrarse</button>
             <div class="bottom-text">Ya tiene cuenta? | <a href="{{ route('customer.login') }}">Ingresar</a></div>

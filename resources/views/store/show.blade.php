@@ -135,7 +135,7 @@
 				</div>
 			</div>
 			<hr class="mb-3">
-			<a class="back-btn" href="{{ route('store') }}"><i class="icon-arrow-left"></i>&nbsp;Volver a la tienda</a>
+			<a class="back-btn" href="javascript:history.go(-1)"><i class="icon-arrow-left"></i>&nbsp;Volver a la tienda</a>
 		</div>
 	</div>
 </div>

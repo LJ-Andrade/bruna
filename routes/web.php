@@ -13,6 +13,8 @@ Route::group(['prefix'=> 'tienda', 'middleware' => 'active-customer'], function(
     Route::post('login', ['uses' => 'CustomerAuth\LoginController@login']);
     Route::post('logout', ['as' => 'customer.logout', 'uses' => 'CustomerAuth\LoginController@logout']);
     // Store Registration Routes
+    
+    Route::get('registro', function(){ return view('store.register-select'); });
     Route::get('register', ['as' => 'customer.register', 'uses' => 'CustomerAuth\RegisterController@showRegistrationForm']);
     Route::get('register-reseller', ['as' => 'customer.register-reseller', 'uses' => 'CustomerAuth\RegisterController@showRegistrationFormReseller']);
     Route::post('register', ['uses' => 'CustomerAuth\RegisterController@register']);

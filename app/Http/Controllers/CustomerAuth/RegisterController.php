@@ -61,24 +61,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
     protected function validator(array $data)
     {
-        if($data['cuit'] == null)
-        {
-            unset($data['cuit']);
-        }
-        
-        if($data['dni'] == null)
-        {
-            unset($data['dni']);
-        }
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'username' => 'required|string|max:20|unique:customers',
             'email' => 'required|string|email|max:255|unique:customers',
-            'cuit' => 'unique:customers',
-            'dni' => 'unique:customers',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -143,6 +133,33 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+
+        // Custom Horrible Validations
+        if($request->group != '2' && $request->group != '3')
+        {
+            return back()->withErrors('No se ha seleccionado un tipo de usuario');
+        }
+
+        if($request->group == '3')
+        {
+            if($request->CuitOrDni == 'Cuit')
+            {
+                if(strlen($request->cuit) != 11)
+                {
+                    return redirect()->back()->withErrors('El CUIT debe tener 11 números');
+                }
+            }
+
+            if($request->CuitOrDni == 'Dni')
+            {
+                if(strlen($request->dni) != 8)
+                {
+                    return redirect()->back()->withErrors('El DNI debe tener 8 números');
+                }
+            }
+
+        }
+
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));

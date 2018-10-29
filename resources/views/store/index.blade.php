@@ -6,8 +6,7 @@
 @endsection
 
 @section('content')
-	<!-- Page Content -->
-	{{-- {{ dd($articles)}} --}}
+
 	<div id="main" class="main-container container-fluid padding-bottom-3x mb-1">
 		<div class="row search-filters">
 			@include('store.partials.filterbar')

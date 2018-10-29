@@ -440,6 +440,28 @@
 	border: 0
 	font-size: 1.2rem
 
+
+.big-btn
+	background-color: $main-color
+	padding: 15px
+	color: #fff
+	@include box-shadow-soft2
+	@include transition(0.2s)
+	.icon-btn
+		font-size: 2rem
+		margin-bottom: 5px
+	.text-btn
+		font-size: 1.2rem
+		span.text-1
+			font-size: 1.1rem
+			font-weight: 300
+		span.text-2
+			font-size: 1.5rem
+			font-weight: 400
+			font-family: $font2
+	&:hover
+		cursor: pointer
+		filter: brightness(1.5)
 	
 //////////////////////////////////////
 //                                  //
