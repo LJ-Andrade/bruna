@@ -26,7 +26,6 @@ class ArticlesController extends Controller
 
     public function index(Request $request)
     {
-        
         $code     = $request->get('code');
         $name     = $request->get('name');
         $category = $request->get('category');
@@ -37,18 +36,14 @@ class ArticlesController extends Controller
             $order = $request->orden_af;
             $rowName = "name";
         }
+
+
         // -------- Pagination -----------
         if($request->get('results'))
         {
             $pagination = $request->get('results');
             // With expiration
             Cookie::queue('stock-pagination', $pagination, 2000);
-            
-            // Forever
-            // Cookie::forever('stock-pagination', $pagination);
-            
-            // Read Cookie
-            // dd(Cookie::get('stock-pagination'));
         }
         else
         {   

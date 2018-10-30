@@ -5,6 +5,7 @@ namespace App\Http\ViewComposers;
 use Illuminate\Contracts\View\View;
 // use App\Cart;
 use App\Traits\CartTrait;
+use App\Settings;
 
 class StoreComposer
 {
@@ -12,12 +13,13 @@ class StoreComposer
 
 	public function compose(View $view)
 	{   
+        $settings = Settings::findOrFail(1);
+        $google_analytics = $settings->google_analytics;
         $favs = $this->getCustomerFavs();
         $activeCart = $this->activeCart();
-        $currentView = '';
         $view
             ->with('activeCart', $activeCart)
             ->with('favs', $favs)
-            ->with('currentView', $currentView);
+            ->with('google_analytics', $google_analytics);
 	}
 }

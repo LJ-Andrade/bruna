@@ -7,7 +7,7 @@
                 <div class="input-group">
                     {!! Form::text('code', null, ['class' => 'form-control', 'aria-describedby' => 'search']) !!}
                     <div class="input-group-append">
-                        <button type="submit" id="SearchFiltersBtn" class="btnSm btnGreen appendBtn"><i class="icon-search"></i></button>
+                        <button type="submit" id="SearchFiltersBtn" class="btnSm btnMain appendBtn"><i class="icon-search"></i></button>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                 <div class="input-group">
                     {!! Form::text('name', null, ['class' => 'form-control', 'aria-describedby' => 'search']) !!}
                     <div class="input-group-append">
-                        <button type="submit" id="SearchFiltersBtn" class="btnSm btnGreen appendBtn"><i class="icon-search"></i></button>
+                        <button type="submit" id="SearchFiltersBtn" class="btnSm btnMain appendBtn"><i class="icon-search"></i></button>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="input-group">
                     {!! Form::select('category', $categories, ['class' => 'form-control', 'aria-describedby' => 'search']) !!}
                     <div class="input-group-append">
-                        <button type="submit" id="SearchFiltersBtn" class="btnSm btnGreen appendBtn"><i class="icon-search"></i></button>
+                        <button type="submit" id="SearchFiltersBtn" class="btnSm btnMain appendBtn"><i class="icon-search"></i></button>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ class VadminComposer
 
     public function compose(View $view)
     {
-        $settings = Settings::findOrFail(1);
+        $settings = Settings::find(1);
         
         $newMessages = Contact::where('status', '=', '0')->get();
         $newOrders = Cart::where('status', '=', 'Process')->count();

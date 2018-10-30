@@ -3,12 +3,12 @@
 
 @section('content')
 <div class="container padding-bottom-3x">
-    <div id="ResellerCTA" class="row centered-form text-center">
+    <div id="ResellerCTA" class="row centered-form text-center" style="margin-top: 0">
         <div class="login-box inner" style="padding-bottom: 30px">
             <h3>Registro de Usuario</h3>
             {{-- RESELLER BOX REQUIRED Edisplay: none;--}}
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row registration-selector">
+                <div class="inner-col col-xs-12 col-sm-6 col-md-6">
                     <a href="{{ route('customer.register-reseller') }}">
                         <div class="big-btn">
                             <div class="icon-btn">
@@ -21,7 +21,7 @@
                         </div>    
                     </a>
                 </div>
-                <div class="col-md-6">
+                <div class="inner-col col-xs-12 col-sm-6 col-md-6">
                     <a href="{{ route('customer.register') }}">
                         <div class="big-btn">
                             <div class="icon-btn">

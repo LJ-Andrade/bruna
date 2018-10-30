@@ -10,5 +10,5 @@ class Settings extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['email_notifications', 'email_1'];
+    protected $fillable = ['user_id', 'email', 'notifications', 'google_analytics'];
 }

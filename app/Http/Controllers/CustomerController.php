@@ -9,6 +9,7 @@ use Image;
 use File;
 use PDF;
 use Excel;
+use Cookie;
 
 class CustomerController extends Controller
 {
@@ -20,29 +21,34 @@ class CustomerController extends Controller
     */
     public function index(Request $request)
     {    
+        $pagination = $this->getSetPaginationCookie($request->get('results'));
         $group = $request->get('group');
         $status = $request->get('status');
         // Name is name, surname, username, email
         $name  = $request->get('name');
         
-        $paginate = 15;
         $order = 'DESC';
         $orderBy = 'created_at';
 
+        if($request->order)
+            $order = $request->order;
+        if($request->orderBy)
+            $orderBy = $request->orderBy;
+
         if(isset($group) && isset($status)){
-            $items = Customer::searchGroupStatus($group, $status)->orderBy($orderBy, $order)->paginate($paginate);    
+            $items = Customer::searchGroupStatus($group, $status)->orderBy($orderBy, $order)->paginate($pagination);    
         }
         elseif(isset($name))
         {
-            $items = Customer::searchName($name)->orderBy($orderBy, $order)->paginate($paginate); 
+            $items = Customer::searchName($name)->orderBy($orderBy, $order)->paginate($pagination); 
         }
         elseif(isset($group))
         {
-            $items = Customer::searchGroup($group)->orderBy($orderBy, $order)->paginate($paginate); 
+            $items = Customer::searchGroup($group)->orderBy($orderBy, $order)->paginate($pagination); 
         }
         else 
         {
-            $items = Customer::orderBy($orderBy, $order)->paginate($paginate); 
+            $items = Customer::orderBy($orderBy, $order)->paginate($pagination); 
         }
 
 
@@ -51,6 +57,28 @@ class CustomerController extends Controller
             ->with('name', $name)
             ->with('group', $group);
     }
+
+    public function getSetPaginationCookie($request)
+    {
+       
+        if($request)
+        {
+            Cookie::queue('store-pagination', $request, 2000);
+            $pagination = $request;
+        }
+        else
+        {   
+            if(Cookie::get('store-pagination'))
+            {
+                $pagination = Cookie::get('store-pagination');
+            }
+            else{
+                $pagination = 24;
+            }
+        } 
+        return $pagination;
+    }
+
     
     public function show($id)
     {

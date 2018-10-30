@@ -291,9 +291,9 @@
 			@endif
 		</a></li>
 		{{-- SETTINGS --}}
-		{{-- <li class="{{ Menu::activeMenu('mensajes_recibidos') }}"><a href="{{ route('vadmin.settings') }}" class="menu-item">
-			<i class="fas fa-sliders-h"></i> Opciones 
-		</a></li> --}}
+		<li class="{{ Menu::activeMenu('configuracion') }}"><a href="{{ route('vadmin.settings') }}" class="menu-item">
+			<i class="fas fa-sliders-h"></i> Configuracion 
+		</a></li>
 		{{-- Public sections --}}
 		<li class="navigation-header"><span data-i18n="nav.category.support">Secciones Públicas</span>
 			<i data-toggle="tooltip" data-placement="right" data-original-title="Support" class="icon-ellipsis icon-ellipsis"></i>

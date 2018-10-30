@@ -42,15 +42,12 @@
 	<div class="list-wrapper">
 		{{-- Search --}}
 		<div class="row inline-links">
-			<span class="with-background">
-				<b>Órden:</b> 
-				<a href="{{ route('catalogo.index', ['orden_af' => 'ASC']) }}" >A-Z</a> |
-				<a href="{{ route('catalogo.index', ['orden_af' => 'DESC']) }}" >Z-A</a> |
-				<a href="{{ route('catalogo.index', ['orden' => 'ASC']) }}">Stock Bajo</a> | 
-				<a href="{{ route('catalogo.index', ['orden' => 'DESC']) }}">Stock Alto</a> |
-				<a href="{{ route('catalogo.index', ['orden' => 'limitados']) }}" >Stock Limitado</a>
-
-			</span>
+			<b>Órden:</b> 
+			<a href="{{ route('catalogo.index', ['orden_af' => 'ASC']) }}" >A-Z</a>
+			<a href="{{ route('catalogo.index', ['orden_af' => 'DESC']) }}" >Z-A</a>
+			<a href="{{ route('catalogo.index', ['orden' => 'ASC']) }}">Stock Bajo</a> 
+			<a href="{{ route('catalogo.index', ['orden' => 'DESC']) }}">Stock Alto</a>
+			<a href="{{ route('catalogo.index', ['orden' => 'limitados']) }}" >Stock Limitado</a>
 		</div>
 		<div class="row">
 			@component('vadmin.components.list')
@@ -198,6 +195,11 @@
 				@endslot
 			@endcomponent
 			{{--  Pagination  --}}
+			<div class="inline-links">
+				<b>Resultados por página:</b>
+				<a href="{{ route('catalogo.index', ['orden' => 'ASC', 'results' => '50']) }}">50</a>
+				<a href="{{ route('catalogo.index', ['orden' => 'ASC', 'results' => '100']) }}">100</a>
+			</div>
 			{!! $articles->appends(request()->query())->render()!!}
 			{{-- @if(isset($_GET['name']))
 				{!! $articles->appends(['name' => $_GET['name']])->render() !!}

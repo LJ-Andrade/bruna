@@ -156,7 +156,7 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'active-user'], function(){
     
     Route::get('/', 'VadminController@index');
 
-    Route::get('opciones', ['as' => 'vadmin.settings', 'uses' => 'VadminController@settings']);
+    Route::get('configuracion', ['as' => 'vadmin.settings', 'uses' => 'VadminController@settings']);
 
     Route::post('sendMail', ['as' => 'vadmin.sendMail', 'uses' => 'VadminController@sendMail']);
     Route::post('sendSupportMail', ['as' => 'vadmin.sendSupportMail', 'uses' => 'VadminController@sendSupportMail']);

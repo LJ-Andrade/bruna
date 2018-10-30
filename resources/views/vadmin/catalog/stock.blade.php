@@ -39,19 +39,12 @@
 	<div class="list-wrapper">
 		{{-- Search --}}
 		<div class="row inline-links">
-			<span class="with-background">
-				<b>Órden:</b> 
-				<a href="{{ route('catalogo.index', ['orden_af' => 'ASC', 'redirect' => 'stock']) }}" >A-Z</a> |
-				<a href="{{ route('catalogo.index', ['orden_af' => 'DESC', 'redirect' => 'stock']) }}" >Z-A</a> |
-				<a href="{{ route('catalogo.index', ['orden' => 'DESC', 'redirect' => 'stock']) }}">Stock Alto</a> |
-				<a href="{{ route('catalogo.index', ['orden' => 'ASC', 'redirect' => 'stock']) }}">Stock Bajo</a> | 
-				<a href="{{ route('catalogo.index', ['orden' => 'limitados', 'redirect' => 'stock']) }}" >Stock Limitado</a>
-            </span>
-            <span class="with-background">
-                <b>Resultados por página:</b>
-                <a href="{{ route('catalogo.index', ['orden' => 'ASC', 'redirect' => 'stock', 'results' => '50']) }}">50</a> | 
-                <a href="{{ route('catalogo.index', ['orden' => 'ASC', 'redirect' => 'stock', 'results' => '100']) }}">100</a>
-            </span>
+			<b>Órden:</b> 
+			<a href="{{ route('catalogo.index', ['orden_af' => 'ASC', 'redirect' => 'stock']) }}" >A-Z</a>
+			<a href="{{ route('catalogo.index', ['orden_af' => 'DESC', 'redirect' => 'stock']) }}" >Z-A</a>
+			<a href="{{ route('catalogo.index', ['orden' => 'DESC', 'redirect' => 'stock']) }}">Stock Alto</a>
+			<a href="{{ route('catalogo.index', ['orden' => 'ASC', 'redirect' => 'stock']) }}">Stock Bajo</a> 
+			<a href="{{ route('catalogo.index', ['orden' => 'limitados', 'redirect' => 'stock']) }}" >Stock Limitado</a>
 		</div>
 		<div class="row">
 			@component('vadmin.components.list')
@@ -150,6 +143,11 @@
 				@endslot
 			@endcomponent
 			{{--  Pagination  --}}
+			<div class="inline-links">
+				<b>Resultados por página:</b>
+				<a href="{{ route('catalogo.index', ['orden' => 'ASC', 'redirect' => 'stock', 'results' => '50']) }}">50</a>
+				<a href="{{ route('catalogo.index', ['orden' => 'ASC', 'redirect' => 'stock', 'results' => '100']) }}">100</a>
+			</div>
 			{!! $articles->appends(request()->query())->render()!!}
 			{{-- @if(isset($_GET['name']))
             {!! $articles->appends(['name' => $_GET['name']])->render() !!}
@@ -161,6 +159,7 @@
             {!! $articles->render() !!}
 			@endif --}}
 		</div>
+		
 		<div id="Error"></div>
 	</div>
 @endsection

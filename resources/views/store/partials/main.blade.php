@@ -26,6 +26,7 @@
 		@yield('styles')
 		<!-- Modernizr-->
 		<script src="{{ asset('store-ui/js/modernizr.min.js') }}"></script>
+		{!! $google_analytics !!}
 	</head>
 	<!-- Body-->
 	<body>

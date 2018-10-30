@@ -462,7 +462,16 @@
 	&:hover
 		cursor: pointer
 		filter: brightness(1.5)
-	
+
+@media (max-width: 575px)
+	.registration-selector
+		.inner-col
+			@include flex-column
+		.big-btn
+			margin-bottom: 15px
+			max-width: 200px
+
+
 //////////////////////////////////////
 //                                  //
 //             FORMS                //

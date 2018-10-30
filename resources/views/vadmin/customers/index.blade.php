@@ -39,13 +39,22 @@
 
 @section('content')
 	<div class="list-wrapper">
-		{{-- Test --}}
-		<div id="TestBox" class="col-xs-12 test-box Hidden">
+		<div class="row inline-links">
+			<b>Órden:</b> 
+			@if(app('request')->input('group') != [])
+				<a href="{{ route('customers.index', ['orderBy' => 'name', 'order' => 'ASC', 'group' => app('request')->input('group')]) }}" >A-Z</a>
+				<a href="{{ route('customers.index', ['orderBy' => 'name', 'order' => 'DESC', 'group' => app('request')->input('group')]) }}" >Z-A</a>
+			@else
+				<a href="{{ route('customers.index', ['orderBy' => 'name', 'order' => 'ASC']) }}" >A-Z</a>
+				<a href="{{ route('customers.index', ['orderBy' => 'name', 'order' => 'DESC']) }}" >Z-A</a>
+			@endif
+			<a href="{{ route('customers.index', ['orderBy' => 'name', 'group' => '2']) }}" >Minorístas</a>
+			<a href="{{ route('customers.index', ['orderBy' => 'name', 'group' => '3']) }}" >Mayorístas</a>
+			<a href="{{ route('customers.index', ['orderBy' => 'created_at', 'order' => 'DESC']) }}">Fecha de Registro</a>
 		</div>
 		<div class="row">
 			@component('vadmin.components.list')
 				@slot('actions')
-
 					<a href="{{ route('vadmin.exportCustomersListSheet', ['params' => 'all', 'format' => 'xls']) }}" data-toggle="tooltip" title="Exportar a XLS"  class="icon-container green">
 						<i class="fas fa-file-excel"></i>
 					</a>
@@ -58,17 +67,6 @@
 					<a href="{{ route('vadmin.exportCustomersListPdf', ['params' => 'all', 'action' => 'stream']) }}" data-toggle="tooltip" title="Exportar a .PDF" class="icon-container black" target="_blank">
 						<i class="fas fa-eye"></i>
 					</a>
-
-					
-					{{-- @if(isset($_GET['name']) || isset($_GET['role']) || isset($_GET['group']))
-						<a href="{{ route('vadmin.exportCustomersListPdf', ['params' => http_build_query($_GET)]) }}" data-toggle="tooltip" title="Exportar a PDF">
-							<i class="icon-file-pdf"></i></a>
-						<a href="{{ route('vadmin.exportCustomersListXls', ['params' => http_build_query($_GET)]) }}" data-toggle="tooltip" title="Exportar a XLS">
-							<i class="icon-file-excel"></i></a>
-					@else
-						<a href="{{ route('vadmin.exportCustomersListPdf', ['params' => 'all']) }}" data-toggle="tooltip" title="Exportar a PDF"><i class="icon-file-pdf"></i></a>
-						<a href="{{ route('vadmin.exportCustomersListXls', ['params' => 'all']) }}" data-toggle="tooltip" title="Exportar a XLS"><i class="icon-file-excel"></i></a>
-					@endif --}}
 				@endslot	
 				@slot('title', 'Clientes')
 				@slot('tableTitles')
@@ -76,9 +74,9 @@
 						@if(Auth::guard('user')->user()->role <= 2)
 						<th class="w-50"></th>
 						@endif
-						<th>Nombre y apellido</th>
-						<th>Usuario</th>
+						<th>Nombre (Usuario)</th>
 						<th>Email</th>
+						<th>Registro</th>
 						<th style="min-width: 150px">Tipo</th>
 						<th>Estado</th>
 					@else
@@ -99,9 +97,9 @@
 									</label>
 								</td>
 								@endif
-								<td class="show-link"><a href="{{ url('vadmin/customers/'.$item->id) }}"> {{ $item->name }} {{ $item->surname}}</a></td>
-								<td>{{ $item->username }}</td>
+								<td class="show-link"><a href="{{ url('vadmin/customers/'.$item->id) }}"> {{ $item->name }} {{ $item->surname}} ({{ $item->username }})</a></td>
 								<td>{{ $item->email }}</td>
+								<td>{{ transDateT($item->created_at) }}</td>
 								<td>
 									{!! Form::select('group', [1 => 'Esperando aprobación', 2 => 'Minorísta', 3 => 'Mayorísta'], $item->group, ['class' => 'form-control', 'onChange' => 'updateCustomerGroup(this, this.dataset.id)', 'data-id' => $item->id]) !!}
 								</td>
@@ -123,14 +121,14 @@
 					@endif
 				@endslot
 			@endcomponent
-			
-			@if(isset($_GET['name']))
-				{!! $items->appends(['name' => $name])->render(); !!}
-			@elseif(isset($_GET['group']))
-				{!! $items->appends(['group' => $group])->render(); !!}
-			@else
-				{!! $items->render(); !!}
-			@endif
+			{{--  Pagination  --}}
+			<div class="inline-links">
+				<b>Resultados por página:</b>
+				<a href="{{ route('customers.index', ['orden' => 'ASC', 'redirect' => 'stock', 'results' => '5']) }}">5</a>
+				<a href="{{ route('customers.index', ['orden' => 'ASC', 'redirect' => 'stock', 'results' => '50']) }}">50</a>
+				<a href="{{ route('customers.index', ['orden' => 'ASC', 'redirect' => 'stock', 'results' => '100']) }}">100</a>
+			</div>
+			{!! $items->appends(request()->query())->render()!!}
 		</div>
 		<div id="Error"></div>	
 	</div>
