@@ -77,12 +77,8 @@ class RegisterController extends Controller
     {
         $status = '1'; // Active
         $group = '2'; // Min 
-        if(isset($data['isreseller'])){
-            if($data['isreseller'] == 'on'){
-                // $status = '0'; // Suspended
-                $status = '1'; // Active
-                $group = '3'; // Reseller
-            } 
+        if($data['group'] == '3'){            
+            $group = '3'; // Reseller
         } 
         
         $cuit = null;
@@ -120,7 +116,7 @@ class RegisterController extends Controller
         $geoprovs = GeoProv::pluck('name','id');
         
         return view('store.register')
-        ->with('geoprovs',$geoprovs);
+            ->with('geoprovs',$geoprovs);
     }
 
     public function showRegistrationFormReseller(){
