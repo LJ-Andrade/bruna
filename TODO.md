@@ -1,14 +1,5 @@
 
 # Errores - Fallas - Bugs - Glitches
-- Cuando se hace el primero pedido y se pone continuar en el checkout sidebar rebota a tienda.
-
-Nuevos cambios subidos:
-Políticas de Exclusividad y Como comprar estilo nuevo.
-Filtros En movil
-Filtros por populares y descuentos.
-Arreglada paginacion
-Arreglado busqueda por categoría desde input text
-En tienda inicio puse un TOOL TIP con stock máximo, probar si gusta y sino poner selector.
 
 # Bruna
 Por otra parte, respecto a la decisión del menú lateral, cuando esté eso eliminaríamos el mensaje que aparece cada vez que agrego un producto al carrito porque ya me aparece de costado (adjunto foto)
@@ -33,6 +24,17 @@ Cuando cargo más fotos en una publicación, para cambiar la destacada, tengo qu
 
 
 # Implementar
+- Empujar mensajes a clientes con carros activos inactivos con más de 3 días.
+- Borrar carros con más de 15 días.
+- Que los productos se puedan destacar y se ordenen por fecha
+- Que desde vadmin se pueda hacer pedido nuevo y que ese pedido no tenga límite de prendas.
+- Carro de compra desde vadmin que soporte un detalle (columna) como por ejemplo nombre del cliente al que pertenece
+- No enter en forms
+- Filtro con temporada actual
+- Modulo de carga de temporadas con opcion todas
+- En vista de pedido mostrar total de prendas
+
+
 - Estadisticas
 - Poder dar orden a articulos de listado
 
@@ -47,7 +49,38 @@ Cuando cargo más fotos en una publicación, para cambiar la destacada, tengo qu
 - Vender producto similar
 - Agregar vista de listado
 
+
+
+
+Te hago una consulta respecto al listado de clientes. Estamos haciendo publicidad en instagram y quisiera medir la repercusión.
+¿Se puede incluir en el listado de clientes la fecha de registro? ¿Y que me permita buscar por localidad o por provincia? Y lo último si me puede permitir ordenar segun distintos criterios: alfabeticamente, orden de registro, mayorista o minirista.
+Y lo otro es si se puede saber cuantas personas entran por día a la página, cuantas abren carros y no finalizan compras. Para poder sacar estadísticas de eso. Google analytics por ejemplo, pero no tengo idea, sólo sé que sirve para eso.
+
+
+## NOSE - Parece que anda
+==============================================
+-Está tomando el mínimo como 12 artículos distintos cuando deberia tomar la cantidad total. Si yo quiero comprar 6 de un modelo y 6 de otro me tiene que dejar.
+-En el carrito, cuando dice stock (marca 1 de menos).
+- Cuando toco la tecla de borrar sin querer afuera del cuadradito para modificar stock me lleva a la hoja anterior, esa tecla no tendría que hacer nada.
+- Modificar el nombre anda raro, se me recarga solo antes de que termine de escribir y no sé por qué, no entiendo si para modificarlo es con un click sólo o doble click sobre el nombre
+
+
+
+==============================================
 # Hecho
+- Manterner url cuando se vuelve de producto individual
+- Buscar etiquetas en filtro de texto
+- Checkout Sidebar fijo derecha
+- Unificar mismos id
+- Banner de bajo stock en prod con min
+- Acceso directo a favoritos desde userbar
+- Nuevos cambios subidos:
+- Políticas de Exclusividad y Como comprar estilo nuevo.
+- Filtros En movil
+- Filtros por populares y descuentos.
+- Arreglada paginacion
+- Arreglado busqueda por categoría desde input text
+- En tienda inicio puse un TOOL TIP con stock máximo, probar si gusta y sino poner selector.
 - WhatsApp flotante
 - Agregar paginacion con cookies
 - Despues de paginar volver a la misma pagina
@@ -69,6 +102,9 @@ Cuando cargo más fotos en una publicación, para cambiar la destacada, tengo qu
 
 
 # RESUELTOS
+
+> (RESUELTO)
+Cuando se hace el primero pedido y se pone continuar en el checkout sidebar rebota a tienda.
 
 > (RESUELTO)
 Cuando se elije el primer producto en la tienda no está el disparador del dropdown del carro de compras.
@@ -132,6 +168,45 @@ En Vadmin precios mayoristas y min dependiendo customer
 >(RESUELTO)
 En store checkout no se pueden borrar items
 
+En el CUIT me deja poner cualquier cantidad de números. Hay gente que se registra con el DNI porque no tiene cuit y los deja igual.
+Sugiero que de la opcion de DNI o CUIT/CUIL y no permita poner sino la cantidad de números que tiene que ir
+
+
+VADMIN
+-Que me permita ordenar por orden alfabético los artículos
+-En publicar similar que el color quede vacío
+
+> Lista de productos 
+- Cuando se clickea en codigo: editar
+- Ir directo a edit
+- Editar titulo
+- Ordenar alfabeticamente
+
+WEB
+-Mover sumarización de prendas arriba en lugar de abajo. no se ve si hay muchos artículos. 
+-Si estoy adentro de un producto y hago click sobre el carro no me lo abre
+Botones de registro: ponerlos con fondo fucsia, la gente lo los ve, tienen que llamar más la atención
+-en la vista de celular la gente no entiende los botones, aunque lleve mas espacio habria que dejarlos con letras (te adjunto dibujo de como me imagino)
+-en ambas vistas: modificar leyendas
+*registro modificar por: “compra por menor”
+*vende bruna modificar por: “compra por mayor”
+
+-En la vista del celular falla el carrito, a veces cuando agrego productos se despliega sólo sin que haga nada, a veces toco encima de la bolsita y no se abre.
+
+agregar al lado de politica de exclusivdad un boton que diga condiciones de compra
+
+https://docs.google.com/document/d/1VPVDU6BEZWkFZg1-KKRCr3Wk7uLQZFeZGJZXl7VmYUY/edit?usp=sharing
+
+
+-Falta barra de scroll sobre el carrito. Si tengo muchos items no me deja bajar.
+
+En la lista no tienen un bortón para comprar los favoritos. ¿Es muy complicado poner el agragar al carrito para que puedan comprar desde ahí? Pienso en aguien que va agregando a favoritos y que después quiere comprar varios de los que están ahí, tiene que entrar uno por uno y volver.
+
+Seria bueno que el boton continuar también actualice totales antes de seguir porque si no alguien que se confunde no sabe que está comprando. O que actualice ahí mismo o que me mande a una pantalla intermedia donde pueda verificar los datos y continuar o volver para modificar.
+
+
+- Boton registrar mayorista
+LOGIN REGISTRAR MAYORISTAS (ir con checkbox tildado)
 
 # Dev Permisos 
 
