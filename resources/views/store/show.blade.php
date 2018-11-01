@@ -180,4 +180,7 @@
 
 @section('scripts')
 	@include('store.components.bladejs')
+	<script>
+	alert();
+	</script>
 @endsection
