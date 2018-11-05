@@ -988,11 +988,15 @@ ul.pagination
 			flex: 0 0 50%
 			max-width: 50%
 
-
-@media (min-width: 768px)
+@media (max-width: 768px)
 	.articles-container
 		.article
 			min-width: 250px
+
+@media (max-width: 520px)
+	.articles-container
+		.article
+			min-width: auto
 
 @media (min-width: 1199px) and (max-width: 1340px)
 	.articles-container .article .inner .content .footer
@@ -1413,7 +1417,7 @@ ul.pagination
 	.trigger
 		display: none
 
-@media (max-width: 819px)
+@media (max-width: 965px)
 	.horizontal-filters
 		form
 			width: 100%

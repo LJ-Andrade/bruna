@@ -13,7 +13,7 @@
 		</div>
 		<div class="row">
 			{{-- col-xs-12 col-lg-9 col-sm-8 col-md-8 --}}
-			<div id="MainContent" class="col-xs-12">
+			<div id="MainContent" class="col-xs-12 col-sm-12">
 				@if(!isset($_GET['checkout-on']))
 					@if(isset($_GET['page']) && !isset($search) && count($_GET) == 1)
 					@else

@@ -98,7 +98,6 @@
 		<script src="{{ asset('js/vadmin-functions.js') }}" type="text/javascript"></script>
 		@include('vadmin.components.appjs')
 		@yield('scripts')
-		@yield('custom_js')
 		<script>
 			
 			let count = 0;
@@ -107,7 +106,7 @@
 				let dots = new Array(count % 10).join('.');
 				document.getElementById('LoadingText').innerHTML = "." + dots;
 			}, 1000);
-
+			
 			// Check If Img Is Broken and replace with default img 
 			// Add ".CheckImg" ass Class in any Img to add this function
 			// $('.CheckImg').on('error', function(){
@@ -120,7 +119,9 @@
 				let svg  = "<img src='{{ asset('images/gral/loader-sm.svg') }}'>";
 				$(this).html(svg + ' ' + loadertext);
 			});
-
+			
+			let allowEnterOnForms = false;	
 		</script>
+		@yield('custom_js')
 	</body>
 </html>

@@ -41,10 +41,6 @@
 </div>
 
 <div class="row">
-    
-</div>
-
-<div class="row">
     {{-- Prices and Offers --}}
     <div class="col-md-6">
         <div class="row">
@@ -94,8 +90,22 @@
             </div>
         </div>
         <div class="row">
+            {{-- Season --}}
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="form-group">
+                    {!! Form::label('seasons', 'Temporada') !!}
+                    {!! Form::select('seasons[]', $seasons, null, ['class' => ' Select-Tags form-control', 'multiple']) !!}
+                </div>
+            </div>
+            {{-- <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="form-group">
+                    {!! Form::label('season_id', 'Temporada') !!}
+                    {!! Form::select('season_id', $seasons, null, ['class' => 'form-control Select-Category-', 'placeholder' => 'Seleccione una opcion',
+                    'required' => '']) !!}
+                </div>
+            </div> --}}
             {{-- Category --}}
-            <div class="col-md-4 col-md-12 col-xs-12">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group">
                     {!! Form::label('category_id', 'Categoría') !!}
                     {!! Form::select('category_id', $categories, null, ['class' => 'form-control Select-Category-', 'placeholder' => 'Seleccione una opcion',

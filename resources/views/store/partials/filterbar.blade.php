@@ -29,6 +29,14 @@
             <option value="{{ route('store', 'categoria=').$category->id }}"> {{ $category->name }} </option>
         @endforeach
     </select>
+    {{-- Seasons --}}
+    <select class="form-control item" name="categories" onchange="location = this.value;">
+        <option value="Etiquetas" selected disabled>Temporadas</option>
+        <option value="{{ route('store') }}"> Todas </option>
+        @foreach($seasons as $season)
+            <option value="{{ route('store', 'temporada=').$season->id }}"> {{ $season->name }} </option>
+        @endforeach
+    </select>
     <div class="back-to-list-desktop">
         @if(!isset($_GET['checkout-on']))
             @if(isset($_GET['page']) && !isset($search) && count($_GET) == 1)

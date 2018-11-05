@@ -90,8 +90,8 @@ class StoreController extends Controller
 
         if(isset($request->buscar))
         {   
-            $tags = CatalogTag::with(['articles' => function($query) { $query->where('status', '=', '1'); } ])->get();
-            $categories = CatalogCategory::with(['articles' => function($query) { $query->where('status','=', '1'); } ])->get();
+            $tags = CatalogTag::with(['articles' => function($query) { $query->where('status', '=', '1'); }])->get();
+            $categories = CatalogCategory::with(['articles' => function($query) { $query->where('status','=', '1'); }])->get();
             $articles = CatalogArticle::search($request->buscar, $categories, $tags)->active()->paginate($pagination);
         } 
         else if(isset($request->filtrar))
@@ -99,7 +99,8 @@ class StoreController extends Controller
             if($request->filtrar == 'populares')
             {  
                 $articles = CatalogArticle::has('hasFavs')->paginate($pagination);
-            } else if($request->filtrar == 'descuentos')
+            } 
+            else if($request->filtrar == 'descuentos')
             {
                 $articles = CatalogArticle::orderBy('discount', 'DESC')->active()->paginate($pagination);
             }
@@ -110,7 +111,19 @@ class StoreController extends Controller
         }
         else if(isset($request->etiqueta))
         {
-            $articles = CatalogArticle::orderBy($orderBy, $order)->active()->where('category_id', $request->etiqueta)->paginate($pagination);
+            // $articles = CatalogArticle::orderBy($orderBy, $order)->active()->where('category_id', $request->etiqueta)->paginate($pagination);
+            $tag = $request->etiqueta;
+            $articles = CatalogArticle::whereHas('tags', function ($query) use($tag){
+                $query->where('catalog_tag_id', $tag);
+            })->paginate($pagination);
+
+        }
+        else if(isset($request->temporada))
+        {
+            $season = $request->temporada;
+            $articles = CatalogArticle::whereHas('seasons', function ($query) use($season){
+                $query->where('catalog_season_id', $season);
+            })->paginate($pagination);
         }
         else 
         {
@@ -154,6 +167,24 @@ class StoreController extends Controller
 
         $search = true;
 
+        return view('store.index')
+            ->with('search', $search)
+            ->with('articles', $articles);
+    }
+
+    public function searchSeason($name)
+	{
+        // Set and Get pagination cookie
+        $pagination = $this->getSetPaginationCookie(null);
+
+        $season = CatalogSeason::searchName($name)->first();
+		$articles = $season->articles()->paginate($pagination);
+        $articles->each(function($articles){
+            $articles->category;
+            $articles->images;
+        });  
+
+        $search = true;
         return view('store.index')
             ->with('search', $search)
             ->with('articles', $articles);

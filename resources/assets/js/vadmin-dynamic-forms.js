@@ -4,9 +4,7 @@
 |--------------------------------------------------------------------------
 */
 
-// Changes values of a list.
-
-// Set cart items JSON
+// Changes values from columns of a list.
 // -------------------------------------------
 window.dataSetter = function (fields) {
     let row = $('.SerializableItem');

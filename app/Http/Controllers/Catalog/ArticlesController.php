@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\CatalogCategory;
 use App\CatalogTag;
+use App\CatalogSeason;
 use App\CatalogArticle;
 use App\CatalogFav;
 use App\CatalogImage;
@@ -204,10 +205,12 @@ class ArticlesController extends Controller
         $categories = CatalogCategory::orderBy('name', 'ASC')->pluck('name', 'id');
         $atribute1  = CatalogAtribute1::orderBy('name', 'ASC')->pluck('name', 'id');
         $tags       = CatalogTag::orderBy('name', 'ASC')->pluck('name', 'id');
+        $seasons    = CatalogSeason::orderBy('name', 'ASC')->pluck('name', 'id');
         return view('vadmin.catalog.create')
             ->with('categories', $categories)
             ->with('atribute1', $atribute1)
-            ->with('tags', $tags);
+            ->with('tags', $tags)
+            ->with('seasons', $seasons);
     }
 
     public function checkSlug($slug)
@@ -226,6 +229,8 @@ class ArticlesController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
+
         $this->validate($request,[
             'name'                 => 'required|min:4|max:250',
             'code'                 => 'unique:catalog_articles,code',
@@ -251,6 +256,7 @@ class ArticlesController extends Controller
         if($request->slug) {
             $checkSlug = $this->checkSlug($request->slug);
         }
+
         $article = new CatalogArticle($request->all());
         $article->slug = $checkSlug;
         $article->user_id = \Auth::guard('user')->user()->id;
@@ -274,6 +280,8 @@ class ArticlesController extends Controller
         if($article->save()) {
             $article->atribute1()->sync($request->atribute1);
             $article->tags()->sync($request->tags);
+            $article->seasons()->sync($request->seasons);
+            
                 if($images){
                 try {    
                     $number = '0';
@@ -310,11 +318,14 @@ class ArticlesController extends Controller
         $categories = CatalogCategory::orderBy('name', 'ASC')->pluck('name', 'id');
         $atribute1  = CatalogAtribute1::orderBy('name', 'ASC')->pluck('name', 'id');
         $tags       = CatalogTag::orderBy('name', 'ASC')->pluck('name', 'id');
+        $seasons    = CatalogSeason::orderBy('name', 'ASC')->pluck('name', 'id');
+
         return view('vadmin.catalog.create-from-another')
             ->with('inheritData', $inheritData)
             ->with('categories', $categories)
             ->with('atribute1', $atribute1)
-            ->with('tags', $tags);
+            ->with('tags', $tags)
+            ->with('seasons', $seasons);
     }
 
     /*
@@ -329,6 +340,8 @@ class ArticlesController extends Controller
         $atribute1  = CatalogAtribute1::orderBy('name', 'DESC')->pluck('name', 'id');
         $article    = CatalogArticle::find($id);
         $categories = CatalogCategory::orderBy('name', 'DESC')->pluck('name', 'id');
+        $seasons    = CatalogSeason::orderBy('name', 'ASC')->pluck('name', 'id');
+
         $article->each(function($article){
                 $article->images;
         });
@@ -337,7 +350,8 @@ class ArticlesController extends Controller
             ->with('categories', $categories)
             ->with('article', $article)
             ->with('tags', $tags)
-            ->with('atribute1', $atribute1);
+            ->with('atribute1', $atribute1)
+            ->with('seasons', $seasons);;
     }
 
     public function update(Request $request, $id)
@@ -389,6 +403,7 @@ class ArticlesController extends Controller
         if($article->save()){
             $article->atribute1()->sync($request->atribute1);
             $article->tags()->sync($request->tags);
+            $article->seasons()->sync($request->seasons);
             
             if(!$article->images->isEmpty()){
                 $number = $article->images->last()->name;
@@ -430,8 +445,7 @@ class ArticlesController extends Controller
     public function updateFields(Request $request)
     {
         foreach($request->data as $item)
-        {
-            
+        {           
             $messages = '';
             $article = CatalogArticle::find($item['id']);
             try {
@@ -451,8 +465,6 @@ class ArticlesController extends Controller
             "messages" => $messages
         ]);
     }
-
-
 
     public function updateStatus(Request $request, $id)
     {

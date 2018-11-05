@@ -48,6 +48,10 @@ class CatalogArticle extends Model
     	return $this->belongsToMany('App\CatalogTag');
     }
 
+    public function seasons(){
+    	return $this->belongsToMany('App\CatalogSeason');
+    }
+
     public function featuredImageName(){
         
         $featuredImage = $this->images()->where('featured', true)->first();

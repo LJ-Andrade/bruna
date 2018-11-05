@@ -62,8 +62,8 @@ $(document).scroll(function(e){
 	var scrollAmount = $(window).scrollTop();
 	if(scrollAmount > 150){
 		$('.DeleteBtn').css({"position":"fixed", "bottom":"50px", "right":"10px", "z-index":"999"});
-		$('.EditBtn').css({"position":"fixed", "bottom":"50px", "right":"300px", "z-index":"999"});
-		$('.CreateFromAnotherBtn').css({"position":"fixed", "bottom":"50px", "right":"130px", "z-index":"999"});
+		$('.EditBtn').css({"position":"fixed", "bottom":"50px", "right":"130px", "z-index":"999"});
+		$('.CreateFromAnotherBtn').css({"position":"fixed", "bottom":"50px", "right":"235px", "z-index":"999"});
 	} else {
 		$('.DeleteBtn').css({"position":"relative", "bottom":"auto", "right":"auto", "z-index":"999"});
 		$('.EditBtn').css({"position":"relative", "bottom":"auto", "right":"auto", "z-index":"999"});

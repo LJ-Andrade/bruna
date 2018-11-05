@@ -201,31 +201,17 @@
 				<a href="{{ route('catalogo.index', ['orden' => 'ASC', 'results' => '100']) }}">100</a>
 			</div>
 			{!! $articles->appends(request()->query())->render()!!}
-			{{-- @if(isset($_GET['name']))
-				{!! $articles->appends(['name' => $_GET['name']])->render() !!}
-			@elseif(isset($_GET['category']))
-				{!! $articles->appends(['category' => $_GET['category']])->render() !!}
-			@elseif(isset($_GET['code']))
-				{!! $articles->appends(['code' => $_GET['code']])->render() !!}
-			@else
-				{!! $articles->render() !!}
-			@endif --}}
 		</div>
 		<div id="Error"></div>
 	</div>
 @endsection
 
-{{-- SCRIPT INCLUDES --}}
 @section('scripts')
 	@include('vadmin.components.bladejs')
 @endsection
 
 @section('custom_js')
 	<script>
-		// function selectText(e)
-		// {
-		// 	console.log(e);
-		// 	$(this).select();
-		// }
+		allowEnterOnForms = true;
 	</script>
 @endsection

@@ -12,7 +12,7 @@ class CatalogSeason extends Model
 
     public function articles()
     {
-        return $this->hasMany('App\CatalogSeason');
+        return $this->belongsToMany('App\CatalogArticle');
     }
 
     public function scopeSearchname($query, $name)
