@@ -191,8 +191,11 @@
 						</li>
 					</ul>
 				</li>
+
+				{{-- ===============================  --}}
 				{{-- Colors --}}
-				<li class="has-sub is-shown {{ Menu::activeMenu('cat_colors') }}">
+				
+				{{-- <li class="has-sub is-shown {{ Menu::activeMenu('cat_colors') }}">
 					<a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">
 						Colores
 					</a>
@@ -208,7 +211,10 @@
 							</a>
 						</li>
 					</ul>
-				</li>
+				</li> --}}
+
+				{{-- ===============================  --}}
+
 				{{-- Seasons --}}
 				<li class="has-sub is-shown {{ Menu::activeMenu('cat_seasons') }}">
 					<a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">
