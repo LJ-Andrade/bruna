@@ -103,7 +103,7 @@
 										<span class="custom-control-description"></span>
 									</label>
 								</td>
-							<td>ID: {{ $item->id }} | #{{ $item->code }}</td>
+							<td>#{{ $item->code }}</td>
 								{{-- NAME --}}
 								<td class="show-link max-text">
 									<a href="{{ url('vadmin/catalogo/'.$item->id) }}">{{ $item->name }}</a>
