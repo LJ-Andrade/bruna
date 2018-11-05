@@ -13,6 +13,9 @@
 			<div class="list-actions">
 				<a href="{{ route('catalogo.create') }}" class="btn btnBlue"><i class="icon-plus-round"></i>  Nuevo artículo</a>
 				<button id="SearchFiltersBtn" class="btn btnBlue"><i class="icon-ios-search-strong"></i></button>
+				{{-- Update Live Data --}}
+				<button id="UpdateList" data-route="{{ route('vadmin.update_catalog_fields') }}" class="fixed-if-scroll false btn btnGreen Hidden">
+				<i class="icon-pencil2"></i> Actualizar</button>
 				{{-- Edit --}}
 				<button class="EditBtn btn btnGreen Hidden"><i class="icon-pencil2"></i> Editar</button>
 				<input id="EditId" type="hidden">
@@ -21,10 +24,6 @@
 				<input id="ModelName" type="hidden" value="catalogo">
 				<button class="DeleteBtn btn btnRed Hidden"><i class="icon-bin2"></i> Eliminar</button>
 				<input id="RowsToDeletion" type="hidden" name="rowstodeletion[]" value="">
-				{{-- If Search --}}
-				@if(isset($_GET['code']) || isset($_GET['title']) || isset($_GET['category']) || isset($_GET['orden'])   )
-				<a href="{{ route('catalogo.index', ['redirect' => 'stock']) }}"><button type="button" class="btn btnGrey">Mostrar Todos</button></a>
-				@endif
 			</div>
 		@endslot
 		@slot('searcher')
@@ -45,6 +44,9 @@
 			<a href="{{ route('catalogo.index', ['orden' => 'DESC', 'redirect' => 'stock']) }}">Stock Alto</a>
 			<a href="{{ route('catalogo.index', ['orden' => 'ASC', 'redirect' => 'stock']) }}">Stock Bajo</a> 
 			<a href="{{ route('catalogo.index', ['orden' => 'limitados', 'redirect' => 'stock']) }}" >Stock Limitado</a>
+			@if(isset($_GET['code']) || isset($_GET['title']) || isset($_GET['category']) || isset($_GET['orden']))
+			<a href="{{ route('catalogo.index', ['redirect' => 'stock']) }}" >Todos</a>
+			@endif
 		</div>
 		<div class="row">
 			@component('vadmin.components.list')
@@ -77,7 +79,6 @@
                 </a>
             @endif
 				@endslot
-
 				@slot('title', 'Listado de artículos de la tienda')
 				@slot('tableTitles')
                     @if(!$articles->count() == '0')
@@ -90,8 +91,11 @@
 					@endslot
 					@slot('tableContent')
 						@foreach($articles as $item)
-							
-							<tr id="ItemId{{$item->id}}">
+							<tr id="ItemId{{$item->id}}" 
+								class="SerializableItem"
+								data-id="{{ $item->id }}"
+								data-controller="ArticlesController"
+								data-model="CatalogArticle">
 								<td class="mw-50">
 									<label class="CheckBoxes custom-control custom-checkbox list-checkbox">
 										<input type="checkbox" class="List-Checkbox custom-control-input row-checkbox" data-id="{{ $item->id }}">
@@ -99,14 +103,26 @@
 										<span class="custom-control-description"></span>
 									</label>
 								</td>
-								<td>#{{ $item->code }}
-								</td>
+							<td>ID: {{ $item->id }} | #{{ $item->code }}</td>
 								{{-- NAME --}}
 								<td class="show-link max-text">
 									<a href="{{ url('vadmin/catalogo/'.$item->id) }}">{{ $item->name }}</a>
 								</td>
 								{{--  STOCK --}}
-								<td class="with-notification mw-50">
+								<td class="StockField with-notification mw-50">
+									<input class="invisible-input mw-50" type="number" min="0"
+									onchange="setData();" onfocus="event.target.select();"
+									data-field="stock" value="{{ $item->stock }}">
+									@if($item->stock < $item->stockmin) <div class="cell-notification"><i class="icon-notification"></i></div> @endif
+								</td>	
+								<td class="StockMinField mw-50">
+									<input class="invisible-input mw-50" type="number" min="0"
+									onchange="setData();" onfocus="event.target.select()" 
+									data-field="stockmin" value="{{ $item->stockmin }}">
+								</td>
+								
+								{{-- Direct Update - Old --}}
+								{{-- <td class="with-notification mw-50">
 									<input class="editable-input mw-50" onfocus="event.target.select()" type="number" value="{{ $item->stock }}" min="0">
 									<div class="editable-input-data " data-id="{{ $item->id }}" 
 											data-route="update_catalog_field" data-field="stock" data-type="int" data-action="reload" data-value=""></div>
@@ -118,7 +134,7 @@
 									<div class="editable-input-data " data-id="{{ $item->id }}" 
 										data-route="update_catalog_field" data-field="stockmin" data-type="int" data-action="reload" data-value=""></div>	
 									</div>
-								</td> 
+								</td>  --}}
 						
 								<td class="w-50 pad0 centered">
 									<label class="switch">
@@ -149,15 +165,6 @@
 				<a href="{{ route('catalogo.index', ['orden' => 'ASC', 'redirect' => 'stock', 'results' => '100']) }}">100</a>
 			</div>
 			{!! $articles->appends(request()->query())->render()!!}
-			{{-- @if(isset($_GET['name']))
-            {!! $articles->appends(['name' => $_GET['name']])->render() !!}
-			@elseif(isset($_GET['category']))
-            {!! $articles->appends(['category' => $_GET['category']])->render() !!}
-			@elseif(isset($_GET['code']))
-            {!! $articles->appends(['code' => $_GET['code']])->render() !!}
-			@else
-            {!! $articles->render() !!}
-			@endif --}}
 		</div>
 		
 		<div id="Error"></div>
@@ -167,4 +174,13 @@
 {{-- SCRIPT INCLUDES --}}
 @section('scripts')
 	@include('vadmin.components.bladejs')
+	<script src="{{ asset('js/vadmin-dynamic-forms.js') }}" type="text/javascript"></script>
+	<script>
+		// Init Serializable list updater
+		function setData(){
+			dataSetter([".StockField", ".StockMinField"]);
+			$('#UpdateList').removeClass('Hidden');
+		}
+		setData();
+	</script>
 @endsection

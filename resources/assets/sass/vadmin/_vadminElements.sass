@@ -474,9 +474,6 @@ input,select
 	padding-top: 5px
 
 
-
-
-
 .custom-list
 	.row-selected
 		background-color: #fff1e8 !important
@@ -547,6 +544,13 @@ input,select
 .list-checkbox
 	padding-left: 0 !important
 	margin-bottom: 0
+
+
+.invisible-input
+	border: 0
+	padding-left: 10px
+	&:active,&:focus
+		border: 1px solid #ccc
 
 //////////////////////////////////////
 //                                  //
@@ -652,8 +656,16 @@ input,select
 	border-radius: 50%
 	margin-left: 5px
 
+.fixed-if-scroll.false
+	position: relative
+	top: auto
+	right: auto
 
-
+.fixed-if-scroll.true
+	position: fixed
+	top: 80px
+	right: 20px
+	z-index: 9998
 //////////////////////////////////////
 //                                  //
 //            CHECKBOXES            //

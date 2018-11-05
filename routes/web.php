@@ -224,8 +224,9 @@ Route::group(['prefix' => 'vadmin', 'middleware' => ['active-user', 'admin']], f
     // -- CATALOG --
     Route::resource('catalogo', 'Catalog\ArticlesController');
     Route::get('createFromAnother/{model}/{id}', 'Catalog\ArticlesController@createFromAnother');
-
     Route::post('update_catalog_field', 'Catalog\ArticlesController@updateField');
+    Route::post('update_catalog_fields', ['as' => 'vadmin.update_catalog_fields', 'uses' => 'Catalog\ArticlesController@updateFields']);
+    // Route::post('update_catalog_fields', 'Catalog\ArticlesController@updateFields');
     // Categories
     Route::resource('cat_categorias', 'Catalog\CategoriesController');
     Route::resource('cat_tags', 'Catalog\TagsController');
@@ -233,6 +234,12 @@ Route::group(['prefix' => 'vadmin', 'middleware' => ['active-user', 'admin']], f
     Route::post('deleteArticleImg/{id}', 'Portfolio\ArticlesController@deleteArticleImg');
     // Sizes
     Route::resource('cat_atribute1', 'Catalog\CatalogAtribute1Controller');
+    // Colors
+    Route::resource('cat_colors', 'Catalog\ColorController');
+    Route::post('update_cat_color_field', 'Catalog\ColorController@updateField');
+    // Seasons
+    Route::resource('cat_seasons', 'Catalog\SeasonController');
+    Route::post('update_cat_season_field', 'Catalog\SeasonController@updateField');
     // CatalogArticle Images
     Route::post('catalog_make_thumb/{id}', 'Catalog\ArticlesController@makeThumb');
     Route::get('article/{id}/images/setFeatured/{image}', 'Catalog\ImagesController@setFeatured');
@@ -275,6 +282,8 @@ Route::prefix('vadmin')->middleware('admin')->group(function () {
     Route::post('destroy_catalogo', 'Catalog\ArticlesController@destroy');
     Route::post('destroy_cat_categorias', 'Catalog\CategoriesController@destroy');
     Route::post('destroy_coupons', 'Catalog\CouponController@destroy');
+    Route::post('destroy_cat_colors', 'Catalog\ColorController@destroy');
+    Route::post('destroy_cat_seasons', 'Catalog\SeasonController@destroy');
     Route::post('destroy_cat_tags', 'Catalog\TagsController@destroy');
     Route::post('destroy_stored_contacts', 'VadminController@destroyStoredContacts');
     Route::post('destroy_cat_atribute1', 'Catalog\CatalogAtribute1Controller@destroy');

@@ -155,50 +155,129 @@
 		<li class="nav-item has-sub {{ Menu::activeMenu('catalogo') }}"><a href="#"><i class="icon-clipboard"></i>
 			<span data-i18n="nav.menu_levels.main" class="menu-title">Catálogo</span></a>
 			<ul class="menu-content" style="">
+				{{-- Article List --}}
 				<li class="@if(app('request')->input('redirect') != 'stock')
 					{{ Menu::activeMenu('catalogo') }}
 					@endif">
 					<a href="{{ route('catalogo.index') }}" class="menu-item">
 					<i class="icon-list"></i> Listado</a></li>
-				<li class="@if(app('request')->input('redirect') == 'stock') active @endif"><a href="{{ route('catalogo.index', ['redirect' => 'stock']) }}" class="menu-item">
-					<i class="fas fa-box-open"></i> Stock</a></li>
-				<li class="{{ Menu::activeMenu('catalogo.create') }}"><a href="{{ route('catalogo.create') }}" class="menu-item">
-					<i class="icon-plus-round"></i> Nuevo Artículo</a></li>
-				<li class="has-sub is-shown"><a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">Categorías</a>
+				{{-- Article Stock --}}
+				<li class="@if(app('request')->input('redirect') == 'stock') active @endif">
+					<a href="{{ route('catalogo.index', ['redirect' => 'stock']) }}" class="menu-item">
+						<i class="fas fa-box-open"></i> Stock
+					</a>
+				</li>
+				{{-- New Article --}}
+				<li class="{{ Menu::activeMenu('catalogo.create') }}">
+					<a href="{{ route('catalogo.create') }}" class="menu-item">
+						<i class="icon-plus-round"></i> Nuevo Artículo
+					</a>
+				</li>
+				{{-- Sizes --}}
+				<li class="has-sub is-shown {{ Menu::activeMenu('cat_atribute1') }}">
+					<a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">
+						Talles
+					</a>
+					<ul class="menu-content" style="">
+						<li class="is-shown {{ Menu::activeMenu('cat_atribute1') }}">
+							<a href="{{ route('cat_atribute1.index') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+							<i class="icon-list"></i> Listado
+						</a>
+						</li>
+							<li class="is-shown {{ Menu::activeMenu('cat_atribute1') }}">
+								<a href="{{ route('cat_atribute1.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+								<i class="icon-plus-round"></i> Nuevo Talle
+							</a>
+						</li>
+					</ul>
+				</li>
+				{{-- Colors --}}
+				<li class="has-sub is-shown {{ Menu::activeMenu('cat_colors') }}">
+					<a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">
+						Colores
+					</a>
+					<ul class="menu-content" style="">
+						<li class="is-shown {{ Menu::activeMenu('cat_colors') }}">
+							<a href="{{ route('cat_colors.index') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+							<i class="icon-list"></i> Listado
+						</a>
+						</li>
+							<li class="is-shown {{ Menu::activeMenu('cat_colors') }}">
+								<a href="{{ route('cat_colors.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+								<i class="icon-plus-round"></i> Nuevo Color
+							</a>
+						</li>
+					</ul>
+				</li>
+				{{-- Seasons --}}
+				<li class="has-sub is-shown {{ Menu::activeMenu('cat_seasons') }}">
+					<a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">
+						Temporadas
+					</a>
+					<ul class="menu-content" style="">
+						<li class="is-shown {{ Menu::activeMenu('cat_seasons') }}">
+							<a href="{{ route('cat_seasons.index') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+								<i class="icon-list"></i> Listado
+							</a>
+						</li>
+						<li class="is-shown {{ Menu::activeMenu('cat_seasons') }}">
+							<a href="{{ route('cat_seasons.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+								<i class="icon-plus-round"></i> Nueva Temporada
+							</a>
+						</li>
+					</ul>
+				</li>
+				{{-- Categories --}}
+				<li class="has-sub is-shown">
+					<a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">
+						Categorías
+					</a>
 					<ul class="menu-content" style="">
 						<li class="is-shown {{ Menu::activeMenu('cat_categorias') }}">
 							<a href="{{ route('cat_categorias.index') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
-								<i class="icon-list"></i> Listado</a></li>
+								<i class="icon-list"></i> Listado
+							</a>
+						</li>
 						<li class="is-shown {{ Menu::activeMenu('cat_categorias') }}">
 							<a href="{{ route('cat_categorias.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
-								<i class="icon-plus-round"></i> Nueva Categoría</a></li>
+								<i class="icon-plus-round"></i> Nueva Categoría
+							</a>
+						</li>
 					</ul>
 				</li>
-				<li class="has-sub is-shown {{ Menu::activeMenu('cat_tags') }}"><a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">
-					Etiquetas</a>
+				{{-- Tags --}}
+				<li class="has-sub is-shown {{ Menu::activeMenu('cat_tags') }}">
+					<a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">
+						Etiquetas
+					</a>
 					<ul class="menu-content" style="">
-						<li class="is-shown {{ Menu::activeMenu('cat_tags') }}"><a href="{{ route('cat_tags.index') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
-							<i class="icon-list"></i> Listado</a></li>
-						<li class="is-shown {{ Menu::activeMenu('cat_tags') }}"><a href="{{ route('cat_tags.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
-							<i class="icon-plus-round"></i> Nueva Etiqueta</a></li>
+						<li class="is-shown {{ Menu::activeMenu('cat_tags') }}">
+							<a href="{{ route('cat_tags.index') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+								<i class="icon-list"></i> Listado
+							</a>
+						</li>
+						<li class="is-shown {{ Menu::activeMenu('cat_tags') }}">
+							<a href="{{ route('cat_tags.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+								<i class="icon-plus-round"></i> Nueva Etiqueta
+							</a>
+						</li>
 					</ul>
 				</li>
-				<li class="has-sub is-shown {{ Menu::activeMenu('cat_atribute1') }}"><a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">
-					Talles</a>
+				<li class="has-sub is-shown {{ Menu::activeMenu('coupons') }}">
+					<a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">
+						Cupones
+					</a>
 					<ul class="menu-content" style="">
-						<li class="is-shown {{ Menu::activeMenu('cat_atribute1') }}"><a href="{{ route('cat_atribute1.index') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
-							<i class="icon-list"></i> Listado</a></li>
-						<li class="is-shown {{ Menu::activeMenu('cat_atribute1') }}"><a href="{{ route('cat_atribute1.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
-							<i class="icon-plus-round"></i> Nuevo Talle</a></li>
-					</ul>
-				</li>
-				<li class="has-sub is-shown {{ Menu::activeMenu('coupons') }}"><a href="#" data-i18n="nav.menu_levels.second_level_child.main" class="menu-item">
-					Cupones</a>
-					<ul class="menu-content" style="">
-						<li class="is-shown {{ Menu::activeMenu('coupons') }}"><a href="{{ route('coupons.index') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
-							<i class="icon-list"></i> Listado</a></li>
-						<li class="is-shown {{ Menu::activeMenu('coupons') }}"><a href="{{ route('coupons.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
-							<i class="icon-plus-round"></i> Nuevo Cupón</a></li>
+						<li class="is-shown {{ Menu::activeMenu('coupons') }}">
+							<a href="{{ route('coupons.index') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+								<i class="icon-list"></i> Listado
+							</a>
+						</li>
+						<li class="is-shown {{ Menu::activeMenu('coupons') }}">
+							<a href="{{ route('coupons.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+								<i class="icon-plus-round"></i> Nuevo Cupón
+							</a>
+						</li>
 					</ul>
 				</li>
 			</ul>

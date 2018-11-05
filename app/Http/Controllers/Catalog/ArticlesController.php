@@ -427,6 +427,33 @@ class ArticlesController extends Controller
         return redirect()->route('catalogo.index')->with('message', 'Se ha editado el item con éxito');
     }
 
+    public function updateFields(Request $request)
+    {
+        foreach($request->data as $item)
+        {
+            
+            $messages = '';
+            $article = CatalogArticle::find($item['id']);
+            try {
+                foreach($item['fields'] as $key => $value)
+                {
+                    $article->$key = $value;
+                }
+                $article->save();
+            }   
+            catch (\Exception $e) {
+                $messages += $e->getMessage(). " | ";
+            }  
+        }
+
+        return response()->json([
+            "response" => "success",
+            "messages" => $messages
+        ]);
+    }
+
+
+
     public function updateStatus(Request $request, $id)
     {
         $article = CatalogArticle::find($id);

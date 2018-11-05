@@ -33,7 +33,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/vadmin-ui.js', 'public/js')
     .js('resources/assets/js/vadmin-functions.js', 'public/js')
     .js('resources/assets/js/vadmin-forms.js', 'public/js')
-
+    .js('resources/assets/js/vadmin-dynamic-forms.js', 'public/js')
     .sass('resources/assets/sass/vadmin/vadmin.sass', 'public/css')
     .webpackConfig({
         plugins: [
