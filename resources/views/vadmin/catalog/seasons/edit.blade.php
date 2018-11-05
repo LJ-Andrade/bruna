@@ -8,7 +8,7 @@
 	@component('vadmin.components.header')
 		@slot('breadcrums')
 			<li class="breadcrumb-item"><a href="{{ url('vadmin')}}">Inicio</a></li>
-			<li class="breadcrumb-item"><a href="{{ route('cat_categorias.index')}}">Listado de colores</a></li>
+			<li class="breadcrumb-item"><a href="{{ route('cat_seasons.index')}}">Listado de temporadas</a></li>
 			<li class="breadcrumb-item active">Edición de color</li>
 		@endslot
 		@slot('actions')

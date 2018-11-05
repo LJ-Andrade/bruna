@@ -1,27 +1,12 @@
-
 # Errores - Fallas - Bugs - Glitches
 
 # Bruna
-Por otra parte, respecto a la decisión del menú lateral, cuando esté eso eliminaríamos el mensaje que aparece cada vez que agrego un producto al carrito porque ya me aparece de costado (adjunto foto)
 
-Vadmin:
-Actualización de precios y stock: que haya un botón por página de actualizar cambios. Demora mucho refrescar item por item, cuando quiero hacer una actualización de todos los precios o el stock de varios artículos. Hasta ahora no lo había notado porque no hice modificaciones grandes.
-
-Vadmin:
-Poder editar el nombre del artículo desde la página principal al igual que con el stock y los precios.
-
-Cuando hago click sobre un artículo para ediarlo aparece una página intermedia con toda la información. Sería más fácil entrar directamente y si quiero ver la info del artículo pero no editarlo en todo caso tener un boton para eso. O un botón que sea visualizar en la tienda o ver anuncio. No encuentro necesario ver ahí esa información.
-
+Vadmin
 
 Cuando toco actualizar ítem me lleva al principio de la página 1, debería quedar donde ternimé de actualizar, sino tengo que volver a buscar donde estaba
 
-
-Al editar una publicación: que no tome el “enter” como actualizar item, tiendo a apretarlo sin querer y se me va de la página. Que se actualice sólo tocando ese botón.
-
-
 Cuando cargo más fotos en una publicación, para cambiar la destacada, tengo que tocar actualizar cambios, volver a entrar a la publicación y recién ahí elegir cual quiero destacar. Ahorraría mucho tiempo poder elegir la destacada ni bien se cargan las nuevas fotos.
-
-
 
 # Implementar
 - Empujar mensajes a clientes con carros activos inactivos con más de 3 días.
@@ -29,11 +14,6 @@ Cuando cargo más fotos en una publicación, para cambiar la destacada, tengo qu
 - Que los productos se puedan destacar y se ordenen por fecha
 - Que desde vadmin se pueda hacer pedido nuevo y que ese pedido no tenga límite de prendas.
 - Carro de compra desde vadmin que soporte un detalle (columna) como por ejemplo nombre del cliente al que pertenece
-- No enter en forms
-- Filtro con temporada actual
-- Modulo de carga de temporadas con opcion todas
-- En vista de pedido mostrar total de prendas
-
 
 - Estadisticas
 - Poder dar orden a articulos de listado
@@ -46,7 +26,6 @@ Cuando cargo más fotos en una publicación, para cambiar la destacada, tengo qu
 - Mejorar carga de items desde vadmin
 - Al cargar productos desde vadmin .. primero cargar solo items si cantidad una vez creada la lista, agregar todas las cantidades
 
-- Vender producto similar
 - Agregar vista de listado
 
 
@@ -68,6 +47,16 @@ Y lo otro es si se puede saber cuantas personas entran por día a la página, cu
 
 ==============================================
 # Hecho
+Al editar una publicación: que no tome el “enter” como actualizar item, tiendo a apretarlo sin querer y se me va de la página. Que se actualice sólo tocando ese botón.
+- Poder editar el nombre del artículo desde la página principal al igual que con el stock y los precios.
+- Actualización de precios y stock: que haya un botón por página de actualizar cambios. Demora mucho refrescar item por item, cuando quiero hacer una actualización de todos los precios o el stock de varios artículos. Hasta ahora no lo había notado porque no hice modificaciones grandes.
+- Cuando hago click sobre un artículo para ediarlo aparece una página intermedia con toda la información. Sería más fácil entrar directamente y si quiero ver la info del artículo pero no editarlo en todo caso tener un boton para eso. O un botón que sea visualizar en la tienda o ver anuncio. No encuentro necesario ver ahí esa información.
+- No enter en forms
+- Filtro con temporada actual
+- Modulo de carga de temporadas con opcion todas
+- En vista de pedido mostrar total de prendas
+- Vender producto similar
+Por otra parte, respecto a la decisión del menú lateral, cuando esté eso eliminaríamos el mensaje que aparece cada vez que agrego un producto al carrito porque ya me aparece de costado (adjunto foto)
 - Manterner url cuando se vuelve de producto individual
 - Buscar etiquetas en filtro de texto
 - Checkout Sidebar fijo derecha
