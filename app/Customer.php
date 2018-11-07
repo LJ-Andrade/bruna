@@ -66,8 +66,6 @@ class Customer extends Authenticatable
         }
     }
 
-
-
     // Search Scopes 
     public function scopeSearchname($query, $name)
     {

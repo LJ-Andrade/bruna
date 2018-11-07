@@ -124,7 +124,4 @@
 
 @section('scripts')
 	@include('store.components.bladejs')
-	<script>
-
-	</script>
 @endsection

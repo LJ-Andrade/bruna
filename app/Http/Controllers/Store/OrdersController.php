@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Store;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Cart;
 use App\Customer;
 use App\Traits\CartTrait;
+use App\Shipping;
+use App\Payment;
+use App\User;
+use App\Cart;
+use App\CartItem;
+use App\CatalogArticle;
 use PDF;
 use Excel;
 
@@ -16,7 +21,7 @@ class OrdersController extends Controller
 
     /*
     |--------------------------------------------------------------------------
-    | CREATE
+    | INDEX
     |--------------------------------------------------------------------------
     */
 
@@ -126,7 +131,67 @@ class OrdersController extends Controller
         })->export('csv');         
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | CREATE
+    |--------------------------------------------------------------------------
+    */
+
+    public function create(Request $request)
+    {
+        $shippings = Shipping::orderBy('name', 'ASC')->pluck('name', 'id');
+        $payment_methods = Payment::orderBy('name', 'ASC')->pluck('name', 'id');
+        $sellers = User::pluck('name', 'id');
+
+        return view('vadmin.orders.create')
+            ->with('sellers', $sellers)
+            ->with('shippings', $shippings)
+            ->with('payment_methods', $payment_methods);
+    }
     
+    public function store(Request $request)
+    {   
+        // dd($request->all());
+
+        // Store Cart
+        $cart = new Cart();
+        $cart->status = 'Approved';
+        
+        //Set Payment Method
+        $cart->payment_method_id = $request->payment_method_id;
+        $payment_percent = Payment::where('id', $request->payment_method_id)->first()->percent;
+        $cart->payment_percent = $payment_percent;
+ 
+        // Set Shipping Method
+        $cart->shipping_id = $request->shipping_id;
+        $shipping_price = Shipping::where('id', $request->shipping_id)->first()->price;
+        $cart->shipping_price = $shipping_price;
+
+        $cart->customer_id = $request->customer_id;
+        
+        $cart->save();
+        $cart_id = $cart->id;
+
+        
+        foreach($request->item as $item)
+        {
+            $cartItem = new CartItem();
+            $cartItem->cart_id = $cart_id;
+            $cartItem->article_id = $item['id'];
+            $cartItem->quantity = $item['quantity'];
+            $cartItem->final_price = $item['final_price'];
+            $article = CatalogArticle::where('id', $item['id'])->first();
+
+            $cartItem->article_name = $article->name;
+            $cartItem->color = $article->color;
+
+            $cartItem->save();    
+        }
+
+        
+        return redirect()->route('orders.index', ['status' => 'All'])->with('message','Pedido cargado exitosamente');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | UPDATE

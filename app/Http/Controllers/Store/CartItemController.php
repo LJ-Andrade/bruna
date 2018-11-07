@@ -15,7 +15,6 @@ class CartItemController extends Controller
 
     public function store(Request $request)
     {   
-        
         // This come from Customer Model getCartAttribute()
         $activeCartId = auth()->guard('customer')->user()->cart->id;
 

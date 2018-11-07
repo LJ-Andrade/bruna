@@ -14,6 +14,7 @@
 		@slot('actions')
 			{{-- Actions --}}
 			<div class="list-actions">
+				<a href="{{ route('orders.create') }}" class="btn btnBlue">Cargar Pedido</a>
 				<button id="SearchFiltersBtn" class="btn btnBlue"><i class="icon-ios-search-strong"></i></button>
 				{{-- Delete --}}
 				{{--  THIS VALUE MUST BE THE NAME OF THE SECTION CONTROLLER  --}}
@@ -21,7 +22,7 @@
 				<button class="DeleteBtn btn btnRed Hidden"><i class="icon-bin2"></i> Eliminar</button>
 				<input id="RowsToDeletion" type="hidden" name="rowstodeletion[]" value="">
 				{{-- If Search --}}
-				@if(isset($_GET['id']) || isset($_GET['status']) || isset($_GET['customer']))
+				@if(isset($_GET['id']) || isset($_GET['status']) || isset($_GET['customer'] ))
 					<a href="{{ route('orders.index', ['status' => 'Process']) }}"><button type="button" class="btn btnGrey">Nuevos</button></a>
 					<a href="{{ route('orders.index', ['status' => 'All']) }}"><button type="button" class="btn btnGrey">Todos</button></a>
 				@endif
@@ -122,10 +123,10 @@
 								{{-- EXPORTS --}}
 								<td class="w-50">
 									@if($item->status != 'Active')
-									<a href="{{ url('vadmin/exportOrderCsv', [$item->id]) }}" class="icon-container green" target="_blank" data-toggle="tooltip" title="Exportar .XLS">
+									<a href="{{ url('vadmin/exportOrderCsv', [$item->id]) }}" class="icon-container green" target="_blank" data-toggle="tooltip" title="Exportar .CSV">
 										<i class="fas fa-file-excel"></i>
 									</a>
-									<a href="{{ url('vadmin/exportOrderXls', [$item->id]) }}" class="icon-container blue" target="_blank" data-toggle="tooltip" title="Exportar .CSV">
+									<a href="{{ url('vadmin/exportOrderXls', [$item->id]) }}" class="icon-container blue" target="_blank" data-toggle="tooltip" title="Exportar .XLS">
 										<i class="fas fa-file-excel"></i>
 									</a>
 									<a href="{{ url('vadmin/descargar-comprobante', [$item->id, 'download']) }}" class="icon-container red" target="_blank" data-toggle="tooltip" title="Exportar .PDF">

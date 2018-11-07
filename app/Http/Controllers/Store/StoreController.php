@@ -287,10 +287,10 @@ class StoreController extends Controller
         $cart = Cart::findOrFail($request->cart_id);  
         // Check if customer choose payment method
         if($cart->payment_method_id == null)
-        return back()->with('error', 'missing-payment');
+            return back()->with('error', 'missing-payment');
         // Check if customer choose payment method and shipping
         if($cart->shipping_id == null)
-        return back()->with('error', 'missing-shipping');
+            return back()->with('error', 'missing-shipping');
         
         // Set fixed prices on checkout confirmation
         foreach($cart->items as $item){
@@ -302,6 +302,7 @@ class StoreController extends Controller
             }   
             $order->save();    
         }
+
         $cart->status = 'Process';
         
         try {
@@ -315,7 +316,7 @@ class StoreController extends Controller
                 //$customerEmail = 'javzero1@gmail.com';
                 Mail::to($customerEmail)->send(new SendMail('Bruna Indumentaria - Compra recibida !', 'CustomerCheckout', ''));
             } catch (\Exception $e) {
-                
+                //
             }
 
         } catch (\Exception $e) {

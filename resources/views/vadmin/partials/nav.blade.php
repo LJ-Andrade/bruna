@@ -322,22 +322,34 @@
 				@if($activeOrders > 0) <span class="blue">&bull;</span> @endif
 			</a>
 			<ul class="menu-content">
-				<li class="is-shown {{ Menu::activeMenu('orders') }}"><a href="{{ route('orders.index', ['status' => 'All']) }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item"><i class="icon-list"></i> 
-				Todos
-				</a></li>
-				<li class="is-shown {{ Menu::activeMenu('orders') }}"><a href="{{ route('orders.index', ['status' => 'Process']) }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item"><i class="icon-list"></i> 
-				Nuevos
-				@if($newOrders > 0)
-					<span class="green">&bull;</span>
-				@endif
-				</a></li>
-				<li class="is-shown {{ Menu::activeMenu('active-carts') }}"><a href="{{ route('orders.index', ['status' => 'Active']) }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item"><i class="icon-list"></i> 
-				Comprando
-				@if($activeOrders > 0)
-					<span class="blue">&bull;</span>
-				@endif
+				<li class="is-shown {{ Menu::activeMenu('active-carts') }}">
+					<a href="{{ route('orders.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+						<i class="icon-list"></i> 
+						Cargar Pedido
+					</a>
 				</li>
-				</a>
+				<li class="is-shown {{ Menu::activeMenu('orders') }}">
+					<a href="{{ route('orders.index', ['status' => 'All']) }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item"><i class="icon-list"></i> 
+						Ver Todos
+					</a>
+				</li>
+				<li class="is-shown {{ Menu::activeMenu('orders') }}">
+					<a href="{{ route('orders.index', ['status' => 'Process']) }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item"><i class="icon-list"></i> 
+						Nuevos
+						@if($newOrders > 0)
+							<span class="green">&bull;</span>
+						@endif
+					</a>
+				</li>
+				<li class="is-shown {{ Menu::activeMenu('active-carts') }}">
+					<a href="{{ route('orders.index', ['status' => 'Active']) }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
+						<i class="icon-list"></i> 
+						Comprando
+						@if($activeOrders > 0)
+							<span class="blue">&bull;</span>
+						@endif
+					</a>
+				</li>
 			</ul>
 		</li>
 		<li class="has-sub is-shown {{ Menu::activeMenu('customers') }}">

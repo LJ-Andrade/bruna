@@ -256,6 +256,9 @@ Route::group(['prefix' => 'vadmin', 'middleware' => ['active-user', 'admin']], f
     Route::get('descargar-comprobante/{id}/{action}', 'Store\OrdersController@downloadInvoice');
     Route::get('super-vadmin', 'VadminController@superVadmin');
     
+    
+    Route::get('searchCatalogArticle', ['as' => 'vadmin.searchCatalogArticle', 'uses' => 'AutocompleteController@searchCatalogArticle']);
+    Route::get('searchCustomer', ['as' => 'vadmin.searchCustomer', 'uses' => 'AutocompleteController@searchCustomer']);
 });
 
 /*
