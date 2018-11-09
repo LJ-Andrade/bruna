@@ -1,5 +1,14 @@
 # Errores - Fallas - Bugs - Glitches
 
+# Augusta Moi
+
+- Variantes talles colores
+- Items tienen marcas. Filtrar por marcas. Mostrar pedidos por marca
+- Registro: mail * , contraseña * , teléfono
+- 1 solo tipo de precio. 1 solo tipo de customer
+- Compra inicial $5000
+- Se aguanta por 30 días.
+
 # Bruna
 
 Vadmin
