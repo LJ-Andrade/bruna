@@ -20,6 +20,7 @@ class StoreComposer
         $view
             ->with('activeCart', $activeCart)
             ->with('favs', $favs)
+            ->with('settings', $settings)
             ->with('google_analytics', $google_analytics);
 	}
 }

@@ -7,7 +7,7 @@
 	@if(session('error')=='low-quantity')
 		<div class="alert alert-success alert-dismissible fade show text-center margin-bottom-1x">
 			<span class="alert-close" data-dismiss="alert"></span>
-			<span>Para realizar compras mayorístas debe incluír al menos 12 prendas.</span><br>
+			<span>Para realizar compras mayorístas debe incluír al menos {{ $settings->reseller_min }} prendas.</span><br>
 			<span>{{ $activeCart['totalItems'] }} prendas incluídas</span> - 
 			<span>Resta incluír: {{ $activeCart['goalQuantity'] }} más </span> 
 		</div>
@@ -19,7 +19,7 @@
 				<h3>Carro de Compras | Checkout</h3> 
 				{{-- <p>Pedido N: #{{ $activeCart['rawdata']->id }}</p> --}}
 				@if(Auth::guard('customer')->user()->group == '3')
-				<div class="warning"><span>Compra mínima: <b>12 unidades</b></span></div>
+				<div class="warning"><span>Compra mínima: <b>{{ $settings->reseller_min }} unidades</b></span></div>
 				@endif
 				<div class="table-responsive shopping-cart">
 					{{-- CART PRODUCTS LIST --}}

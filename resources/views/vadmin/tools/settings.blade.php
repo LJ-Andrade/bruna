@@ -13,11 +13,16 @@
             <hr class="softhr">
             <div class="row">
                 <div class="container-fluid">
-                    <h2>Notificaciones del Sistema</h2>
                     {!! Form::open(['route' => 'updateSettings', 'method' => 'POST', 'class' => 'settings-form']) !!}	
                         {{ csrf_field() }}
-                        <label for="">E-mail primario</label>
-                        <input class="form-control" type="text" name="email" value="{{ $settings->email }}">
+                        <div class="form-group">
+                            <label for="">Mayorísta compra mínima</label>
+                            <input class="form-control" type="text" name="reseller_min" value="{{ $settings->reseller_min }}" placeholder="Cantidad de prendas">
+                        </div>
+                        <div class="form-group">
+                            <label for="">E-mail primario</label>
+                            <input class="form-control" type="text" name="email" value="{{ $settings->email }}">
+                        </div>
                         <input class="btnSm btnBlue" type="submit" value="Actualizar">
                     {!! Form::close() !!}
                 </div>

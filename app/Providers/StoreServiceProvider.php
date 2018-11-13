@@ -32,6 +32,7 @@ class StoreServiceProvider extends ServiceProvider
             'store.customer-order',
             'store.checkout-success',
             'store.show',
+            'store.buy-conditions',
             'store.how-to-buy',
             'store.reseller-policy',
             'store.cartdetail',

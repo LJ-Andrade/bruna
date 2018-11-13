@@ -200,8 +200,7 @@
         }).data("ui-autocomplete")._renderItem = function(ul, item) {
             if(item.empty != undefined)
             {
-                let inner_html = "<div class='label'>Sin resultados</div>";
-                return $("<li></li>").data( "item.autocomplete", item).append(inner_html).appendTo(ul);
+                return $("<li onclick='event.stopPropagation();'></li>").append("<div class='label'>Sin resultados</div>").appendTo(ul);
             }
             else
             {
@@ -223,23 +222,29 @@
                 }
                 else
                 {
-                    $.getJSON("{{ url('vadmin/searchCatalogArticle') }}", { request, customer: customerId }, response);
+                    $.getJSON("{{ url('vadmin/searchCatalogArticle') }}", {request, customer: customerId }, response);
                 }
             },
             select: function(event, ui) {
                 buildItemRow(ui.item.id, ui.item.code, ui.item.name, ui.item.stock, ui.item.price);
             }
         }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-            var inner_html = '<div class="label">#' + item.code + ' '+ item.name +'</div>';
-            
-            // Multiline
-            //var inner_html = '<div class="label">#' + item.code + ' '+ item.name +'<br><div>'+ item.name +'</div></b></div>';
-            return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append(inner_html)
-                .appendTo( ul );
+            if(item.name === 0)
+            {
+                return $("<li onclick='event.stopPropagation();'></li>").append("<div class='label'>Sin resultados</div>").appendTo(ul);
+            }
+            else
+            {
+                let inner_html = '<div class="label">#' + item.code + ' '+ item.name +'</div>';
+                // Multiline
+                //let inner_html = '<div class="label">#' + item.code + ' '+ item.name +'<br><div>'+ item.name +'</div></b></div>';
+                return $( "<li></li>" ).data( "item.autocomplete", item).append(inner_html).appendTo(ul);
+
+            }
         };
     });
+
+
     </script>
 
 @endsection

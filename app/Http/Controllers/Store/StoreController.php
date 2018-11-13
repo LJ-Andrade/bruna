@@ -20,6 +20,7 @@ use App\Cart;
 use App\CartItem;
 use App\CatalogCoupon;
 use Carbon\Carbon;
+use App\Settings;
 use Cookie;
 use PDF;
 use App\Traits\CartTrait;
@@ -33,8 +34,11 @@ class StoreController extends Controller
 
     use CartTrait;
     
+    protected $settings;
+
     public function __construct()
     {
+        $this->settings = Settings::find(1);
         // $this->middleware('auth:customer');
         //$customer = auth()->guard('customer')->user();     
     }
@@ -251,7 +255,7 @@ class StoreController extends Controller
         // Check minimun quantity - reseller
         if(auth()->guard('customer')->user()->group == '3' && $request->action == 'continue' ) {
             if($activeCart['goalQuantity'] > 0)
-            return response()->json(['response' => 'error', 'message' => 'Debe incluír al menos 12 prendas']);
+                return response()->json(['response' => 'error', 'message' => 'Debe incluír al menos '. $this->settings->reseller_min.' prendas']);
             // return redirect()->back()->with('error', 'low-quantity');
         }
  

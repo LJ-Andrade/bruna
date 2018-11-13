@@ -294,7 +294,6 @@ class VadminController extends Controller
 
     public function updateSettings(Request $request)
     {
-        
         $settings = Settings::findOrFail(1);
         $settings->fill($request->all());
         $settings->save();

@@ -53,19 +53,22 @@ class AutocompleteController extends Controller
     }
 
     public function searchCatalogArticle(Request $request)
-    {
+    {   
+        // dd($request->all());
         
-        $customer = Customer::find($request->customer);
+        $customer = Customer::find($request['customer']);
         if($customer == null)
         {
             echo json_encode("Error");
             die();
         }
-
         $customerGroup = $customer->group;
-        $articles = CatalogArticle::where('name', 'LIKE', "%{$request->term}%")->orWhere('code', 'LIKE' ,"%{$request->term}%")
-            ->limit(15)
-            ->get();
+        
+        $articles = CatalogArticle::where('name', 'LIKE', "%{$request['request']['term']}%")
+        ->orWhere('code', 'LIKE', "%{$request['request']['term']}%")
+        ->limit(15)
+        ->get();
+
         
         if(!$articles->isEmpty())
         {
@@ -105,7 +108,7 @@ class AutocompleteController extends Controller
         }
         else
         {
-            $new_row['name'] = "Sin Resultados";
+            $new_row['name'] = 0;
             $row_set[] = $new_row;
         }
 

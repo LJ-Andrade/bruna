@@ -4,9 +4,17 @@ namespace App\Traits;
 use App\Cart;
 use App\CatalogArticle;
 use App\CatalogFav;
+use App\Settings;
 
 trait CartTrait {
- 
+    
+    protected $settings;
+
+    public function __construct()
+    {
+        $this->settings = Settings::find(1);
+    }
+
     // Calc Cart Fixed Prices
     // ----------------------------------------------------------
     public function calcCartData($cart)
@@ -56,7 +64,7 @@ trait CartTrait {
         $payment_percent = 0;
         $shipping_price = 0;
         $activeCart = null;
-        $minQuantity = 12;
+        $minQuantity = $this->settings->reseller_min;
 
         if(auth()->guard('customer')->check())
         {
