@@ -173,7 +173,6 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'active-user'], function(){
     // Export Customers
     Route::get('exportCustomersListPdf/{params}/{action}', ['as' => 'vadmin.exportCustomersListPdf', 'uses' => 'CustomerController@exportPdf']);
     Route::get('exportCustomersListSheet/{params}/{format}', ['as' => 'vadmin.exportCustomersListSheet', 'uses' => 'CustomerController@exportSheet']);
-
     // Export Catalog List
     Route::get('exportCatalogListPdf/{params}/{action}', ['as' => 'vadmin.exportCatalogListPdf', 'uses' => 'Catalog\ArticlesController@exportPdf']);
     Route::get('exportCatalogListSheet/{params}/{format}', ['as' => 'vadmin.exportCatalogListSheet', 'uses' => 'Catalog\ArticlesController@exportSheet']);
@@ -255,7 +254,6 @@ Route::group(['prefix' => 'vadmin', 'middleware' => ['active-user', 'admin']], f
     Route::resource('orders', 'Store\OrdersController');
     Route::get('descargar-comprobante/{id}/{action}', 'Store\OrdersController@downloadInvoice');
     Route::get('super-vadmin', 'VadminController@superVadmin');
-    
     
     Route::get('searchCatalogArticle', ['as' => 'vadmin.searchCatalogArticle', 'uses' => 'AutocompleteController@searchCatalogArticle']);
     Route::get('searchCustomer', ['as' => 'vadmin.searchCustomer', 'uses' => 'AutocompleteController@searchCustomer']);

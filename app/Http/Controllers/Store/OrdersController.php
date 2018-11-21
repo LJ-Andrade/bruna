@@ -79,13 +79,14 @@ class OrdersController extends Controller
     // DOWNLOAD INVOICE PDF
     public function downloadInvoice($id, $action)
     {
+        $view = 'vadmin.orders.invoicePdf';
         // Return Options
         // return $pdf->dowload($filename.'.pdf');
         // return $pdf->stream($filename.'.pdf');
         $order = Cart::find($id);
         if($order != null){
             $cart = $this->calcCartData($order);
-            $pdf = PDF::loadView('store.checkout-invoice', compact('order', 'cart'))->setPaper('a4', 'portrait');
+            $pdf = PDF::loadView($view, compact('order', 'cart'))->setPaper('a4', 'portrait');
             $filename = 'Comprobante-Pedido-N-'.$order->id;
             if($action == 'stream')
             {
