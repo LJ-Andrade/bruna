@@ -64,7 +64,7 @@
                         </tr>
                         <tr>
                             <td></td><td></td>
-                            <td>Forma de pago <span class="dont-break">(% {{ $cart['paymentPercent'] }})</span></td>
+                            <td>Forma de pago <span class="dont-break" style="white-space: nowrap">(% {{ $cart['paymentPercent'] }})</span></td>
                             <td>{{ $cart['rawdata']->payment->name }}</td>
                             <td>$ {{ calcPercent($cart['subTotal'], $cart['paymentPercent']) }}</td>
                         </tr>
