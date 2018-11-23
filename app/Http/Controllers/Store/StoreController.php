@@ -100,14 +100,28 @@ class StoreController extends Controller
         } 
         else if(isset($request->filtrar))
         {
-            if($request->filtrar == 'populares')
-            {  
-                $articles = CatalogArticle::has('hasFavs')->paginate($pagination);
-            } 
-            else if($request->filtrar == 'descuentos')
-            {
-                $articles = CatalogArticle::orderBy('discount', 'DESC')->active()->paginate($pagination);
+
+            switch ($request->filtrar) {
+                case 'populares':
+                    $articles = CatalogArticle::has('hasFavs')->active()->paginate($pagination);
+                    break;
+                case 'descuentos':
+                    $articles = CatalogArticle::where('discount', '>', '0')->orderBy('discount', 'DESC')->active()->paginate($pagination);
+                    break;
+                default:
+                $articles = CatalogArticle::orderBy($orderBy, $order)->orderBy($orderBy2, $order2)->active()->paginate($pagination);
+                    break;
             }
+
+
+            // if($request->filtrar == 'populares')
+            // {  
+            //     $articles = CatalogArticle::has('hasFavs')->paginate($pagination);
+            // } 
+            // else if($request->filtrar == 'descuentos')
+            // {
+            //     $articles = CatalogArticle::orderBy('discount', 'DESC')->active()->paginate($pagination);
+            // }
         }
         else if(isset($request->categoria))
         {
@@ -119,7 +133,7 @@ class StoreController extends Controller
             $tag = $request->etiqueta;
             $articles = CatalogArticle::whereHas('tags', function ($query) use($tag){
                 $query->where('catalog_tag_id', $tag);
-            })->paginate($pagination);
+            })->active()->paginate($pagination);
 
         }
         else if(isset($request->temporada))
@@ -127,7 +141,7 @@ class StoreController extends Controller
             $season = $request->temporada;
             $articles = CatalogArticle::whereHas('seasons', function ($query) use($season){
                 $query->where('catalog_season_id', $season);
-            })->paginate($pagination);
+            })->active()->paginate($pagination);
         }
         else 
         {

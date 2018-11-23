@@ -171,7 +171,7 @@
 									data-route="update_catalog_field" data-field="reseller_discount" data-type="decimal" data-action="reload" data-value=""></div>
 									</span>
 								</td>
-								{{-- DATE --}}
+								{{-- STATUS --}}
 								<td class="w-50 pad0 centered">
 									<label class="switch">
 										<input class="UpdateStatus switch-checkbox" type="checkbox" 
