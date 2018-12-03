@@ -57,16 +57,16 @@
                                         <div class="col-md-3 form-group">
                                             <label for="">Buscar un producto</label>
                                             <div class="input-group">
-                                                <input id="SearchArticles" type="text" autocomplete="off" class="form-control" placeholder="Ingrese Nombre o Código">
+                                                <input id="SearchArticles" type="text" autocomplete="off" class="form-control" placeholder="Ingrese Nombre o Código" >
                                             </div>
                                         </div>
                                         <div class="col-md-3 form-group">
                                             {!! Form::label('shipping_id', 'Envío') !!}
-                                            {!! Form::select('shipping_id', $shippings, null, ['class' => 'form-control', 'placeholder' => 'Seleccione una opcion']) !!}
+                                            {!! Form::select('shipping_id', $shippings, null, ['class' => 'form-control', 'placeholder' => 'Seleccione una opcion', 'required' => '']) !!}
                                         </div>
                                         <div class="col-md-3 form-group">
                                             {!! Form::label('payment_method_id', 'Forma de Pago') !!}
-                                            {!! Form::select('payment_method_id', $payment_methods, null, ['class' => 'form-control', 'placeholder' => 'Seleccione una opcion']) !!}
+                                            {!! Form::select('payment_method_id', $payment_methods, null, ['class' => 'form-control', 'placeholder' => 'Seleccione una opcion', 'required' => '']) !!}
                                         </div>
                                         <div class="col-md-3 form-group">
                                             {!! Form::label('seller', 'Vendedor') !!}

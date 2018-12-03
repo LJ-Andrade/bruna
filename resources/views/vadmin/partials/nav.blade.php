@@ -156,7 +156,7 @@
 			<span data-i18n="nav.menu_levels.main" class="menu-title">Catálogo</span></a>
 			<ul class="menu-content" style="">
 				{{-- Article List --}}
-				<li class="@if(app('request')->input('redirect') != 'stock')
+				<li class="@if(app('request')->input('redirect') != 'stock' && app('request')->input('redirect') != 'inactive'))  
 					{{ Menu::activeMenu('catalogo') }}
 					@endif">
 					<a href="{{ route('catalogo.index') }}" class="menu-item">
@@ -167,6 +167,12 @@
 						<i class="fas fa-box-open"></i> Stock
 					</a>
 				</li>
+				{{-- Article List --}}
+				<li class="@if(app('request')->input('redirect') == 'inactive')
+					{{ Menu::activeMenu('catalogo') }}
+					@endif">
+					<a href="{{ route('catalogo.index', ['redirect' => 'inactive'])  }}" class="menu-item">
+				<i class="icon-list"></i> Inactivos</a></li>
 				{{-- New Article --}}
 				<li class="{{ Menu::activeMenu('catalogo.create') }}">
 					<a href="{{ route('catalogo.create') }}" class="menu-item">

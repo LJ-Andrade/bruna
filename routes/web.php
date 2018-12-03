@@ -179,6 +179,7 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'active-user'], function(){
     // Export Orders
     Route::get('exportOrderCsv/{params}', ['as' => 'vadmin.exportOrderCsv', 'uses' => 'Store\OrdersController@exportOrderCsv']);
     Route::get('exportOrderXls/{params}', ['as' => 'vadmin.exportOrderXls', 'uses' => 'Store\OrdersController@exportOrderXls']);
+    Route::get('descargar-comprobante/{id}/{action}', 'Store\StoreController@downloadInvoice');
     
     Route::get('mailChecker', ['as' => 'vadmin.mailChecker', 'uses' => 'ToolsController@mailChecker']);
     // Autocomplete

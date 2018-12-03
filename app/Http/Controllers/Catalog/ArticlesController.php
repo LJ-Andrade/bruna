@@ -70,6 +70,10 @@ class ArticlesController extends Controller
             $articles = CatalogArticle::whereRaw('catalog_articles.stock < catalog_articles.stockmin')->paginate($pagination);
             // dd($articles);
         }
+        elseif($order == 'descuento')
+        {
+            $articles = CatalogArticle::where('discount', '>', 0)->orWhere('reseller_discount', '>', '0')->orderBy($rowName, $order)->paginate($pagination);
+        }
         else 
         {
             // ---------- Queries ------------    
@@ -87,7 +91,14 @@ class ArticlesController extends Controller
             }
             else 
             {
-                $articles = CatalogArticle::orderBy($rowName, $order)->paginate($pagination);
+                if($request->redirect == 'inactive')
+                {
+                    $articles = CatalogArticle::orderBy($rowName, $order)->inactive()->paginate($pagination);
+                }
+                else
+                {
+                    $articles = CatalogArticle::orderBy($rowName, $order)->active()->paginate($pagination);
+                }
             }
             
         }

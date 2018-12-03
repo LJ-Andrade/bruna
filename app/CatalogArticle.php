@@ -69,6 +69,10 @@ class CatalogArticle extends Model
         return $query->where('status', '1')->where('stock', '>', '0');
     }
 
+    public function scopeInactive($query){
+        return $query->where('status', '0')->where('stock', '>', '0');
+    }
+    
     public function scopeSearch($query, $term, $categories, $tags)
     {  
         return $query

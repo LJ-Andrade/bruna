@@ -48,6 +48,7 @@
 			<a href="{{ route('catalogo.index', ['orden' => 'ASC']) }}">Stock Bajo</a> 
 			<a href="{{ route('catalogo.index', ['orden' => 'DESC']) }}">Stock Alto</a>
 			<a href="{{ route('catalogo.index', ['orden' => 'limitados']) }}" >Stock Limitado</a>
+			<a href="{{ route('catalogo.index', ['orden' => 'descuento']) }}" >Con descuento</a>
 		</div>
 		<div class="row">
 			@component('vadmin.components.list')

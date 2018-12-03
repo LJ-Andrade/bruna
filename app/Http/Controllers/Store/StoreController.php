@@ -112,8 +112,6 @@ class StoreController extends Controller
                 $articles = CatalogArticle::orderBy($orderBy, $order)->orderBy($orderBy2, $order2)->active()->paginate($pagination);
                     break;
             }
-
-
             // if($request->filtrar == 'populares')
             // {  
             //     $articles = CatalogArticle::has('hasFavs')->paginate($pagination);
@@ -134,7 +132,6 @@ class StoreController extends Controller
             $articles = CatalogArticle::whereHas('tags', function ($query) use($tag){
                 $query->where('catalog_tag_id', $tag);
             })->active()->paginate($pagination);
-
         }
         else if(isset($request->temporada))
         {
