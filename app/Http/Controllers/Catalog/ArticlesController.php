@@ -467,6 +467,7 @@ class ArticlesController extends Controller
                 $article->save();
             }   
             catch (\Exception $e) {
+                dd($e);
                 $messages += $e->getMessage(). " | ";
             }  
         }

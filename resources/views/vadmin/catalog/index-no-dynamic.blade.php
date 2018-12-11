@@ -13,9 +13,6 @@
 			<div class="list-actions">
 				<a href="{{ route('catalogo.create') }}" class="btn btnBlue"><i class="icon-plus-round"></i>  Nuevo artículo</a>
 				<button id="SearchFiltersBtn" class="btn btnBlue"><i class="icon-ios-search-strong"></i></button>
-				{{-- Update Live Data --}}
-				<button id="UpdateList" data-route="{{ route('vadmin.update_catalog_fields') }}" class="fixed-if-scroll false btn btnGreen Hidden">
-				<i class="icon-pencil2"></i> Actualizar</button>
 				{{-- Edit --}}
 				<button class="EditBtn btn btnGreen Hidden"><i class="icon-pencil2"></i> Editar</button>
 				<input id="EditId" type="hidden">
@@ -102,11 +99,8 @@
 					@endslot
 					@slot('tableContent')
 						@foreach($articles as $item)
-							<tr id="ItemId{{$item->id}}"
-								class="SerializableItem"
-								data-id="{{ $item->id }}"
-								data-controller="ArticlesController"
-								data-model="CatalogArticle">
+							
+							<tr id="ItemId{{$item->id}}">
 								<td class="mw-50">
 									<label class="CheckBoxes custom-control custom-checkbox list-checkbox">
 										<input type="checkbox" class="List-Checkbox custom-control-input row-checkbox" data-id="{{ $item->id }}">
@@ -125,50 +119,58 @@
 								<td class="mw-100"><a href="{{ url('vadmin/catalogo/'.$item->id.'/edit') }}"> #{{ $item->code }} </a>
 								</td>
 								{{-- NAME --}}
-								<td class="NameField">
-									<input class="invisible-input" type="text"
-									onchange="setData();" onfocus="event.target.select();"
-									data-field="name" value="{{ $item->name }}">
+								<td>
+									<input class="editable-input" onfocus="event.target.select()" type="text" value="{{ $item->name }}" min="0">
+									<div class="editable-input-data" data-id="{{ $item->id }}" 
+										data-route="update_catalog_field" data-field="name" data-type="string" data-action="reload" data-value="">
+									</div>
 								</td>
+								{{-- <td class="show-link max-text">
+									<a href="{{ url('vadmin/catalogo/'.$item->id) }}">{{ $item->name }}</a>
+								</td> --}}
 								{{--  STOCK --}}
-								<td class="StockField">
-									<input class="invisible-input mw-50" type="number" min="0"
-									onchange="setData();" onfocus="event.target.select();"
-									data-field="stock" value="{{ $item->stock }}">
-								</td>
-								{{--  STOCK --}}
-								<td class="StockMinField">
-									<input class="invisible-input mw-50" type="number" min="0"
-									onchange="setData();" onfocus="event.target.select();"
-									data-field="stockmin" value="{{ $item->stockmin }}">
-								</td>
+								<td class="with-notification mw-50">
+									<input class="editable-input mw-50" onfocus="event.target.select()" type="number" value="{{ $item->stock }}" min="0">
+									<div class="editable-input-data " data-id="{{ $item->id }}" 
+											data-route="update_catalog_field" data-field="stock" data-type="int" data-action="reload" data-value=""></div>
+											@if($item->stock < $item->stockmin) <div class="cell-notification"><i class="icon-notification"></i></div> @endif
+									</div>
+								</td>	
+								<td class="mw-50">
+									<input class="editable-input mw-50" onfocus="event.target.select()" type="number" value="{{ $item->stockmin }}" min="0">
+									<div class="editable-input-data " data-id="{{ $item->id }}" 
+										data-route="update_catalog_field" data-field="stockmin" data-type="int" data-action="reload" data-value=""></div>	
+									</div>
+								</td> 
 								{{-- PRICE --}}
-								<td class="PriceField money-sign">
-									{{-- <span class="money"> --}}
-										<input class="invisible-input mw-80" type="number" min="0"
-										onchange="setData();" onfocus="event.target.select();"
-										data-field="price" value="{{ $item->price + 0}}">
-									{{-- </span> --}}
+								<td>
+									<span class="money"><input class="editable-input mw-80" onfocus="event.target.select()" type="number" value="{{ $item->price }}" min="0">
+									<div class="editable-input-data" data-id="{{ $item->id }}" 
+									data-route="update_catalog_field" data-field="price" data-type="decimal" data-action="reload" data-value=""></div>
+									</span>
 								</td>
 								{{-- DISCOUNT --}}
-								<td class="DiscountField percent-sign">
-									{{-- <span class="percent"> --}}
-										<input class="invisible-input mw-50" type="number" min="0"
-										onchange="setData();" onfocus="event.target.select();"
-										data-field="discount" value="{{ $item->discount }}">
-									{{-- </span> --}}
+								<td>
+									<span class="percent"><input class="editable-input mw-50" onfocus="event.target.select()" type="number" value="{{ $item->discount }}" min="0">
+									@if($item->discount >= '0')<span> ($ {{ calcValuePercentNeg($item->price, $item->discount) }})</span>@endif
+									<div class="editable-input-data" data-id="{{ $item->id }}" 
+									data-route="update_catalog_field" data-field="discount" data-type="decimal" data-action="reload" data-value=""></div>
+									</span>
 								</td>
 								{{-- RESELLER PRICE --}}
-								<td class="ResellerPriceField money-sign">
-									<input class="invisible-input mw-80" type="number" min="0"
-									onchange="setData();" onfocus="event.target.select();"
-									data-field="reseller_price" value="{{ $item->reseller_price + 0 }}">
+								<td>
+									<span class="money"><input class="editable-input mw-80" type="number" value="{{ $item->reseller_price }}" min="0">
+									<div class="editable-input-data" data-id="{{ $item->id }}" 
+									data-route="update_catalog_field" data-field="reseller_price" data-type="decimal" data-action="reload" data-value=""></div>
+									</span>
 								</td>
 								{{-- RESELLER DISCOUNT --}}
-								<td class="ResellerDiscountField percent-sign">
-									<input class="invisible-input mw-50" type="number" min="0"
-									onchange="setData();" onfocus="event.target.select();"
-									data-field="reseller_discount" value="{{ $item->reseller_discount }}">
+								<td>
+									<span class="percent"><input class="editable-input mw-50" type="number" value="{{ $item->reseller_discount }}" min="0">
+									@if($item->reseller_discount >= '0')<span> ($ {{ calcValuePercentNeg($item->reseller_price, $item->reseller_discount) }})</span>@endif
+									<div class="editable-input-data" data-id="{{ $item->id }}" 
+									data-route="update_catalog_field" data-field="reseller_discount" data-type="decimal" data-action="reload" data-value=""></div>
+									</span>
 								</td>
 								{{-- STATUS --}}
 								<td class="w-50 pad0 centered">
@@ -201,24 +203,16 @@
 			</div>
 			{!! $articles->appends(request()->query())->render()!!}
 		</div>
+		<div id="Error"></div>
 	</div>
-	<div id="Error"></div>
 @endsection
 
 @section('scripts')
 	@include('vadmin.components.bladejs')
-	<script src="{{ asset('js/vadmin-dynamic-forms.js') }}" type="text/javascript"></script>
 @endsection
 
 @section('custom_js')
 	<script>
 		allowEnterOnForms = true;
-		function setData()
-		{
-			dataSetter(['.NameField', '.StockField', '.StockMinField', '.PriceField', '.DiscountField', '.ResellerPriceField', '.ResellerDiscountField']);
-			$(this).parent().css('background','red');
-			$('#UpdateList').removeClass('Hidden');
-		}
-		setData();
 	</script>
 @endsection

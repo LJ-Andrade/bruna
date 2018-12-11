@@ -28,7 +28,13 @@ window.dataSetter = function (fields) {
         // Push row with cols data to array
         items.push(item);
     });
-    console.info(items);
+    // First row
+
+    // Debug Table Log
+    // All rows
+    //for(let i = 0; i < items.length; i++ ){
+    //    console.table(items[i]['fields']);
+    //}
 }
 
 $(document).ready(function() {
@@ -58,8 +64,8 @@ function updateList(items, route)
             alert_ok('OK!','Items actualizados');
         },
         error: function (data) {
-            // $('#Error').html(data.responseText);
-            alert_error("", "Ha ingresado un dato incorrecto. Solo puede ingresar números enteros positivos.");
+            $('#Error').html(data.responseText);
+            // alert_error("", "Ha ingresado un dato incorrecto. Solo puede ingresar números enteros positivos.");
             console.log("Error en updateList()");
             console.log(data);
         }

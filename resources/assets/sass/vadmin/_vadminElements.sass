@@ -541,6 +541,12 @@ input,select
 		color: $blue
 		font-weight: 600
 
+.money-sign::before
+	content: "$"
+.percent-sign::before
+	content: "%"
+
+
 .list-checkbox
 	padding-left: 0 !important
 	margin-bottom: 0
@@ -549,6 +555,7 @@ input,select
 .invisible-input
 	border: 0
 	padding-left: 10px
+	background: transparent
 	&:active,&:focus
 		border: 1px solid #ccc
 

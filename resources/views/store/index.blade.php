@@ -97,7 +97,29 @@
 									{{-- =============== Footer =============== --}}
 									<div class="footer">
 										<div class="col-price pad0">
-											@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
+											{{-- Reseller prices first --}}
+											@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '2')
+												@if($article->discount > 0)
+													<del>$ {{ $article->price + 0 }}</del>
+													<span class="price">
+														$ {{ calcValuePercentNeg($article->price, $article->discount + 0) }}
+													</span>
+												@else
+													<span class="price">$ {{ $article->price + 0 }}</span>
+												@endif
+											@else
+												@if($article->reseller_discount > 0)
+													<del>$ {{ $article->reseller_price + 0 }}</del> 
+													<span class="price">
+														$ {{ calcValuePercentNeg($article->reseller_price, $article->reseller_discount + 0) }}
+													</span>
+												@else
+													<span class="price">$ {{ $article->reseller_price + 0 }}</span>
+												@endif
+											@endif
+											
+											{{-- Estandar prices first --}}
+											{{-- @if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
 												@if($article->reseller_discount > 0)
 													<del>$ {{ $article->reseller_price + 0 }}</del> 
 													<span class="price">
@@ -115,7 +137,7 @@
 												@else
 													<span class="price">$ {{ $article->price + 0 }}</span>
 												@endif
-											@endif
+											@endif --}}
 										</div>
 										<div class="col-add pad0">
 											{{-- @if(Auth::guard('customer')->check()) --}}

@@ -5,11 +5,9 @@
 	{!! Html::style('plugins/texteditor/trumbowyg.min.css') !!}
 	{!! Html::style('plugins/jqueryFileUploader/jquery.fileuploader.css') !!}
 	{!! Html::style('plugins/jqueryFileUploader/jquery.fileuploader-thumbnailtheme.css') !!}
-	
 	{{-- {!! Html::style('plugins/jqueryfiler/themes/jquery.filer-dragdropbox-theme.css') !!} --}}
 	{!! Html::style('plugins/jqueryfiler/jquery.filer.css') !!}
 	{!! Html::style('plugins/chosen/chosen.min.css') !!}
-	{!! Html::style('plugins/colorpicker/spectrum.css') !!}
 @endsection
 
 @section('header')
