@@ -173,6 +173,12 @@
 					@endif">
 					<a href="{{ route('catalogo.index', ['redirect' => 'inactive'])  }}" class="menu-item">
 				<i class="icon-list"></i> Inactivos</a></li>
+				{{-- Discountinued --}}
+				<li class="@if(app('request')->input('redirect') == 'discountinued')
+						{{ Menu::activeMenu('catalogo') }}
+						@endif">
+						<a href="{{ route('catalogo.index', ['redirect' => 'discontinued'])  }}" class="menu-item">
+					<i class="icon-list"></i> Discontinuados</a></li>
 				{{-- New Article --}}
 				<li class="{{ Menu::activeMenu('catalogo.create') }}">
 					<a href="{{ route('catalogo.create') }}" class="menu-item">

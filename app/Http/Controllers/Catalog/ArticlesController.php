@@ -95,6 +95,10 @@ class ArticlesController extends Controller
                 {
                     $articles = CatalogArticle::orderBy($rowName, $order)->inactive()->paginate($pagination);
                 }
+                elseif($request->redirect == 'discontinued')
+                {
+                    $articles = CatalogArticle::orderBy($rowName, $order)->discontinued()->paginate($pagination);
+                }
                 else
                 {
                     $articles = CatalogArticle::orderBy($rowName, $order)->active()->paginate($pagination);
@@ -549,8 +553,8 @@ class ArticlesController extends Controller
 
     public function updateDiscount(Request $request, $id)
     {   
-        $item          = CatalogArticle::find($request->id);
-        $item->discount   = $request->value;
+        $item = CatalogArticle::find($request->id);
+        $item->discount = $request->value;
         $item->save();
 
         return response()->json([
@@ -560,7 +564,33 @@ class ArticlesController extends Controller
         ]);
     }
 
+    
+    /*
+    |--------------------------------------------------------------------------
+    | DESTROY
+    |--------------------------------------------------------------------------
+    */
 
+    public function discountinue(Request $request)
+    {   
+        $ids = json_decode('['.str_replace("'",'"',$request->id).']', true);
+        try {
+            foreach ($ids as $id) {
+                // Check existence of related favs and delete
+                $item = CatalogArticle::find($id);
+                $item->discontinued = intval($request->value);
+                $item->save();
+            }
+            return response()->json([
+                'success'   => true,
+            ]); 
+        }  catch (\Exception $e) {
+            return response()->json([
+                'success'   => false,
+                'error'    => 'Error: '.$e->getMessage()
+            ]);    
+        }
+    }
 
     /*
     |--------------------------------------------------------------------------

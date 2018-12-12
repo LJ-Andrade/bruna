@@ -111,14 +111,31 @@ window.openCheckoutDesktop = function()
 //     checkoutSidebar("close");
 // });
 
+// window.openFilters = function () {
+//     const filters = $('#SearchFilters');
+//     if (filters.css('display') == 'none') {
+//         filters.css('display', 'inherit');
+//     }
+//     else {
+//         filters.css('display', 'none');
+//     }
+// }
+
+
 window.openFilters = function () {
     const filters = $('#SearchFilters');
-    if (filters.css('display') == 'none') {
-        filters.css('display', 'inherit');
+    const trigger = $('#SearchFiltersTrigger');
+    if(filters.hasClass('active'))
+    {
+        filters.removeClass('active');
+        trigger.show();
     }
-    else {
-        filters.css('display', 'none');
+    else
+    {
+        filters.addClass('active');
+        trigger.hide();
     }
+
 }
 
 // Hide alerts

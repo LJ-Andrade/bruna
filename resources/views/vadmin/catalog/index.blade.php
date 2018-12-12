@@ -11,20 +11,25 @@
 		@slot('actions')
 			{{-- Actions --}}
 			<div class="list-actions">
-				<a href="{{ route('catalogo.create') }}" class="btn btnBlue"><i class="icon-plus-round"></i>  Nuevo artículo</a>
-				<button id="SearchFiltersBtn" class="btn btnBlue"><i class="icon-ios-search-strong"></i></button>
+				<a href="{{ route('catalogo.create') }}" class="btn btnMain"><i class="icon-plus-round"></i>  Nuevo artículo</a>
+				<button id="SearchFiltersBtn" class="btn btnMain"><i class="icon-ios-search-strong"></i></button>
 				{{-- Update Live Data --}}
-				<button id="UpdateList" data-route="{{ route('vadmin.update_catalog_fields') }}" class="fixed-if-scroll false btn btnGreen Hidden">
+				<button id="UpdateList" data-route="{{ route('vadmin.update_catalog_fields') }}" class="fixed-if-scroll false btn btnMain Hidden">
 				<i class="icon-pencil2"></i> Actualizar</button>
 				{{-- Edit --}}
-				<button class="EditBtn btn btnGreen Hidden"><i class="icon-pencil2"></i> Editar</button>
+				<button class="EditBtn btn btnMain Hidden"><i class="icon-pencil2"></i> Editar</button>
 				<input id="EditId" type="hidden">
 				{{-- Add Similar --}}
-				<button class="CreateFromAnotherBtn btn btnBlue Hidden"><i class="icon-pencil2"></i> Publicar Similar</button>
+				<button class="CreateFromAnotherBtn btn btnMain Hidden"><i class="icon-pencil2"></i> Publicar Similar</button>
 				<input id="CreateFromAnotherId" type="hidden">
 				{{-- Delete --}}
 				{{-- THIS VALUE MUST BE THE NAME OF THE SECTION CONTROLLER --}}
 				<input id="ModelName" type="hidden" value="catalogo">
+				@if(isset($_GET['redirect']) && $_GET['redirect'] == 'discontinued')
+				<button class="DiscountinueBtn btn btnGreen Hidden" data-value="0"><i class="fas fa-box-open"></i> Revivir</button>
+				@else
+				<button class="DiscountinueBtn btn btnRed Hidden" data-value="1"><i class="fas fa-archive"></i> Discontinuar</button>
+				@endif
 				<button class="DeleteBtn btn btnRed Hidden"><i class="icon-bin2"></i> Eliminar</button>
 				<input id="RowsToDeletion" type="hidden" name="rowstodeletion[]" value="">
 				{{-- If Search --}}
@@ -99,6 +104,7 @@
 						<th>Precio May.</th>
 						<th>% Oferta May.</th>
 						<th>Estado</th>
+						<th>Discont.</th>
 					@endslot
 					@slot('tableContent')
 						@foreach($articles as $item)
@@ -178,6 +184,9 @@
 										@if($item->status == '1') checked @endif>
 										<span class="slider round"></span>
 									</label>
+								</td>
+								<td>
+									{{ $item->discontinued }}
 								</td>
 							</tr>					
 						@endforeach

@@ -39,19 +39,19 @@ $(document).on("click", ".List-Checkbox", function(e){
 	}
 });
 
-
 function showButtons(trigger) {
-	
 	var countSelected = $('.List-Checkbox:checkbox:checked').length;
 	if(countSelected == 1) {
-        $('.DeleteBtn').removeClass('Hidden');
+		$('.DeleteBtn').removeClass('Hidden');
+		$('.DiscountinueBtn').removeClass('Hidden');
 		$('.EditBtn').removeClass('Hidden');
 		$('.CreateFromAnotherBtn').removeClass('Hidden');
 	} else if(countSelected >= 2) {
 		$('.EditBtn').addClass('Hidden');
 		$('.CreateFromAnotherBtn').addClass('Hidden');
     } else if(countSelected == 0) {
-        $('.DeleteBtn').addClass('Hidden');
+		$('.DeleteBtn').addClass('Hidden');
+		$('.DiscountinueBtn').addClass('Hidden');
 		$('.EditBtn').addClass('Hidden');
 		$('.CreateFromAnotherBtn').addClass('Hidden');
     }
@@ -61,10 +61,12 @@ function showButtons(trigger) {
 $(document).scroll(function(e){
 	var scrollAmount = $(window).scrollTop();
 	if(scrollAmount > 150){
+		$('.DiscountinueBtn').css({"position":"fixed", "bottom":"50px", "right":"120px", "z-index":"999"});
 		$('.DeleteBtn').css({"position":"fixed", "bottom":"50px", "right":"10px", "z-index":"999"});
-		$('.EditBtn').css({"position":"fixed", "bottom":"50px", "right":"130px", "z-index":"999"});
-		$('.CreateFromAnotherBtn').css({"position":"fixed", "bottom":"50px", "right":"235px", "z-index":"999"});
+		$('.EditBtn').css({"position":"fixed", "bottom":"50px", "right":"425px", "z-index":"999"});
+		$('.CreateFromAnotherBtn').css({"position":"fixed", "bottom":"50px", "right":"265px", "z-index":"999"});
 	} else {
+		$('.DiscountinueBtn').css({"position":"relative", "bottom":"auto", "right":"auto", "z-index":"999"});
 		$('.DeleteBtn').css({"position":"relative", "bottom":"auto", "right":"auto", "z-index":"999"});
 		$('.EditBtn').css({"position":"relative", "bottom":"auto", "right":"auto", "z-index":"999"});
 		$('.CreateFromAnotherBtn').css({"position":"relative", "bottom":"auto", "right":"auto", "z-index":"999"});
@@ -158,6 +160,54 @@ deleteAndReload = function(id, route, bigtext, smalltext) {
 			method: 'POST',             
 			dataType: 'JSON',
 			data: { id: id },
+			beforeSend: function(){
+				// $('#Main-Loader').removeClass('Hidden');
+			},
+			success: function(data){
+				$('#BatchDeleteBtn').addClass('Hidden');
+				if (data.success == true) {
+					// alert_ok('Ok!','Eliminación completa');
+					location.reload();
+				} else {
+					alert_error('Ups!','Ha ocurrido un error (Puede que este registro tenga relación con otros items en el sistema). Debe eliminar primero los mismos.');
+					console.log(data);
+					return false;
+				}
+			},
+			error: function(data)
+			{
+				location.reload();
+				// $('#Error').html(data.responseText);
+				console.log(data);	
+			}
+		});
+	});
+
+}
+
+
+
+
+
+discountinueArticle = function(id, route, value, bigtext, smalltext) {
+	swal({
+		title: bigtext,
+		text: smalltext,
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Discontinuar',
+		cancelButtonText: 'Cancelar',
+		confirmButtonClass: 'btn btnGreen',
+		cancelButtonClass: 'btn btnRed',
+		buttonsStyling: false
+	}).then(function () {
+		$.ajax({
+			url: route,
+			method: 'POST',             
+			dataType: 'JSON',
+			data: { id: id, value: value },
 			beforeSend: function(){
 				// $('#Main-Loader').removeClass('Hidden');
 			},

@@ -226,6 +226,8 @@ Route::group(['prefix' => 'vadmin', 'middleware' => ['active-user', 'admin']], f
     Route::get('createFromAnother/{model}/{id}', 'Catalog\ArticlesController@createFromAnother');
     Route::post('update_catalog_field', 'Catalog\ArticlesController@updateField');
     Route::post('update_catalog_fields', ['as' => 'vadmin.update_catalog_fields', 'uses' => 'Catalog\ArticlesController@updateFields']);
+    
+    Route::post('discountinueArticles', 'Catalog\ArticlesController@discountinue');
     // Route::post('update_catalog_fields', 'Catalog\ArticlesController@updateFields');
     // Categories
     Route::resource('cat_categorias', 'Catalog\CategoriesController');

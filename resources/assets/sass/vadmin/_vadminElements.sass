@@ -586,9 +586,9 @@ input,select
 //////////////////////////////////////
 
 .btn
-	// margin-bottom: 15px
 	@include transition(0.2s)
-	border-radius: 20px
+	border-radius: 5px
+	padding: 5px 10px
 
 .btnSquare
 	border-radius: 5px
@@ -657,13 +657,12 @@ input,select
 		color: #000
 
 .btnMain
-	background-color: $dark-main
+	
+	background-color: $main-color
 	color: #fff
-	&:hover
-		background-color: #f9f9f9
-		color: #383838
-	&:active,&:focus
-		color: #000
+	&:hover,&:active,&:focus
+		color: #fff
+		background-color: $main-color2
 
 
 .iconSquare

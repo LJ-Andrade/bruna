@@ -1,42 +1,20 @@
 @extends('store.partials.main')
 
 @section('header-image')
-	<div class="index-header">		
-	</div>
 @endsection
 
 @section('content')
 
 	<div id="main" class="main-container container-fluid padding-bottom-3x mb-1">
-		<div class="row search-filters">
-			@include('store.partials.filterbar')
-		</div>
 		<div class="row">
 			{{-- col-xs-12 col-lg-9 col-sm-8 col-md-8 --}}
 			<div id="MainContent" class="col-xs-12 col-sm-12">
-				@if(!isset($_GET['checkout-on']))
-					@if(isset($_GET['page']) && !isset($search) && count($_GET) == 1)
-					@else
-						@if(isset($search) && $search == true || count($_GET) > 0 && !isset($_GET['results']))
-							<div class="results-info">
-								@if($articles->count() == '1')
-									1 artículo encontrado <br>
-								@elseif($articles->count() == '0')
-						
-								@else
-									Mostrando resultados de la búsqueda.
-								@endif
-							</div>
-						@endif
-					@endif
-				@endif
+				<div class="index-header">	
+					<img src="{{ asset('images/web/home-banner.jpg') }}" alt="Bruna Promo Banner">
+				</div>
 				<!-- Products Grid -->
+				@include('store.partials.filterbar')	
 				<div class="row articles-container">
-					@if($articles->count() == '0')
-					<div class="no-articles">
-						<h3>No se han encontrado artículos</h3>
-					</div>
-					@endif
 					@foreach($articles as $article)
 						<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 article">
 							<div class="inner">

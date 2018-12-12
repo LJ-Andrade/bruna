@@ -4,6 +4,9 @@
 //                                  //
 //////////////////////////////////////
 
+.main-container
+	padding: 0
+
 .white-container
 	background-color: #fff
 	padding: 20px
@@ -121,6 +124,10 @@
 	width: 150px
 	max-width: 100%
 	padding: 5px 0 5px 30px
+
+.index-header
+	img
+		max-width: 100%
 
 @media (min-width: 768px)
 	.index-header
@@ -784,11 +791,7 @@
 
 
 .no-articles
-		position: absolute
-		margin-top: 200px
 		width: 100%
-		left: 0
-		top: 0
 		@include flex-center()
 
 @media (max-width: 576px)
@@ -860,7 +863,7 @@ ul.pagination
 //////////////////////////////////////
 
 .articles-container
-	padding: 0
+	padding: 15px
 	.article
 		padding: 10px
 		.inner
@@ -1389,65 +1392,66 @@ ul.pagination
 
 // ------------- Horizontal Filters --------------- //
 
-.search-filters
-	margin-bottom: 15px
-	padding-left: 10px
-	padding-right: 10px
+// .search-filters
+// 	overflow: hidden
+// 	margin-bottom: 15px
+// 	padding-left: 25px
+// 	padding-right: 25px
 	
-.horizontal-filters
-	padding: 0
-	position: relative
-	@include transition(0.2s)
-	input,select
-		margin-right: 5px
-		border: 1px solid #ccc
-		border-radius: 0
-	.filter-button
-		padding: 12px
-		background: $main-color
-		@include transition(0.2s)
-		color: #fff
-		&:hover
-			cursor: pointer
-			filter: brightness(1.2)
+// .horizontal-filters
+// 	padding: 0
+// 	position: relative
+// 	@include transition(0.2s)
+// 	input,select
+// 		margin-right: 5px
+// 		border: 1px solid #ccc
+// 		border-radius: 0
+// 	.filter-button
+// 		padding: 12px
+// 		background: $main-color
+// 		@include transition(0.2s)
+// 		color: #fff
+// 		&:hover
+// 			cursor: pointer
+// 			filter: brightness(1.2)
 
-.search-filter
-	.search-input
-		padding-right: 0
-	.trigger
-		display: none
+// .search-filter
+// 	.search-input
+// 		padding-right: 0
+// 	.trigger
+// 		display: none
 
-@media (max-width: 965px)
-	.horizontal-filters
-		form
-			width: 100%
-			margin-right: 0
-		select,input
-			width: 100%
-	.general-filters
-		display: none
-		@include transition(0.2s)
-		.item
-			margin: 0
-			margin-bottom: 5px
-	.search-filter
-		margin-top: 10px
-		width: 100%
-		padding-right: 50px
-		margin-bottom: 5px
-		// @include flex-center
-		form
-			max-width: 100%
-			width: 100%
-			margin-bottom: 0
-		.trigger
-			display: block
-			height: 100%
-			position: absolute
-			right: 0
-			top: 0
-			font-size: 1.5rem
-			@include flex-center()
+// @media (max-width: 965px)
+// 	.horizontal-filters
+// 		form
+// 			width: 100%
+// 			margin-right: 0
+// 		select,input
+// 			width: 100%
+// 	.general-filters
+// 		display: none
+// 		@include transition(0.2s)
+// 		.item
+// 			margin: 0
+// 			margin-bottom: 5px
+// 	.search-filter
+// 		margin-top: 10px
+// 		width: 100%
+// 		padding-right: 50px
+// 		margin-bottom: 5px
+// 		// @include flex-center
+// 		form
+// 			max-width: 100%
+// 			width: 100%
+// 			margin-bottom: 0
+// 		.trigger
+// 			display: block
+// 			height: 100%
+// 			position: absolute
+// 			right: 0
+// 			top: 0
+// 			font-size: 1.5rem
+// 			@include flex-center()
 
 .back-to-list-mobile
 	display: none
@@ -1455,8 +1459,6 @@ ul.pagination
 @media (max-width: 768px)
 	.back-to-list-desktop
 		display: none
-	.search-filters
-		margin-bottom: 0
 	.back-to-list-mobile
 		display: block
 

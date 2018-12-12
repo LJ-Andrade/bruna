@@ -29,6 +29,12 @@
         deleteAndReload(id, route, 'Cuidado!','Está seguro?');
     });
 
+     $(document).on('click', '.DiscountinueBtn', function(e) {
+        var id    = $('#RowsToDeletion').val();
+        var route = "{{ url('vadmin/discountinueArticles') }}";
+        var value = $(this).data('value');
+        discountinueArticle(id, route, value, 'Cuidado!','Está seguro?');
+    });
 
 
     // Editable Input

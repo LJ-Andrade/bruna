@@ -1,0 +1,96 @@
+
+// ------------- Horizontal Filters --------------- //
+
+.search-filters
+	display: flex
+	flex-wrap: nowrap
+	height: 55px
+	max-width: 100%
+	width: 100%
+	margin: 0
+	margin-bottom: 15px
+	.column
+		padding: 0
+		flex-grow: 1
+		input,select,select.form-control:not([size]):not([multiple])
+			border: 1px solid blue
+			height: 55px
+			border: 1px solid #ccc
+			border-radius: 0
+	.filter-button
+		border: 1px solid #ccc
+		text-align: center
+		padding: 10px
+		height: 55px
+		line-height: 2rem
+	.trigger-mobile-inner
+		display: none
+	.back-to-list-desktop
+		border: 0
+		a
+			border: 0
+			background-color: $main-color
+			color: #fff
+@media (max-width: 930px) and (min-width: 768px)
+	.search-filters .filter-button
+		padding: 10px 0 0 
+		line-height: 1rem
+
+
+// Triggers outsite filters to open in mobile
+.trigger-column
+	.trigger-btn
+		display: none
+
+.trigger-filter-mobile
+	padding: 15px 30px 0
+	display: none
+	flex-wrap: nowrap
+	.inner
+		width: 100%
+		.form-control
+			border: 1px solid #ccc
+			border-radius: 0
+			height: 45px
+		form
+			width: 80%
+			float: left
+			height: 45px
+		a
+			@include flex-center
+			border: 1px solid #ccc
+			height: 45px
+			width: 20%
+			&:hover
+				cursor: pointer
+
+
+@media (max-width: 768px)
+	.trigger-filter-mobile
+		display: flex
+	.search-filters
+		background-color: #f9f9f9
+		display: none
+		padding: 15px
+		height: auto
+		.trigger-column
+			display: flex
+			flex-wrap: nowrap
+			display: inline
+			.trigger-btn
+				display: block
+			select
+				width: 80%
+				float: left
+			a
+				@include flex-center
+				border: 1px solid #ccc
+				height: 45px
+				&:hover
+					cursor: pointer
+		.column
+			input,select,select.form-control:not([size]):not([multiple]),.filter-button
+				line-height: 1rem
+				height: 45px
+	.search-filters.active
+		display: block

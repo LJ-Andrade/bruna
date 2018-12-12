@@ -31,11 +31,11 @@
         <div class="row text-center">
             <div class="col-sm-12 col-md-6 col-lg-4 item">
                 <img src="{{ asset('images/gral/icons/icon-cart.png') }} " alt="Compras">
-                <p>Compra inicial de <br><b>$15000</b></p>
+                <p>Compra inicial de <br><b>$30000</b></p>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 item">
                 <img src="{{ asset('images/gral/icons/icon-truck.png') }} " alt="Compras">
-                <p>Reposiciones mensuales por <br> <b>$10000</b></p>
+                <p>Reposiciones mensuales por <br> <b>$40000</b></p>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 item">
                 <img src="{{ asset('images/gral/icons/icon-shield.png') }} " alt="Compras">
