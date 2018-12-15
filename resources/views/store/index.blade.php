@@ -22,14 +22,7 @@
 								{{-- ====================================== --}}
 								
 								{{-- Reseller Discount --}}
-								@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
-									@if($article->reseller_discount > 0)
-										<div class="overlay-ribbon top-right-ribbon">
-											<div class="triangle"></div>
-											<div class="text">	%{{ $article->reseller_discount }} <br> off !!</div>
-										</div> 
-									@endif
-								@else
+								@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '2')
 									{{-- Normal Customer Discount --}}
 									@if($article->discount > 0)
 										<div class="overlay-ribbon top-right-ribbon">
@@ -37,7 +30,32 @@
 											<div class="text">	%{{ $article->discount }} <br> off !!</div>
 										</div> 
 									@endif
+								@else
+									@if($article->reseller_discount > 0)
+										<div class="overlay-ribbon top-right-ribbon">
+											<div class="triangle"></div>
+											<div class="text">	%{{ $article->reseller_discount }} <br> off !!</div>
+										</div> 
+									@endif
 								@endif
+
+								{{-- Reseller Discount --}}
+								{{-- @if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
+									@if($article->reseller_discount > 0)
+										<div class="overlay-ribbon top-right-ribbon">
+											<div class="triangle"></div>
+											<div class="text">	%{{ $article->reseller_discount }} <br> off !!</div>
+										</div> 
+									@endif
+								@else --}}
+									{{-- Normal Customer Discount --}}
+									{{-- @if($article->discount > 0)
+										<div class="overlay-ribbon top-right-ribbon">
+											<div class="triangle"></div>
+											<div class="text">	%{{ $article->discount }} <br> off !!</div>
+										</div> 
+									@endif
+								@endif --}}
 								
 								{{-- =============== Image ================ --}}
 								{{-- ====================================== --}}
