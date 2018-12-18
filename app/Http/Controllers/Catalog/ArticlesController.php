@@ -79,7 +79,7 @@ class ArticlesController extends Controller
             // ---------- Queries ------------    
             if(isset($code))
             {
-                $articles = CatalogArticle::where('code', 'LIKE', "%".$code."%")->paginate($pagination);
+                $articles = CatalogArticle::where('id', 'LIKE', "%".$code."%")->paginate($pagination);
             }
             elseif(isset($name))
             {
@@ -248,14 +248,14 @@ class ArticlesController extends Controller
 
         $this->validate($request,[
             'name'                 => 'required|min:4|max:250',
-            'code'                 => 'unique:catalog_articles,code',
+            'id'                   => 'unique:catalog_articles,id',
             'category_id'          => 'required',
             'image'                => 'image|mimes:jpeg,png,jpg,gif',
         ],[
             'name.required'        => 'Debe ingresar un nombre',
             'name.min'             => 'El título debe tener al menos 4 caracteress',
             'name.max'             => 'El título debe tener como máximo 250 caracteress',
-            'code.unique'          => 'El código está utilizado por otro producto',
+            'id.unique'          => 'El código está utilizado por otro producto',
             'category_id.required' => 'Debe ingresar una categoría',
             'slug.required'        => 'Se requiere un slug',
             'slug.min'             => 'El slug debe tener 4 caracteres como mínimo',
@@ -375,7 +375,7 @@ class ArticlesController extends Controller
 
         $this->validate($request,[
             'name'                 => 'required|min:4|max:250',
-            'code'                 => 'unique:catalog_articles,code,'.$article->id,
+            'id'                 => 'unique:catalog_articles,id,'.$article->id,
             'category_id'          => 'required',
             'slug'                 => 'required|alpha_dash|min:4|max:255',
             'image'                => 'image|mimes:jpeg,png,jpg,gif',
@@ -384,7 +384,7 @@ class ArticlesController extends Controller
             'name.required'        => 'Debe ingresar un nombre',
             'name.min'             => 'El título debe tener al menos 4 caracteress',
             'name.max'             => 'El título debe tener como máximo 250 caracteress',
-            'code.unique'          => 'El código está utilizado por otro producto',
+            'id.unique'          => 'El código está utilizado por otro producto',
             'category_id.required' => 'Debe ingresar una categoría',
             'slug.required'        => 'Se requiere un slug',
             'slug.min'             => 'El slug debe tener 4 caracteres como mínimo',

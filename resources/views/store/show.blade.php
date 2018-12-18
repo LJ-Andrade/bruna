@@ -93,7 +93,7 @@
 					<span class="h2 d-block">$ {{ $article->price }}</span>
 				@endif
 			@endif
-			<div class="mb-3"><span class="text-medium">Código:</span> #{{ $article->code }}</div>
+			<div class="mb-3"><span class="text-medium">Código:</span> #{{ $article->id }}</div>
 			{{-- Id: {{ $article->id }} <br> --}}
 			{{-- Article Description --}}
 			<p>{{ strip_tags($article->description) }}</p>

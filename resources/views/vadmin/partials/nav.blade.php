@@ -353,6 +353,11 @@
 						@endif
 					</a>
 				</li>
+				<li class="is-shown {{ Menu::activeMenu('orders') }}">
+					<a href="{{ route('orders.index', ['status' => 'Approved']) }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item"><i class="icon-list"></i> 
+						Aprobados
+					</a>
+				</li>
 				<li class="is-shown {{ Menu::activeMenu('active-carts') }}">
 					<a href="{{ route('orders.index', ['status' => 'Active']) }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
 						<i class="icon-list"></i> 

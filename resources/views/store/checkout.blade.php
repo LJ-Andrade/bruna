@@ -45,7 +45,7 @@
 											<h4 class="product-title">
 												<a href="{{ url('tienda/articulo/'.$item->article->id) }}">{{ $item->article->name }}<small>{{ $item->article->size }}</small></a>
 											</h4>
-											<span><em>Código:</em> #{{ $item->article->code }}</span>
+											<span><em>Código:</em> #{{ $item->article->id }}</span>
 											<span><em>Talle: @foreach($item->article->atribute1 as $atribute) {{ $atribute->name }} @endforeach</em></span>
 											<span><em>Color: {{ $item->color }}</em></span>
 											<span><em>Textil: {{ $item->textile }}</em></span>

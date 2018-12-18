@@ -30,7 +30,7 @@
                     <tbody>
                         @foreach($order->items as $item)
                         <tr class="content">
-                            <td>#{{ $item->article->code }}</td>
+                            <td>#{{ $item->article->id }}</td>
                             <td>{{ $item->article->name }}</td>
                             <td>{{ $item->size }}</td>
                             <td>{{ $item->color }}</td>

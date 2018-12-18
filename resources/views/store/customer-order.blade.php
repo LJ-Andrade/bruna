@@ -31,7 +31,7 @@
                                             <img class="CheckCatalogImg" src="{{ asset($item->article->featuredImageName() ) }}" alt="{{ $item->name }}"></a>
                                             <div class="product-info">
                                                 <h4 class="product-title"><a href="{{ url('tienda/articulo/'.$item->article->id) }}">{{ $item->article->name }}</a></h4>
-                                                <span><b>Código:</b> #{{ $item->article->code }}</span>
+                                                <span><b>Código:</b> #{{ $item->article->id }}</span>
                                                 <span><b>Categoría:</b> {{ $item->article->category->name}}</span>
                                                 <span><b>Tela:</b> {{ $item->article->textile }}</span>
                                                 <span><b>Color:</b> {{ $item->article->color }}</span>

@@ -95,7 +95,7 @@
 					@if(!$articles->count() == '0')
 						<th class="w-50"></th>
 						<th></th>
-						<th>Cód.</th>
+						{{-- <th>Cód.</th> --}}
 						<th>Título</th>
 						<th>Stock</th>
 						<th>Stock Min.</th>
@@ -128,7 +128,7 @@
 										@endif
 									</a>
 								</td>
-								<td class="mw-100"><a href="{{ url('vadmin/catalogo/'.$item->id.'/edit') }}"> #{{ $item->code }} </a>
+								<td class="mw-100"><a href="{{ url('vadmin/catalogo/'.$item->id.'/edit') }}"> #{{ $item->id }} </a>
 								</td>
 								{{-- NAME --}}
 								<td class="NameField">

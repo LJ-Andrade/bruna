@@ -15,7 +15,7 @@
     <tbody>
     @foreach($items as $item)
         <tr>
-            <td class="w-50">#{{ $item->code }}</td>
+            <td class="w-50">#{{ $item->id }}</td>
             <td class="max-text">{{ $item->name }}</td>
             {{--  STOCK  --}}
             <td>

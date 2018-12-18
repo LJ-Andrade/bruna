@@ -169,7 +169,7 @@ class RegisterController extends Controller
                 $subject = 'Nuevo usuario registrado';
                 $message = 'Nuevo usuario registrado';
             }
-            Mail::to(APP_EMAIL_1)->send(new SendMail($subject, 'SimpleMail', $message));
+            // Mail::to(APP_EMAIL_1)->send(new SendMail($subject, 'SimpleMail', $message));
         } catch (\Exception $e) {
             //
         }
