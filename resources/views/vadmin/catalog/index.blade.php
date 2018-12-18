@@ -95,7 +95,7 @@
 					@if(!$articles->count() == '0')
 						<th class="w-50"></th>
 						<th></th>
-						{{-- <th>Cód.</th> --}}
+						<th>Cód.</th>
 						<th>Título</th>
 						<th>Stock</th>
 						<th>Stock Min.</th>
