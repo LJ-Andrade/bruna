@@ -70,8 +70,19 @@
 				<h2 class="text-normal">{{ $article->name }}</h2>
 			</div>
 			
-			@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '3')
-			{{-- Reseller Article Price and Discount --}}	
+			@if(Auth::guard('customer')->check() && Auth::guard('customer')->user()->group == '2')
+				{{-- Article Price and Discount --}}
+				@if($article->discount > 0)
+				DESCUENTO % {{ $article->discount }}!!
+				<span class="h2 d-block">
+					<del class="text-muted text-normal">$ {{ $article->price }}</del>
+					&nbsp; ${{ calcValuePercentNeg($article->price, $article->discount) }}
+				</span>
+				@else
+				<span class="h2 d-block">$ {{ $article->price }}</span>
+				@endif
+			@else
+				{{-- Reseller Article Price and Discount --}}	
 				@if($article->reseller_discount > 0)
 					DESCUENTO % {{ $article->reseller_discount }}!!
 					<span class="h2 d-block">
@@ -80,17 +91,6 @@
 					</span>
 				@else
 					<span class="h2 d-block">$ {{ $article->reseller_price }}</span>
-				@endif
-			@else
-			{{-- Article Price and Discount --}}
-				@if($article->discount > 0)
-					DESCUENTO % {{ $article->discount }}!!
-					<span class="h2 d-block">
-						<del class="text-muted text-normal">$ {{ $article->price }}</del>
-						&nbsp; ${{ calcValuePercentNeg($article->price, $article->discount) }}
-					</span>
-				@else
-					<span class="h2 d-block">$ {{ $article->price }}</span>
 				@endif
 			@endif
 			<div class="mb-3"><span class="text-medium">Código:</span> #{{ $article->id }}</div>

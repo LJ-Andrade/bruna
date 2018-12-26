@@ -14,16 +14,23 @@
 		@slot('actions')
 			{{-- Actions --}}
 			<div class="list-actions">
-				<a href="{{ route('orders.create') }}" class="btn btnBlue">Cargar Pedido</a>
-				<button id="SearchFiltersBtn" class="btn btnBlue"><i class="icon-ios-search-strong"></i></button>
+				<a href="{{ route('orders.create') }}" class="btn btnMain">Cargar Pedido</a>
+				<button id="SearchFiltersBtn" class="btn btnMain"><i class="icon-ios-search-strong"></i></button>
 				{{-- Delete --}}
 				{{--  THIS VALUE MUST BE THE NAME OF THE SECTION CONTROLLER  --}}
 				<input id="ModelName" type="hidden" value="carts">
 				<button class="DeleteBtn btn btnRed Hidden"><i class="icon-bin2"></i> Eliminar</button>
 				<input id="RowsToDeletion" type="hidden" name="rowstodeletion[]" value="">
 				{{-- If Search --}}
-				@if(isset($_GET['id']) || isset($_GET['status']) || isset($_GET['customer'] ))
+				@if(isset($_GET['id']) || isset($_GET['status']) || isset($_GET['customer']))
+					@if($_GET['status'] != "Process")
 					<a href="{{ route('orders.index', ['status' => 'Process']) }}"><button type="button" class="btn btnGrey">Nuevos</button></a>
+					@else
+					{{-- For NewOrders Export Debug --}}
+					<a href="{{ route('vadmin.show_new_orders', ['output' => 'inview']) }}"><button type="button" class="btn btnMain">Ver unificado</button></a>
+					<a href="{{ route('vadmin.show_new_orders', ['output' => 'csv']) }}"><button type="button" class="btn btnMain"><i class="fas fa-file-excel"></i> &nbsp; Generar CSV</button></a>
+				<a href="{{ route('vadmin.show_new_orders', ['output' => 'xls']) }}"><button type="button" class="btn btnMain"><i class="fas fa-file-excel"></i> &nbsp; Generar XLS</button></a>
+					@endif
 					<a href="{{ route('orders.index', ['status' => 'All']) }}"><button type="button" class="btn btnGrey">Todos</button></a>
 				@endif
 			</div>

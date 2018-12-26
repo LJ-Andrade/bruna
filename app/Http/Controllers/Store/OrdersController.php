@@ -76,6 +76,61 @@ class OrdersController extends Controller
     |--------------------------------------------------------------------------
     */
 
+    public function showUnifiedNewOrders($output)
+    {
+        if($output == 'inview')
+        {
+            $items = $this->unifyNewOrders();
+            return view('vadmin.orders.new-orders')->with('items', $items);
+        }
+        else
+        {
+            return $this->exportToFile($output, 'Bruna-pedidos-unificados', 'vadmin.orders.new-orders-invoice', $this->unifyNewOrders());
+        }
+    }
+
+    public function exportToFile($filetype, $filename, $view, $data)
+    {
+        Excel::create($filename, function($excel) use($data, $view){
+            $excel->sheet('Listado', function($sheet) use($data, $view) { 
+                $sheet->getDefaultStyle()->getFont()->setName('Arial');
+                $sheet->getDefaultStyle()->getFont()->setSize(12);
+                $sheet->getColumnDimension()->setAutoSize(true);
+                $sheet->loadView($view, 
+                compact('data'));
+            });
+        })->export($filetype);
+    }
+    
+    // Unify New Orders
+    public function unifyNewOrders()
+    {
+        $orders = Cart::where('status', 'Process')->get();
+        
+        $items = array();
+        
+        foreach($orders as $order)
+        {
+            foreach($order->items as $item)
+            {
+    
+                $item = array(
+                    'quantity' => $item->quantity,
+                    'article_name' => $item->article_name,
+                    'details' => $item->size.' | '.$item->textile.' | '.$item->color,
+                    'price' => $item->final_price
+                );
+                array_push($items, $item);
+            }
+        }
+        // From Helpers
+        sort_array_of_array($items, 'article_name');
+
+        return $items;
+    }
+
+
+
     // DOWNLOAD INVOICE PDF
     public function downloadInvoice($id, $action)
     {

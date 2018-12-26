@@ -257,7 +257,8 @@ Route::group(['prefix' => 'vadmin', 'middleware' => ['active-user', 'admin']], f
     Route::resource('orders', 'Store\OrdersController');
     Route::get('descargar-comprobante/{id}/{action}', 'Store\OrdersController@downloadInvoice');
     Route::get('super-vadmin', 'VadminController@superVadmin');
-    
+    Route::get('exportar_nuevas_ordenes/{output}', ['as' => 'vadmin.show_new_orders', 'uses' => 'Store\OrdersController@showUnifiedNewOrders']);
+
     Route::get('searchCatalogArticle', ['as' => 'vadmin.searchCatalogArticle', 'uses' => 'AutocompleteController@searchCatalogArticle']);
     Route::get('searchCustomer', ['as' => 'vadmin.searchCustomer', 'uses' => 'AutocompleteController@searchCustomer']);
 });
