@@ -29,7 +29,7 @@
 					{{-- For NewOrders Export Debug --}}
 					<a href="{{ route('vadmin.show_new_orders', ['output' => 'inview']) }}"><button type="button" class="btn btnMain">Ver unificado</button></a>
 					<a href="{{ route('vadmin.show_new_orders', ['output' => 'csv']) }}"><button type="button" class="btn btnMain"><i class="fas fa-file-excel"></i> &nbsp; Generar CSV</button></a>
-				<a href="{{ route('vadmin.show_new_orders', ['output' => 'xls']) }}"><button type="button" class="btn btnMain"><i class="fas fa-file-excel"></i> &nbsp; Generar XLS</button></a>
+					<a href="{{ route('vadmin.show_new_orders', ['output' => 'xls']) }}"><button type="button" class="btn btnMain"><i class="fas fa-file-excel"></i> &nbsp; Generar XLS</button></a>
 					@endif
 					<a href="{{ route('orders.index', ['status' => 'All']) }}"><button type="button" class="btn btnGrey">Todos</button></a>
 				@endif

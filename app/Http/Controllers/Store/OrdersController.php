@@ -12,6 +12,7 @@ use App\User;
 use App\Cart;
 use App\CartItem;
 use App\CatalogArticle;
+use DB;
 use PDF;
 use Excel;
 
@@ -102,31 +103,75 @@ class OrdersController extends Controller
         })->export($filetype);
     }
     
+    // // Unify New Orders
+    // public function unifyNewOrders()
+    // {
+    //     $orders = Cart::where('status', 'Process')->get();
+        
+    //     $collected = [];
+
+    //     foreach($orders as $order)
+    //     {
+    //         echo "<span style='background: black; color: #fff'> Join orders </span> <br>";            
+    //         foreach($order->items as $item)
+    //         {   
+    //             echo "Join order <br>";
+    //             // if($item->article_id == $item[$])
+    //             $newItem = ([
+    //                 'quantity' => $item['quantity'],
+    //                 'article_name' => $item['article_name'],
+    //                 'article_id' => $item['article_id'],
+    //                 //details' => $item->size.' | '.$item->textile.' | '.$item->color,
+    //                 //price' => $item->article->price,
+    //                 //reseller_price' => $item->article->reseller_price
+    //             ]);
+    //         }
+            
+    //     }   
+    //     array_push($collected, $newItem);
+        
+    //     // if(array_key_exists($item['article_id'], $newItem))
+    //     // {
+    //     //     $newItem[$item['article_id']]['quantity'] += $item['quantity'] ;
+    //     // };
+    //     // sort_array_of_array($items, 'article_name');
+    //     return $collected;
+    // }
+    
     // Unify New Orders
     public function unifyNewOrders()
     {
         $orders = Cart::where('status', 'Process')->get();
-        
-        $items = array();
-        
+
+        $collected = [];
+
         foreach($orders as $order)
         {
+            
             foreach($order->items as $item)
             {
-    
-                $item = array(
-                    'quantity' => $item->quantity,
-                    'article_name' => $item->article_name,
-                    'details' => $item->size.' | '.$item->textile.' | '.$item->color,
-                    'price' => $item->final_price
-                );
-                array_push($items, $item);
+                if(array_key_exists($item->article_id, $collected))
+                {
+                    $collected[$item->article_id]['quantity'] = $collected[$item->article_id]['quantity'] + $item->quantity;
+                }
+                else
+                {
+                    $collected[$item->article_id] = [
+                        'article_id' => $item->article_id,
+                        'article_name' => $item->article_name,
+                        'details' => $item->size.' | '.$item->textile.' | '.$item->color,
+                        'quantity' => $item->quantity,
+                        'price' => $item->final_price
+                    ];                
+                }
             }
         }
         // From Helpers
-        sort_array_of_array($items, 'article_name');
-
-        return $items;
+        sort_array_of_array($collected, 'article_name');
+        
+        // dd($collected);
+        
+        return $collected;
     }
 
 

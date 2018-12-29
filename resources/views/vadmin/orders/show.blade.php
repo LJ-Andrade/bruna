@@ -77,7 +77,7 @@
                             <span class="custom-control-description"></span>
                         </label>
                     </td> --}}
-                    <td><a href="">{{ $item->article->name }} (#{{ $item->article->code }})</a></td>
+                    <td><a href="">{{ $item->article->name }} (#{{ $item->article->id }})</a></td>
                     {{-- Sizr | Color | Textile --}}
                     <td>
                         @foreach($item->article->atribute1 as $atribute) {{ $atribute->name }} @endforeach |

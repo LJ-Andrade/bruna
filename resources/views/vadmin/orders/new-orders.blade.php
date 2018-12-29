@@ -32,6 +32,7 @@
 		<div id="TestBox" class="col-xs-12 test-box Hidden">
 		</div>
 		<div class="row">
+			{{-- {{dd($items)}} --}}
 			{{-- List --}}
 			{{-- {{			dd($items)}} --}}
 			@component('vadmin.components.list')
@@ -40,6 +41,7 @@
 					@slot('tableTitles')
 						<th>Cantidad</th>
 						<th>Artículo</th>
+						<th>Código</th>
 						<th>Detalles</th>
 						<th>Precio</th>
 					@endslot
@@ -49,6 +51,7 @@
 							<tr>
 								<td class="mw-50">{{ $item['quantity'] }}</td>
 								<td>{{ $item['article_name'] }}</td>
+								<td>{{ $item['article_id'] }}</td>
 								<td>{{ $item['details'] }}</td>
 								<td>{{ $item['price'] }}</td>
 							</tr>
