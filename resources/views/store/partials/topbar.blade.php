@@ -11,8 +11,8 @@
 	</div>
 	<div class="topbar-column">
 		<a class="">&nbsp;<b>11-6761-8867 </b></a>
-		<a class="e-mail-field" href="mailto:info@bruna.com.ar">
-			<i class="icon-mail"></i>&nbsp; info@bruna.com.ar
+		<a class="e-mail-field" href="mailto:info@brunaindumentaria.com.ar">
+			<i class="icon-mail"></i>&nbsp; info@brunaindumentaria.com.ar
 		</a>
 		@if(Auth::guard('customer')->check())
 		<button onclick="checkoutSidebar('show')" class="icon-btn-small"|><i class="fas fa-shopping-cart"></i></button>
