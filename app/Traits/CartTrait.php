@@ -184,11 +184,6 @@ trait CartTrait {
         return array("articleFavs" => $articleFavs, "favs" => $favs);
     }
 
-    public function CancelOldCarts($ids)
-    {
-        $oldCarts = Cart::where('id', $ids);
-    }
-
     public function manageOldCarts($ids, $action)
     {
         // $ids = json_decode('['.str_replace("'",'"',$ids).']', true);
@@ -220,20 +215,17 @@ trait CartTrait {
                     $response = "no action";
                 }
             }
-            echo $response;
-            // return response()->json([
-            //     'success'   => true,
-            // ]); 
+            return $response;
         }  
         catch (\Exception $e)
         {
-            echo "Error: " . $e->getMessage();
-            // return response()->json([
-            //     'success'   => false,
-            //     'error'    => 'Error: '.$e->getMessage()
-            // ]);    
+            return "Error: " . $e->getMessage();
         } 
+    }
 
+    public function notifyOldCarts($mails)
+    {
+        return "Notificando...";
     }
 
 }

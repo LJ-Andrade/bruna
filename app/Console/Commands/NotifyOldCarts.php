@@ -4,11 +4,11 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Carbon\Carbon;
-use App\Cart;
 use App\Traits\CartTrait;
+use App\Cart;
 use Log;
 
-class DeleteOldCarts extends Command
+class NotifyOldCarts extends Command
 {
     use CartTrait;
 
@@ -17,14 +17,14 @@ class DeleteOldCarts extends Command
      *
      * @var string
      */
-    protected $signature = 'delete:oldcarts';
+    protected $signature = 'notify:oldcarts';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Deleting old carts';
+    protected $description = 'Notifiying old carts';
 
     /**
      * Create a new command instance.
@@ -43,10 +43,12 @@ class DeleteOldCarts extends Command
      */
     public function handle()
     {
-        $maxTime = 72;
+
+        $maxTime = 24;
 
         $oldCarts = Cart::where('status','ACTIVE')->get();
         $time = Carbon::now()->subHour($maxTime);
+        
 
         $ids = [];
         foreach($oldCarts as $oldCart)
@@ -61,17 +63,6 @@ class DeleteOldCarts extends Command
             }
         }
 
-        // $this->manageOldCarts($ids, 'Cancel');
-
-        // $array_string = '';
-        
-        // foreach($ids as $id)
-        // {
-        //     $array_string .= $id . " | ";
-        // }
-        
-        // $string = 'Borrar carros de compra: ' . $array_string;
-
-        Log::info($this->manageOldCarts($ids, 'cancel'));
+        Log::info($this->notifyOldCarts($ids));
     }
 }
