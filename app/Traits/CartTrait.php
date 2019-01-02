@@ -186,10 +186,10 @@ trait CartTrait {
 
     public function manageOldCarts($ids, $action)
     {
-        // $ids = json_decode('['.str_replace("'",'"',$ids).']', true);
+        $response = '';
+
         try 
         {
-            $response = '';
 
             foreach ($ids as $id) {
                 $cart = Cart::find($id);
@@ -212,15 +212,15 @@ trait CartTrait {
                 }
                 else
                 {
-                    $response = "no action";
+                    $response = "No deleted or canceled cart";
                 }
             }
-            return $response;
         }  
         catch (\Exception $e)
         {
-            return "Error: " . $e->getMessage();
+            $response = "Error: " . $e->getMessage();
         } 
+        return $response;
     }
 
     public function notifyOldCarts($mails)
