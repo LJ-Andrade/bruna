@@ -57,10 +57,6 @@ class NotifyOldCarts extends Command
             {
                 array_push($ids, $oldCart->id);
             }
-            else 
-            {
-                
-            }
         }
 
         Log::info($this->notifyOldCarts($ids));

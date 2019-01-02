@@ -186,7 +186,7 @@ trait CartTrait {
 
     public function manageOldCarts($ids, $action)
     {
-        $response = '';
+        $response = 'Manage Old Carts. ';
 
         try 
         {

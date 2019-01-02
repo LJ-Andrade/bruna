@@ -55,22 +55,7 @@ class DeleteOldCarts extends Command
             {
                 array_push($ids, $oldCart->id);
             }
-            else 
-            {
-                
-            }
         }
-
-        // $this->manageOldCarts($ids, 'Cancel');
-
-        // $array_string = '';
-        
-        // foreach($ids as $id)
-        // {
-        //     $array_string .= $id . " | ";
-        // }
-        
-        // $string = 'Borrar carros de compra: ' . $array_string;
 
         Log::info($this->manageOldCarts($ids, 'cancel'));
     }
