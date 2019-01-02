@@ -32,8 +32,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         // $schedule->command('cron:test')->everyMinute();
         // ->daily();
-        $schedule->command('delete:oldcarts')->everyMinute();
-        $schedule->command('notify:oldcarts')->everyMinute();
+        $schedule->command('delete:oldcarts')->daily();
+        $schedule->command('notify:oldcarts')->daily();
     }
 
     /**
