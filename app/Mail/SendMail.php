@@ -13,7 +13,7 @@ class SendMail extends Mailable implements ShouldQueue
 
     public $subject;
     public $content;
-
+    public $data;
     /**
      * Create a new message instance.
      *

@@ -57,7 +57,7 @@ class NotifyOldCarts extends Command
                 array_push($ids, $oldCart->id);
             }
         }
-
+        
         Log::info($this->notifyOldCarts($ids));
     }
 }

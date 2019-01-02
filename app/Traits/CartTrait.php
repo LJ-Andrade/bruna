@@ -5,6 +5,8 @@ use App\CatalogArticle;
 use App\CatalogFav;
 use App\Cart;
 use App\Settings;
+use App\Mail\SendMail;
+use Mail;
 
 trait CartTrait {
     
@@ -226,13 +228,18 @@ trait CartTrait {
     public function notifyOldCarts($ids)
     {
         
-        $response = 'Notificar a ';
+        $response = '';
+        $message = "Le queremos recordar que usted tiene un carro de compras abierto en nuestra tienda. No dude en comunicarse con nosotros por cualquier duda o inconveniente.";
         try 
         {
             foreach ($ids as $id) {
                 $cart = Cart::find($id);
                 $response .= $cart->customer->id;
                 $response .= $cart->customer->email;
+                
+                Mail::to("dev@vimana.studio")->send(new SendMail('Bruna Indumentaria | Carro de compra activo', 'SimpleMail', $message));
+
+                $response = "Client: " . $cart->customer->name . " " . $cart->customer->surname . " (" . $cart->customer->id. ") notified to " . $cart->customer->email;
             }
         }
         catch (\Exception $e)
