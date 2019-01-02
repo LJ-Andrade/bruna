@@ -49,7 +49,6 @@ class NotifyOldCarts extends Command
         $oldCarts = Cart::where('status','ACTIVE')->get();
         $time = Carbon::now()->subHour($maxTime);
         
-
         $ids = [];
         foreach($oldCarts as $oldCart)
         {

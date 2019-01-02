@@ -7,23 +7,18 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendMail extends Mailable implements ShouldQueue
+class NotifyOldCartMail extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $subject;
-    public $content;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($subject, $view, $data)
+    public function __construct()
     {
-        $this->data = $data;
-        $this->subject = $subject;
-        $this->view    = $view;
+        //
     }
 
     /**
@@ -33,7 +28,6 @@ class SendMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject($this->subject)->markdown('vadmin.components.mail'.$this->view)
-            ->with(['data' => $this->data]);
+        return $this->view('view.name');
     }
 }

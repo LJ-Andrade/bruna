@@ -223,9 +223,24 @@ trait CartTrait {
         return $response;
     }
 
-    public function notifyOldCarts($mails)
+    public function notifyOldCarts($ids)
     {
-        return "Notificando...";
+        
+        $response = 'Notificar a ';
+        try 
+        {
+            foreach ($ids as $id) {
+                $cart = Cart::find($id);
+                $response .= $cart->customer->id;
+                $response .= $cart->customer->email;
+            }
+        }
+        catch (\Exception $e)
+        {
+            $response = "Error: " . $e->getMessage();
+        } 
+
+        return $response;
     }
 
 }
