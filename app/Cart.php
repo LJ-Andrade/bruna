@@ -42,4 +42,9 @@ class Cart extends Model
         $query->where('status', '=', $status);
     }
 
+    public function deleteOldCarts()
+    {
+        dd("Test");
+    }
+
 }

@@ -1,9 +1,9 @@
 <?php
  
 namespace App\Traits;
-use App\Cart;
 use App\CatalogArticle;
 use App\CatalogFav;
+use App\Cart;
 use App\Settings;
 
 trait CartTrait {
@@ -183,4 +183,57 @@ trait CartTrait {
         }   
         return array("articleFavs" => $articleFavs, "favs" => $favs);
     }
+
+    public function CancelOldCarts($ids)
+    {
+        $oldCarts = Cart::where('id', $ids);
+    }
+
+    public function manageOldCarts($ids, $action)
+    {
+        // $ids = json_decode('['.str_replace("'",'"',$ids).']', true);
+        try 
+        {
+            $response = '';
+
+            foreach ($ids as $id) {
+                $cart = Cart::find($id);
+                if($action == 'delete')
+                {
+                    $response .= "Cart n°".$id." deleted | ";
+                    foreach($cart->items as $item){
+                        $this->updateCartItemStock($item->article->id, $item->quantity);
+                    }
+                    $cart->delete();
+                }
+                else if($action == 'cancel')
+                {
+                    $response .= "Cart n°".$id." canceled | ";
+                    $cart->status = "Canceled";
+                    foreach($cart->items as $item){
+                        $this->updateCartItemStock($item->article->id, $item->quantity);
+                    }
+                    $cart->save();
+                }
+                else
+                {
+                    $response = "no action";
+                }
+            }
+            echo $response;
+            // return response()->json([
+            //     'success'   => true,
+            // ]); 
+        }  
+        catch (\Exception $e)
+        {
+            echo "Error: " . $e->getMessage();
+            // return response()->json([
+            //     'success'   => false,
+            //     'error'    => 'Error: '.$e->getMessage()
+            // ]);    
+        } 
+
+    }
+
 }
