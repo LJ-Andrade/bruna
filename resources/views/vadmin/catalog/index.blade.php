@@ -232,8 +232,5 @@
 
 		allowEnterOnForms = true;
 
-		$(window).bind('beforeunload', function(){
-			return 'Guardaste todos los cambios?';
-		});
 	</script>
 @endsection
