@@ -104,7 +104,7 @@
 						<th>Precio May.</th>
 						<th>% Oferta May.</th>
 						<th>Estado</th>
-						<th>Discont.</th>
+						{{-- <th>Discont.</th> --}}
 					@endslot
 					@slot('tableContent')
 						@foreach($articles as $item)
@@ -185,9 +185,9 @@
 										<span class="slider round"></span>
 									</label>
 								</td>
-								<td>
+								{{-- <td>
 									{{ $item->discontinued }}
-								</td>
+								</td> --}}
 							</tr>					
 						@endforeach
 						@else 
@@ -229,5 +229,11 @@
 			$('#UpdateList').removeClass('Hidden');
 		}
 		setData();
+
+		allowEnterOnForms = true;
+
+		$(window).bind('beforeunload', function(){
+			return 'Guardaste todos los cambios?';
+		});
 	</script>
 @endsection

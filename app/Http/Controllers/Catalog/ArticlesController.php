@@ -65,47 +65,52 @@ class ArticlesController extends Controller
             $order = 'DESC';
         }
 
-        if($order == 'limitados')
+        if(isset($request->redirect))
         {
-            $articles = CatalogArticle::whereRaw('catalog_articles.stock < catalog_articles.stockmin')->paginate($pagination);
-            // dd($articles);
-        }
-        elseif($order == 'descuento')
-        {
-            $articles = CatalogArticle::where('discount', '>', 0)->orWhere('reseller_discount', '>', '0')->orderBy($rowName, $order)->paginate($pagination);
-        }
-        else 
-        {
-            // ---------- Queries ------------    
-            if(isset($code))
+            if($request->redirect == 'inactive')
             {
-                $articles = CatalogArticle::where('id', 'LIKE', "%".$code."%")->paginate($pagination);
+                $articles = CatalogArticle::orderBy($rowName, $order)->inactive()->paginate($pagination);
             }
-            elseif(isset($name))
+            elseif($request->redirect == 'discontinued')
             {
-                $articles = CatalogArticle::searchName($name)->orderBy($rowName, $order)->paginate($pagination);
-            } 
-            elseif(isset($category))
+                $articles = CatalogArticle::orderBy($rowName, $order)->discontinued()->paginate($pagination);
+            }
+        }
+        else
+        {
+            if($order == 'limitados')
             {
-                $articles = CatalogArticle::where('category_id', $category)->orderBy($rowName, $order)->paginate($pagination);
+                $articles = CatalogArticle::whereRaw('catalog_articles.stock < catalog_articles.stockmin')->paginate($pagination);
+                // dd($articles);
+            }
+            elseif($order == 'descuento')
+            {
+                $articles = CatalogArticle::where('discount', '>', 0)->orWhere('reseller_discount', '>', '0')->orderBy($rowName, $order)->paginate($pagination);
             }
             else 
             {
-                if($request->redirect == 'inactive')
+                // ---------- Queries ------------    
+                if(isset($code))
                 {
-                    $articles = CatalogArticle::orderBy($rowName, $order)->inactive()->paginate($pagination);
+                    $articles = CatalogArticle::where('id', 'LIKE', "%".$code."%")->paginate($pagination);
                 }
-                elseif($request->redirect == 'discontinued')
+                elseif(isset($name))
                 {
-                    $articles = CatalogArticle::orderBy($rowName, $order)->discontinued()->paginate($pagination);
+                    $articles = CatalogArticle::searchName($name)->active()->orderBy($rowName, $order)->paginate($pagination);
+                } 
+                elseif(isset($category))
+                {
+                    $articles = CatalogArticle::where('category_id', $category)->orderBy($rowName, $order)->paginate($pagination);
                 }
-                else
+                else 
                 {
                     $articles = CatalogArticle::orderBy($rowName, $order)->active()->paginate($pagination);
                 }
+                
             }
-            
+
         }
+
         $categories = CatalogCategory::orderBy('id', 'ASC')->pluck('name','id');
         
         // ---------- Redirect -------------
