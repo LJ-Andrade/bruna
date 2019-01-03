@@ -23,7 +23,7 @@
 				<input id="RowsToDeletion" type="hidden" name="rowstodeletion[]" value="">
 				{{-- If Search --}}
 				@if(isset($_GET['id']) || isset($_GET['status']) || isset($_GET['customer']))
-					@if($_GET['status'] != "Process")
+					@if(isset($_GET['status']) && $_GET['status'] != "Process")
 					<a href="{{ route('orders.index', ['status' => 'Process']) }}"><button type="button" class="btn btnGrey">Nuevos</button></a>
 					@else
 					{{-- For NewOrders Export Debug --}}
@@ -160,5 +160,11 @@
 {{-- SCRIPT INCLUDES --}}
 @section('scripts')
 	@include('vadmin.components.bladejs')
+@endsection
+
+@section('custom_js')
+	<script>
+		allowEnterOnForms = true;
+	</script>
 @endsection
 

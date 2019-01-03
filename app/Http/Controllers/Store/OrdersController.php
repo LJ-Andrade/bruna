@@ -32,6 +32,10 @@ class OrdersController extends Controller
         {
             $items = Cart::searchId($request->id)->orderBy('id', 'ASC')->paginate(15); 
         } 
+        else if($request->customer != null)
+        {
+            $items = Cart::searchCustomer($request->customer)->get();
+        }
         else if($request->status != null)
         {
             if($request->status == 'All')

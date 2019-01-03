@@ -42,6 +42,16 @@ class Cart extends Model
         $query->where('status', '=', $status);
     }
 
+    public function scopeSearchCustomer($query, $term)
+    {
+        return $query->whereHas('customer', function($customers) use($term){
+            $customers->where('name', 'like', "%" . $term ."%")
+            ->orWhere('surname', 'like', "%" . $term ."%")
+            ->orWhere('username', 'like', "%" . $term ."%")
+            ->orWhere('email', 'like', "%" . $term ."%");
+        });
+    }
+
     public function deleteOldCarts()
     {
         dd("Test");

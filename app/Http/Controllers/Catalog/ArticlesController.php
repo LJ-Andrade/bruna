@@ -108,7 +108,6 @@ class ArticlesController extends Controller
         }
         $categories = CatalogCategory::orderBy('id', 'ASC')->pluck('name','id');
         
-
         // ---------- Redirect -------------
         if($request->redirect == 'stock')
         {
@@ -125,9 +124,12 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $article = CatalogArticle::find($id);
-        if($article == null){
+        if($article == null)
+        {
             return back();
-        } else {
+        } 
+        else 
+        {
             return view('vadmin.catalog.show')->with('article', $article);
         }
     }

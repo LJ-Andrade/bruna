@@ -39,3 +39,4 @@
     {{-- /Search --}}
     <div class="btnClose btn-close"><i class="icon-android-cancel"></i></div>		
 </div>
+
