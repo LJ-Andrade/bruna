@@ -295,16 +295,19 @@
     }
 
     function validateInt(value){
-        if(parseInt(value) == value){
+        if(parseInt(value) == value)
+        {
             return true;
-            }
-            else if(parseFloat(value) == value){
-                alert_error('Ups','Debe ingresar un número entero');
-                return false;
-            }
-            else{
-                alert_error('Ups','Debe ingresar un número');
-                return false;
+        }
+        else if(parseFloat(value) == value)
+        {
+            alert_error('Ups','Debe ingresar un número entero');
+            return false;
+        }
+        else
+        {
+            alert_error('Ups','Debe ingresar un número');
+            return false;
         } 
     }
     
