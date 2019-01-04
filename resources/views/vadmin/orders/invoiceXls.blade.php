@@ -38,7 +38,7 @@
     @endif
     <tr>
         <td></td><td></td><td></td><td></td>
-        @if($order['rawdata']->shipping_id != null)
+        @if($order['rawdata']->shipping_id != null && $order['rawdata']->shipping != null )
         <td></td>
         <td><b>Envío:</b> {{ $order['rawdata']->shipping->name }}</td>
         <td>$ {{ $order['shippingCost'] }}</td>
@@ -50,7 +50,7 @@
     </tr>
     <tr>
         <td></td><td></td><td></td><td></td>
-        @if($order['rawdata']->payment_method_id != null)
+        @if($order['rawdata']->payment_method_id != null && $order['rawdata']->payment)
         <td></td>
         <td><b>Método de pago:</b> {{ $order['rawdata']->payment->name }} (% {{ $order['paymentPercent'] }})</td>
         <td>${{ $order['paymentCost'] }}</td>
