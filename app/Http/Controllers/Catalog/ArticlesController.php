@@ -66,7 +66,7 @@ class ArticlesController extends Controller
         }
 
         if(isset($request->redirect))
-        {
+        { 
             if($request->redirect == 'inactive')
             {
                 $articles = CatalogArticle::orderBy($rowName, $order)->inactive()->paginate($pagination);
@@ -112,14 +112,23 @@ class ArticlesController extends Controller
         }
 
         $categories = CatalogCategory::orderBy('id', 'ASC')->pluck('name','id');
-        
-        // ---------- Redirect -------------
+
         if($request->redirect == 'stock')
         {
+            $articles = CatalogArticle::orderBy($rowName, $order)->active()->paginate($pagination);
             return view('vadmin.catalog.stock')
                 ->with('articles', $articles)
                 ->with('categories', $categories);
         }
+        
+        
+        // ---------- Redirect -------------
+        // if($request->redirect == 'stock')
+        // {
+        //     return view('vadmin.catalog.stock')
+        //         ->with('articles', $articles)
+        //         ->with('categories', $categories);
+        // }
 
         return view('vadmin.catalog.index')
             ->with('articles', $articles)
