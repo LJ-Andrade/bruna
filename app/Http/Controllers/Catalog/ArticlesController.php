@@ -32,12 +32,15 @@ class ArticlesController extends Controller
         $category = $request->get('category');
         $order    = $request->get('orden');
         $rowName = 'stock';
+
+        $view = "vadmin.catalog.index";
+
+
         if($request->orden_af)
         {
             $order = $request->orden_af;
             $rowName = "name";
         }
-
 
         // -------- Pagination -----------
         if($request->get('results'))
@@ -64,75 +67,65 @@ class ArticlesController extends Controller
             $rowName = 'id';
             $order = 'DESC';
         }
-
+        
         if(isset($request->redirect))
-        { 
+        {
+            if($request->redirect == 'stock')
+            {
+                $view = "vadmin.catalog.stock";
+            }
+            
             if($request->redirect == 'inactive')
             {
                 $articles = CatalogArticle::orderBy($rowName, $order)->inactive()->paginate($pagination);
+                return view($view)->with('articles', $articles)->with('categories', $categories);
             }
             elseif($request->redirect == 'discontinued')
             {
                 $articles = CatalogArticle::orderBy($rowName, $order)->discontinued()->paginate($pagination);
+                return view($view)->with('articles', $articles)->with('categories', $categories);
             }
         }
-        else
+
+
+       
+        if($order == 'limitados')
         {
-            if($order == 'limitados')
+            $articles = CatalogArticle::whereRaw('catalog_articles.stock < catalog_articles.stockmin')->activeFull()->paginate($pagination);
+            // dd($articles);
+        }
+        elseif($order == 'descuento')
+        {
+            $articles = CatalogArticle::where('discount', '>', 0)->orWhere('reseller_discount', '>', '0')->activeFull()->orderBy($rowName, $order)->paginate($pagination);
+        }
+        else 
+        {
+            // ---------- Queries ------------    
+            if(isset($code))
             {
-                $articles = CatalogArticle::whereRaw('catalog_articles.stock < catalog_articles.stockmin')->paginate($pagination);
-                // dd($articles);
+                $articles = CatalogArticle::where('id', 'LIKE', "%".$code."%")->activeFull()->paginate($pagination);
             }
-            elseif($order == 'descuento')
+            elseif(isset($name))
             {
-                $articles = CatalogArticle::where('discount', '>', 0)->orWhere('reseller_discount', '>', '0')->orderBy($rowName, $order)->paginate($pagination);
+                $articles = CatalogArticle::searchName($name)->activeFull()->orderBy($rowName, $order)->paginate($pagination);
+            } 
+            elseif(isset($category))
+            {
+                $articles = CatalogArticle::where('category_id', $category)->activeFull()->orderBy($rowName, $order)->paginate($pagination);
             }
             else 
             {
-                // ---------- Queries ------------    
-                if(isset($code))
-                {
-                    $articles = CatalogArticle::where('id', 'LIKE', "%".$code."%")->paginate($pagination);
-                }
-                elseif(isset($name))
-                {
-                    $articles = CatalogArticle::searchName($name)->active()->orderBy($rowName, $order)->paginate($pagination);
-                } 
-                elseif(isset($category))
-                {
-                    $articles = CatalogArticle::where('category_id', $category)->orderBy($rowName, $order)->paginate($pagination);
-                }
-                else 
-                {
-                    $articles = CatalogArticle::orderBy($rowName, $order)->active()->paginate($pagination);
-                }
-                
+                $articles = CatalogArticle::orderBy($rowName, $order)->activeFull()->paginate($pagination);
             }
-
+            
         }
 
-        $categories = CatalogCategory::orderBy('id', 'ASC')->pluck('name','id');
-
-        if($request->redirect == 'stock')
-        {
-            $articles = CatalogArticle::orderBy($rowName, $order)->active()->paginate($pagination);
-            return view('vadmin.catalog.stock')
-                ->with('articles', $articles)
-                ->with('categories', $categories);
-        }
+        $categories = CatalogCategory::orderBy('id', 'ASC')->pluck('name','id');       
         
-        
-        // ---------- Redirect -------------
-        // if($request->redirect == 'stock')
-        // {
-        //     return view('vadmin.catalog.stock')
-        //         ->with('articles', $articles)
-        //         ->with('categories', $categories);
-        // }
-
-        return view('vadmin.catalog.index')
+        return view($view)
             ->with('articles', $articles)
             ->with('categories', $categories);
+
     }
 
     public function show($id)

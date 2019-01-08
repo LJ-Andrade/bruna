@@ -291,14 +291,20 @@ class VadminController extends Controller
     {
         return view('vadmin.tools.settings');
     }
-
+    
     public function updateSettings(Request $request)
     {
         $settings = Settings::findOrFail(1);
         $settings->fill($request->all());
         $settings->save();
-
+        
         return redirect()->back()->with('message', 'Opciones actualizadas');
+    }
+    
+    public function tests()
+    {
+        $carts = Cart::where('status','ACTIVE')->get();
+        return view('vadmin.tools.tests')->with('carts', $carts);
     }
 
     /*

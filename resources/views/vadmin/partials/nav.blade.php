@@ -406,8 +406,14 @@
 		</a></li>
 		{{-- SETTINGS --}}
 		<li class="{{ Menu::activeMenu('configuracion') }}"><a href="{{ route('vadmin.settings') }}" class="menu-item">
-			<i class="fas fa-sliders-h"></i> Configuracion 
+			<i class="fas fa-sliders-h"></i> Configuración 
 		</a></li>
+
+		{{-- TESTS --}}
+		<li class="{{ Menu::activeMenu('tests') }}"><a href="{{ route('vadmin.tests') }}" class="menu-item">
+			<i class="fas fa-sliders-h"></i> Tests 
+		</a></li>
+
 		{{-- Public sections --}}
 		<li class="navigation-header"><span data-i18n="nav.category.support">Secciones Públicas</span>
 			<i data-toggle="tooltip" data-placement="right" data-original-title="Support" class="icon-ellipsis icon-ellipsis"></i>

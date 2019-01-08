@@ -229,7 +229,6 @@ trait CartTrait {
     {
         
         $response = '';
-        $message = "Le queremos recordar que usted tiene un carro de compras abierto en nuestra tienda. No dude en comunicarse con nosotros por cualquier duda o inconveniente.";
         try 
         {
             foreach ($ids as $id) {
@@ -237,7 +236,7 @@ trait CartTrait {
                 $response .= $cart->customer->id;
                 $response .= $cart->customer->email;
                 
-                Mail::to("dev@vimana.studio")->send(new SendMail('Bruna Indumentaria | Carro de compra activo', 'SimpleMail', $message));
+                Mail::to("dev@vimana.studio")->send(new SendMail('Bruna Indumentaria | Carro de compra activo', 'NotifyOldCarts', $cart));
 
                 $response = "Client: " . $cart->customer->name . " " . $cart->customer->surname . " (" . $cart->customer->id. ") notified to " . $cart->customer->email;
             }

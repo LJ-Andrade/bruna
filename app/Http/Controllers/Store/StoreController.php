@@ -65,7 +65,7 @@ class StoreController extends Controller
     }
 
     public function index(Request $request)
-    {   
+    {  
         $pagination = $this->getSetPaginationCookie($request->get('results'));
         $order = 'DESC';
         $orderBy = 'id';

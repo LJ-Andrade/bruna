@@ -43,7 +43,6 @@ class NotifyOldCarts extends Command
      */
     public function handle()
     {
-
         $maxTime = 24;
 
         $oldCarts = Cart::where('status','ACTIVE')->get();

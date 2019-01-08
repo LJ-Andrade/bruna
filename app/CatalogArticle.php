@@ -71,6 +71,11 @@ class CatalogArticle extends Model
         return $query->where('status', '1')->where('discontinued', '!=', '1')->where('stock', '>', '0');
     }
 
+    public function scopeActiveFull($query)
+    {
+        return $query->where('status', '1')->where('discontinued', '!=', '1');
+    }
+
     public function scopeInactive($query){
         return $query->where('status', '0')->where('stock', '>', '0');
     }
