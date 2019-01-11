@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">E-mail destino</label>
-                            <input class="form-control" type="text" name="maildestiny" value="dev@vimana.studio">
+                            <input class="form-control" type="text" name="maildestiny" value="info@vimana.studio">
                         </div>
                         <input class="btnSm btnBlue" type="submit" value="Enviar">
                     {!! Form::close() !!}
@@ -66,7 +66,9 @@
             </div>
         </div>
     </div>
-    <div id="Error"></div>
+
+
+   <div id="Error"></div>
 @endsection
 
 @section('scripts')

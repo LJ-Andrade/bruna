@@ -313,7 +313,8 @@ class VadminController extends Controller
 
         try 
         {
-            Mail::to($request->maildestiny)->send(new $class("Mail de prueba", 'SimpleMail', "Este es un mail de prueba, no responder, gracias."));
+            Mail::to($request->maildestiny)->send(new SendMail("Mail de prueba", 'SimpleMail', "Este es un mail de prueba, no responder, gracias."));
+            return back()->with('message', 'Mail enviado?');
         } 
         catch (\Exception $e) 
         {
