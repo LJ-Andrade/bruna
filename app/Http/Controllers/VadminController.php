@@ -10,10 +10,10 @@ use App\Customer;
 use App\User;
 use App\GeoProv;
 use App\GeoLoc;
-use Mail;
-use App\Mail\SendMail;
-use App\Mail\SendSupportMail;
 use App\Settings;
+use App\Mail\SendSupportMail;
+use App\Mail\SendMail;
+use Mail;
 
 
 class VadminController extends Controller
@@ -305,6 +305,20 @@ class VadminController extends Controller
     {
         $carts = Cart::where('status','ACTIVE')->get();
         return view('vadmin.tools.tests')->with('carts', $carts);
+    }
+
+    public function testMailSending(Request $request)
+    {
+        $class = $request->mailclass;
+
+        try 
+        {
+            Mail::to($request->maildestiny)->send(new $class("Mail de prueba", 'SimpleMail', "Este es un mail de prueba, no responder, gracias."));
+        } 
+        catch (\Exception $e) 
+        {
+            dd($e->getMessage());
+        }
     }
 
     /*

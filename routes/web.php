@@ -157,7 +157,7 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'active-user'], function(){
     Route::get('/', 'VadminController@index');
 
     Route::get('configuracion', ['as' => 'vadmin.settings', 'uses' => 'VadminController@settings']);
-    Route::get('tests', ['as' => 'vadmin.tests', 'uses' => 'VadminController@tests']);
+    
 
     Route::post('sendMail', ['as' => 'vadmin.sendMail', 'uses' => 'VadminController@sendMail']);
     Route::post('sendSupportMail', ['as' => 'vadmin.sendSupportMail', 'uses' => 'VadminController@sendSupportMail']);
@@ -189,6 +189,12 @@ Route::group(['prefix' => 'vadmin', 'middleware' => 'active-user'], function(){
     // -- SUPPORT --
     Route::get('docs', function(){ return view('vadmin.support.docs'); });
     Route::get('help', function(){ return view('vadmin.support.help'); });
+
+    // -- TESTS --
+    Route::get('tests', ['as' => 'vadmin.tests', 'uses' => 'VadminController@tests']);
+    Route::post('testMailSending', ['as' => 'vadmin.testMailSending', 'uses' => 'VadminController@testMailSending']);
+
+
 });
 
 

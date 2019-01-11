@@ -9,8 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use App\GeoProv;
-use Mail;
 use App\Mail\SendMail;
+use Mail;
 
 class RegisterController extends Controller
 {
