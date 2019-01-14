@@ -60,12 +60,12 @@
 								{{-- =============== Image ================ --}}
 								{{-- ====================================== --}}
 								<div class="image">
-									@if($article->stock < $article->stockmin)
+									{{-- @if($article->stock < $article->stockmin)
 										<div class="overlay-ribbon bottom-left-ribbon">
 											<div class="triangle"></div>
 											<div class="text">Bajo <br>Stock</div>
 										</div> 
-									@endif
+									@endif --}}
 									<img src="{{ asset($article->featuredImageName()) }}" alt="Producto del Catálogo">
 									@if(Auth::guard('customer')->check())
 									{{--  Check if product is in favs  --}}

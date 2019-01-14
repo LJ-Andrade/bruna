@@ -301,26 +301,26 @@ class VadminController extends Controller
         return redirect()->back()->with('message', 'Opciones actualizadas');
     }
     
-    public function tests()
-    {
-        $carts = Cart::where('status','ACTIVE')->get();
-        return view('vadmin.tools.tests')->with('carts', $carts);
-    }
+    // public function tests()
+    // {
+    //     $carts = Cart::where('status','ACTIVE')->get();
+    //     return view('vadmin.tools.tests')->with('carts', $carts);
+    // }
 
-    public function testMailSending(Request $request)
-    {
-        $class = $request->mailclass;
+    // public function testMailSending(Request $request)
+    // {
+    //     $class = $request->mailclass;
 
-        try 
-        {
-            Mail::to($request->maildestiny)->send(new SendMail("Mail de prueba", 'SimpleMail', "Este es un mail de prueba, no responder, gracias."));
-            return back()->with('message', 'Mail enviado?');
-        } 
-        catch (\Exception $e) 
-        {
-            dd($e->getMessage());
-        }
-    }
+    //     try 
+    //     {
+    //         Mail::to($request->maildestiny)->send(new SendMail("Mail de prueba", 'SimpleMail', "Este es un mail de prueba, no responder, gracias."));
+    //         return back()->with('message', 'Mail enviado?');
+    //     } 
+    //     catch (\Exception $e) 
+    //     {
+    //         return back()->with('message', $e->getMessage());
+    //     }
+    // }
 
     /*
     |--------------------------------------------------------------------------

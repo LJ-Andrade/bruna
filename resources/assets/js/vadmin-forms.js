@@ -169,19 +169,113 @@ $('#Single_Image').fileuploader({
 });
 
 
-$('#Multi_Images').fileuploader({
+//enable fileuploader plugin
+$('.ImagesUploader').fileuploader({
+    extensions: ['jpg', 'jpeg', 'png', 'gif'],
+    addMore: true,
+    enableApi: true,
+    dragDrop: {
+        // set the drop container {null, String, jQuery Object}
+        // example: 'body'
+        // container: null,
+    
+        // Callback fired on entering with dragging files the drop container
+        onDragEnter: function(event, listEl, parentEl, newInputEl, inputEl) {
+            // callback will go here
+        },
+    
+        // Callback fired on leaving with dragging files the drop container
+        onDragLeave: function(event, listEl, parentEl, newInputEl, inputEl) {
+            // callback will go here
+        },
+    
+        // Callback fired on dropping the files in the drop container
+        onDrop: function(event, listEl, parentEl, newInputEl, inputEl) {
+            // callback will go here
+        }
+    },
+    sorter: {
+        selectorExclude: null,
+        placeholder: null,
+        scrollContainer: window,
+        onSort: function(list, listEl, parentEl, newInputEl, inputEl) {
+            // onSort callback
+        }
+    },
+    thumbnails: {
+        onImageLoaded: function(item) {
+            item.html.find('.fileuploader-action-remove').before('<a class="fileuploader-action fileuploader-action-sort fas fa-sort title="Sort"><i></i></a>');
+            if (!item.html.find('.fileuploader-action-edit').length)
+                item.html.find('.fileuploader-action-remove').before('<a class="fileuploader-action fileuploader-action-popup fileuploader-action-edit fas fa-edit" title="Edit"><i></i></a>');
+        }
+    },
+    editor: {
+        cropper: {
+            ratio: '1:1',
+            minWidth: 100,
+            minHeight: 100,
+            showGrid: true
+        }
+    },
+    sorter: {
+        selectorExclude: null,
+        placeholder: null,
+        scrollContainer: window,
+        onSort: function(list, listEl, parentEl, newInputEl, inputEl) {
+            // onSort callback
+        }
+    }
+});
+
+
+
+
+
+$('#Multi_Images, .Multi_Images').fileuploader({
     extensions: ['jpg', 'jpeg', 'png', 'gif', 'bmp'],
     changeInput: ' ',
     theme: 'thumbnails',
     enableApi: true,
     addMore: true,
+    dragDrop: {
+        // set the drop container {null, String, jQuery Object}
+        // example: 'body'
+        container: null,
+    
+        // Callback fired on entering with dragging files the drop container
+        onDragEnter: function(event, listEl, parentEl, newInputEl, inputEl) {
+            // callback will go here
+        },
+    
+        // Callback fired on leaving with dragging files the drop container
+        onDragLeave: function(event, listEl, parentEl, newInputEl, inputEl) {
+            // callback will go here
+        },
+    
+        // Callback fired on dropping the files in the drop container
+        onDrop: function(event, listEl, parentEl, newInputEl, inputEl) {
+            // callback will go here
+        }
+    },
+    sorter: {
+        selectorExclude: null,
+        placeholder: null,
+        scrollContainer: window,
+        onSort: function(list, listEl, parentEl, newInputEl, inputEl) {
+            // onSort callback
+        }
+    },
     thumbnails: {
+        onItemShow: function(item) {
+            // add sorter button to the item html<i class="fas fa-sort"></i>
+            item.html.find('.fileuploader-action-remove').before('<a class="fileuploader-action fileuploader-action-sort fas fa-sort" title="Sort"><i></i></a>');
+        },
         box: '<div class="fileuploader-items">' +
                   '<ul class="fileuploader-items-list">' +
                       '<li class="fileuploader-thumbnails-input"><div class="fileuploader-thumbnails-input-inner">+</div></li>' +
                   '</ul>' +
               '</div>',
-        item: '<li class="fileuploader-item">' +
+        item: '<li class="fileuploader-item">' + 
                    '<div class="fileuploader-item-inner">' +
                        '<div class="thumbnail-holder">${image}</div>' +
                        '<div class="actions-holder">' +
@@ -207,6 +301,7 @@ $('#Multi_Images').fileuploader({
             item: '.fileuploader-item',
             start: '.fileuploader-action-start',
             retry: '.fileuploader-action-retry',
+            sorter: '.fileuploader-action-sort',
             remove: '.fileuploader-action-remove'
         },
         onItemShow: function(item, listEl, parentEl, newInputEl, inputEl) {
@@ -276,6 +371,117 @@ $('#Multi_Images').fileuploader({
     },
     */
 });
+
+
+
+
+// $('#Multi_Images, .Multi_Images').fileuploader({
+//     extensions: ['jpg', 'jpeg', 'png', 'gif', 'bmp'],
+//     changeInput: ' ',
+//     theme: 'thumbnails',
+//     enableApi: true,
+//     addMore: true,
+//     thumbnails: {
+//         box: '<div class="fileuploader-items">' +
+//                   '<ul class="fileuploader-items-list">' +
+//                       '<li class="fileuploader-thumbnails-input"><div class="fileuploader-thumbnails-input-inner">+</div></li>' +
+//                   '</ul>' +
+//               '</div>',
+//         item: '<li class="fileuploader-item">' +
+//                    '<div class="fileuploader-item-inner">' +
+//                        '<div class="thumbnail-holder">${image}</div>' +
+//                        '<div class="actions-holder">' +
+//                               '<a class="fileuploader-action fileuploader-action-remove" title="${captions.remove}"><i class="remove"></i></a>' +
+//                            '<span class="fileuploader-action-popup"></span>' +
+//                        '</div>' +
+//                           '<div class="progress-holder">${progressBar}</div>' +
+//                    '</div>' +
+//                '</li>',
+//         item2: '<li class="fileuploader-item">' +
+//                    '<div class="fileuploader-item-inner">' +
+//                        '<div class="thumbnail-holder">${image}</div>' +
+//                        '<div class="actions-holder">' +
+//                            '<a class="fileuploader-action fileuploader-action-remove" title="${captions.remove}"><i class="remove"></i></a>' +
+//                            '<span class="fileuploader-action-popup"></span>' +
+//                        '</div>' +
+//                    '</div>' +
+//                '</li>',
+//         startImageRenderer: true,
+//         canvasImage: false,
+//         _selectors: {
+//             list: '.fileuploader-items-list',
+//             item: '.fileuploader-item',
+//             start: '.fileuploader-action-start',
+//             retry: '.fileuploader-action-retry',
+//             remove: '.fileuploader-action-remove'
+//         },
+//         onItemShow: function(item, listEl, parentEl, newInputEl, inputEl) {
+//             var plusInput = listEl.find('.fileuploader-thumbnails-input'),
+//                 api = $.fileuploader.getInstance(inputEl.get(0));
+            
+//             plusInput.insertAfter(item.html)[api.getOptions().limit && api.getChoosedFiles().length >= api.getOptions().limit ? 'hide' : 'show']();
+            
+//             if(item.format == 'image') {
+//                 item.html.find('.fileuploader-item-icon').hide();
+//             }
+//         }
+//     },
+//     afterRender: function(listEl, parentEl, newInputEl, inputEl) {
+//         var plusInput = listEl.find('.fileuploader-thumbnails-input'),
+//             api = $.fileuploader.getInstance(inputEl.get(0));
+    
+//         plusInput.on('click', function() {
+//             api.open();
+//         });
+//     },
+//     onRemove: function(item, listEl, parentEl, newInputEl, inputEl) {
+//         var plusInput = listEl.find('.fileuploader-thumbnails-input'),
+//             api = $.fileuploader.getInstance(inputEl.get(0));
+    
+//         if (api.getOptions().limit && api.getChoosedFiles().length - 1 < api.getOptions().limit)
+//             plusInput.show();
+//     },
+//     /*
+//     // while using upload option, please set
+//     // startImageRenderer: false
+//     // for a better effect
+//     upload: {
+//         url: './php/upload_file.php',
+//         data: null,
+//         type: 'POST',
+//         enctype: 'multipart/form-data',
+//         start: true,
+//         synchron: true,
+//         beforeSend: null,
+//         onSuccess: function(data, item) {
+//             setTimeout(function() {
+//                 item.html.find('.progress-holder').hide();
+//                 item.renderThumbnail();
+//             }, 400);
+//         },
+//         onError: function(item) {
+//             item.html.find('.progress-holder').hide();
+//             item.html.find('.fileuploader-item-icon i').text('Failed!');
+//         },
+//         onProgress: function(data, item) {
+//             var progressBar = item.html.find('.progress-holder');
+            
+//             if(progressBar.length > 0) {
+//                 progressBar.show();
+//                 progressBar.find('.fileuploader-progressbar .bar').width(data.percentage + "%");
+//             }
+//         }
+//     },
+//     dragDrop: {
+//         container: '.fileuploader-thumbnails-input'
+//     },
+//     onRemove: function(item) {
+//         $.post('php/upload_remove.php', {
+//             file: item.name
+//         });
+//     },
+//     */
+// });
 
 
 $('.Display-Input-Modificable').click(function(){

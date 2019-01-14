@@ -3,6 +3,8 @@
 @section('title', 'Vadmin | Tests')
 
 @section('styles')
+    {!! Html::style('plugins/jqueryFileUploader/jquery.fileuploader.css') !!}
+	{!! Html::style('plugins/jqueryFileUploader/jquery.fileuploader-thumbnailtheme.css') !!}
 @endsection
 
 @section('content')
@@ -53,11 +55,11 @@
             <h2>Image manipulation</h2>
             <div class="row">
                 <div class="col-md-6">
-                    {!! Form::open(['route' => 'catalogo.store', 'method' => 'POST', 'files' => true, 'class' => 'settings-form', 'data-parsley-validate' => '']) !!}	
+                    {!! Form::open(['route' => 'vadmin.testImageUpload', 'method' => 'POST', 'files' => true, 'class' => 'settings-form']) !!}	
                         {{ csrf_field() }}
                         <label for="">Feature, edit and upload image</label>
                         <div class="form-group">
-                            {!! Form::file('images[]', array('multiple'=>true, 'id' => 'Multi_Images')) !!}
+                            {!! Form::file('images[]', array('multiple'=>true, 'class' => 'ImagesUploader')) !!}
                         </div>
                     
                         <input class="btnSm btnBlue" type="submit" value="Enviar">
@@ -73,9 +75,11 @@
 
 @section('scripts')
     <script type="text/javascript" src="{{ asset('plugins/chosen/chosen.jquery.min.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('plugins/validation/parsley.min.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('plugins/validation/es/parsley-es.min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('plugins/jqueryFileUploader/jquery.fileuploader.min.js')}} "></script>
-    @include('vadmin.components.bladejs')
     <script type="text/javascript" src="{{ asset('js/vadmin-forms.js') }}" ></script>
+    @include('vadmin.components.bladejs')
 @endsection
 
 @section('custom_js')
