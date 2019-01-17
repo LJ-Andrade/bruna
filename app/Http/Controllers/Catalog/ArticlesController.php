@@ -68,6 +68,8 @@ class ArticlesController extends Controller
             $order = 'DESC';
         }
         
+        $categories = CatalogCategory::orderBy('id', 'ASC')->pluck('name','id');  
+        
         if(isset($request->redirect))
         {
             if($request->redirect == 'stock')
@@ -120,7 +122,7 @@ class ArticlesController extends Controller
             
         }
 
-        $categories = CatalogCategory::orderBy('id', 'ASC')->pluck('name','id');       
+        // $categories = CatalogCategory::orderBy('id', 'ASC')->pluck('name','id');       
         
         return view($view)
             ->with('articles', $articles)
