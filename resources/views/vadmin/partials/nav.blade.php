@@ -336,7 +336,7 @@
 			<ul class="menu-content">
 				<li class="is-shown {{ Menu::activeMenu('active-carts') }}">
 					<a href="{{ route('orders.create') }}" data-i18n="nav.menu_levels.second_level_child.third_level" class="menu-item">
-						<i class="icon-list"></i> 
+						<i class="icon-plus"></i> 
 						Cargar Pedido
 					</a>
 				</li>

@@ -7,6 +7,7 @@ use App\Cart;
 use App\Settings;
 use App\Mail\SendMail;
 use Mail;
+use Log;
 
 trait CartTrait {
     
@@ -188,35 +189,41 @@ trait CartTrait {
 
     public function manageOldCarts($ids, $action)
     {
-        $response = 'Manage Old Carts. ';
+        $response = ' ';
 
         try 
         {
-
+            if($ids == [])
+                $response = 'No carts to manage';
+                
+            $count = '0';
             foreach ($ids as $id) {
                 $cart = Cart::find($id);
                 if($action == 'delete')
                 {
-                    $response .= "Cart n°".$id." deleted | ";
                     foreach($cart->items as $item){
                         $this->updateCartItemStock($item->article->id, $item->quantity);
                     }
                     $cart->delete();
+                    Log::info("Carro n°".$id." eliminado");
+                    $count++;
                 }
                 else if($action == 'cancel')
                 {
-                    $response .= "Cart n°".$id." canceled | ";
                     $cart->status = "Canceled";
                     foreach($cart->items as $item){
                         $this->updateCartItemStock($item->article->id, $item->quantity);
                     }
                     $cart->save();
+                    Log::info("Carro n°".$id." cancelado");
+                    $count++;
                 }
                 else
                 {
                     $response = "No deleted or canceled cart";
                 }
             }
+            $response = $count . " carros manejados";
         }  
         catch (\Exception $e)
         {
@@ -227,19 +234,20 @@ trait CartTrait {
 
     public function notifyOldCarts($ids)
     {
-        
         $response = '';
+        $count = '0';
         try 
         {
             foreach ($ids as $id) {
                 $cart = Cart::find($id);
                 $response .= $cart->customer->id;
                 $response .= $cart->customer->email;
-                
-                Mail::to("dev@vimana.studio")->send(new SendMail('Bruna Indumentaria | Carro de compra activo', 'NotifyOldCarts', $cart));
-
-                $response = "Client: " . $cart->customer->name . " " . $cart->customer->surname . " (" . $cart->customer->id. ") notified to " . $cart->customer->email;
+                $email = $cart->customer->email;
+                Mail::to($email)->send(new SendMail('Bruna Indumentaria | Carro de compra activo', 'NotifyOldCarts', $cart));
+                Log::info("Eviando notificación a cliente: " . $cart->customer->name . " " . $cart->customer->surname . " (" . $cart->customer->id. ") a " . $cart->customer->email);
+                $count++;
             }
+            $response = $count . " clientes notificados.";
         }
         catch (\Exception $e)
         {

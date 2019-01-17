@@ -27,7 +27,7 @@ class OrdersController extends Controller
     */
 
     public function index(Request $request)
-    {          
+    {   
         if($request->id != null)
         {
             $items = Cart::searchId($request->id)->orderBy('id', 'ASC')->paginate(15); 
@@ -47,6 +47,7 @@ class OrdersController extends Controller
         } else {
             $items = Cart::orderBy('created_at', 'DESC')->where('status', '=','Process')->get();
         }
+        
 
         return view('vadmin.orders.index')->with('items', $items);    
     }

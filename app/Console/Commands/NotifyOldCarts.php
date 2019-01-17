@@ -45,7 +45,7 @@ class NotifyOldCarts extends Command
     {
         $maxTime = 24;
 
-        $oldCarts = Cart::where('status','ACTIVE')->get();
+        $oldCarts = Cart::where('status', 'ACTIVE')->get();
         $time = Carbon::now()->subHour($maxTime);
         
         $ids = [];
@@ -56,7 +56,6 @@ class NotifyOldCarts extends Command
                 array_push($ids, $oldCart->id);
             }
         }
-        
         Log::info($this->notifyOldCarts($ids));
     }
 }

@@ -70,6 +70,7 @@
 						<th>Cliente</th>
 						<th>Estado</th>
 						<th>Items</th>
+						<th>Total</th>
 						<th>Fecha</th>
 						<th></th>
 					@endslot
@@ -123,9 +124,20 @@
 								@php
 									$count = '0';
 									foreach($item->items as $sum)
-									$count += $sum->quantity;
+										$count += $sum->quantity;
 								@endphp
 								<td>{{ $count }}</td>
+								<td>
+									@php
+										$totalPrice = '0';
+										foreach($item->items as $unit)
+											$totalPrice += $unit->final_price * $unit->quantity;
+										
+										$totalPrice += calcPercent($totalPrice, $item->payment_percent) + $item->shipping_price;
+										echo '$ '. $totalPrice;
+										unset($totalPrice);
+									@endphp
+								</td>
 								<td class="w-200">{{ transDateT($item->created_at) }}</td>
 								{{-- EXPORTS --}}
 								<td class="w-50">
