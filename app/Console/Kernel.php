@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('cron:test')->everyMinute();
         // ->daily();
         $schedule->command('delete:oldcarts')->daily();
-        $schedule->command('notify:oldcarts')->everyMinute();
+        $schedule->command('notify:oldcarts')->daily();
     }
 
     /**
