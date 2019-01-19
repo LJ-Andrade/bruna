@@ -258,13 +258,15 @@
         $.ajax({
             url: route,
             type: 'POST',
+            dataType: 'JSON',
             data: data,
             success: function(data){
-                console.log(data);
                 if(data.response == true){
                     location.reload();
                 } else {
-                    $('#Error').html(data.responseText);
+                    // $('#Error').html(data.responseText);
+                    alert_error('Ups.', data.message);
+                    console.log(data);
                 }
             },
             error: function(data){

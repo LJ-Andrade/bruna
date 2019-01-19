@@ -75,10 +75,53 @@ class CartsController extends Controller
         }
     }
     
+    // public function updateStatus(Request $request)
+    // {
+    //     dd($request->all());
+    //     $cart = Cart::findOrFail($request->id);
+    //     try {
+    //         $cart->status = $request->status;
+    //         if($request->status == 'Canceled')
+    //         {
+    //             // $this->updateCartItemStock($item->article->id, $item->quantity);
+    //         }
+    //         $cart->save();
+    //         return response()->json([
+    //             'response' => true,
+    //             'newstatus' => $cart->status
+    //         ]); 
+    //     }  catch (\Exception $e) {
+    //         return response()->json([
+    //             'response'   => false,
+    //             'error'    => 'Error: '.$e->getMessage()
+    //         ]);    
+    //     } 
+    // }
+
+
     public function updateStatus(Request $request)
     {
         $cart = Cart::findOrFail($request->id);
+        $oldStatus = $cart->status;
+        // dd($cart->items);
+        
+        if($oldStatus == 'Canceled')
+        {
+            return response()->json([
+                'response' => false,
+                'message' => 'Estás tratando de revivir una órden cancelada. Esta función aún no ha sido diseñada.'
+            ]); 
+        }
+
         try {
+            if($request->status == "Canceled")
+            {
+                foreach($cart->items as $item)
+                {
+                    $this->updateCartItemStock($item->article_id, $item->quantity);
+                }
+            }
+                     
             $cart->status = $request->status;
             $cart->save();
             return response()->json([
@@ -92,6 +135,8 @@ class CartsController extends Controller
             ]);    
         } 
     }
+
+
     
     /*
     |--------------------------------------------------------------------------
