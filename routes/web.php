@@ -328,17 +328,17 @@ Route::get('/vadmin/clients', function(){
 //->middleware('auth');
 
 // Render Mails Test
-use App\Customer;
-Route::get('/mail', function(){
-//    $cart = Cart::findOrFail(29);  
-//    $message = 'Mensaje de dfdfhsdjkf';
-   $data = Customer::find(24);
+// use App\Customer;
+// Route::get('/mail', function(){
+// //    $cart = Cart::findOrFail(29);  
+// //    $message = 'Mensaje de dfdfhsdjkf';
+//    $data = Customer::find(24);
    
-   // Bussiness
-   return new App\Mail\SendMail('Subject', 'NotifyOldCarts', $data);
-//    Mail::to("dev@vimana.studio")->send(new SendMail('Bruna Indumentaria | Carro de compra activo', 'NotifyOldCarts', $cart));
-   // Customer
-   //return new App\Mail\SendMail('Bruna Indumentaria | Compra recibida !', 'CustomerCheckout', $cart);
-});
+//    // Bussiness
+//    return new App\Mail\SendMail('Subject', 'NotifyOldCarts', $data);
+// //    Mail::to("dev@vimana.studio")->send(new SendMail('Bruna Indumentaria | Carro de compra activo', 'NotifyOldCarts', $cart));
+//    // Customer
+//    //return new App\Mail\SendMail('Bruna Indumentaria | Compra recibida !', 'CustomerCheckout', $cart);
+// });
 
 

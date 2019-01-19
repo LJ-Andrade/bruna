@@ -236,10 +236,12 @@ class OrdersController extends Controller
         $cart->shipping_price = $shipping_price;
 
         $cart->customer_id = $request->customer_id;
-        
+        $cart->status = "Process";
         $cart->save();
+        
+        
         $cart_id = $cart->id;
-
+        
         
         foreach($request->item as $item)
         {
@@ -249,11 +251,12 @@ class OrdersController extends Controller
             $cartItem->quantity = $item['quantity'];
             $cartItem->final_price = $item['final_price'];
             $article = CatalogArticle::where('id', $item['id'])->first();
-
+            
             $cartItem->article_name = $article->name;
             $cartItem->color = $article->color;
-
+            
             $cartItem->save();    
+            $this->updateCartItemStock($cartItem->article_id, -$item['quantity']);
         }
 
         

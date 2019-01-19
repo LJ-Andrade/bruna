@@ -134,7 +134,7 @@
 
     // Store Id to prevent duplicated items
     let saveIds = [];
-    function buildItemRow(id, code, name, stock, price)
+    function buildItemRow(id, name, stock, price)
     {   
         console.log(saveIds);
         $('#TableList').removeClass('Hidden');
@@ -149,7 +149,7 @@
         else
         {
             let row ="<tr id='OrderItem-"+ id +"'>" +
-                    "<td>#"+ code +"</td>" + 
+                    "<td>#"+ id +"</td>" +
                     "<td>"+ name +"</td>" +
                     "<td>"+ stock +"</td>" +
                     "<td>$"+ price +
@@ -226,7 +226,7 @@
                 }
             },
             select: function(event, ui) {
-                buildItemRow(ui.item.id, ui.item.code, ui.item.name, ui.item.stock, ui.item.price);
+                buildItemRow(ui.item.id, ui.item.name, ui.item.stock, ui.item.price);
             }
         }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
             if(item.name === 0)
@@ -235,9 +235,9 @@
             }
             else
             {
-                let inner_html = '<div class="label">#' + item.code + ' '+ item.name +'</div>';
+                let inner_html = '<div class="label">#' + item.id + ' '+ item.name +'</div>';
                 // Multiline
-                //let inner_html = '<div class="label">#' + item.code + ' '+ item.name +'<br><div>'+ item.name +'</div></b></div>';
+                //let inner_html = '<div class="label">#' + item.id + ' '+ item.name +'<br><div>'+ item.name +'</div></b></div>';
                 return $( "<li></li>" ).data( "item.autocomplete", item).append(inner_html).appendTo(ul);
 
             }

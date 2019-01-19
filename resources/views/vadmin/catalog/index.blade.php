@@ -233,23 +233,24 @@
 		allowEnterOnForms = true;
 
 
-		// Detect F5 and Save
-		document.onkeydown = fkey;
-		document.onkeypress = fkey
-		document.onkeyup = fkey;
+		// Detect F5 and Save 
+		// USE NOT RECOMMENDED
+		// document.onkeydown = fkey;
+		// document.onkeypress = fkey
+		// document.onkeyup = fkey;
 
-		var wasPressed = false;
+		// var wasPressed = false;
 
-		function fkey(e){
-				e = e || window.event;
-			if(wasPressed) return; 
+		// function fkey(e){
+		// 		e = e || window.event;
+		// 	if(wasPressed) return; 
 
-			if (e.keyCode == 116 || e.keyCode == 8) {
-				$('#UpdateList').click();
-				alert_ok("","Datos guardados");
-				wasPressed = true;
-			}
-		}
+		// 	if (e.keyCode == 116 || e.keyCode == 8) {
+		// 		$('#UpdateList').click();
+		// 		alert_ok("","Datos guardados");
+		// 		wasPressed = true;
+		// 	}
+		// }
 
 		
 
