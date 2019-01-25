@@ -168,17 +168,25 @@
 					</a>
 				</li>
 				{{-- Article List --}}
-				<li class="@if(app('request')->input('redirect') == 'inactive')
+				{{-- <li class="@if(app('request')->input('redirect') == 'inactive')
 					{{ Menu::activeMenu('catalogo') }}
 					@endif">
 					<a href="{{ route('catalogo.index', ['redirect' => 'inactive'])  }}" class="menu-item">
-				<i class="icon-list"></i> Inactivos</a></li>
+					<i class="icon-list"></i> Inactivos</a>
+				</li> --}}
+
+				<li class="" {{ Menu::activeMenu('catalogo') }}>
+					<a href="{{ route('catalogo.index-inactive') }}" class="menu-item">
+					<i class="icon-list"></i> Inactivos</a>
+				</li>
+
+
 				{{-- Discountinued --}}
-				<li class="@if(app('request')->input('redirect') == 'discountinued')
+				{{-- <li class="@if(app('request')->input('redirect') == 'discountinued')
 						{{ Menu::activeMenu('catalogo') }}
 						@endif">
 						<a href="{{ route('catalogo.index', ['redirect' => 'discontinued'])  }}" class="menu-item">
-					<i class="icon-list"></i> Discontinuados</a></li>
+					<i class="icon-list"></i> Discontinuados</a></li> --}}
 				{{-- New Article --}}
 				<li class="{{ Menu::activeMenu('catalogo.create') }}">
 					<a href="{{ route('catalogo.create') }}" class="menu-item">

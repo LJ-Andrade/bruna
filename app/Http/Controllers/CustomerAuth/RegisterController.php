@@ -87,7 +87,7 @@ class RegisterController extends Controller
         $geoProvId = null;
         $geoLocId = null;
         if(isset($data['cuit']))       { $cuit = $data['cuit']; }
-        if(isset($data['dni']))       { $dni = $data['dni']; }
+        if(isset($data['dni']))        { $dni = $data['dni']; }
         if(isset($data['phone']))      { $phone = $data['phone']; }
         if(isset($data['geoprov_id'])) { $geoProvId = $data['geoprov_id']; }
         if(isset($data['geoloc_id']))  { $geoLocId = $data['geoloc_id']; }

@@ -230,6 +230,7 @@ Route::group(['prefix' => 'vadmin', 'middleware' => ['active-user', 'admin']], f
     
     // -- CATALOG --
     Route::resource('catalogo', 'Catalog\ArticlesController');
+    Route::get('catalogo_inactivos', ['as' => 'catalogo.index-inactive', 'uses' => 'Catalog\ArticlesController@indexInactive']);
     Route::get('createFromAnother/{model}/{id}', 'Catalog\ArticlesController@createFromAnother');
     Route::post('update_catalog_field', 'Catalog\ArticlesController@updateField');
     Route::post('update_catalog_fields', ['as' => 'vadmin.update_catalog_fields', 'uses' => 'Catalog\ArticlesController@updateFields']);

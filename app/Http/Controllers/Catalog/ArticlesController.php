@@ -25,8 +25,35 @@ class ArticlesController extends Controller
     |--------------------------------------------------------------------------
     */
 
+    public function getSetPaginationCookie($request)
+    {
+        if($request)
+        {
+            $pagination = $request;
+            Cookie::queue('stock-pagination', $pagination, 2000);
+        }
+        else
+        {
+            if(Cookie::get('stock-pagination'))
+            {
+                $pagination = Cookie::get('store-pagination');
+            }
+            else
+            {
+                $pagination = 24;
+            }
+        }
+        return $pagination;
+    }
+
+
     public function index(Request $request)
     {
+        $pagination = $this->getSetPaginationCookie($request->get('results'));
+        // Necesito unificar las búsquedas y usarlas tanto en activos como inactivos
+
+
+
         $code     = $request->get('code');
         $name     = $request->get('name');
         $category = $request->get('category');
@@ -42,24 +69,24 @@ class ArticlesController extends Controller
             $rowName = "name";
         }
 
-        // -------- Pagination -----------
-        if($request->get('results'))
-        {
-            $pagination = $request->get('results');
-            // With expiration
-            Cookie::queue('stock-pagination', $pagination, 2000);
-        }
-        else
-        {   
-            if($request->get('redirect') != null && Cookie::get('stock-pagination'))
-            {
-                $pagination = Cookie::get('stock-pagination');
-            }
-            else 
-            {
-                $pagination = 15;
-            }
-        }    
+        // // -------- Pagination -----------
+        // if($request->get('results'))
+        // {
+        //     $pagination = $request->get('results');
+        //     // With expiration
+        //     Cookie::queue('stock-pagination', $pagination, 2000);
+        // }
+        // else
+        // {   
+        //     if($request->get('redirect') != null && Cookie::get('stock-pagination'))
+        //     {
+        //         $pagination = Cookie::get('stock-pagination');
+        //     }
+        //     else 
+        //     {
+        //         $pagination = 15;
+        //     }
+        // }    
         
         // ---------- Order --------------
         if(!isset($order))
@@ -128,6 +155,53 @@ class ArticlesController extends Controller
             ->with('articles', $articles)
             ->with('categories', $categories);
 
+    }
+
+    public function indexInactive(Request $request)
+    {
+        
+
+        $pagination = $this->getSetPaginationCookie($request->get('results'));
+        $code     = $request->get('code');
+        $name     = $request->get('name');
+        $category = $request->get('category');
+        $order    = $request->get('orden');
+        $rowName = 'stock';
+
+        if($request->orden_af)
+        {
+            $order = $request->orden_af;
+            $rowName = "name";
+        }
+        if(!isset($order))
+        {
+            $rowName = 'id';
+            $order = 'DESC';
+        }
+        
+        if(isset($code))
+        {
+            $articles = CatalogArticle::where('id', 'LIKE', "%".$code."%")->inactive()->paginate($pagination);
+        }
+        elseif(isset($name))
+        {
+            $articles = CatalogArticle::searchName($name)->inactive()->orderBy($rowName, $order)->paginate($pagination);
+        } 
+        elseif(isset($category))
+        {
+            $articles = CatalogArticle::where('category_id', $category)->inactive()->orderBy($rowName, $order)->paginate($pagination);
+        }
+        else 
+        {
+            $articles = CatalogArticle::orderBy($rowName, $order)->inactive()->paginate($pagination);
+        }
+
+        $categories = CatalogCategory::orderBy('id', 'ASC')->pluck('name','id'); 
+
+        return view('vadmin.catalog.index-inactive')
+            ->with('articles', $articles)
+            ->with('inactiveCatalog', true)
+            ->with('categories', $categories);
     }
 
     public function show($id)

@@ -1,6 +1,13 @@
+
+
+@php($route = 'catalogo.index')
+@if(isset($inactiveCatalog) && $inactiveCatalog == true)
+@php ($route = 'catalogo.index-inactive')
+@endif
+
 <div id="SearchFilters" class="search-filters">
     <div class="row">
-        {!! Form::open(['id' => 'SearchForm', 'method' => 'GET', 'route' => 'catalogo.index', 'class' => 'col-md-2 col-xs-12 pad0', 'role' => 'search']) !!} 
+        {!! Form::open(['id' => 'SearchForm', 'method' => 'GET', 'route' => $route, 'class' => 'col-md-2 col-xs-12 pad0', 'role' => 'search']) !!} 
             <div class="form-control">
                 {!! Form::label('code', 'Buscar por código') !!}
                 <div class="input-group">
@@ -11,7 +18,7 @@
                 </div>
             </div>
         {!! Form::close() !!}
-        {!! Form::open(['id' => 'SearchForm', 'method' => 'GET', 'route' => 'catalogo.index', 'class' => 'col-md-3 col-xs-12 pad0', 'role' => 'search']) !!} 
+        {!! Form::open(['id' => 'SearchForm', 'method' => 'GET', 'route' => $route, 'class' => 'col-md-3 col-xs-12 pad0', 'role' => 'search']) !!} 
             <div class="form-control">
                 {!! Form::label('name', 'Buscar por nombre') !!}
                 <div class="input-group">
@@ -22,7 +29,7 @@
                 </div>
             </div>
         {!! Form::close() !!}
-        {!! Form::open(['id' => 'SearchForm', 'method' => 'GET', 'route' => 'catalogo.index', 'class' => 'col-md-3 col-xs-12 pad0', 'role' => 'search']) !!} 
+        {!! Form::open(['id' => 'SearchForm', 'method' => 'GET', 'route' => $route, 'class' => 'col-md-3 col-xs-12 pad0', 'role' => 'search']) !!} 
             <div class="form-control">
                 {!! Form::label('category', 'Buscar por categoría') !!}
                 <div class="input-group">
