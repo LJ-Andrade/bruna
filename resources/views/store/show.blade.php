@@ -107,31 +107,36 @@
 			<div class="row margin-top-1x">
 				{{-- Form --}}
 				<div class="col-sm-12 price-and-stock">
-					@if($article->stock > 0)
-						@if(Auth::guard('customer')->check())
-						<div class="AvailableStock stock">
-							Stock disponible: {{ $article->stock }}
-						</div>
-						{{-- {!! Form::open(['class' => 'AddToCart price']) !!}	
-							{{ csrf_field() }}
-							<input type="number" min="0" max="{{ $article->stock }}" name="quantity" class="quantity-input" value="1">
-							<input type="submit" class="input-button" value="Agregar">
-							<input type="hidden" value="{{ $article->id }}" name="articleId">
-						{!! Form::close() !!} --}}
-						{!! Form::open(['class' => 'AddToCart form-group price']) !!}
-							{{ csrf_field() }}	
-							<div class="input-with-btn">
-								<input class="form-control input-field short-input" name="quantity" type="number" min="1" max="{{ $article->stock }}" value="1" placeholder="1" required>
-								<button class="btn input-btn">Agregar al carro</button>
+					@if($article->status == 1)
+						@if($article->stock > 0)
+							@if(Auth::guard('customer')->check())
+							<div class="AvailableStock stock">
+								Stock disponible: {{ $article->stock }}
 							</div>
-							<input type="hidden" value="{{ $article->id }}" name="articleId">
-						{!! Form::close() !!}
+							{{-- {!! Form::open(['class' => 'AddToCart price']) !!}	
+								{{ csrf_field() }}
+								<input type="number" min="0" max="{{ $article->stock }}" name="quantity" class="quantity-input" value="1">
+								<input type="submit" class="input-button" value="Agregar">
+								<input type="hidden" value="{{ $article->id }}" name="articleId">
+							{!! Form::close() !!} --}}
+							{!! Form::open(['class' => 'AddToCart form-group price']) !!}
+								{{ csrf_field() }}	
+								<div class="input-with-btn">
+									<input class="form-control input-field short-input" name="quantity" type="number" min="1" max="{{ $article->stock }}" value="1" placeholder="1" required>
+									<button class="btn input-btn">Agregar al carro</button>
+								</div>
+								<input type="hidden" value="{{ $article->id }}" name="articleId">
+							{!! Form::close() !!}
+							@else
+							<a href="{{ url('tienda/login') }}" class="btn input-btn">Comprar</a>
+							@endif
 						@else
-						<a href="{{ url('tienda/login') }}" class="btn input-btn">Comprar</a>
+							No hay stock disponible
 						@endif
 					@else
-						No hay stock disponible
+						Este artículo no está disponible al momento
 					@endif
+							
 				</div>
 			</div>
 			<hr class="mb-3">

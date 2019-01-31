@@ -155,7 +155,7 @@ class StoreController extends Controller
         $pagination = $this->getSetPaginationCookie(null);
 
         $size = CatalogAtribute1::searchName($name)->first();
-		$articles = $size->articles()->paginate($pagination);
+		$articles = $size->articles()->active()->paginate($pagination);
         $articles->each(function($articles){
             $articles->category;
             $articles->images;
@@ -174,7 +174,7 @@ class StoreController extends Controller
         $pagination = $this->getSetPaginationCookie(null);
 
         $tag = CatalogTag::searchName($name)->first();
-		$articles = $tag->articles()->paginate($pagination);
+		$articles = $tag->articles()->active()->paginate($pagination);
         $articles->each(function($articles){
             $articles->category;
             $articles->images;
@@ -193,7 +193,7 @@ class StoreController extends Controller
         $pagination = $this->getSetPaginationCookie(null);
 
         $season = CatalogSeason::searchName($name)->first();
-		$articles = $season->articles()->paginate($pagination);
+		$articles = $season->articles()->active()->paginate($pagination);
         $articles->each(function($articles){
             $articles->category;
             $articles->images;
