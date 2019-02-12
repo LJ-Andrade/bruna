@@ -11,12 +11,16 @@
         </div>
         <div class="content">
                 <div class="top-text">
-                    <b>Nombre y Apellido:</b> {{ $order->customer->name }} {{ $order->customer->surname }} | <b>Usuario:</b> {{ $order->customer->username }} <br>
+                    <b>Nombre y Apellido:</b> {{ $order->customer->name }} {{ $order->customer->surname }} | <b>Usuario:</b> {{ $order->customer->username }} 
+                    @if($order->customer->dni != '') | <b>Dni:</b> {{ $order->customer->dni }} @endif
+                    @if($order->customer->cuit != '') | <b>Cuit:</b> {{ $order->customer->cuit }} @endif <br>
                     <b>Dirección: </b> {{ $order->customer->address }} 
                     @if($order->customer->geoprov != null) | {{ $order->customer->geoprov->name }} @endif
-                    @if($order->customer->geoloc != null) | {{ $order->customer->geoloc->name }} @endif <br>
-                    <b>Teléfonos: </b> {{ $order->customer->phone }} @if($order->customer->phone2) | {{ $order->customer->phone2 }} @endif<br>
+                    @if($order->customer->geoloc != null) - {{ $order->customer->geoloc->name }} @endif 
+                    ({{ $order->customer->cp }})<br>
+                    <b>Teléfonos: </b> {{ $order->customer->phone }} @if($order->customer->phone2) | {{ $order->customer->phone2 }} @endif | 
                     <b>E-mail: </b> {{ $order->customer->email }} <br>
+                    @if($order->bus_name != '') <b>Transporte:</b> {{ $order->bus_name }} @endif
                 </div>
                 <table class="table">
                     <thead>

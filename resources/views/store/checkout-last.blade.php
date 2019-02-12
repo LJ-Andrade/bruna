@@ -45,6 +45,20 @@
 			<div class="col-sm-8">
 				{!! Form::open(['route' => 'store.updatePaymentAndShipping', 'class' => 'row small-form loader-on-submit dont-submit-on-enter', 'method' => 'POST']) !!}
 					<div class="col-md-6">
+						<div class="sub-title"><i class="fas fa-truck"></i> Forma de envío</div>
+						{{-- {!! Form::label('shipping', 'Seleccione el tipo de envío') !!} --}}
+						<select onchange="submit()" name="shipping_id" class="Select-Atribute form-control" placeholder="Seleccionar forma de pago">
+							@if($activeCart['rawdata']->shipping_id == null)
+								<option selected disabled>Seleccione forma de envío</option>
+							@endif
+							@foreach($shippings as $shipping)
+								<option value="{{ $shipping->id }}" @if($shipping->id == $activeCart['rawdata']->shipping_id ) selected @endif>
+									{{ $shipping->name }} @if($shipping->price > 0) - (Costo ${{ $shipping->price }})@endif
+								</option>
+							@endforeach
+						</select>
+					</div>
+					<div class="col-md-6">
 						<div class="sub-title"> <i class="far fa-credit-card"></i> Medio de pago</div>
 						<input type="hidden" name="id" value="{{ $activeCart['rawdata']->id }}">
 						{{-- {!! Form::label('payment_method', 'Seleccione un medio de pago') !!} --}}
@@ -65,30 +79,15 @@
 							{{ $payment->name }} @if($payment->percent > 0) - (Recargo %{{ $payment->percent }})@endif<br>
 						@endforeach --}}
 					</div>
-					<div class="col-md-6">
-						<div class="sub-title"><i class="fas fa-truck"></i> Forma de envío</div>
-						{{-- {!! Form::label('shipping', 'Seleccione el tipo de envío') !!} --}}
-						<select onchange="submit()" name="shipping_id" class="Select-Atribute form-control" placeholder="Seleccionar forma de pago">
-							@if($activeCart['rawdata']->shipping_id == null)
-								<option selected disabled>Seleccione forma de envío</option>
-							@endif
-							@foreach($shippings as $shipping)
-								<option value="{{ $shipping->id }}" @if($shipping->id == $activeCart['rawdata']->shipping_id ) selected @endif>
-									{{ $shipping->name }} @if($shipping->price > 0) - (Costo ${{ $shipping->price }})@endif
-								</option>
-							@endforeach
-						</select>
-						{{-- RADIO BTN STYLE --}}
-						{{-- @foreach($shippings as $shipping)
-							<input type="radio" name="shipping_id" onclick="submit()" value="{{ $shipping->id }}" 
-							@if($shipping->id == $activeCart['rawdata']->shipping_id ) checked @endif>
-							{{ $shipping->name }} @if($shipping->price > 0) - (Costo ${{ $shipping->price }})@endif<br>
-						@endforeach --}}
-					</div>
 				{!! Form::close() !!} 
-				<br>
 			{{-- Proccess Checkout --}}
 			{!! Form::open(['route' => 'store.processCheckout', 'method' => 'POST', 'class' => 'loader-on-submit']) !!}	
+				<div class="row small-form mb-3">
+					<div class="col-md-6">
+						<div class="sub-title"><i class="fas fa-bus"></i> Empresa de Micro</div>
+						<input name="bus_name" type="text" class="form-control" placeholder="Campo opcional">
+					</div> 
+				</div>
 				<div class="row small-form">
 					<div class="col-md-12">
 						<div class="sub-title"><i class="far fa-address-card"></i> Datos de entrega</div>
@@ -176,6 +175,12 @@
 						</div>
 					@endif
 				</div><br>
+				<div class="row mb-3 small-form">
+					<div class="col-md-12">
+						<div class="sub-title"><i class="fas fa-pencil-alt"></i> Observaciones</div>
+						<textarea name="notes" placeholder="Completa acá cualquie información adicional que consideres necesaria para el envio"></textarea>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="sub-title">¿ Tenés un cupón de descuento ?</div>

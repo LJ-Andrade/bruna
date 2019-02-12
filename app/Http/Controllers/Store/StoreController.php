@@ -317,7 +317,8 @@ class StoreController extends Controller
             }   
             $order->save();    
         }
-
+        $cart->bus_name = $request->bus_name;
+        $cart->notes = $request->notes;
         $cart->status = 'Process';
         
         try {
@@ -423,7 +424,6 @@ class StoreController extends Controller
             'cp.required' => 'Debe ingresar su código postal'
         ]);
         $data = $data->all();
-            
         if($customer->group == '3')
         {
             if($data['cuit'] == '' || $data['cuit'] == null)
