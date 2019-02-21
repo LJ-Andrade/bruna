@@ -7,6 +7,7 @@
     "require": {
         "php": ">=7.2",
         "barryvdh/laravel-dompdf": "^0.8.1",
+        "codemancompany/laravel-mercadopago": "^1.07",
         "fideloper/proxy": "~4.0",
         "intervention/image": "^2.4",
         "laravel/framework": "5.6.*",
@@ -14,8 +15,7 @@
         "laravel/scout": "^4.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5",
-        "maatwebsite/excel": "~2.1.0",
-        "santigraviano/laravel-mercadopago": "^1.0"
+        "maatwebsite/excel": "~2.1.0"
     },
     "require-dev": {
         "appzcoder/crud-generator": "^2.0",

@@ -128,7 +128,7 @@ class OrdersController extends Controller
                     $collected[$item->article_id] = [
                         'article_id' => $item->article_id,
                         'article_name' => $item->article_name,
-                        'details' => $item->size.' | '.$item->textile.' | '.$item->color,
+                        'details' => $item->size.' , '.$item->textile.' , '.$item->color,
                         'quantity' => $item->quantity,
                         'price' => $item->final_price
                     ];                

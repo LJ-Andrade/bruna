@@ -4,3 +4,13 @@
 //                                    //
 ////////////////////////////////////////
 
+.sbi_photo_wrap .sbi_overlay
+    @include transition(0.2s)
+    .inner
+        transform: translateY(100px)
+    &:hover
+        .inner
+            transform: translateY(0px)
+
+.test
+    color: red

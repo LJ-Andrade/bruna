@@ -184,14 +184,14 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        // MercadoPago Api
-        SantiGraviano\LaravelMercadoPago\Providers\MercadoPagoServiceProvider::class,
         // Debug Bar
         // Barryvdh\Debugbar\ServiceProvider::class,
         // PDF Export
         Barryvdh\DomPDF\ServiceProvider::class,
         // Excel Export
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        // API Mercado Pago
+        CodemanCompany\LaravelMercadoPago\Providers\MercadoPagoServiceProvider::class,
     ],
 
     /*
@@ -243,12 +243,12 @@ return [
         // Custom Packages
         // DebugBar
         //'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        // Mercado Pago
-        'MP' => SantiGraviano\LaravelMercadoPago\Facades\MP::class,
         // PDF Export
         'PDF' => Barryvdh\DomPDF\Facade::class,
         // Excel Export
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        // API Mercado Pago
+        'MP' => CodemanCompany\LaravelMercadoPago\Facades\MP::class,
     ],
 
 ];
